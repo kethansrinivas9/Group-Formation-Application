@@ -6,6 +6,10 @@ public class User {
     private String email;
     private String password;
 
+    public User() {
+
+    }
+
     public User(long id) {
         this.id = id;
     }
