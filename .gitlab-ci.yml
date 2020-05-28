@@ -31,3 +31,13 @@ test:
     - ./gradlew check
   tags:
     - grad
+
+deploy:
+  stage: deploy
+  script:
+    - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/catme-app || true
+    - git push -f heroku HEAD:master
+  only:
+     - develop
+  tags:
+    - grad
