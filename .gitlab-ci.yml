@@ -27,6 +27,8 @@ build:
   
 test:
   stage: test
+  variables:
+    GIT_STRATEGY: clone
   script:     
     -  chmod +x ./gradlew
     - ./gradlew check
