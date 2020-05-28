@@ -3,6 +3,7 @@ image: java:8-jdk
 stages:
   - build
   - test
+  - deploy
 
 before_script:
   - echo "CI started..." 
@@ -29,5 +30,15 @@ test:
   script:     
     -  chmod +x ./gradlew
     - ./gradlew check
+  tags:
+    - grad
+
+deploy:
+  stage: deploy
+  script:
+    - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/catme-app || true
+    - git push -f heroku HEAD:master
+  only:
+     - develop
   tags:
     - grad
