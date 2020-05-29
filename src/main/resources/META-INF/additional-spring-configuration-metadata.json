@@ -1,0 +1,9 @@
+{
+    "properties": [
+        {
+            "name": "crypt.key",
+            "type": "java.lang.String",
+            "description": "Symmetric key for Encryption and Decryption"
+        }
+    ]
+}
