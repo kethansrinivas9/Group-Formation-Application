@@ -1,27 +1,56 @@
 package com.group8.dalsmartteamwork;
 
+import java.io.InputStream;
 import java.sql.*;
+import java.util.Properties;
 
 public class MySQLConnection {
-    public final String ENVIRONMENT;
-    private final String USER;
-    private final String PASSWORD;
-    private static final String CONNECTION_STRING = "jdbc:mysql://db-5308.cs.dal.ca:3306/CSCI5308_8_DEVINT";
+    private String ENVIRONMENT;
+    private String USER;
+    private String PASSWORD;
+    private String CONNECTION;
+    private String DATABASE;
     private Statement statement;
 
-    public MySQLConnection(String ENVIRONMENT) {
-        this.ENVIRONMENT = ENVIRONMENT;
-        this.USER = "CSCI5308_8_DEVINT_USER";
-        this.PASSWORD = "CSCI5308_8_DEVINT_8189";
+    public MySQLConnection() {
 
         try {
-            Connection conn = DriverManager.getConnection(CONNECTION_STRING, this.USER, this.PASSWORD);
-            this.statement = conn.createStatement();
-        } catch (SQLException e) {
+            Properties properties = new Properties();
+            Thread currentThread = Thread.currentThread();
+            ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+            InputStream propertiesStream = contextClassLoader.getResourceAsStream("application.properties");
+            if (propertiesStream != null) {
+                properties.load(propertiesStream);
+                this.ENVIRONMENT = properties.getProperty("db.environment");
+                this.CONNECTION = properties.getProperty("db.connection");
+                switch (this.ENVIRONMENT) {
+                    case "TEST":
+                        this.DATABASE = properties.getProperty("db.test.database");
+                        this.USER = properties.getProperty("db.test.user");
+                        this.PASSWORD = properties.getProperty("db.test.password");
+                        break;
+
+                    case "PRODUCTION":
+                        this.DATABASE = properties.getProperty("db.prod.database");
+                        this.USER = properties.getProperty("db.prod.user");
+                        this.PASSWORD = properties.getProperty("db.prod.password");
+                        break;
+
+                    default:
+                        this.DATABASE = properties.getProperty("db.dev.database");
+                        this.USER = properties.getProperty("db.dev.user");
+                        this.PASSWORD = properties.getProperty("db.dev.password");
+                }
+                Connection conn = DriverManager.getConnection(this.CONNECTION + this.DATABASE, this.USER,
+                        this.PASSWORD);
+                this.statement = conn.createStatement();
+            }
+
+        } catch (Exception e) {
+            // TODO: Add to Log
             e.printStackTrace();
             this.statement = null;
         }
-
     }
 
     public Statement getStatement() {
@@ -32,6 +61,7 @@ public class MySQLConnection {
         try {
             return this.statement.executeQuery(query);
         } catch (Exception e) {
+            // TODO: Add to Log
             e.printStackTrace();
             return null;
         }
@@ -41,6 +71,7 @@ public class MySQLConnection {
         try {
             return this.statement.executeUpdate(query);
         } catch (Exception e) {
+            // TODO: Add to Log
             e.printStackTrace();
             return 0;
         }

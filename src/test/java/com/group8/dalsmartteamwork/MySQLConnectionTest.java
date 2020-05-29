@@ -11,13 +11,13 @@ public class MySQLConnectionTest {
 
     @Test
     public void defaultConstructorTest() {
-        MySQLConnection connection = new MySQLConnection("DEV_INT");
+        MySQLConnection connection = new MySQLConnection();
         assertNotNull(connection.getStatement());
     }
 
     @Test
     public void updateRecordsTest() {
-        MySQLConnection connection = new MySQLConnection("DEV_INT");
+        MySQLConnection connection = new MySQLConnection();
         Random rand = new Random();
         String id = Integer.toString(rand.nextInt(1000000));
         String query = String
