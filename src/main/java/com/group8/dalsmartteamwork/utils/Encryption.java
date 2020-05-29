@@ -1,4 +1,4 @@
-package com.group8.dalsmartteamwork;
+package com.group8.dalsmartteamwork.utils;
 
 import java.io.InputStream;
 import java.security.spec.KeySpec;
@@ -40,10 +40,10 @@ public class Encryption {
                 this.decryptCipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
                 this.decryptCipher.init(Cipher.DECRYPT_MODE, secretKeySpec, ivSpec);
             } else {
-                // TODO: Add to Log file - Properties file not found!
+                // TODO: Add to Log - Properties file not found!
             }
         } catch (Exception e) {
-            // TODO: Add to Log file - Exception
+            // TODO: Add to Log - Exception
         }
     }
 
@@ -51,7 +51,7 @@ public class Encryption {
         try {
             return Base64.getEncoder().encodeToString(encryptCipher.doFinal(strToEncrypt.getBytes("UTF-8")));
         } catch (Exception e) {
-            // TODO: Add to log
+            // TODO: Add to Log
             System.out.println("Error while encrypting: " + e.toString());
         }
         return null;
@@ -61,7 +61,7 @@ public class Encryption {
         try {
             return new String(this.decryptCipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
         } catch (Exception e) {
-            // TODO: Add to log
+            // TODO: Add to Log
             System.out.println("Error while decrypting: " + e.toString());
         }
         return null;

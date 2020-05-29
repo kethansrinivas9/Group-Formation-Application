@@ -1,6 +1,6 @@
 package com.group8.dalsmartteamwork.register.dao;
 
-import com.group8.dalsmartteamwork.MySQLConnection;
+import com.group8.dalsmartteamwork.utils.MySQLConnection;
 
 public class RegisterDaoImpl implements RegisterDao {
 
