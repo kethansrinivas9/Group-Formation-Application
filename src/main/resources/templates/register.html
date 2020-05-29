@@ -9,11 +9,12 @@
 <body>
     <h1>Form</h1>
     <form action="#" th:action="@{/register}" th:object="${user}" method="post">
-        <p>Banner Id: <input type="text" th:field="*{id}" /></p>
-        <p>First Name: <input type="text" th:field="*{firstName}" /></p>
-        <p>Last Name: <input type="text" th:field="*{lastName}" /></p>
-        <p>Email: <input type="text" th:field="*{email}" /></p>
-        <p>Password: <input type="password" th:field="*{password}" /></p>
+        <p>Banner Id: <input required type="text" th:field="*{id}" /></p>
+        <p>First Name: <input required type="text" th:field="*{firstName}" /></p>
+        <p>Last Name: <input required type="text" th:field="*{lastName}" /></p>
+        <p>Email: <input required type="email" th:field="*{email}" /></p>
+        <p>Password: <input required type="password" th:field="*{password}" /></p>
+        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Pasword Error</p>
         <p><input type="submit" value="Register" /></p>
     </form>
 </body>

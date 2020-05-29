@@ -1,10 +1,16 @@
 package com.group8.dalsmartteamwork.register.models;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class User {
     private String id;
     private String firstName;
     private String lastName;
+
     private String email;
+    @NotNull
+    @Size(min = 8, max = 30)
     private String password;
 
     public User() {
