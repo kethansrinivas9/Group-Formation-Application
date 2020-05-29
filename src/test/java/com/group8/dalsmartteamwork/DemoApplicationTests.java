@@ -1,4 +1,4 @@
-package com.example.webproject;
+package com.group8.dalsmartteamwork;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

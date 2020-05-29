@@ -1,4 +1,4 @@
-package com.example.webproject;
+package com.group8.dalsmartteamwork;
 
 public class User {
     private long id;

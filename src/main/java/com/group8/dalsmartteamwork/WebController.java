@@ -1,4 +1,4 @@
-package com.example.webproject;
+package com.group8.dalsmartteamwork;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,7 +70,7 @@ public class WebController {
         Boolean status = login_i.getUserDetails(user.getId(), user.getName(), user.getEmail(), user.getPassword());
         if(status)
         {
-            return "dummy";
+            return "success";
         }
         return "frontpage";
     }

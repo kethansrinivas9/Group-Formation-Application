@@ -1,4 +1,4 @@
-package com.example.webproject;
+package com.group8.dalsmartteamwork;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
