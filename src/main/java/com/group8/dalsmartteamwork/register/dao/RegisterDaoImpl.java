@@ -8,8 +8,8 @@ public class RegisterDaoImpl implements RegisterDao {
     public Boolean setUserDetails(String id, String firstName, String lastName, String email, String password) {
         try {
             MySQLConnection connection = new MySQLConnection("DEV_INT");
-            String query = String.format("INSERT INTO Users VALUES ('%s', '%s', '%s', '%s', '%s')", id, firstName,
-                    lastName, email, password);
+            String query = String.format("INSERT INTO Users VALUES ('%s', '%s', '%s', '%s', '%s')", id, lastName,
+                    firstName, email, password);
             System.out.println("query is" + query);
             int noRecords = connection.updateRecords(query);
             if (noRecords > 0) {
