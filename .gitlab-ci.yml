@@ -42,7 +42,7 @@ deploy:
   variables:
     GIT_STRATEGY: clone
   script:
-    - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/catme-app-test-server.git || true
+    - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_REPO || true
     - git push -f heroku HEAD:master
   only:
      - develop
