@@ -1,0 +1,14 @@
+{
+    "properties": [
+        {
+            "name": "crypt.key",
+            "type": "java.lang.String",
+            "description": "Secret Key for AES 256 encryption"
+        },
+        {
+            "name": "crypt.salt",
+            "type": "java.lang.String",
+            "description": "Salt for AES 256 encryption"
+        }
+    ]
+}
