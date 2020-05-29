@@ -36,3 +36,15 @@ test:
     - ./gradlew check
   tags:
     - grad
+
+deploy:
+  stage: deploy
+  variables:
+    GIT_STRATEGY: clone
+  script:
+    - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_REPO || true
+    - git push -f heroku HEAD:master
+  only:
+     - develop
+  tags:
+    - grad
