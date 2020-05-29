@@ -1,8 +1,9 @@
 package com.group8.dalsmartteamwork.register.models;
 
 public class User {
-    private long id;
-    private String name;
+    private String id;
+    private String firstName;
+    private String lastName;
     private String email;
     private String password;
 
@@ -10,29 +11,34 @@ public class User {
 
     }
 
-    public User(long id) {
+    public User(String id) {
         this.id = id;
     }
 
-    public User(long id, String email, String password) {
+    public User(String id, String email, String password) {
         this.id = id;
         this.email = email;
         this.password = password;
     }
 
-    public User(long id, String name, String email, String password) {
+    public User(String id, String firstName, String lastName, String email, String password) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setEmail(String email) {
@@ -43,12 +49,16 @@ public class User {
         this.password = password;
     }
 
-    public long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public String getName() {
-        return this.name;
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public String getLastName() {
+        return this.lastName;
     }
 
     public String getEmail() {

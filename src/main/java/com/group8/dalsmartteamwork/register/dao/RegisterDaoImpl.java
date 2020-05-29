@@ -5,10 +5,12 @@ import com.group8.dalsmartteamwork.MySQLConnection;
 public class RegisterDaoImpl implements RegisterDao {
 
     @Override
-    public Boolean setUserDetails(long id, String name, String email, String password) {
+    public Boolean setUserDetails(String id, String firstName, String lastName, String email, String password) {
         try {
             MySQLConnection connection = new MySQLConnection("DEV_INT");
-            String query = String.format("INSERT INTO Users VALUES (%d, '%s', '%s', '%s')", id, name, email, password);
+            String query = String.format("INSERT INTO Users VALUES ('%s', '%s', '%s', '%s', '%s')", id, firstName,
+                    lastName, email, password);
+            System.out.println("query is" + query);
             int noRecords = connection.updateRecords(query);
             if (noRecords > 0) {
                 return true;

@@ -16,8 +16,8 @@ public class MySQLConnectionTest {
     @Test
     public void updateRecordsTest() {
         MySQLConnection connection = new MySQLConnection("DEV_INT");
-        int noRecords = connection
-                .updateRecords("INSERT INTO Users VALUES (1234, 'Avinash', 'avinash@gmail.com', 'password')");
+        int noRecords = connection.updateRecords(
+                "INSERT INTO Users VALUES ('B00833546', 'Avinash', 'Gazula', 'avinash@gmail.com', 'password')");
         assertTrue(noRecords == 1);
     }
 

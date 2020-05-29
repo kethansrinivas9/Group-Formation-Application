@@ -1,5 +1,5 @@
 package com.group8.dalsmartteamwork.register.dao;
 
 public interface RegisterDao {
-    public Boolean setUserDetails(long id, String name, String email, String password);
+    public Boolean setUserDetails(String id, String firstName, String lastName, String email, String password);
 }
