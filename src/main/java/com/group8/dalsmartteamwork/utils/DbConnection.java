@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.Properties;
 
-public class MySQLConnection {
+public class DbConnection {
     private String ENVIRONMENT;
     private String USER;
     private String PASSWORD;
@@ -12,7 +12,7 @@ public class MySQLConnection {
     private String DATABASE;
     private Statement statement;
 
-    public MySQLConnection() {
+    public DbConnection() {
 
         try {
             Properties properties = new Properties();
@@ -75,6 +75,14 @@ public class MySQLConnection {
             e.printStackTrace();
             return 0;
         }
+    }
+
+    public int addRecords(String query) {
+        return this.updateRecords(query);
+    }
+
+    public int deleteRecords(String query) {
+        return this.updateRecords(query);
     }
 
 }

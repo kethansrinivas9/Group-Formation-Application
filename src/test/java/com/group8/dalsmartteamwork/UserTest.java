@@ -7,7 +7,6 @@ import com.group8.dalsmartteamwork.register.models.User;
 import org.junit.jupiter.api.Test;
 
 public class UserTest {
-
     public static final String TEMP_ID = "B00833467";
     public static final String TEMP_FIRST_NAME = "temp_name";
     public static final String TEMP_LAST_NAME = "temp_name";

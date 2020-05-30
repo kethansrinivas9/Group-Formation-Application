@@ -1,23 +1,23 @@
 package com.group8.dalsmartteamwork;
 
-import com.group8.dalsmartteamwork.utils.MySQLConnection;
+import com.group8.dalsmartteamwork.utils.DbConnection;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
 
-public class MySQLConnectionTest {
+public class DbConnectionTest {
 
     @Test
     public void defaultConstructorTest() {
-        MySQLConnection connection = new MySQLConnection();
+        DbConnection connection = new DbConnection();
         assertNotNull(connection.getStatement());
     }
 
     @Test
     public void updateRecordsTest() {
-        MySQLConnection connection = new MySQLConnection();
+        DbConnection connection = new DbConnection();
         Random rand = new Random();
         String id = Integer.toString(rand.nextInt(1000000));
         String query = String
