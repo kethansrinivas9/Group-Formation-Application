@@ -47,7 +47,7 @@ public class WebController {
         Boolean status = login_i.getUserDetails(user.getId(), user.getName(), user.getEmail(),eString);
         if(status)
         {
-            return "success";
+            return "login_success";
         }
         return "frontpage";
     }
