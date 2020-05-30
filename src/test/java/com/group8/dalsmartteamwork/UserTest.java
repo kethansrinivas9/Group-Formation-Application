@@ -1,95 +1,98 @@
 package com.group8.dalsmartteamwork;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
-//import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.group8.dalsmartteamwork.register.models.User;
 import org.junit.jupiter.api.Test;
-import com.group8.dalsmartteamwork.login.models.User;
 
-public class  UserTest {
-
-
-    public static final String ID= "123";
-    public static final String NAME = "Dalhousie";
-    public static final String EMAIL= "Dal12@gmail.com";
-    public static final String PASSWORD = "temdal@1234p";
+public class UserTest {
+    public static final String TEMP_ID = "B00833467";
+    public static final String TEMP_FIRST_NAME = "temp_name";
+    public static final String TEMP_LAST_NAME = "temp_name";
+    public static final String TEMP_EMAIL = "temp@email.com";
+    public static final String TEMP_PASSWORD = "temp_password";
 
     @Test
-    public void defaultconstructorTest()
-    {
+    public void defaultConstructorTest() {
         User user = new User();
         assertNull(user.getId());
     }
 
     @Test
-    public void constructorTest()
-    {
-        User user =new User(ID,NAME,EMAIL, PASSWORD);
-        assertTrue(user.getId().equals(ID));
-        assertTrue(user.getName().equals(NAME));
-        assertTrue(user.getEmail().equals(EMAIL));
-        assertTrue(user.getPassword().equals(PASSWORD));
+    public void constructorThreeArgumentsTest() {
+        User user = new User(TEMP_ID, TEMP_EMAIL, TEMP_PASSWORD);
+        assertTrue(user.getId() == TEMP_ID);
     }
 
     @Test
-    public void getIDTest()
-    {
-        User user = new User(ID,NAME,EMAIL, PASSWORD);
-        assertTrue(user.getId().equals(ID));
+    public void constructorFourArgumentsTest() {
+        User user = new User(TEMP_ID, TEMP_FIRST_NAME, TEMP_LAST_NAME, TEMP_EMAIL, TEMP_PASSWORD);
+        assertTrue(user.getFirstName().equals(TEMP_FIRST_NAME));
     }
 
     @Test
-    public void setIDTest()
-    {
-        User user = new User(ID,NAME,EMAIL, PASSWORD);
-        user.setId(ID);
-        assertTrue(user.getId()==ID);
+    public void setIdTest() {
+        User user = new User(TEMP_ID);
+        assertTrue(user.getId() == TEMP_ID);
     }
 
     @Test
-    public void getNameTest()
-    {
-        User user = new User(ID,NAME,EMAIL, PASSWORD);
-        assertTrue(user.getName().equals(NAME));
+    public void getIdTest() {
+        User user = new User(TEMP_ID, TEMP_FIRST_NAME, TEMP_LAST_NAME, TEMP_EMAIL, TEMP_PASSWORD);
+        assertTrue(user.getId() == TEMP_ID);
     }
 
     @Test
-    public void setNameTest()
-    {
-        User user = new User(ID,NAME,EMAIL, PASSWORD);
-        user.setId(NAME);
-        assertTrue(user.getName()==NAME);
+    public void setFirstNameTest() {
+        User user = new User(TEMP_ID);
+        user.setFirstName(TEMP_FIRST_NAME);
+        assertTrue(user.getFirstName().equals(TEMP_FIRST_NAME));
     }
 
     @Test
-    public void getEmailTest()
-    {
-        User user = new User(ID,NAME,EMAIL, PASSWORD);
-        assertTrue(user.getEmail().equals(EMAIL));
+    public void getFirstNameTest() {
+        User user = new User(TEMP_ID, TEMP_FIRST_NAME, TEMP_LAST_NAME, TEMP_EMAIL, TEMP_PASSWORD);
+        assertTrue(user.getFirstName().equals((TEMP_FIRST_NAME)));
     }
 
     @Test
-    public void setEmailTest()
-    {
-        User user = new User(ID,NAME,EMAIL, PASSWORD);
-        user.setId(EMAIL);
-        assertTrue(user.getEmail()==EMAIL);
+    public void setLastNameTest() {
+        User user = new User(TEMP_ID);
+        user.setLastName(TEMP_LAST_NAME);
+        assertTrue(user.getLastName().equals(TEMP_LAST_NAME));
     }
 
     @Test
-    public void getPasswordTest()
-    {
-        User user = new User(ID,NAME,EMAIL, PASSWORD);
-        assertTrue(user.getPassword().equals(PASSWORD));
+    public void getLastNameTest() {
+        User user = new User(TEMP_ID, TEMP_FIRST_NAME, TEMP_LAST_NAME, TEMP_EMAIL, TEMP_PASSWORD);
+        assertTrue(user.getLastName().equals((TEMP_LAST_NAME)));
     }
 
     @Test
-    public void setPasswordTest()
-    {
-        User user = new User(ID,NAME,EMAIL, PASSWORD);
-        user.setId(PASSWORD);
-        assertTrue(user.getPassword()==PASSWORD);
+    public void setEmailTest() {
+        User user = new User(TEMP_ID);
+        user.setEmail(TEMP_EMAIL);
+        assertTrue(user.getEmail().equals(TEMP_EMAIL));
     }
-    
+
+    @Test
+    public void getEmailTest() {
+        User user = new User(TEMP_ID, TEMP_FIRST_NAME, TEMP_LAST_NAME, TEMP_EMAIL, TEMP_PASSWORD);
+        assertTrue(user.getEmail().equals((TEMP_EMAIL)));
+    }
+
+    @Test
+    public void setPasswordTest() {
+        User user = new User(TEMP_ID);
+        user.setPassword(TEMP_PASSWORD);
+        assertTrue(user.getPassword().equals(TEMP_PASSWORD));
+    }
+
+    @Test
+    public void getPasswordTest() {
+        User user = new User(TEMP_ID, TEMP_FIRST_NAME, TEMP_LAST_NAME, TEMP_EMAIL, TEMP_PASSWORD);
+        assertTrue(user.getPassword().equals(TEMP_PASSWORD));
+    }
+
 }

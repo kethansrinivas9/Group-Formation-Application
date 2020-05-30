@@ -1,30 +1,30 @@
 package com.group8.dalsmartteamwork;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import com.group8.dalsmartteamwork.utils.Encryption;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 public class EncryptionTest {
-    public static final String STRING = "dal@1234";
-    public static final String E_STRING = "zYai5lSilh+n06ao4TFZuA==";
+    private static final String TEST_STRING = "HelloWorld123@";
+    private static final String TEST_ENC_STRING = "N3UEE4Uf/MNu9uc3qpeY0g==";
 
     @Test
-    public void encrypt()
-    {
+    public void encryptTest() {
         Encryption encryption = new Encryption();
-        assertTrue(encryption.encrypt(STRING).equals(E_STRING));
-
+        assertTrue(encryption.encrypt(TEST_STRING).equals(TEST_ENC_STRING));
     }
 
     @Test
-    public void decrypt()
-    {
+    public void decryptTest() {
         Encryption encryption = new Encryption();
-        assertTrue(encryption.decrypt(E_STRING).equals(STRING));
-
+        assertTrue(encryption.decrypt(TEST_ENC_STRING).equals(TEST_STRING));
     }
 
-
+    @Test
+    public void encryptDecryptTest() {
+        Encryption encryption = new Encryption();
+        String encrypted_text = encryption.encrypt("HelloWorld123@");
+        assertTrue(encryption.decrypt(encrypted_text).equals("HelloWorld123@"));
+    }
 }
