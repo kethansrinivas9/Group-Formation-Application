@@ -12,7 +12,6 @@ import com.group8.dalsmartteamwork.utils.CsvReader;
 import org.junit.jupiter.api.Test;
 
 public class CsvReaderTest {
-    public static final String FILE_PATH = "students.csv";
     public static final String TEST_FILE = "B123,FN1,LN1,FN1@gmail.com,pwd\n" + "b124,fn2,lm2,FN2@gmail.com,pwd";
     public static final String[] TEST_ARRAY = { "B124", "fn", "ln", "email@email.com", "password" };
 
