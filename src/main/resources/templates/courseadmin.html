@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <title>Course Admin</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <div>
+        <h2>Import Student List</h2>
+        <p th:text="${message}" th:if="${message ne null}"></p>
+        <form th:action="@{/upload}" enctype="multipart/form-data" method="POST">
+            <input type="file" name="file">
+            <button type="submit">Upload File</button>
+        </form>
+    </div>
+
+</body>
+
+</html>
