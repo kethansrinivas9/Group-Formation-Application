@@ -14,8 +14,7 @@ import org.junit.jupiter.api.Test;
 public class LoginImplementationTest {
 
     @Test
-    public void getUserDetails() throws SQLException
-    {
+    public void getUserDetails() throws SQLException {
         String email = "email@gmail.com";
         String password = "email@123";
         DbConnection connection = new DbConnection();

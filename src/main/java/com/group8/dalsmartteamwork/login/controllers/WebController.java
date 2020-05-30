@@ -1,6 +1,6 @@
 package com.group8.dalsmartteamwork.login.controllers;
 
-import com.group8.dalsmartteamwork.login.models.User;
+import com.group8.dalsmartteamwork.utils.User;
 import com.group8.dalsmartteamwork.utils.Encryption;
 
 import org.springframework.stereotype.Controller;
@@ -14,28 +14,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller  
 public class WebController {
 
-    @GetMapping(value="/login")
-    public String login(Model model)
-    {
+    @GetMapping(value = "/login")
+    public String login(Model model) {
         model.addAttribute("user", new User());
         return "login";
     }
 
     @PostMapping(value = "/login")
-    public String logindetails(@ModelAttribute User user, BindingResult bindingResult)
-    {
-        if(bindingResult.hasErrors())
-        {
+    public String logindetails(@ModelAttribute User user, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
             return "login";
         }
         
-        LoginImplementation login_i = new LoginImplementation();
-       Encryption encryption = new Encryption();
-       String eString = encryption.encrypt(user.getPassword());
-       System.out.println(eString);
-        Boolean status = login_i.getUserDetails(user.getId(), user.getName(), user.getEmail(),eString);
-        if(status)
-        {
+        LoginImplementation loginImplementation = new LoginImplementation();
+        Encryption encryption = new Encryption();
+        String encryptedPassword = encryption.encrypt(user.getPassword());
+        Boolean status = loginImplementation.getUserDetails(user.getId(), user.getName(), user.getEmail(),encryptedPassword);
+        if(status) {
             return "login_success";
         }
         return "frontpage";
