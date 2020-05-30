@@ -16,12 +16,11 @@ public class LoginImplementationTest {
     @Test
     public void getUserDetails() throws SQLException
     {
+        String email = "email@gmail.com";
+        String password = "email@123";
         DbConnection connection = new DbConnection();
-        Connection con = connection.conn;
-        PreparedStatement ps = con.prepareStatement("SELECT FirstName from Users WHERE Email=? and Password =? ");
-        ps.setString(1, "email");
-        ps.setString(2, "password");
-        ResultSet rs = ps.executeQuery();
+        String query = String.format("SELECT Email from Users WHERE Email= '%s' and Password = '%s' ", email,password);
+        ResultSet rs = connection.getRecords(query);
         assertTrue(!rs.next());
     }
 }

@@ -11,7 +11,6 @@ public class DbConnection {
     private String CONNECTION;
     private String DATABASE;
     private Statement statement;
-    public Connection conn = null;
 
     public DbConnection() {
 
@@ -42,7 +41,7 @@ public class DbConnection {
                         this.USER = properties.getProperty("db.dev.user");
                         this.PASSWORD = properties.getProperty("db.dev.password");
                 }
-                 conn = DriverManager.getConnection(this.CONNECTION + this.DATABASE, this.USER,
+                 Connection conn = DriverManager.getConnection(this.CONNECTION + this.DATABASE, this.USER,
                         this.PASSWORD);
                 this.statement = conn.createStatement();
             }
