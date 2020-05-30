@@ -15,15 +15,4 @@ public class DbConnectionTest {
         assertNotNull(connection.getStatement());
     }
 
-    @Test
-    public void updateRecordsTest() {
-        DbConnection connection = new DbConnection();
-        Random rand = new Random();
-        String id = Integer.toString(rand.nextInt(1000000));
-        String query = String
-                .format("INSERT INTO Users VALUES ('%s', 'Avinash', 'Gazula', 'avinash@gmail.com', 'password')", id);
-        int noRecords = connection.updateRecords(query);
-        assertTrue(noRecords == 1);
-    }
-
 }

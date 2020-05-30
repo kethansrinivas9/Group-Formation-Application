@@ -41,7 +41,7 @@ public class DbConnection {
                         this.USER = properties.getProperty("db.dev.user");
                         this.PASSWORD = properties.getProperty("db.dev.password");
                 }
-                Connection conn = DriverManager.getConnection(this.CONNECTION + this.DATABASE, this.USER,
+                 Connection conn = DriverManager.getConnection(this.CONNECTION + this.DATABASE, this.USER,
                         this.PASSWORD);
                 this.statement = conn.createStatement();
             }
