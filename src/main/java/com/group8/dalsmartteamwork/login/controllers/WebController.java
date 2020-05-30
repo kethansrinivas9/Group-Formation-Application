@@ -39,7 +39,7 @@ public class WebController {
         {
             return "login";
         }
-        //user.setId(123456);
+        
         LoginImplementation login_i = new LoginImplementation();
        Encryption encryption = new Encryption();
        String eString = encryption.encrypt(user.getPassword());
