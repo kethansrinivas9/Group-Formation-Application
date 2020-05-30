@@ -29,7 +29,7 @@ public class WebController {
         LoginImplementation loginImplementation = new LoginImplementation();
         Encryption encryption = new Encryption();
         String encryptedPassword = encryption.encrypt(user.getPassword());
-        Boolean status = loginImplementation.getUserDetails(user.getId(), user.getName(), user.getEmail(),encryptedPassword);
+        Boolean status = loginImplementation.getUserDetails(user.getId(), user.getFirstName(), user.getEmail(),encryptedPassword);
         if(status) {
             return "login_success";
         }
