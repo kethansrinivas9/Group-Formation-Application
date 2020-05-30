@@ -14,7 +14,7 @@
         <p>Last Name: <input required type="text" th:field="*{lastName}" /></p>
         <p>Email: <input required type="email" th:field="*{email}" /></p>
         <p>Password: <input required type="password" th:field="*{password}" /></p>
-        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Pasword Error</p>
+        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>
         <p><input type="submit" value="Register" /></p>
     </form>
 </body>
