@@ -13,6 +13,7 @@ public class DbConnectionTest {
     public void defaultConstructorTest() {
         DbConnection connection = new DbConnection();
         assertNotNull(connection.getStatement());
+        connection.close();
     }
 
     @Test
@@ -24,6 +25,7 @@ public class DbConnectionTest {
                 .format("INSERT INTO Users VALUES ('%s', 'Avinash', 'Gazula', 'avinash@gmail.com', 'password')", id);
         int noRecords = connection.updateRecords(query);
         assertTrue(noRecords == 1);
+        connection.close();
     }
 
 }
