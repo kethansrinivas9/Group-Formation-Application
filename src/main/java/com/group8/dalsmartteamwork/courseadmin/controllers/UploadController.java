@@ -27,21 +27,19 @@ public class UploadController {
 
     @PostMapping(value = "/upload")
     public String uploadFile(@RequestParam("file") MultipartFile file, RedirectAttributes attributes, Model model) {
-        String fileName;
-        CsvReader csvReader;
-        List<User> users;
-        List<Boolean> status;
-        VerifyRegistrationImpl vri = new VerifyRegistrationImpl();
-        List<Pair<User, Boolean>> details = new ArrayList<Pair<User, Boolean>>();
+
         if (file.isEmpty()) {
             attributes.addFlashAttribute("message", "Please select a file to upload.");
             return "redirect:/courseadmin";
         }
         try {
-            fileName = file.getOriginalFilename();
-            csvReader = new CsvReader(file.getInputStream());
-            users = csvReader.getUsers();
+            String fileName = file.getOriginalFilename();
+            CsvReader csvReader = new CsvReader(file.getInputStream());
+            List<User> users = csvReader.getUsers();
+            List<Boolean> status;
+            VerifyRegistrationImpl vri = new VerifyRegistrationImpl();
             status = vri.verifyRegistration(users);
+            List<Pair<User, Boolean>> details = new ArrayList<Pair<User, Boolean>>();
             for (int i = 0; i < users.size(); i++) {
                 Pair<User, Boolean> temp = new Pair<User, Boolean>(users.get(i), status.get(i));
                 details.add(temp);

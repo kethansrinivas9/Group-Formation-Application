@@ -26,6 +26,8 @@ public class VerifyRegistrationImpl implements VerifyRegistrationDao {
                 return status;
             }
             for (User user : users) {
+                String password = generatePassword(15);
+                String encrypted_password = encryption.encrypt(password);
                 String selectQuery = String.format("SELECT * FROM Users where BannerId='%s'", user.getId());
                 ResultSet resultSet = dbConnection.getRecords(selectQuery);
                 int rsCount = 0;
@@ -36,8 +38,6 @@ public class VerifyRegistrationImpl implements VerifyRegistrationDao {
                     status.add(false);
                     continue;
                 }
-                String password = generatePassword(15);
-                String encrypted_password = encryption.encrypt(password);
                 String insertQuery = String.format("INSERT INTO Users VALUES('%s', '%s', '%s', '%s', '%s')",
                         user.getId(), user.getLastName(), user.getFirstName(), user.getEmail(), encrypted_password);
                 dbConnection.updateRecords(insertQuery);
