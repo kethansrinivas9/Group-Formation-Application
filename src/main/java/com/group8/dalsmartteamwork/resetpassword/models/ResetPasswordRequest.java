@@ -1,13 +1,11 @@
-package com.group8.dalsmartteamwork.register.models;
+package com.group8.dalsmartteamwork.resetpassword.models;
 
 public class ResetPasswordRequest {
 	private String BannerID;
 
-	
 	public ResetPasswordRequest() {}
 
 	public ResetPasswordRequest(String bannerID) {
-		super();
 		BannerID = bannerID;
 	}
 	
