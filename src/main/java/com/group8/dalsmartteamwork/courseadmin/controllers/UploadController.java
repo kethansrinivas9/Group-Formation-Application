@@ -44,7 +44,6 @@ public class UploadController {
                 Pair<User, Boolean> temp = new Pair<User, Boolean>(users.get(i), status.get(i));
                 details.add(temp);
             }
-            System.out.println(details.size());
             model.addAttribute("details", details);
             // model.addAttribute("users", users);
             model.addAttribute("message", String.format("Num Users: %d", users.size()));

@@ -36,9 +36,6 @@
                     <td>
                         <p th:if="${detail.getY()} ==false">Existing</p>
                         <p th:if="${detail.getY()} ==true">Invited</p>
-                        <a th:href="/@{'/edit/' + ${sale.id}}">Edit</a>
-                        &nbsp;&nbsp;&nbsp;
-                        <a th:href="/@{'/delete/' + ${sale.id}}">Delete</a>
                     </td>
                 </tr>
             </tbody>

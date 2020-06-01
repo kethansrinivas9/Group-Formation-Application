@@ -3,21 +3,12 @@ package com.group8.dalsmartteamwork.courseadmin.dao;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.Random;
-
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 import com.group8.dalsmartteamwork.utils.User;
 import com.group8.dalsmartteamwork.utils.DbConnection;
 import com.group8.dalsmartteamwork.utils.Encryption;
-import com.group8.dalsmartteamwork.utils.Props;
+import com.group8.dalsmartteamwork.utils.Mail;
 
 public class VerifyRegistrationImpl implements VerifyRegistrationDao {
 
@@ -26,6 +17,7 @@ public class VerifyRegistrationImpl implements VerifyRegistrationDao {
         List<Boolean> status = new ArrayList<>();
         try {
             DbConnection dbConnection = new DbConnection();
+            Mail mail = new Mail();
             if (users.size() == 0) {
                 return status;
             }
@@ -40,7 +32,6 @@ public class VerifyRegistrationImpl implements VerifyRegistrationDao {
                     status.add(false);
                     continue;
                 }
-                System.out.println(user.getId());
                 String password = generatePassword(15);
                 Encryption encryption = new Encryption();
                 String encrypted_password = encryption.encrypt(password);
@@ -50,7 +41,7 @@ public class VerifyRegistrationImpl implements VerifyRegistrationDao {
                 String message = String.format(
                         "You have been registered to CatME. You can login with your email and password: %s", password);
                 String subject = "CatME Registration";
-                // sendEmail(user.getEmail(), subject, message);
+                mail.sendEmail(user.getEmail(), subject, message);
                 status.add(true);
             }
             dbConnection.close();
@@ -74,31 +65,4 @@ public class VerifyRegistrationImpl implements VerifyRegistrationDao {
         return stringBuilder.toString();
     }
 
-    public Boolean sendEmail(String toEmail, String subject, String text) {
-        try {
-
-            Props props = new Props();
-            Properties properties = props.getProperties();
-            final String username = props.getValue("mail.smtp.username");
-            final String password = props.getValue("mail.smtp.password");
-
-            Authenticator auth = new Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(username, password);
-                }
-            };
-
-            Session session = Session.getInstance(properties, auth);
-            MimeMessage msg = new MimeMessage(session);
-            msg.setSubject(subject, "UTF-8");
-            msg.setText(text, "UTF-8");
-            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
-            Transport.send(msg);
-            return true;
-        } catch (Exception e) {
-            // TODO: handle exception
-            e.printStackTrace();
-            return false;
-        }
-    }
 }
