@@ -1,21 +1,17 @@
 package com.group8.dalsmartteamwork.resetpassword;
 
 import com.group8.dalsmartteamwork.resetpassword.models.PasswordResetToken;
-import com.group8.dalsmartteamwork.utils.DbConnection;
 import org.junit.jupiter.api.Test;
 
-import javax.print.attribute.standard.DateTimeAtCreation;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PasswordResetTokenTest{
 
-    public static final String TEMP_BANNERID = "B00000000";
-    public static final String TEMP_TOKEN = "a0a1a2a3a4a5a6a7a8a9";
-    public static  final Date TEMP_TIMESTAMP = new Date();
+    private static final String TEMP_BANNERID = "B00000000";
+    private static final String TEMP_TOKEN = "a0a1a2a3a4a5a6a7a8a9";
+    private static  final Date TEMP_TIMESTAMP = new Date();
 
     @Test
     public void defaultConstructorTest(){
