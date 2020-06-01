@@ -27,36 +27,33 @@ public class UploadController {
 
     @PostMapping(value = "/upload")
     public String uploadFile(@RequestParam("file") MultipartFile file, RedirectAttributes attributes, Model model) {
+        String fileName;
+        CsvReader csvReader;
+        List<User> users;
+        List<Boolean> status;
+        VerifyRegistrationImpl vri = new VerifyRegistrationImpl();
+        List<Pair<User, Boolean>> details = new ArrayList<Pair<User, Boolean>>();
         if (file.isEmpty()) {
             attributes.addFlashAttribute("message", "Please select a file to upload.");
             return "redirect:/courseadmin";
         }
-
-        String fileName = file.getOriginalFilename();
-
         try {
-            CsvReader csvReader = new CsvReader(file.getInputStream());
-            List<User> users = csvReader.getUsers();
-            VerifyRegistrationImpl vri = new VerifyRegistrationImpl();
-            List<Boolean> status = vri.verifyRegistration(users);
-            List<Pair<User, Boolean>> details = new ArrayList<Pair<User, Boolean>>();
+            fileName = file.getOriginalFilename();
+            csvReader = new CsvReader(file.getInputStream());
+            users = csvReader.getUsers();
+            status = vri.verifyRegistration(users);
             for (int i = 0; i < users.size(); i++) {
                 Pair<User, Boolean> temp = new Pair<User, Boolean>(users.get(i), status.get(i));
                 details.add(temp);
             }
             model.addAttribute("details", details);
-            // model.addAttribute("users", users);
-            model.addAttribute("message", String.format("Num Users: %d", users.size()));
+            model.addAttribute("message", String.format("Succesfully uploaded file: %s", fileName));
             return "courseadmin";
 
         } catch (IOException e) {
             e.printStackTrace();
+            return "courseadmin";
         }
-
-        attributes.addFlashAttribute("message", "You successfully uploaded " + fileName + '!');
-
-        return "redirect:/courseadmin";
-
     }
 
 }

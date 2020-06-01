@@ -27,7 +27,6 @@ public class Mail {
             };
 
             this.session = Session.getInstance(properties, auth);
-
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();

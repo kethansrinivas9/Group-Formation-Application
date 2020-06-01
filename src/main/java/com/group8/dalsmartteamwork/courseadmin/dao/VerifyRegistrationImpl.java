@@ -11,12 +11,16 @@ import com.group8.dalsmartteamwork.utils.Encryption;
 import com.group8.dalsmartteamwork.utils.Mail;
 
 public class VerifyRegistrationImpl implements VerifyRegistrationDao {
+    private final String ALLOWED_CHARS = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM0987654321";
+    private final String INVITE_SUBJECT = "CatME Registration";
+    private final String INVITE_TEXT_FORMAT = "You have been registered to CatME. You can login with your email and password: %s";
 
     @Override
     public List<Boolean> verifyRegistration(List<User> users) {
         List<Boolean> status = new ArrayList<>();
         try {
             DbConnection dbConnection = new DbConnection();
+            Encryption encryption = new Encryption();
             Mail mail = new Mail();
             if (users.size() == 0) {
                 return status;
@@ -33,15 +37,12 @@ public class VerifyRegistrationImpl implements VerifyRegistrationDao {
                     continue;
                 }
                 String password = generatePassword(15);
-                Encryption encryption = new Encryption();
                 String encrypted_password = encryption.encrypt(password);
                 String insertQuery = String.format("INSERT INTO Users VALUES('%s', '%s', '%s', '%s', '%s')",
                         user.getId(), user.getLastName(), user.getFirstName(), user.getEmail(), encrypted_password);
                 dbConnection.updateRecords(insertQuery);
-                String message = String.format(
-                        "You have been registered to CatME. You can login with your email and password: %s", password);
-                String subject = "CatME Registration";
-                mail.sendEmail(user.getEmail(), subject, message);
+                String message = String.format(this.INVITE_TEXT_FORMAT, password);
+                mail.sendEmail(user.getEmail(), this.INVITE_SUBJECT, message);
                 status.add(true);
             }
             dbConnection.close();
@@ -54,12 +55,11 @@ public class VerifyRegistrationImpl implements VerifyRegistrationDao {
     }
 
     public String generatePassword(int length) {
-        String allowedChars = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM0987654321";
-        int len = allowedChars.length();
+        int len = this.ALLOWED_CHARS.length();
         StringBuilder stringBuilder = new StringBuilder();
         Random rand = new Random();
         for (int i = 0; i < length; i++) {
-            stringBuilder.append(allowedChars.charAt(rand.nextInt(len)));
+            stringBuilder.append(this.ALLOWED_CHARS.charAt(rand.nextInt(len)));
         }
 
         return stringBuilder.toString();
