@@ -1,8 +1,6 @@
 package com.group8.dalsmartteamwork.utils;
 
-import java.io.InputStream;
 import java.sql.*;
-import java.util.Properties;
 
 public class DbConnection {
     private String ENVIRONMENT;
@@ -11,40 +9,34 @@ public class DbConnection {
     private String CONNECTION;
     private String DATABASE;
     private Statement statement;
+    private Connection conn;
 
     public DbConnection() {
 
         try {
-            Properties properties = new Properties();
-            Thread currentThread = Thread.currentThread();
-            ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-            InputStream propertiesStream = contextClassLoader.getResourceAsStream("application.properties");
-            if (propertiesStream != null) {
-                properties.load(propertiesStream);
-                this.ENVIRONMENT = properties.getProperty("db.environment");
-                this.CONNECTION = properties.getProperty("db.connection");
-                switch (this.ENVIRONMENT) {
-                    case "TEST":
-                        this.DATABASE = properties.getProperty("db.test.database");
-                        this.USER = properties.getProperty("db.test.user");
-                        this.PASSWORD = properties.getProperty("db.test.password");
-                        break;
+            Props properties = new Props();
+            this.ENVIRONMENT = properties.getValue("db.environment");
+            this.CONNECTION = properties.getValue("db.connection");
+            switch (this.ENVIRONMENT) {
+                case "TEST":
+                    this.DATABASE = properties.getValue("db.test.database");
+                    this.USER = properties.getValue("db.test.user");
+                    this.PASSWORD = properties.getValue("db.test.password");
+                    break;
 
-                    case "PRODUCTION":
-                        this.DATABASE = properties.getProperty("db.prod.database");
-                        this.USER = properties.getProperty("db.prod.user");
-                        this.PASSWORD = properties.getProperty("db.prod.password");
-                        break;
+                case "PRODUCTION":
+                    this.DATABASE = properties.getValue("db.prod.database");
+                    this.USER = properties.getValue("db.prod.user");
+                    this.PASSWORD = properties.getValue("db.prod.password");
+                    break;
 
-                    default:
-                        this.DATABASE = properties.getProperty("db.dev.database");
-                        this.USER = properties.getProperty("db.dev.user");
-                        this.PASSWORD = properties.getProperty("db.dev.password");
-                }
-                 Connection conn = DriverManager.getConnection(this.CONNECTION + this.DATABASE, this.USER,
-                        this.PASSWORD);
-                this.statement = conn.createStatement();
+                default:
+                    this.DATABASE = properties.getValue("db.dev.database");
+                    this.USER = properties.getValue("db.dev.user");
+                    this.PASSWORD = properties.getValue("db.dev.password");
             }
+            this.conn = DriverManager.getConnection(this.CONNECTION + this.DATABASE, this.USER, this.PASSWORD);
+            this.statement = conn.createStatement();
 
         } catch (Exception e) {
             // TODO: Add to Log
@@ -83,6 +75,16 @@ public class DbConnection {
 
     public int deleteRecords(String query) {
         return this.updateRecords(query);
+    }
+
+    public void close() {
+        try {
+            this.conn.close();
+        } catch (Exception e) {
+            // TODO: Add to Log
+            e.printStackTrace();
+        }
+
     }
 
 }
