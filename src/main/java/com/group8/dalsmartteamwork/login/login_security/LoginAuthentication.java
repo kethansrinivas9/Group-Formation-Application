@@ -4,41 +4,38 @@ import org.springframework.security.authentication.AuthenticationManager;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Iterator;
-
 import java.util.Set;
 import com.group8.dalsmartteamwork.login.dao.LoginImplementation;
 import com.group8.dalsmartteamwork.login.model.Role;
 import com.group8.dalsmartteamwork.login.model.User;
 import com.group8.dalsmartteamwork.utils.Encryption;
-
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 
 public class LoginAuthentication implements AuthenticationManager {
 
-
     public Set<Role> roleName = new HashSet<Role>();
-    Iterator<Role> role;
-    Iterator<Role> course;
-    String[] roles = new String[20];
-    String[] courses = new String[60];
-     int i = 0;
-     int j = 0;
-     Boolean status;
+    Boolean status;
      LoginImplementation loginImplementation = new LoginImplementation();
    
     @Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		// TODO Auto-generated method stub
         User user = new User();
+        Iterator<Role> role;
+        Iterator<Role> course;
+        String[] roles = new String[20];
+        String[] courses = new String[60];
+        int i = 0;
+        int j = 0;
         String username = authentication.getPrincipal().toString();
         String password = authentication.getCredentials().toString();
-        // Encryption encryption = new Encryption();
-        // String encryptedPassword = encryption.encrypt(password);
+        Encryption encryption = new Encryption();
+        String encryptedPassword = encryption.encrypt(password);
         try {
             status = loginImplementation.getUserDetails(username, user.getFirstName(), user.getEmail(),
-                    password);
+                    encryptedPassword);
         } catch (SQLException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();

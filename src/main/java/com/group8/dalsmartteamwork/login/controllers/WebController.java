@@ -15,24 +15,23 @@ public class WebController {
     public String username;
 
     @GetMapping("/login")
-    public String login(Model model) {
+    public String getLoginPage(Model model) {
             model.addAttribute("user", new User());
             return "login";
     }
 
     @PostMapping("/login")
-       public String logindetails(@ModelAttribute("user") User user1) {
+       public String loginResult(@ModelAttribute("user") User user1) {
         return "login_success";
     }
     
     @GetMapping("/loginError")
-    public String errorPage() {
+    public String loginErrorPage() {
         return "loginError";
     }
 
     @GetMapping("student")
-    public String studentPage(HttpServletRequest request, Model model) {
-    
+    public String getStudentPage(HttpServletRequest request, Model model) { 
     String [] courses = (String[]) request.getSession().getAttribute("courses");
     int i=0;
     try {
@@ -47,8 +46,7 @@ public class WebController {
     }
 
     @GetMapping("admin")
-    public String adminPage(HttpServletRequest request, Model model) {
-    
+    public String getAdminPage(HttpServletRequest request, Model model) {  
     username = (String) request.getSession().getAttribute("username");
     model.addAttribute("user", username);
     return "admin";
@@ -56,8 +54,7 @@ public class WebController {
     }
 
     @GetMapping("guest")
-    public String guestPage(HttpServletRequest request, Model model) {
-    
+    public String getGuestPage(HttpServletRequest request, Model model) {
     username = (String) request.getSession().getAttribute("username");
     model.addAttribute("user", username);
     return "guest";

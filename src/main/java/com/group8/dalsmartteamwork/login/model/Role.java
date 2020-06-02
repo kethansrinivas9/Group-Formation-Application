@@ -10,6 +10,17 @@ public class Role {
 
     }
 
+    public Role(String roleId, String roleName, String courseName) {
+        this.roleId = roleId;
+        this.roleName = roleName;
+        this.courseName = courseName;
+    }
+
+    public Role(String roleName, String courseName) {
+        this.roleName = roleName;
+        this.courseName = courseName;
+    }    
+
     public String getRoleId() {
         return roleId;
     }
@@ -33,16 +44,5 @@ public class Role {
     public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
-
-    public Role(String roleId, String roleName, String courseName) {
-        this.roleId = roleId;
-        this.roleName = roleName;
-        this.courseName = courseName;
-    }
-
-    public Role(String roleName, String courseName) {
-        this.roleName = roleName;
-        this.courseName = courseName;
-    }    
     
 }
