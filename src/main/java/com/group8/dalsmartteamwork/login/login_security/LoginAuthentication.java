@@ -17,11 +17,11 @@ public class LoginAuthentication implements AuthenticationManager {
 
     public Set<Role> roleName = new HashSet<Role>();
     Boolean status;
-     LoginImplementation loginImplementation = new LoginImplementation();
-   
+    LoginImplementation loginImplementation = new LoginImplementation();
+
     @Override
-	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		// TODO Auto-generated method stub
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        // TODO Auto-generated method stub
         User user = new User();
         Iterator<Role> role;
         Iterator<Role> course;
@@ -40,30 +40,30 @@ public class LoginAuthentication implements AuthenticationManager {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
-        try{
-            if(status) {
+        try {
+            if (status) {
                 roleName = loginImplementation.roles;
                 role = roleName.iterator();
                 course = roleName.iterator();
-            
-                while(role.hasNext()) {
-                    roles[i]=role.next().getRoleName();
+
+                while (role.hasNext()) {
+                    roles[i] = role.next().getRoleName();
                     i++;
                 }
-                while(course.hasNext()) {
+                while (course.hasNext()) {
                     courses[j] = course.next().getCourseName();
                     j++;
                 }
 
-            user.setRole(roles);
-            user.setCourses(courses);
-            RoleAuthorization roleAuthorization = new RoleAuthorization(user);
-            return new UsernamePasswordAuthenticationToken(username, password, roleAuthorization.getAuthorities() ) ;
+                user.setRole(roles);
+                user.setCourses(courses);
+                RoleAuthorization roleAuthorization = new RoleAuthorization(user);
+                return new UsernamePasswordAuthenticationToken(username, password, roleAuthorization.getAuthorities());
             }
-        } catch (Exception e) { 
+        } catch (Exception e) {
             e.printStackTrace();
 
         }
-    return null;
+        return null;
     }
 }

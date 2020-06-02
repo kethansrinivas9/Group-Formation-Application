@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 
     <title>Login Page</title>
     <link th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
+
 <body style="background-color:#ededed;">
-    <div style="background-color:#337ab7; height:50px; text-align: center; color: black;"> <h2>Group Formation Tool</h2></div>
+    <div style="background-color:#337ab7; height:50px; text-align: center; color: black;">
+        <h2>Group Formation Tool</h2>
+    </div>
     <div id="loginStyles">
-        <div class="loginBox">    
-        <h2 >Login Page </h2>
+        <div class="loginBox">
+            <h2>Login Page </h2>
             <form style="text-align:center" th:action="@{/login}" method="POST">
-            <input style="font-size: large;" required type="text" id = "username" name = "username" th:placeholder="Email"/>
-            <br/>
-            <input style="font-size: large;" required type="password" id="password" name="password" th:placeholder="Password" />  
-            <br/>
-            <input id="submit" type="submit" value="Log in" />  
-            <br/>
-            </form> 
-            <h5><a  href="/recover-password">Forgot password?</a> </h5>
+                <input style="font-size: large;" required type="text" id="username" name="username"
+                    th:placeholder="Email" />
+                <br />
+                <input style="font-size: large;" required type="password" id="password" name="password"
+                    th:placeholder="Password" />
+                <br />
+                <input id="submit" type="submit" value="Log in" />
+                <br />
+            </form>
+            <h5><a href="/recover-password">Forgot password?</a> </h5>
             <form>
-           <h5 style="text-align: left;"> <button class="btn" name="Signup" value="signup" >Signup</button> </h5>
-        </form>
+                <h5 style="text-align: left;"> <button class="btn" name="Signup" value="signup">Signup</button> </h5>
+            </form>
         </div>
     </div>
 

@@ -4,6 +4,6 @@ import java.sql.SQLException;
 
 public interface LoginDao {
 
-    public Boolean getUserDetails(String id, String firstName,String email, String password) throws SQLException;
+    public Boolean getUserDetails(String id, String firstName, String email, String password) throws SQLException;
 
 }

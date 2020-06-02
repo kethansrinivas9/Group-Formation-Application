@@ -23,24 +23,21 @@ public class Successhandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
-        
+
         HttpSession session = request.getSession();
-        String username= authentication.getPrincipal().toString();
+        String username = authentication.getPrincipal().toString();
         session.setAttribute("user", authentication.getPrincipal());
         session.setAttribute("username", username);
         session.setAttribute("authorities", authentication.getAuthorities());
-    
+
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
 
-        if ((roles.contains("Student"))||roles.contains(("TA"))) {
+        if ((roles.contains("Student")) || roles.contains(("TA"))) {
             response.sendRedirect("/student");
-        } 
-        else if(roles.contains("Admin")) {
+        } else if (roles.contains("Admin")) {
             response.sendRedirect("/admin");
-        } 
-        else if (roles.contains("Guest")) {
+        } else if (roles.contains("Guest")) {
             response.sendRedirect("/guestPage");
         }
     }
 }
-

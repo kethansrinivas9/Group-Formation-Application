@@ -1,7 +1,7 @@
 package com.group8.dalsmartteamwork.login.model;
 
 public class Role {
-    
+
     public String roleId;
     public String roleName;
     public String courseName;
@@ -19,7 +19,7 @@ public class Role {
     public Role(String roleName, String courseName) {
         this.roleName = roleName;
         this.courseName = courseName;
-    }    
+    }
 
     public String getRoleId() {
         return roleId;
@@ -44,5 +44,5 @@ public class Role {
     public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
-    
+
 }
