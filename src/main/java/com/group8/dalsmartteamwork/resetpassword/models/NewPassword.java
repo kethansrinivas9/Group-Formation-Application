@@ -4,7 +4,8 @@ public class NewPassword {
     private String password;
     private String bannerID;
 
-    public NewPassword(){}
+    public NewPassword() {
+    }
 
     public NewPassword(String bannerID, String password) {
         this.bannerID = bannerID;

@@ -1,6 +1,5 @@
 package com.group8.dalsmartteamwork.resetpassword.models;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class PasswordResetToken {
@@ -10,7 +9,8 @@ public class PasswordResetToken {
     private Date timestamp;
     private String status;
 
-    public PasswordResetToken() {}
+    public PasswordResetToken() {
+    }
 
     public PasswordResetToken(int tokenID, String bannerID, String token, Date timestamp, String status) {
         this.tokenID = tokenID;
@@ -60,7 +60,7 @@ public class PasswordResetToken {
         this.status = "valid";
     }
 
-    public void setStatusExpired(){
+    public void setStatusExpired() {
         this.status = "expired";
     }
 }
