@@ -20,12 +20,12 @@ public class WebController {
     }
 
     @PostMapping("/login")
-    public String loginResult(@ModelAttribute("user") User user1) {
+    public String displayLoginResult(@ModelAttribute("user") User user1) {
         return "login_success";
     }
 
     @GetMapping("/loginError")
-    public String loginErrorPage() {
+    public String displayErrorPage() {
         return "loginError";
     }
 
