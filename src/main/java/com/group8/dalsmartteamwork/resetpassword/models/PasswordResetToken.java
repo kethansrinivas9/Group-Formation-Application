@@ -63,4 +63,8 @@ public class PasswordResetToken {
     public void setStatusExpired() {
         this.status = "expired";
     }
+
+    public void setStatusNotFound() {
+        this.status = "notfound";
+    }
 }

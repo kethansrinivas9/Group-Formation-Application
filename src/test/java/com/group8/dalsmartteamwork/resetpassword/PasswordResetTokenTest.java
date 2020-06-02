@@ -101,4 +101,12 @@ public class PasswordResetTokenTest{
         passwordResetToken.setStatusExpired();
         assertEquals(passwordResetToken.getStatus(), "expired", "Status was not added/updated to the PasswordResetToken object.");
     }
+
+    @Test
+    public void setStatusNotFoundTest(){
+        PasswordResetToken passwordResetToken = new PasswordResetToken();
+        passwordResetToken.setStatusNotFound();
+        assertEquals(passwordResetToken.getStatus(), "notfound", "Status was not added/updated to the PasswordResetToken object.");
+    }
+
 }
