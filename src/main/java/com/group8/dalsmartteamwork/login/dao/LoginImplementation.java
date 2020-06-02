@@ -17,7 +17,7 @@ public class LoginImplementation implements LoginDao {
        
 		try {
             DbConnection connection = new DbConnection();
-            String query = String.format("SELECT u.Password, r.RoleName,cc.CourseName from Users AS u INNER JOIN CourseRole AS c on (u.BannerID=c.BannerID) INNER JOIN Role AS r on (c.RoleID = r.RoleID) INNER JOIN Courses as cc on (c.CourseID = cc.CourseID) where u.BannerID ='%s' ", id);
+            String query = String.format("SELECT u.Password, r.RoleName,cc.CourseName from Users AS u INNER JOIN CourseRole AS c on (u.BannerID=c.BannerID) INNER JOIN Role AS r on (c.RoleID = r.RoleID) INNER JOIN Courses as cc on (c.CourseID = cc.CourseID) where u.BannerID ='%s' and u.Password='%s ", id, password);
             ResultSet rs = connection.getRecords(query);
             while(rs.next()) {
             password_temp=rs.getString("u.Password");
