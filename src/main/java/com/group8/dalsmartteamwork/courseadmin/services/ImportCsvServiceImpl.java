@@ -1,6 +1,6 @@
 package com.group8.dalsmartteamwork.courseadmin.services;
 
-import com.group8.dalsmartteamwork.courseadmin.dao.ImportCsvDaoImpl;
+import com.group8.dalsmartteamwork.register.dao.RegistrationDaoImpl;
 import com.group8.dalsmartteamwork.utils.Encryption;
 import com.group8.dalsmartteamwork.utils.Mail;
 import com.group8.dalsmartteamwork.utils.User;
@@ -15,7 +15,7 @@ public class ImportCsvServiceImpl implements ImportCsvService{
     public List<Boolean> verifyRegistration(List<User> users) {
         List<Boolean> status = new ArrayList<>();
         try {
-            ImportCsvDaoImpl dao = new ImportCsvDaoImpl();
+            RegistrationDaoImpl dao = new RegistrationDaoImpl();
             Encryption encryption = new Encryption();
             Mail mail = new Mail();
             if (users.size() == 0) {

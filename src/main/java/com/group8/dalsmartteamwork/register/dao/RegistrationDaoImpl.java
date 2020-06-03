@@ -1,16 +1,12 @@
-package com.group8.dalsmartteamwork.courseadmin.dao;
+package com.group8.dalsmartteamwork.register.dao;
+
+import com.group8.dalsmartteamwork.utils.DbConnection;
+import com.group8.dalsmartteamwork.utils.User;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
-import com.group8.dalsmartteamwork.utils.User;
-import com.group8.dalsmartteamwork.utils.DbConnection;
-import com.group8.dalsmartteamwork.utils.Encryption;
-import com.group8.dalsmartteamwork.utils.Mail;
-
-public class ImportCsvDaoImpl implements ImportCsvDao {
+public class RegistrationDaoImpl implements RegistrationDao {
 
     @Override
     public Boolean isUserInDb(String id){
@@ -30,21 +26,20 @@ public class ImportCsvDaoImpl implements ImportCsvDao {
     }
 
     @Override
-    public void addUserToDb(User user){
+    public Boolean addUserToDb(User user){
         try {
             DbConnection dbConnection = new DbConnection();
             String insertQuery = String.format("INSERT INTO Users VALUES('%s', '%s', '%s', '%s', '%s')",
                     user.getId(), user.getLastName(), user.getFirstName(), user.getEmail(), user.getPassword());
-            dbConnection.updateRecords(insertQuery);
+            int numRecords = dbConnection.updateRecords(insertQuery);
             dbConnection.close();
+            return numRecords>0;
         }
         catch (Exception e){
             //TODO: Add to Log
             e.printStackTrace();
+            return false;
         }
     }
-
-
-
 
 }
