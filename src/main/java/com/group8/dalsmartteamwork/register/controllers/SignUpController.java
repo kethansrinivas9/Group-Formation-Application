@@ -22,7 +22,7 @@ public class SignUpController {
     }
 
     @PostMapping(value = "/register")
-    public String submitDetails(User user, BindingResult bindingResult) {
+    public String submitDetails(User user, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "register";
         }
@@ -31,7 +31,7 @@ public class SignUpController {
         if (status) {
             return "success";
         }
-        System.out.println("Registration Failed");
+        model.addAttribute("message", "Registration failed. User already exists");
         return "register";
     }
 
