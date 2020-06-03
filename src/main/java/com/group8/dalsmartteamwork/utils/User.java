@@ -3,11 +3,10 @@ package com.group8.dalsmartteamwork.utils;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class User {
+public class User implements IUser {
     private String id;
     private String firstName;
     private String lastName;
-
     private String email;
     @NotNull
     @Size(min = 8, max = 30)
@@ -32,7 +31,7 @@ public class User {
         this.email = email;
         this.password = password;
     }
-    
+
     public User(String id, String firstName, String lastName, String email, String password) {
         this.id = id;
         this.firstName = firstName;
@@ -40,8 +39,6 @@ public class User {
         this.email = email;
         this.password = password;
     }
-
-    
 
     public void setId(String id) {
         this.id = id;

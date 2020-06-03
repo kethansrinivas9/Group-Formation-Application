@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.group8.dalsmartteamwork.courseadmin.dao.VerifyRegistrationImpl;
+import com.group8.dalsmartteamwork.courseadmin.dao.ImportCsvDaoImpl;
 import com.group8.dalsmartteamwork.courseadmin.models.Pair;
+import com.group8.dalsmartteamwork.courseadmin.services.ImportCsvService;
+import com.group8.dalsmartteamwork.courseadmin.services.ImportCsvServiceImpl;
 import com.group8.dalsmartteamwork.utils.CsvReader;
 import com.group8.dalsmartteamwork.utils.User;
 
@@ -37,8 +39,8 @@ public class UploadController {
             CsvReader csvReader = new CsvReader(file.getInputStream());
             List<User> users = csvReader.getUsers();
             List<Boolean> status;
-            VerifyRegistrationImpl vri = new VerifyRegistrationImpl();
-            status = vri.verifyRegistration(users);
+            ImportCsvServiceImpl service = new ImportCsvServiceImpl();
+            status = service.verifyRegistration(users);
             List<Pair<User, Boolean>> details = new ArrayList<Pair<User, Boolean>>();
             for (int i = 0; i < users.size(); i++) {
                 Pair<User, Boolean> temp = new Pair<User, Boolean>(users.get(i), status.get(i));
