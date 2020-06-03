@@ -54,9 +54,10 @@ public class ResetPasswordController {
             newPassword.setBannerID(bannerID);
             model.addAttribute("newpassword", newPassword);
             return "resetPassword";
+        } else if (passwordResetToken.getStatus().equals("expired")) {
+            //TODO: Add password request token expired page and an a link to redirect to forgot password page and request reset request again
         }
         return "badrequest";
-
     }
 
     @PostMapping("/resetpassword")
