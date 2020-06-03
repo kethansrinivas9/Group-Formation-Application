@@ -22,7 +22,9 @@ public class RegistrationServiceImpl implements RegistrationService {
             }
             Encryption encryption = new Encryption();
             user.setPassword(encryption.encrypt(user.getPassword()));
-            return this.dao.addUserToDb(user);
+            Boolean createUserStatus = this.dao.addUserToDb(user);
+            Boolean addGuestRoleStatus = this.dao.addGuestRole(user.getId());
+            return createUserStatus && addGuestRoleStatus;
         }
         catch (Exception e){
             //TODO: Add to Log

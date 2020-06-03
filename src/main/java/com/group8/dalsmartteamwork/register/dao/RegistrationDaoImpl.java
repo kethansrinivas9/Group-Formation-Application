@@ -42,4 +42,20 @@ public class RegistrationDaoImpl implements RegistrationDao {
         }
     }
 
+    @Override
+    public Boolean addGuestRole(String id) {
+        try{
+            DbConnection dbConnection = new DbConnection();
+            String insertQuery = String.format("INSERT INTO SystemRole VALUES('%s', '%d')", id, 1);
+            int numRecords = dbConnection.updateRecords(insertQuery);
+            dbConnection.close();
+            return numRecords>0;
+        }
+        catch (Exception e){
+            //TODO: Add to Log
+            return false;
+        }
+    }
+
+
 }
