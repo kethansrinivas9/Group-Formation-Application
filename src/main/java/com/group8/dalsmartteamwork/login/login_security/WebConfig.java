@@ -19,6 +19,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
     protected AuthenticationManager authenticationManager() throws Exception {
         return new LoginAuthentication();
     }
+    
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http

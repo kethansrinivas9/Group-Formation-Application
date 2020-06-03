@@ -23,27 +23,27 @@ public class RoleTest {
 
     @Test
     public void constructorRoleTest() {
-        Role role = new Role(ROLE_ID,ROLE_NAME,COURSE_NAME);
+        Role role = new Role(ROLE_ID, ROLE_NAME, COURSE_NAME);
         assertTrue(role.getRoleName().equals(ROLE_NAME));
     }
 
     @Test
     public void getRoleIdTest() {
-        Role role = new Role(ROLE_ID,ROLE_NAME,COURSE_NAME);
-        assertTrue(role.getRoleId()==ROLE_ID);
+        Role role = new Role(ROLE_ID, ROLE_NAME, COURSE_NAME);
+        assertTrue(role.getRoleId() == ROLE_ID);
     }
-    
+
     @Test
     public void setRoleIdTest() {
         Role role = new Role();
         role.setRoleId(ROLE_ID);
-        assertTrue(role.getRoleId()==ROLE_ID);
+        assertTrue(role.getRoleId() == ROLE_ID);
     }
-    
+
     @Test
     public void getRoleNameTest() {
-        Role role = new Role(ROLE_ID_1,ROLE_NAME_1,COURSE_NAME);
-        assertTrue(role.getRoleName()==ROLE_NAME_1);
+        Role role = new Role(ROLE_ID_1, ROLE_NAME_1, COURSE_NAME);
+        assertTrue(role.getRoleName() == ROLE_NAME_1);
     }
 
     @Test
@@ -52,20 +52,18 @@ public class RoleTest {
         role.setRoleName(ROLE_NAME);
         assertTrue(role.getRoleName().equals(ROLE_NAME));
     }
-    
+
     @Test
     public void getCourseNameTest() {
-        Role role = new Role(ROLE_ID,ROLE_NAME,COURSE_NAME);
-        assertTrue(role.getCourseName()==COURSE_NAME);
+        Role role = new Role(ROLE_ID, ROLE_NAME, COURSE_NAME);
+        assertTrue(role.getCourseName() == COURSE_NAME);
     }
 
     @Test
     public void setCourseNameTest() {
         Role role = new Role();
         role.setCourseName(COURSE_NAME);
-        assertTrue(role.getCourseName()==COURSE_NAME);
+        assertTrue(role.getCourseName() == COURSE_NAME);
     }
-    
-    
-    
+
 }
