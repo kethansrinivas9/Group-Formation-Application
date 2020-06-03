@@ -1,0 +1,32 @@
+.contain{
+    text-align: center;
+    color: blue;
+    
+}
+
+.button {
+    position: absolute;
+    top: 50%;
+}
+
+.loginStyles{
+    text-align:center;
+    background-color:#337ab7; 
+    height:50px;
+}
+
+.loginBox{
+    text-align: center;
+    margin-top: 80px;
+     background-color:#fff; 
+     padding:55px; 
+     width: 30%;
+      margin-left: 480px
+}
+
+.btn{
+    width: 20%; 
+    cursor: pointer; 
+    background-color: deepskyblue
+
+}
