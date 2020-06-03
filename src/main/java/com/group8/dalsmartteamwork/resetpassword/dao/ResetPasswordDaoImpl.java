@@ -2,10 +2,10 @@ package com.group8.dalsmartteamwork.resetpassword.dao;
 
 import com.group8.dalsmartteamwork.resetpassword.models.PasswordResetToken;
 import com.group8.dalsmartteamwork.utils.DbConnection;
+import com.group8.dalsmartteamwork.utils.ResetToken;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Random;
 
 public class ResetPasswordDaoImpl implements ResetPasswordDao {
 
@@ -15,9 +15,10 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
 
     @Override
     public Boolean addToken(String bannerID) {
+        ResetToken resetToken = new ResetToken();
         try {
             DbConnection connection = new DbConnection();
-            String token = createToken();
+            String token = resetToken.createToken();
             String query = String.format("INSERT INTO CSCI5308_8_DEVINT.PasswordResetToken (BannerID, Token, Timestamp, Status) VALUES ('%s', '%s', now(), 'valid')", bannerID, token);
             int records = connection.addRecords(query);
             if (records > 0) {
@@ -65,24 +66,6 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
             System.out.print(exception.getMessage());
             return false;
         }
-    }
-
-    public String createToken() {
-        String tokenResult = "";
-        try {
-            for (int i = 0; i < 20; i++) {
-                tokenResult += getRandomChar();
-            }
-        } catch (Exception exception) {
-            System.out.print(exception.getMessage());
-        }
-        return tokenResult;
-    }
-
-    public static char getRandomChar() {
-        String characterSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
-        Random random = new Random();
-        return characterSet.charAt(random.nextInt(62));
     }
 
     @Override

@@ -2,13 +2,13 @@ package com.group8.dalsmartteamwork.resetpassword;
 
 import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDaoImpl;
 import com.group8.dalsmartteamwork.resetpassword.models.PasswordResetToken;
-
-import static org.mockito.Mockito.*;
+import com.group8.dalsmartteamwork.utils.ResetToken;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 public class ResetPasswordDaoImplTest {
     public static final String TEMP_BANNERID = "B00000000";
@@ -19,24 +19,18 @@ public class ResetPasswordDaoImplTest {
     @Test
     public void addTokenTwoArgumentsTest() {
         ResetPasswordDaoImpl resetPasswordDaoImpl = new ResetPasswordDaoImpl();
-        String token = resetPasswordDaoImpl.createToken();
+        ResetToken resetToken = new ResetToken();
+        String token = resetToken.createToken();
         when(resetPasswordDaoImplMock.addToken(TEMP_BANNERID, token)).thenReturn(true);
         assertTrue(resetPasswordDaoImplMock.addToken(TEMP_BANNERID, token), "Database token insertion failed.");
         verify(resetPasswordDaoImplMock).addToken(TEMP_BANNERID, token);
     }
 
     @Test
-    public void addTokenOneArgumentTest(){
+    public void addTokenOneArgumentTest() {
         when(resetPasswordDaoImplMock.addToken(TEMP_BANNERID)).thenReturn(true);
         assertTrue(resetPasswordDaoImplMock.addToken(TEMP_BANNERID), "Database token insertion failed.");
         verify(resetPasswordDaoImplMock).addToken(TEMP_BANNERID);
-    }
-
-    @Test
-    public void createTokenTest() {
-        ResetPasswordDaoImpl resetPasswordDaoImpl = new ResetPasswordDaoImpl();
-        String token = resetPasswordDaoImpl.createToken();
-        assertNotNull(token, "Token for password reset wasn't generated.");
     }
 
     @Test
@@ -44,19 +38,6 @@ public class ResetPasswordDaoImplTest {
         when(resetPasswordDaoImplMock.resetTokens()).thenReturn(true);
         assertTrue(resetPasswordDaoImplMock.resetTokens(), "Tokens were not reset.");
         verify(resetPasswordDaoImplMock).resetTokens();
-    }
-
-    @Test
-    public void res(){
-        ResetPasswordDaoImpl resetPasswordDao = new ResetPasswordDaoImpl();
-        resetPasswordDao.resetTokens();
-    }
-
-    @Test
-    public void getRandomCharTest() {
-        ResetPasswordDaoImpl resetPasswordDaoImpl = new ResetPasswordDaoImpl();
-        char randomChar = resetPasswordDaoImpl.getRandomChar();
-        assertNotNull(String.valueOf(randomChar), "Random character for token generation not generated.");
     }
 
     @Test
@@ -75,7 +56,7 @@ public class ResetPasswordDaoImplTest {
     }
 
     @Test
-    public void updatePasswordTest(){
+    public void updatePasswordTest() {
         when(resetPasswordDaoImplMock.addToken(TEMP_BANNERID, TEMP_PASSWORD)).thenReturn(true);
         assertTrue(resetPasswordDaoImplMock.addToken(TEMP_BANNERID, TEMP_PASSWORD), "Password not updated in the database.");
         verify(resetPasswordDaoImplMock).addToken(TEMP_BANNERID, TEMP_PASSWORD);
