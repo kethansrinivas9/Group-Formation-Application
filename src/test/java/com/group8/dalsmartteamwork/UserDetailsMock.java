@@ -70,5 +70,4 @@ public class UserDetailsMock implements IUser {
     public String getPassword() {
         return this.password;
     }
-
 }

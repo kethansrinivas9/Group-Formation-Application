@@ -44,7 +44,7 @@ public class WebController {
         return "student";
     }
 
-    @GetMapping("admin")
+    //@GetMapping("admin")
     public String getAdminPage(HttpServletRequest request, Model model) {
         username = (String) request.getSession().getAttribute("username");
         model.addAttribute("user", username);

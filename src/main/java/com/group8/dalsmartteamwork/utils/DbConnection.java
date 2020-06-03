@@ -1,47 +1,76 @@
 package com.group8.dalsmartteamwork.utils;
 
+import java.io.InputStream;
 import java.sql.*;
+import java.util.Properties;
 
 public class DbConnection {
-    private String ENVIRONMENT;
-    private String USER;
-    private String PASSWORD;
-    private String CONNECTION;
-    private String DATABASE;
+    private String environment;
+    private String user;
+    private String password;
+    private String connection;
+    private String database;
     private Statement statement;
     private Connection conn;
+    private static DbConnection dbConnection;
+    private static final String IGNORE_TIME_ZONE = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
-    public DbConnection() {
+    private DbConnection() {
+    }
 
+    public static DbConnection getInstance() {
+        if (dbConnection == null) {
+            dbConnection = new DbConnection();
+        }
+        return dbConnection;
+    }
+
+    public void createDbConnection() {
         try {
-            Props properties = new Props();
-            this.ENVIRONMENT = properties.getValue("db.environment");
-            this.CONNECTION = properties.getValue("db.connection");
-            switch (this.ENVIRONMENT) {
-                case "TEST":
-                    this.DATABASE = properties.getValue("db.test.database");
-                    this.USER = properties.getValue("db.test.user");
-                    this.PASSWORD = properties.getValue("db.test.password");
-                    break;
+            Properties properties = new Properties();
+            Thread currentThread = Thread.currentThread();
+            ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+            InputStream propertiesStream = contextClassLoader.getResourceAsStream("application.properties");
+            if (propertiesStream != null) {
+                properties.load(propertiesStream);
+                this.environment = properties.getProperty("db.environment");
+                this.connection = properties.getProperty("db.connection");
+                switch (this.environment) {
+                    case "TEST":
+                        this.database = properties.getProperty("db.test.database");
+                        this.user = properties.getProperty("db.test.user");
+                        this.password = properties.getProperty("db.test.password");
+                        break;
 
-                case "PRODUCTION":
-                    this.DATABASE = properties.getValue("db.prod.database");
-                    this.USER = properties.getValue("db.prod.user");
-                    this.PASSWORD = properties.getValue("db.prod.password");
-                    break;
+                    case "PRODUCTION":
+                        this.database = properties.getProperty("db.prod.database");
+                        this.user = properties.getProperty("db.prod.user");
+                        this.password = properties.getProperty("db.prod.password");
+                        break;
 
-                default:
-                    this.DATABASE = properties.getValue("db.dev.database");
-                    this.USER = properties.getValue("db.dev.user");
-                    this.PASSWORD = properties.getValue("db.dev.password");
+                    default:
+                        this.database = properties.getProperty("db.dev.database");
+                        this.user = properties.getProperty("db.dev.user");
+                        this.password = properties.getProperty("db.dev.password");
+                }
+                conn = DriverManager.getConnection(this.connection + this.database + this.IGNORE_TIME_ZONE, this.user,
+                        this.password);
+                this.statement = conn.createStatement();
             }
-            this.conn = DriverManager.getConnection(this.CONNECTION + this.DATABASE + "?serverTimezone=" + properties.getValue("db.timezone"), this.USER, this.PASSWORD);
-            this.statement = conn.createStatement();
-
         } catch (Exception e) {
             // TODO: Add to Log
             e.printStackTrace();
             this.statement = null;
+        }
+    }
+
+    public void closeConnection() {
+        try {
+            if (conn.isValid(120)) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -84,7 +113,6 @@ public class DbConnection {
             // TODO: Add to Log
             e.printStackTrace();
         }
-
     }
 
 }

@@ -19,10 +19,10 @@ public class User implements IUser {
         this.id = id;
     }
 
-    public User(String id, String email, String password) {
+    public User(String id, String firstName, String lastName) {
         this.id = id;
-        this.email = email;
-        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public User(String id, String firstName, String email, String password) {
@@ -80,4 +80,7 @@ public class User implements IUser {
         return this.password;
     }
 
+    public String toString() {
+        return this.id.toUpperCase() + "," + this.firstName.toUpperCase() + " " + this.lastName.toUpperCase();
+    }
 }

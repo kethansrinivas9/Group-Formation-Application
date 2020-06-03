@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class ResetPasswordDaoImpl implements ResetPasswordDao {
+    DbConnection connection;
 
     public ResetPasswordDaoImpl() {
         resetTokens();
@@ -17,7 +18,8 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
     public Boolean addToken(String bannerID) {
         ResetToken resetToken = new ResetToken();
         try {
-            DbConnection connection = new DbConnection();
+            connection = DbConnection.getInstance();
+            connection.createDbConnection();
             String token = resetToken.createToken();
             String query = String.format("INSERT INTO CSCI5308_8_DEVINT.PasswordResetToken (BannerID, Token, Timestamp, Status) VALUES ('%s', '%s', now(), 'valid')", bannerID, token);
             int records = connection.addRecords(query);
@@ -29,13 +31,16 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
         } catch (Exception exception) {
             System.out.print(exception.getMessage());
             return false;
+        } finally {
+            connection.closeConnection();
         }
     }
 
     @Override
     public Boolean addToken(String bannerID, String token) {
         try {
-            DbConnection connection = new DbConnection();
+            connection = DbConnection.getInstance();
+            connection.createDbConnection();
             String query = String.format("INSERT INTO CSCI5308_8_DEVINT.PasswordResetToken (BannerID, Token, Timestamp, Status) VALUES ('%s', '%s', now(), 'valid')", bannerID, token);
             int records = connection.addRecords(query);
             if (records > 0) {
@@ -46,13 +51,17 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
         } catch (Exception exception) {
             System.out.print(exception.getMessage());
             return false;
+        } finally {
+            connection.closeConnection();
         }
     }
 
     @Override
     public Boolean resetTokens() {
         try {
-            DbConnection connection = new DbConnection();
+            connection = DbConnection.getInstance();
+            connection.createDbConnection();
+
             String query = "CALL CSCI5308_8_DEVINT.resettokens";
             Statement statement = connection.getStatement();
             boolean records = statement.execute(query);
@@ -65,6 +74,8 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
         } catch (Exception exception) {
             System.out.print(exception.getMessage());
             return false;
+        } finally {
+            connection.closeConnection();
         }
     }
 
@@ -73,7 +84,9 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
         PasswordResetToken passwordResetToken = new PasswordResetToken();
         String status = "notfound";
         try {
-            DbConnection connection = new DbConnection();
+            connection = DbConnection.getInstance();
+            connection.createDbConnection();
+
             String query = String.format("SELECT * FROM CSCI5308_8_DEVINT.PasswordResetToken WHERE BannerID='%s' and token='%s'", bannerID, token);
             ResultSet rs = connection.getRecords(query);
             while (rs.next()) {
@@ -89,7 +102,10 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
             }
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
+        } finally {
+            connection.closeConnection();
         }
+
         if (status.equals("valid"))
             passwordResetToken.setStatusValid();
         else if (status.equals("expired"))
@@ -102,7 +118,9 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
     @Override
     public Boolean updatePassword(String bannerID, String password) {
         try {
-            DbConnection connection = new DbConnection();
+            connection = DbConnection.getInstance();
+            connection.createDbConnection();
+
             String query = String.format("UPDATE CSCI5308_8_DEVINT.Users SET Password='%s' WHERE BannerID='%s'", password, bannerID);
             String updateStatusQuery = String.format("UPDATE CSCI5308_8_DEVINT.PasswordResetToken SET Status='expired' WHERE BannerID='%s'", bannerID);
             int records = connection.updateRecords(query);
@@ -116,6 +134,8 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
             return false;
+        } finally {
+            connection.closeConnection();
         }
     }
 }

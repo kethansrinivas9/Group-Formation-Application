@@ -7,55 +7,66 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 import java.sql.ResultSet;
 
 public class RegistrationDaoImpl implements RegistrationDao {
+    DbConnection dbConnection;
 
     @Override
-    public Boolean isUserInDb(String id){
+    public Boolean isUserInDb(String id) {
         try {
-            DbConnection dbConnection = new DbConnection();
+            dbConnection = DbConnection.getInstance();
+            dbConnection.createDbConnection();
+
             String selectQuery = String.format("SELECT * FROM Users where BannerId='%s'", id);
             ResultSet resultSet = dbConnection.getRecords(selectQuery);
             Boolean status = resultSet.next();
-            dbConnection.close();
             return status;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             //TODO: Add to Log
             e.printStackTrace();
+        } finally {
+            dbConnection.closeConnection();
         }
         return false;
     }
 
     @Override
-    public Boolean addUserToDb(User user){
+    public Boolean addUserToDb(User user) {
         try {
-            DbConnection dbConnection = new DbConnection();
+            dbConnection = DbConnection.getInstance();
+            dbConnection.createDbConnection();
+
             String insertQuery = String.format("INSERT INTO Users VALUES('%s', '%s', '%s', '%s', '%s')",
                     user.getId(), user.getLastName(), user.getFirstName(), user.getEmail(), user.getPassword());
             int numRecords = dbConnection.updateRecords(insertQuery);
-            dbConnection.close();
-            return numRecords>0;
-        }
-        catch (Exception e){
+            if (numRecords > 0) {
+                return true;
+            }
+        } catch (Exception e) {
             //TODO: Add to Log
             e.printStackTrace();
-            return false;
+        } finally {
+            dbConnection.closeConnection();
         }
+        return false;
     }
 
     @Override
     public Boolean addGuestRole(String id) {
-        try{
-            DbConnection dbConnection = new DbConnection();
+        try {
+            dbConnection = DbConnection.getInstance();
+            dbConnection.createDbConnection();
+
             String insertQuery = String.format("INSERT INTO SystemRole VALUES('%s', '%d')", id, 1);
             int numRecords = dbConnection.updateRecords(insertQuery);
-            dbConnection.close();
-            return numRecords>0;
-        }
-        catch (Exception e){
+
+            if (numRecords > 0) {
+                return true;
+            }
+        } catch (Exception e) {
             //TODO: Add to Log
-            return false;
+            e.printStackTrace();
+        } finally {
+            dbConnection.close();
         }
+        return false;
     }
-
-
 }
