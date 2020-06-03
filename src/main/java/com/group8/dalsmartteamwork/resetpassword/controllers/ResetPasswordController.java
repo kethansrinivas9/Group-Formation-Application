@@ -44,8 +44,8 @@ public class ResetPasswordController {
     }
 
     @GetMapping("/resetpassword")
-    public String resetPassword(@RequestParam(name = "bannerid", required = true) String bannerID,
-                                @RequestParam(name = "token", required = true) String token,
+    public String resetPassword(@RequestParam(name = "bannerid") String bannerID,
+                                @RequestParam(name = "token") String token,
                                 Model model) {
         ResetPasswordDaoImpl resetPasswordDaoImpl = new ResetPasswordDaoImpl();
         PasswordResetToken passwordResetToken = resetPasswordDaoImpl.getRequestByToken(bannerID, token);
@@ -55,7 +55,7 @@ public class ResetPasswordController {
             model.addAttribute("newpassword", newPassword);
             return "resetPassword";
         } else if (passwordResetToken.getStatus().equals("expired")) {
-            //TODO: Add password request token expired page and an a link to redirect to forgot password page and request reset request again
+            return "tokenexpired";
         }
         return "badrequest";
     }

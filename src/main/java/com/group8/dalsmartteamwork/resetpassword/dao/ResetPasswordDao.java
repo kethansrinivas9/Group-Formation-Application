@@ -5,13 +5,13 @@ import com.group8.dalsmartteamwork.resetpassword.models.PasswordResetToken;
 import java.sql.SQLException;
 
 public interface ResetPasswordDao {
-    public Boolean addToken(String BannerID) throws SQLException;
+    Boolean addToken(String bannerID) throws SQLException;
 
-    public Boolean addToken(String BannerID, String Token) throws SQLException;
+    Boolean addToken(String bannerID, String token) throws SQLException;
 
-    public Boolean resetTokens() throws SQLException;
+    Boolean resetTokens() throws SQLException;
 
-    public PasswordResetToken getRequestByToken(String bannerID, String token) throws SQLException;
+    PasswordResetToken getRequestByToken(String bannerID, String token) throws SQLException;
 
-    public Boolean updatePassword(String bannerID, String password) throws SQLException;
+    Boolean updatePassword(String bannerID, String password) throws SQLException;
 }
