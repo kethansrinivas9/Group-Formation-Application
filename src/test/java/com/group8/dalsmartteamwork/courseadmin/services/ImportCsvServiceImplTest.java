@@ -22,7 +22,6 @@ public class ImportCsvServiceImplTest {
     private User existingUser = new User("B00000000", "fName", "lName", "email@email.com", "pwd");
     private User newUser = new User("B1111111", "fName", "lName", "email@email.com", "pwd");
 
-
     @BeforeEach
     void setup(){
         this.service = new ImportCsvServiceImpl(dao, mail);
@@ -40,7 +39,6 @@ public class ImportCsvServiceImplTest {
         when(dao.addUserToDb(existingUser)).thenReturn(false);
         when(dao.addUserToDb(newUser)).thenReturn(true);
         assertEquals(service.verifyRegistration(users), result);
-
     }
 
     @Test
