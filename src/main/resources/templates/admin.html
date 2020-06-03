@@ -11,11 +11,10 @@
 <body>
 
     <div style="text-align:center">
-        <h2>success </h2>
-        <p th:text="'name: ' + ${user.getEmail()}" />
-        <p><a href="/login"> Click here to logout</button></p>
-    </div>
+        <h2>Admin page </h2>
+        <h5>Welcome : <span th:text="${user}"></span></h5>
 
+    </div>
 </body>
 
 </html>

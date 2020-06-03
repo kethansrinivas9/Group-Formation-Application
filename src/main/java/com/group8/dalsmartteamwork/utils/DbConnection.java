@@ -35,7 +35,7 @@ public class DbConnection {
                     this.USER = properties.getValue("db.dev.user");
                     this.PASSWORD = properties.getValue("db.dev.password");
             }
-            this.conn = DriverManager.getConnection(this.CONNECTION + this.DATABASE, this.USER, this.PASSWORD);
+            this.conn = DriverManager.getConnection(this.CONNECTION + this.DATABASE + "?serverTimezone=" + properties.getValue("db.timezone"), this.USER, this.PASSWORD);
             this.statement = conn.createStatement();
 
         } catch (Exception e) {
