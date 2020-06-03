@@ -20,10 +20,11 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
             String token = createToken();
             String query = String.format("INSERT INTO CSCI5308_8_DEVINT.PasswordResetToken (BannerID, Token, Timestamp, Status) VALUES ('%s', '%s', now(), 'valid')", bannerID, token);
             int records = connection.addRecords(query);
-            if (records > 0)
+            if (records > 0) {
                 return true;
-            else
+            } else {
                 return false;
+            }
         } catch (Exception exception) {
             System.out.print(exception.getMessage());
             return false;
@@ -36,10 +37,11 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
             DbConnection connection = new DbConnection();
             String query = String.format("INSERT INTO CSCI5308_8_DEVINT.PasswordResetToken (BannerID, Token, Timestamp, Status) VALUES ('%s', '%s', now(), 'valid')", bannerID, token);
             int records = connection.addRecords(query);
-            if (records > 0)
+            if (records > 0) {
                 return true;
-            else
+            } else {
                 return false;
+            }
         } catch (Exception exception) {
             System.out.print(exception.getMessage());
             return false;
@@ -54,10 +56,11 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
             Statement statement = connection.getStatement();
             boolean records = statement.execute(query);
             statement.close();
-            if (records)
+            if (records) {
                 return true;
-            else
+            } else {
                 return false;
+            }
         } catch (Exception exception) {
             System.out.print(exception.getMessage());
             return false;
@@ -67,8 +70,9 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
     public String createToken() {
         String tokenResult = "";
         try {
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 20; i++) {
                 tokenResult += getRandomChar();
+            }
         } catch (Exception exception) {
             System.out.print(exception.getMessage());
         }
@@ -94,10 +98,11 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
                 passwordResetToken.setBannerID(rs.getString("BannerID"));
                 passwordResetToken.setToken(rs.getString("Token"));
                 passwordResetToken.setTimestamp(rs.getTimestamp("Timestamp"));
-                if (rs.getString("Status").equals("expired"))
+                if (rs.getString("Status").equals("expired")) {
                     status = "expired";
-                else if (rs.getString("Status").equals("valid"))
+                } else if (rs.getString("Status").equals("valid")) {
                     status = "valid";
+                }
             }
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
@@ -122,8 +127,9 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
             if (records > 0) {
                 records = connection.updateRecords(updateStatusQuery);
                 return true;
-            } else
+            } else {
                 return false;
+            }
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
             return false;

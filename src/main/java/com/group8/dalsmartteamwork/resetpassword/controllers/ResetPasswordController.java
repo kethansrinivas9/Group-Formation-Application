@@ -24,7 +24,6 @@ public class ResetPasswordController {
         return "resetPasswordRequest";
     }
 
-
     @PostMapping("/forgotpassword")
     public String requestPasswordReset(@ModelAttribute ResetPasswordRequest resetPasswordRequest, Model model) {
         ResetPasswordDao resetPasswordDaoImpl = new ResetPasswordDaoImpl();
