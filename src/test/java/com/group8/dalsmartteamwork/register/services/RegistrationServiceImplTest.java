@@ -22,12 +22,21 @@ class RegistrationServiceImplTest {
     @Test
     void registerUserSuccessTest(){
         when(this.dao.addUserToDb(newUser)).thenReturn(true);
+        when(this.dao.addGuestRole(newUser.getId())).thenReturn(true);
         assertTrue(service.registerUser(newUser));
     }
 
     @Test
     void registerUserFailTest(){
         when(this.dao.addUserToDb(existingUser)).thenReturn(false);
+        when(this.dao.addGuestRole(newUser.getId())).thenReturn(true);
+        assertFalse(service.registerUser(existingUser));
+    }
+
+    @Test
+    void addGuestRoleFailTest(){
+        when(this.dao.addUserToDb(existingUser)).thenReturn(true);
+        when(this.dao.addGuestRole(newUser.getId())).thenReturn(false);
         assertFalse(service.registerUser(existingUser));
     }
 }
