@@ -1,22 +1,41 @@
 <!DOCTYPE HTML>
-<html lang='en' xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org">
 
 <head>
     <title>Register</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 
-<body>
-<h1>Form</h1>
-<form action="#" th:action="@{/register}" th:object="${user}" method="post">
-    <p>Banner Id: <input required type="text" th:field="*{id}"/></p>
-    <p>First Name: <input required type="text" th:field="*{firstName}"/></p>
-    <p>Last Name: <input required type="text" th:field="*{lastName}"/></p>
-    <p>Email: <input required type="email" th:field="*{email}"/></p>
-    <p>Password: <input required type="password" th:field="*{password}"/></p>
-    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>
-    <p><input type="submit" value="Register"/></p>
-</form>
+<body class="container">
+    <h3>Register</h3>
+    <form th:action="@{/register}" th:object="${user}" method="post">
+        <div class="form-group col-lg-5">
+            <label for="id">Banner Id</label>
+            <input required type="text" th:field="*{id}" class="form-control" id="id" placeholder="Enter Banner ID">
+        </div>
+        <div class="form-group col-lg-5">
+            <label for="firstName">First Name</label>
+            <input required type="text" th:field="*{firstName}" class="form-control" id="firstName" placeholder="Enter First Name">
+        </div>
+        <div class="form-group col-lg-5">
+            <label for="lastName">Last Name</label>
+            <input required type="text" th:field="*{lastName}" class="form-control" id="lastName" placeholder="Enter Last Name">
+        </div>
+        <div class="form-group col-lg-5">
+            <label for="email">Email</label>
+            <input required type="email" th:field="*{email}" class="form-control" id="email" placeholder="Enter Email">
+        </div>
+        <div class="form-group col-lg-5">
+            <label for="password">Password</label>
+            <input required type="password" th:field="*{password}" class="form-control" id="password" placeholder="Enter Password">
+        </div>
+        <p class="alert alert-danger col-lg-5" th:text="${message}" th:if="${message ne null}"></p>
+        <div class="form-group col-lg-5 text-center">
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+    </form>
 </body>
 
 </html>

@@ -2,9 +2,10 @@ package com.group8.dalsmartteamwork.register.controllers;
 
 import javax.validation.Valid;
 
-import com.group8.dalsmartteamwork.register.dao.RegisterDaoImpl;
-import com.group8.dalsmartteamwork.register.models.User;
+import com.group8.dalsmartteamwork.register.dao.RegistrationDaoImpl;
+import com.group8.dalsmartteamwork.register.services.RegistrationServiceImpl;
 import com.group8.dalsmartteamwork.utils.Encryption;
+import com.group8.dalsmartteamwork.utils.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,20 +22,17 @@ public class SignUpController {
     }
 
     @PostMapping(value = "/register")
-    public String submitDetails(@Valid User user, BindingResult bindingResult) {
+    public String submitDetails(User user, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "register";
         }
-        RegisterDaoImpl register = new RegisterDaoImpl();
-        Encryption encryption = new Encryption();
-        String encrypted_password = encryption.encrypt(user.getPassword());
-        Boolean status = register.setUserDetails(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(),
-                encrypted_password);
+        RegistrationServiceImpl service = new RegistrationServiceImpl();
+        Boolean status = service.registerUser(user);
         if (status) {
             return "success";
         }
-        System.out.println("Signup Failed");
-        return null;
+        model.addAttribute("message", "Registration failed. User already exists");
+        return "register";
     }
 
 }

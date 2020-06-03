@@ -1,98 +1,90 @@
 package com.group8.dalsmartteamwork;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.group8.dalsmartteamwork.register.models.User;
 import org.junit.jupiter.api.Test;
 
 public class UserTest {
-    public static final String TEMP_ID = "B00833467";
-    public static final String TEMP_FIRST_NAME = "temp_name";
-    public static final String TEMP_LAST_NAME = "temp_name";
-    public static final String TEMP_EMAIL = "temp@email.com";
-    public static final String TEMP_PASSWORD = "temp_password";
+    public static final String TEMP_ID = "B99999999";
+    public static final String TEMP_FIRST_NAME = "TEST_FIRST_NAME";
+    public static final String TEMP_LAST_NAME = "TEST_LAST_NAME";
+    public static final String TEMP_EMAIL = "TEST_EMAIL@EMAIL.COM";
+    public static final String TEMP_PASSWORD = "TEST_PASSWORD";
+    public static final String NEW_ID = "B99999998";
+    public static final String NEW_FIRST_NAME = "NEW_FIRST_NAME";
+    public static final String NEW_LAST_NAME = "NEW_LAST_NAME";
+    public static final String NEW_EMAIL = "NEW_EMAIL@EMAIL.COM";
+    public static final String NEW_PASSWORD = "NEW_PASSWORD";
 
     @Test
     public void defaultConstructorTest() {
-        User user = new User();
-        assertNull(user.getId());
-    }
-
-    @Test
-    public void constructorThreeArgumentsTest() {
-        User user = new User(TEMP_ID, TEMP_EMAIL, TEMP_PASSWORD);
-        assertTrue(user.getId() == TEMP_ID);
-    }
-
-    @Test
-    public void constructorFourArgumentsTest() {
-        User user = new User(TEMP_ID, TEMP_FIRST_NAME, TEMP_LAST_NAME, TEMP_EMAIL, TEMP_PASSWORD);
-        assertTrue(user.getFirstName().equals(TEMP_FIRST_NAME));
+        UserDetailsMock userDetailsMock = new UserDetailsMock();
+        assertTrue(userDetailsMock.getId() == TEMP_ID);
     }
 
     @Test
     public void setIdTest() {
-        User user = new User(TEMP_ID);
-        assertTrue(user.getId() == TEMP_ID);
+        UserDetailsMock userDetailsMock = new UserDetailsMock();
+        userDetailsMock.setId(NEW_ID);
+        assertTrue(userDetailsMock.getId().equals(NEW_ID));
     }
 
     @Test
     public void getIdTest() {
-        User user = new User(TEMP_ID, TEMP_FIRST_NAME, TEMP_LAST_NAME, TEMP_EMAIL, TEMP_PASSWORD);
-        assertTrue(user.getId() == TEMP_ID);
+        UserDetailsMock userDetailsMock = new UserDetailsMock();
+        assertTrue(userDetailsMock.getId().equals(TEMP_ID));
     }
 
     @Test
     public void setFirstNameTest() {
-        User user = new User(TEMP_ID);
-        user.setFirstName(TEMP_FIRST_NAME);
-        assertTrue(user.getFirstName().equals(TEMP_FIRST_NAME));
+        UserDetailsMock userDetailsMock = new UserDetailsMock();
+        userDetailsMock.setFirstName(NEW_FIRST_NAME);
+        assertTrue(userDetailsMock.getFirstName().equals(NEW_FIRST_NAME));
     }
 
     @Test
     public void getFirstNameTest() {
-        User user = new User(TEMP_ID, TEMP_FIRST_NAME, TEMP_LAST_NAME, TEMP_EMAIL, TEMP_PASSWORD);
-        assertTrue(user.getFirstName().equals((TEMP_FIRST_NAME)));
+        UserDetailsMock userDetailsMock = new UserDetailsMock();
+        assertTrue(userDetailsMock.getFirstName().equals(TEMP_FIRST_NAME));
     }
 
     @Test
     public void setLastNameTest() {
-        User user = new User(TEMP_ID);
-        user.setLastName(TEMP_LAST_NAME);
-        assertTrue(user.getLastName().equals(TEMP_LAST_NAME));
+        UserDetailsMock userDetailsMock = new UserDetailsMock();
+        userDetailsMock.setLastName(NEW_LAST_NAME);
+        assertTrue(userDetailsMock.getLastName().equals(NEW_LAST_NAME));
     }
 
     @Test
     public void getLastNameTest() {
-        User user = new User(TEMP_ID, TEMP_FIRST_NAME, TEMP_LAST_NAME, TEMP_EMAIL, TEMP_PASSWORD);
-        assertTrue(user.getLastName().equals((TEMP_LAST_NAME)));
+        UserDetailsMock userDetailsMock = new UserDetailsMock();
+        assertTrue(userDetailsMock.getLastName().equals(TEMP_LAST_NAME));
     }
 
     @Test
     public void setEmailTest() {
-        User user = new User(TEMP_ID);
-        user.setEmail(TEMP_EMAIL);
-        assertTrue(user.getEmail().equals(TEMP_EMAIL));
+        UserDetailsMock userDetailsMock = new UserDetailsMock();
+        userDetailsMock.setEmail(NEW_EMAIL);
+        assertTrue(userDetailsMock.getEmail().equals(NEW_EMAIL));
     }
 
     @Test
     public void getEmailTest() {
-        User user = new User(TEMP_ID, TEMP_FIRST_NAME, TEMP_LAST_NAME, TEMP_EMAIL, TEMP_PASSWORD);
-        assertTrue(user.getEmail().equals((TEMP_EMAIL)));
+        UserDetailsMock userDetailsMock = new UserDetailsMock();
+        assertTrue(userDetailsMock.getEmail().equals(TEMP_EMAIL));
     }
 
     @Test
     public void setPasswordTest() {
-        User user = new User(TEMP_ID);
-        user.setPassword(TEMP_PASSWORD);
-        assertTrue(user.getPassword().equals(TEMP_PASSWORD));
+        UserDetailsMock userDetailsMock = new UserDetailsMock();
+        userDetailsMock.setPassword(NEW_PASSWORD);
+        assertTrue(userDetailsMock.getPassword().equals(NEW_PASSWORD));
     }
 
     @Test
     public void getPasswordTest() {
-        User user = new User(TEMP_ID, TEMP_FIRST_NAME, TEMP_LAST_NAME, TEMP_EMAIL, TEMP_PASSWORD);
-        assertTrue(user.getPassword().equals(TEMP_PASSWORD));
+        UserDetailsMock userDetailsMock = new UserDetailsMock();
+        assertTrue(userDetailsMock.getPassword().equals(TEMP_PASSWORD));
     }
 
 }

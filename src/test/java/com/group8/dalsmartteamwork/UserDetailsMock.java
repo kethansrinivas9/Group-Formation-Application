@@ -1,75 +1,72 @@
-package com.group8.dalsmartteamwork.register.models;
+package com.group8.dalsmartteamwork;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import com.group8.dalsmartteamwork.utils.IUser;
 
-public class User {
+public class UserDetailsMock implements IUser {
     private String id;
-    private String firstName;
     private String lastName;
-
+    private String firstName;
     private String email;
-    @NotNull
-    @Size(min = 8, max = 30)
     private String password;
 
-    public User() {
+    public UserDetailsMock() {
+        setToDefault();
     }
 
-    public User(String id) {
-        this.id = id;
+    public void setToDefault() {
+        id = "B99999999";
+        lastName = "TEST_LAST_NAME";
+        firstName = "TEST_FIRST_NAME";
+        email = "TEST_EMAIL@EMAIL.COM";
+        password = "TEST_PASSWORD";
     }
 
-    public User(String id, String email, String password) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-    }
-
-    public User(String id, String firstName, String lastName, String email, String password) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-    }
-
+    @Override
     public void setId(String id) {
         this.id = id;
     }
 
+    @Override
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    @Override
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    @Override
     public void setEmail(String email) {
         this.email = email;
     }
 
+    @Override
     public void setPassword(String password) {
         this.password = password;
     }
 
+    @Override
     public String getId() {
         return this.id;
     }
 
+    @Override
     public String getFirstName() {
         return this.firstName;
     }
 
+    @Override
     public String getLastName() {
         return this.lastName;
     }
 
+    @Override
     public String getEmail() {
         return this.email;
     }
 
+    @Override
     public String getPassword() {
         return this.password;
     }
