@@ -18,5 +18,4 @@ public class ResetPasswordRequest {
         BannerID = bannerID;
     }
 
-
 }
