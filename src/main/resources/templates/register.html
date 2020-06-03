@@ -1,22 +1,22 @@
 <!DOCTYPE HTML>
-<html xmlns:th="https://www.thymeleaf.org">
+<html lang='en' xmlns:th="https://www.thymeleaf.org">
 
 <head>
     <title>Register</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 
 <body>
-    <h1>Form</h1>
-    <form action="#" th:action="@{/register}" th:object="${user}" method="post">
-        <p>Banner Id: <input required type="text" th:field="*{id}" /></p>
-        <p>First Name: <input required type="text" th:field="*{firstName}" /></p>
-        <p>Last Name: <input required type="text" th:field="*{lastName}" /></p>
-        <p>Email: <input required type="email" th:field="*{email}" /></p>
-        <p>Password: <input required type="password" th:field="*{password}" /></p>
-        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Pasword Error</p>
-        <p><input type="submit" value="Register" /></p>
-    </form>
+<h1>Form</h1>
+<form action="#" th:action="@{/register}" th:object="${user}" method="post">
+    <p>Banner Id: <input required type="text" th:field="*{id}"/></p>
+    <p>First Name: <input required type="text" th:field="*{firstName}"/></p>
+    <p>Last Name: <input required type="text" th:field="*{lastName}"/></p>
+    <p>Email: <input required type="email" th:field="*{email}"/></p>
+    <p>Password: <input required type="password" th:field="*{password}"/></p>
+    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>
+    <p><input type="submit" value="Register"/></p>
+</form>
 </body>
 
 </html>
