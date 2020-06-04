@@ -1,10 +1,12 @@
 package com.group8.dalsmartteamwork.login.login_security;
 
 import org.springframework.security.authentication.AuthenticationManager;
+
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+
 import com.group8.dalsmartteamwork.login.dao.LoginImplementation;
 import com.group8.dalsmartteamwork.login.model.Role;
 import com.group8.dalsmartteamwork.login.model.User;
@@ -21,7 +23,6 @@ public class LoginAuthentication implements AuthenticationManager {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        // TODO Auto-generated method stub
         User user = new User();
         Iterator<Role> role;
         Iterator<Role> course;
@@ -36,8 +37,7 @@ public class LoginAuthentication implements AuthenticationManager {
         try {
             status = loginImplementation.getUserDetails(username, user.getFirstName(), user.getEmail(),
                     encryptedPassword);
-        } catch (SQLException e1) {
-            // TODO Auto-generated catch block
+        } catch (Exception e1) {
             e1.printStackTrace();
         }
         try {
@@ -62,7 +62,6 @@ public class LoginAuthentication implements AuthenticationManager {
             }
         } catch (Exception e) {
             e.printStackTrace();
-
         }
         return null;
     }
