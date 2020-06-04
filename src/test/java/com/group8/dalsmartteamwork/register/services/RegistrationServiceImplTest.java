@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class RegistrationServiceImplTest {
-    private RegistrationServiceImpl service = null;
+    private RegistrationService service = null;
     private RegistrationDaoImpl dao = mock(RegistrationDaoImpl.class);
     private User existingUser = new User("B00000000", "fName", "lName", "email@email.com", "pwd");
     private User newUser = new User("B1111111", "fName", "lName", "email@email.com", "pwd");

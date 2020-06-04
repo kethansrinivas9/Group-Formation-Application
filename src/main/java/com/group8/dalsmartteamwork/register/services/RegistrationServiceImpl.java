@@ -8,7 +8,9 @@ import com.group8.dalsmartteamwork.utils.User;
 public class RegistrationServiceImpl implements RegistrationService {
     private RegistrationDao dao;
 
-    public RegistrationServiceImpl() {}
+    public RegistrationServiceImpl() {
+        this.dao = new RegistrationDaoImpl();
+    }
 
     public RegistrationServiceImpl(RegistrationDao dao){
         this.dao = dao;
@@ -17,9 +19,6 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Override
     public Boolean registerUser(User user) {
         try{
-            if(this.dao == null){
-                this.dao = new RegistrationDaoImpl();
-            }
             Encryption encryption = new Encryption();
             user.setPassword(encryption.encrypt(user.getPassword()));
             Boolean createUserStatus = this.dao.addUserToDb(user);
