@@ -14,6 +14,7 @@ public class ResetPasswordDaoImplTest {
     public static final String TEMP_BANNERID = "B00000000";
     public static final String TEMP_TOKEN = "a0a1a2a3a4a5a6a7a8a9";
     public static final String TEMP_PASSWORD = "Test@123";
+    public static final String TEMP_EMAIL = "test123@gmail.com";
     ResetPasswordDaoImpl resetPasswordDaoImplMock = mock(ResetPasswordDaoImpl.class);
 
     @Test
@@ -22,21 +23,21 @@ public class ResetPasswordDaoImplTest {
         ResetToken resetToken = new ResetToken();
         String token = resetToken.createToken();
         when(resetPasswordDaoImplMock.addToken(TEMP_BANNERID, token)).thenReturn(true);
-        assertTrue(resetPasswordDaoImplMock.addToken(TEMP_BANNERID, token), "Database token insertion failed.");
+        assertTrue(resetPasswordDaoImplMock.addToken(TEMP_BANNERID, token), "Database token insertion failed");
         verify(resetPasswordDaoImplMock).addToken(TEMP_BANNERID, token);
     }
 
     @Test
     public void addTokenOneArgumentTest() {
         when(resetPasswordDaoImplMock.addToken(TEMP_BANNERID)).thenReturn(true);
-        assertTrue(resetPasswordDaoImplMock.addToken(TEMP_BANNERID), "Database token insertion failed.");
+        assertTrue(resetPasswordDaoImplMock.addToken(TEMP_BANNERID), "Database token insertion failed");
         verify(resetPasswordDaoImplMock).addToken(TEMP_BANNERID);
     }
 
     @Test
     public void resetTokensTest() {
         when(resetPasswordDaoImplMock.resetTokens()).thenReturn(true);
-        assertTrue(resetPasswordDaoImplMock.resetTokens(), "Tokens were not reset.");
+        assertTrue(resetPasswordDaoImplMock.resetTokens(), "Tokens were not reset");
         verify(resetPasswordDaoImplMock).resetTokens();
     }
 
@@ -58,7 +59,14 @@ public class ResetPasswordDaoImplTest {
     @Test
     public void updatePasswordTest() {
         when(resetPasswordDaoImplMock.addToken(TEMP_BANNERID, TEMP_PASSWORD)).thenReturn(true);
-        assertTrue(resetPasswordDaoImplMock.addToken(TEMP_BANNERID, TEMP_PASSWORD), "Password not updated in the database.");
+        assertTrue(resetPasswordDaoImplMock.addToken(TEMP_BANNERID, TEMP_PASSWORD), "Password not updated in the database");
         verify(resetPasswordDaoImplMock).addToken(TEMP_BANNERID, TEMP_PASSWORD);
+    }
+
+    @Test
+    void getUserEmailTest() {
+        when(resetPasswordDaoImplMock.getUserEmail(TEMP_BANNERID)).thenReturn(TEMP_EMAIL);
+        assertEquals(resetPasswordDaoImplMock.getUserEmail(TEMP_BANNERID), TEMP_EMAIL, "Failed to get user Email");
+        verify(resetPasswordDaoImplMock).getUserEmail(TEMP_BANNERID);
     }
 }

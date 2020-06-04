@@ -6,6 +6,8 @@ import com.group8.dalsmartteamwork.resetpassword.models.NewPassword;
 import com.group8.dalsmartteamwork.resetpassword.models.PasswordResetToken;
 import com.group8.dalsmartteamwork.resetpassword.models.ResetPasswordRequest;
 import com.group8.dalsmartteamwork.utils.Encryption;
+import com.group8.dalsmartteamwork.utils.Mail;
+import com.group8.dalsmartteamwork.utils.ResetToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +23,7 @@ public class ResetPasswordController {
     @GetMapping("/forgotpassword")
     public String viewResetPasswordForm(Model model) {
         model.addAttribute("resetpasswordrequest", new ResetPasswordRequest());
-        return "resetPasswordRequest";
+        return "resetPasswordRequestForm";
     }
 
     @PostMapping("/forgotpassword")
@@ -29,17 +31,25 @@ public class ResetPasswordController {
         ResetPasswordDao resetPasswordDaoImpl = new ResetPasswordDaoImpl();
         model.addAttribute("resetPasswordRequest", resetPasswordRequest);
         try {
-            Boolean updateStatus = resetPasswordDaoImpl.addToken(resetPasswordRequest.getBannerID());
+            ResetToken resetToken = new ResetToken();
+            String token = resetToken.createToken();
+            Boolean updateStatus = resetPasswordDaoImpl.addToken(resetPasswordRequest.getBannerID(), token);
             if (!updateStatus) {
                 return "resetPasswordUserNotFound";
             } else {
                 //TODO: Send Email with token and BannerID ("/resetpassword?bannerid=B00000000&token=a0a1a2a3a4a5a6a7a8a9")
+                Mail mail = new Mail();
+                String email = resetPasswordDaoImpl.getUserEmail(resetPasswordRequest.getBannerID());
+//                String content="<a href=\"localhost:8080/resetpassword?bannerid="+resetPasswordRequest.getBannerID()+"&token="+token+"\">Click here</a> to reset your password.";
+//                String content="<html><body><a href=\"localhost:8080/resetpassword?bannerid="+resetPasswordRequest.getBannerID()+"&token="+token+"\">Click here</a> to reset your password. </body></html>";
+                String content = "localhost:8080/resetpassword?bannerid=" + resetPasswordRequest.getBannerID() + "&token=" + token;
+                mail.sendEmail(email, "Password Reset Request", content);
             }
         } catch (SQLException exception) {
             System.out.println(exception.getMessage());
             exception.printStackTrace();
         }
-        return "resetPasswordMessage";
+        return "resetPasswordEmailMessage";
     }
 
     @GetMapping("/resetpassword")
@@ -52,11 +62,12 @@ public class ResetPasswordController {
             NewPassword newPassword = new NewPassword();
             newPassword.setBannerID(bannerID);
             model.addAttribute("newpassword", newPassword);
-            return "resetPassword";
+            return "resetPasswordForm";
         } else if (passwordResetToken.getStatus().equals("expired")) {
             return "tokenexpired";
+        } else {
+            return "badrequest";
         }
-        return "badrequest";
     }
 
     @PostMapping("/resetpassword")
@@ -68,13 +79,11 @@ public class ResetPasswordController {
             Boolean updateStatus = resetPasswordDaoImpl.updatePassword(newPassword.getBannerID(), encrypted_password);
             if (!updateStatus) {
                 return "resetPasswordUserNotFound";
-            } else {
-                //TODO: (Optional) Send Email stating that the password was changed.
             }
         } catch (SQLException exception) {
             System.out.println(exception.getMessage());
             exception.printStackTrace();
         }
-        return "resetPasswordMessage";
+        return "passwordResetSuccess";
     }
 }
