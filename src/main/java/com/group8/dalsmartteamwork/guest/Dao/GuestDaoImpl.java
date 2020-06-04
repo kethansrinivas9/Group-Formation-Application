@@ -14,7 +14,6 @@ public class GuestDaoImpl implements GuestDao {
     @Override
     public List<Course> getCourses() {
         List<Course> courses = new ArrayList<>();
-
         try {
             connection = DbConnection.getInstance();
             connection.createDbConnection();

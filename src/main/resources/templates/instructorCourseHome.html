@@ -8,17 +8,55 @@
 <body>
 
 <div class="container-fluid">
-    <form method="GET" th:action="@{'/add-ta?courseid='+${course}}">
+    <form method="POST" th:action="@{'/add-ta?courseid='+${course}}">
         <input id="frmsub1" name="courseid"
                type="submit" value="Add TA"/>
     </form>
 
-<!--    TODO: Add the link to import students containing upload csv function-->
+    <!--    TODO: Add the link to import students containing upload csv function-->
     <form method="GET" th:action="@{'/add-ta/'+${course}}">
         <input id="frmsub2" name="courseid"
                type="submit" value="Add Students"/>
     </form>
 </div>
+<h1>TAs</h1>
+<table class="table table-sm">
+    <tr class="d-flex">
+        <td class="col-1">BannerID</td>
+        <td class="col-1">First Name</td>
+        <td class="col-1">Last Name</td>
+        <td class="col-2">Email</td>
+        <!--        <td class="col-1">Actions</td>-->
+    </tr>
+    <tr class="d-flex" th:each="ta : ${currentTAList}">
+        <td class="col-sm-1" th:text="${ta.getId()}"/>
+        <td class="col-sm-1" th:text="${ta.getFirstName()}"/>
+        <td class="col-sm-1" th:text="${ta.getLastName()}"/>
+        <td class="col-sm-2" th:text="${ta.getEmail()}"/>
+        <!--        <td class="col-sm-1"><a th:href="@{'/confirm-add-ta?courseid=' + ${courseid} + '&bannerid=' + ${user.getId()}}">Add</a>-->
+        <!--        </td>-->
 
+    </tr>
+</table>
+<br>
+<h1>Students</h1>
+<table class="table table-sm">
+    <tr class="d-flex">
+        <td class="col-1">BannerID</td>
+        <td class="col-1">First Name</td>
+        <td class="col-1">Last Name</td>
+        <td class="col-2">Email</td>
+        <!--        <td class="col-1">Actions</td>-->
+    </tr>
+    <tr class="d-flex" th:each="student : ${currentStudentList}">
+        <td class="col-sm-1" th:text="${student.getId()}"/>
+        <td class="col-sm-1" th:text="${student.getFirstName()}"/>
+        <td class="col-sm-1" th:text="${student.getLastName()}"/>
+        <td class="col-sm-2" th:text="${student.getEmail()}"/>
+        <!--        <td class="col-sm-1"><a th:href="@{'/confirm-add-ta?courseid=' + ${courseid} + '&bannerid=' + ${user.getId()}}">Add</a>-->
+        <!--        </td>-->
+
+    </tr>
+</table>
 </body>
 </html>

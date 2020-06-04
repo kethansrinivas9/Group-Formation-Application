@@ -24,7 +24,7 @@ public class CourseDaoImplTest {
     }
 
     @Test
-    public void getStudentsForTATest() {
+    public void getUsersForTATest() {
         List<User> users = new ArrayList<>();
         User user1 = new User("B00000001", "fname1", "lname1", "email1", "p1");
         User user2 = new User("B00000002", "fname2", "lname2", "email2", "p2");
@@ -32,11 +32,52 @@ public class CourseDaoImplTest {
         users.add(user1);
         users.add(user2);
         users.add(user3);
-        when(courseDao.getStudentsForTA(TEMP_COURSEID)).thenReturn(users);
-        assertEquals(courseDao.getStudentsForTA(TEMP_COURSEID), users, "Failed to get Eligible Students for assigning TA");
-        verify(courseDao).getStudentsForTA(TEMP_COURSEID);
+        when(courseDao.getUsersForTA(TEMP_COURSEID)).thenReturn(users);
+        assertEquals(courseDao.getUsersForTA(TEMP_COURSEID), users, "Failed to get Eligible Students for assigning TA");
+        verify(courseDao).getUsersForTA(TEMP_COURSEID);
     }
 
+    @Test
+    public void getCurrentTAsTest() {
+        List<User> taList = new ArrayList<>();
+        User user1 = new User("B00000001", "fname1", "lname1", "email1", "p1");
+        User user2 = new User("B00000002", "fname2", "lname2", "email2", "p2");
+        User user3 = new User("B00000003", "fname3", "lname3", "email3", "p3");
+        taList.add(user1);
+        taList.add(user2);
+        taList.add(user3);
+        when(courseDao.getUsersForTA(TEMP_COURSEID)).thenReturn(taList);
+        assertEquals(courseDao.getUsersForTA(TEMP_COURSEID), taList, "Failed to get existing TAsfrom the database");
+        verify(courseDao).getUsersForTA(TEMP_COURSEID);
+    }
+
+    @Test
+    public void getCurrentStudentsTest() {
+        List<User> taList = new ArrayList<>();
+        User user1 = new User("B00000001", "fname1", "lname1", "email1", "p1");
+        User user2 = new User("B00000002", "fname2", "lname2", "email2", "p2");
+        User user3 = new User("B00000003", "fname3", "lname3", "email3", "p3");
+        taList.add(user1);
+        taList.add(user2);
+        taList.add(user3);
+        when(courseDao.getUsersForTA(TEMP_COURSEID)).thenReturn(taList);
+        assertEquals(courseDao.getUsersForTA(TEMP_COURSEID), taList, "Failed to get existing TAs from the database");
+        verify(courseDao).getUsersForTA(TEMP_COURSEID);
+    }
+
+    @Test
+    public void getStudentsForTATest() {
+        List<User> studentList = new ArrayList<>();
+        User user1 = new User("B00000001", "fname1", "lname1", "email1", "p1");
+        User user2 = new User("B00000002", "fname2", "lname2", "email2", "p2");
+        User user3 = new User("B00000003", "fname3", "lname3", "email3", "p3");
+        studentList.add(user1);
+        studentList.add(user2);
+        studentList.add(user3);
+        when(courseDao.getUsersForTA(TEMP_COURSEID)).thenReturn(studentList);
+        assertEquals(courseDao.getUsersForTA(TEMP_COURSEID), studentList, "Failed to get existing students from the database");
+        verify(courseDao).getUsersForTA(TEMP_COURSEID);
+    }
 
     @Test
     public void addTAtoCourse() {

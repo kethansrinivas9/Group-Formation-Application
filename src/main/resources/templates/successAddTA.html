@@ -8,7 +8,7 @@
 <body>
 
 <div class="container-fluid">
-    TA Added successfully. Return to <a th:href="@{'/add-ta?courseid=' + ${courseid}}">add TA</a>.
+    TA Added successfully. Return to <a th:href="@{'/viewcourse/' + ${courseid}}" th:method="POST">Course Homepage</a>.
 </div>
 
 </body>

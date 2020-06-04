@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
@@ -18,18 +19,22 @@ public class InstructorController {
     public String view(@PathVariable int courseid, Model model) {
         CourseDaoImpl courseDao = new CourseDaoImpl();
         if (courseDao.courseExists(courseid)) {
+            List<User> currentTAList = courseDao.getCurrentTAs(courseid);
+            List<User> currentStudentList = courseDao.getCurrentTAs(courseid);
             model.addAttribute("course", courseid);
+            model.addAttribute("currentTAList", currentTAList);
+            model.addAttribute("currentStudentList", currentStudentList);
             return "instructorCourseHome";
         }
         return "badrequest";
     }
 
     //    @PostMapping("/add-ta/{courseid}")
-    @GetMapping("/add-ta")
+    @PostMapping("/add-ta")
     public String addTA(@RequestParam(name = "courseid") int courseid, Model model) {
         CourseDaoImpl courseDao = new CourseDaoImpl();
         List<User> users = new ArrayList<>();
-        users = courseDao.getStudentsForTA(courseid);
+        users = courseDao.getUsersForTA(courseid);
         model.addAttribute("users", users);
         model.addAttribute("courseid", courseid);
         return "addTA";

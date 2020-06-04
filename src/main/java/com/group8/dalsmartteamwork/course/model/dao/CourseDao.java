@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface CourseDao {
     Boolean courseExists(int courseID) throws SQLException;
-    List<User> getStudentsForTA(int courseID) throws SQLException;
+    List<User> getUsersForTA(int courseID) throws SQLException;
     Boolean addTAtoCourse(String bannerID, int courseID) throws SQLException;
+    List<User> getCurrentTAs(int courseID) throws SQLException;
+    List<User> getCurrentStudents(int courseID) throws SQLException;
 }
