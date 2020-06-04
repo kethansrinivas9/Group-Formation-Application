@@ -13,10 +13,14 @@ import java.util.Random;
 public class ImportCsvServiceImpl implements ImportCsvService{
     private RegistrationDao dao;
     private Mail mail;
+    private int courseId;
 
-    public ImportCsvServiceImpl() {}
+    public ImportCsvServiceImpl(int courseId) {
+        this.courseId = courseId;
+    }
 
-    public ImportCsvServiceImpl(RegistrationDao dao, Mail mail){
+    public ImportCsvServiceImpl(int courseId, RegistrationDao dao, Mail mail){
+        this.courseId = courseId;
         this.dao = dao;
         this.mail = mail;
     }
@@ -38,13 +42,15 @@ public class ImportCsvServiceImpl implements ImportCsvService{
                 Boolean userDbStatus = this.dao.isUserInDb(user.getId());
                 if(userDbStatus){
                     status.add(false);
+                    this.dao.assignCourseToUser(user.getId(), courseId);
                 }
                 else {
                     this.dao.addUserToDb(user);
-                    final String INVITE_TEXT_FORMAT = "You have been registered to CatME. You can login with your email and password: %s";
+                    this.dao.assignCourseToUser(user.getId(), courseId);
+                    final String INVITE_TEXT_FORMAT = "You have been registered to CatME and registered for the course %d. You can login with your email and password: %s";
                     final String INVITE_SUBJECT = "CatME Registration";
                     status.add(true);
-                    String message = String.format(INVITE_TEXT_FORMAT, password);
+                    String message = String.format(INVITE_TEXT_FORMAT, courseId, password);
                     Thread t = new Thread(new Runnable() {
                         @Override
                         public void run() {

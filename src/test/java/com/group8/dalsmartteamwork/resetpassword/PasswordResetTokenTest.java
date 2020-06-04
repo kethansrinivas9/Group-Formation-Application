@@ -16,11 +16,11 @@ public class PasswordResetTokenTest{
     @Test
     public void defaultConstructorTest(){
         PasswordResetToken passwordResetToken = new PasswordResetToken();
-        assertEquals(passwordResetToken.getTokenID(), 0, "tid Default constructor of PasswordResetToken failed.");
-        assertNull(passwordResetToken.getBannerID(), "bid Default constructor of PasswordResetToken failed.");
-        assertNull(passwordResetToken.getToken(), "tok Default constructor of PasswordResetToken failed.");
-        assertNull(passwordResetToken.getTimestamp(), "timest Default constructor of PasswordResetToken failed.");
-        assertNull(passwordResetToken.getStatus(), "statDefault constructor of PasswordResetToken failed.");
+        assertEquals(passwordResetToken.getTokenID(), 0, "Default constructor of PasswordResetToken failed.");
+        assertNull(passwordResetToken.getBannerID(), "Default constructor of PasswordResetToken failed.");
+        assertNull(passwordResetToken.getToken(), "Default constructor of PasswordResetToken failed.");
+        assertNull(passwordResetToken.getTimestamp(), "Default constructor of PasswordResetToken failed.");
+        assertNull(passwordResetToken.getStatus(), "constructor of PasswordResetToken failed.");
     }
 
     @Test

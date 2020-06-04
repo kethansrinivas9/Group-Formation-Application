@@ -29,7 +29,7 @@ public class SignUpController {
         RegistrationServiceImpl service = new RegistrationServiceImpl();
         Boolean status = service.registerUser(user);
         if (status) {
-            return "success";
+            return "login";
         }
         model.addAttribute("message", "Registration failed. User already exists");
         return "register";

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List TAs</title>
+    <meta charset="UTF-8" content="text/html" http-equiv="Content-type"/>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" rel="stylesheet">
+</head>
+<body>
+<table class="table table-sm">
+    <tr class="d-flex">
+        <td class="col-1">BannerID</td>
+        <td class="col-1">First Name</td>
+        <td class="col-1">Last Name</td>
+        <td class="col-2">Email</td>
+        <td class="col-1">Actions</td>
+    </tr>
+    <tr class="d-flex" th:each="user : ${users}">
+        <td class="col-sm-1" th:text="${user.getId()}"/>
+        <td class="col-sm-1" th:text="${user.getFirstName()}"/>
+        <td class="col-sm-1" th:text="${user.getLastName()}"/>
+        <td class="col-sm-2" th:text="${user.getEmail()}"/>
+        <td class="col-sm-1"><a th:href="@{'/confirm-add-ta?courseid=' + ${courseid} + '&bannerid=' + ${user.getId()}}">Add</a>
+        </td>
+
+    </tr>
+</table>
+</body>
+</html>

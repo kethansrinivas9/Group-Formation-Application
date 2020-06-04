@@ -9,8 +9,12 @@
 
 <body>
     <div class="container">
+        <br>
+        <p>Course</p>
+        <p th:text="${courseId}" th:if="${courseId ne null}"></p>
         <h3>Import Student List</h3>
         <form th:action="@{/upload}" enctype="multipart/form-data" method="POST">
+            <input type="hidden" id="courseId" name="courseId" th:value="${courseId}">
             <div class="form-group">
                 <label for="file">Select file</label>
                 <input type="file" name="file" class="form-control-file" id="file">
