@@ -21,7 +21,7 @@ public class ResetPasswordController {
     @GetMapping("/forgotpassword")
     public String viewResetPasswordForm(Model model) {
         model.addAttribute("resetpasswordrequest", new ResetPasswordRequest());
-        return "resetPasswordRequest";
+        return "resetPasswordRequestForm";
     }
 
     @PostMapping("/forgotpassword")
@@ -39,7 +39,7 @@ public class ResetPasswordController {
             System.out.println(exception.getMessage());
             exception.printStackTrace();
         }
-        return "resetPasswordMessage";
+        return "resetPasswordEmailMessage";
     }
 
     @GetMapping("/resetpassword")
@@ -52,11 +52,12 @@ public class ResetPasswordController {
             NewPassword newPassword = new NewPassword();
             newPassword.setBannerID(bannerID);
             model.addAttribute("newpassword", newPassword);
-            return "resetPassword";
+            return "resetPasswordForm";
         } else if (passwordResetToken.getStatus().equals("expired")) {
             return "tokenexpired";
+        } else {
+            return "badrequest";
         }
-        return "badrequest";
     }
 
     @PostMapping("/resetpassword")
@@ -75,6 +76,6 @@ public class ResetPasswordController {
             System.out.println(exception.getMessage());
             exception.printStackTrace();
         }
-        return "resetPasswordMessage";
+        return "passwordResetSuccess";
     }
 }
