@@ -13,11 +13,16 @@
                type="submit" value="Add TA"/>
     </form>
 
-    <!--    TODO: Add the link to import students containing upload csv function-->
     <form method="GET" th:action="@{'/add-ta/'+${course}}">
         <input id="frmsub2" name="courseid"
                type="submit" value="Add Students"/>
     </form>
+
+    <form method="POST" th:action="@{'/import?course-id='+${course}}">
+        <input id="frmsub3" name="course-id"
+               type="submit" value="Import Students from CSV"/>
+    </form>
+
 </div>
 <h1>TAs</h1>
 <table class="table table-sm">

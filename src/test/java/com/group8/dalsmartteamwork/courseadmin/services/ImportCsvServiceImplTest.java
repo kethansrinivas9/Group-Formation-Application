@@ -19,12 +19,13 @@ public class ImportCsvServiceImplTest {
     private RegistrationDao dao = mock(RegistrationDaoImpl.class);
     private Mail mail = mock(Mail.class);
     private List<User> users;
+    private static final int COURSE_ID = 5308;
     private User existingUser = new User("B00000000", "fName", "lName", "email@email.com", "pwd");
     private User newUser = new User("B1111111", "fName", "lName", "email@email.com", "pwd");
 
     @BeforeEach
     void setup(){
-        this.service = new ImportCsvServiceImpl(dao, mail);
+        this.service = new ImportCsvServiceImpl(COURSE_ID, dao, mail);
         this.users = new ArrayList<>();
         users.add(this.existingUser);
         users.add(this.newUser);
@@ -38,6 +39,8 @@ public class ImportCsvServiceImplTest {
         when(dao.isUserInDb(newUser.getId())).thenReturn(false);
         when(dao.addUserToDb(existingUser)).thenReturn(false);
         when(dao.addUserToDb(newUser)).thenReturn(true);
+        when(dao.assignCourseToUser(newUser.getId(), COURSE_ID)).thenReturn(true);
+        when(dao.assignCourseToUser(existingUser.getId(), COURSE_ID)).thenReturn(true);
         assertEquals(service.verifyRegistration(users), result);
     }
 

@@ -7,7 +7,7 @@ import com.group8.dalsmartteamwork.utils.User;
 import java.sql.ResultSet;
 
 public class RegistrationDaoImpl implements RegistrationDao {
-    DbConnection dbConnection;
+    private DbConnection dbConnection;
 
     @Override
     public Boolean isUserInDb(String id) {
@@ -66,6 +66,27 @@ public class RegistrationDaoImpl implements RegistrationDao {
             e.printStackTrace();
         } finally {
             dbConnection.close();
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean assignCourseToUser(String userId, int courseId) {
+        try {
+            dbConnection = DbConnection.getInstance();
+            dbConnection.createDbConnection();
+
+            String insertQuery = String.format("INSERT INTO CourseRole VALUES('%s', '%d', '%d')",
+                    userId, courseId, 2);
+            int numRecords = dbConnection.updateRecords(insertQuery);
+            if (numRecords > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            //TODO: Add to Log
+            e.printStackTrace();
+        } finally {
+            dbConnection.closeConnection();
         }
         return false;
     }
