@@ -26,7 +26,6 @@ build:
     paths:
       - build/libs/*.jar
   tags:
-    - grad
     - local123
   
 test:
@@ -37,7 +36,6 @@ test:
     -  chmod +x ./gradlew
     - ./gradlew check
   tags:
-    - grad
     - local123
 
 deploy-test:
@@ -50,7 +48,6 @@ deploy-test:
   only:
      - develop
   tags:
-    - grad
     - local123
 
 deploy-prod:
@@ -63,5 +60,4 @@ deploy-prod:
   only:
       - develop
   tags:
-    - grad
     - local123
