@@ -1,4 +1,4 @@
-package com.group8.dalsmartteamwork;
+package com.group8.dalsmartteamwork.utils;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

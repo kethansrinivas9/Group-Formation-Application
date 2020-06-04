@@ -17,6 +17,8 @@ public class ImportCsvServiceImpl implements ImportCsvService{
 
     public ImportCsvServiceImpl(int courseId) {
         this.courseId = courseId;
+        this.dao = new RegistrationDaoImpl();
+        this.mail = new Mail();
     }
 
     public ImportCsvServiceImpl(int courseId, RegistrationDao dao, Mail mail){
@@ -30,8 +32,6 @@ public class ImportCsvServiceImpl implements ImportCsvService{
         List<Boolean> status = new ArrayList<>();
         try {
             Encryption encryption = new Encryption();
-            if (this.dao == null) this.dao = new RegistrationDaoImpl();
-            if(this.mail == null) this.mail = new Mail();
             if (users.size() == 0) {
                 return status;
             }
