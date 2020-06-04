@@ -14,6 +14,7 @@ import static org.mockito.Mockito.*;
 public class CourseDaoImplTest {
     public static final int TEMP_COURSEID = 9999;
     public static final String TEMP_BANNERID = "B00000000";
+    public static final String TEMP_COURSENAME = "Course1";
     CourseDaoImpl courseDao = mock(CourseDaoImpl.class);
 
     @Test
@@ -77,6 +78,13 @@ public class CourseDaoImplTest {
         when(courseDao.getUsersForTA(TEMP_COURSEID)).thenReturn(studentList);
         assertEquals(courseDao.getUsersForTA(TEMP_COURSEID), studentList, "Failed to get existing students from the database");
         verify(courseDao).getUsersForTA(TEMP_COURSEID);
+    }
+
+    @Test
+    public void getCourseNameTest() {
+        when(courseDao.getCourseName(TEMP_COURSEID)).thenReturn(TEMP_COURSENAME);
+        assertEquals(courseDao.getCourseName(TEMP_COURSEID), TEMP_COURSENAME, "Failed to add TA to the courseRole Table in the database");
+        verify(courseDao).getCourseName(TEMP_COURSEID);
     }
 
     @Test
