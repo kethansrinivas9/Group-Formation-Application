@@ -37,7 +37,7 @@ public class ResetPasswordController {
             if (!updateStatus) {
                 return "resetPasswordUserNotFound";
             } else {
-                //TODO: Send Email with token and BannerID ("/resetpassword?bannerid=B00000000&token=a0a1a2a3a4a5a6a7a8a9")
+                //Send Email with token and BannerID ("/resetpassword?bannerid=B00000000&token=a0a1a2a3a4a5a6a7a8a9")
                 Mail mail = new Mail();
                 String email = resetPasswordDaoImpl.getUserEmail(resetPasswordRequest.getBannerID());
 //                String content="<a href=\"localhost:8080/resetpassword?bannerid="+resetPasswordRequest.getBannerID()+"&token="+token+"\">Click here</a> to reset your password.";
