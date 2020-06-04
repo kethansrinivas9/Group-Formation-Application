@@ -3,6 +3,7 @@ package com.group8.dalsmartteamwork.resetpassword.dao;
 import com.group8.dalsmartteamwork.resetpassword.models.PasswordResetToken;
 import com.group8.dalsmartteamwork.utils.DbConnection;
 import com.group8.dalsmartteamwork.utils.ResetToken;
+import com.group8.dalsmartteamwork.utils.User;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -127,5 +128,25 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
             System.out.println(exception.getMessage());
             return false;
         }
+    }
+
+    @Override
+    public String getUserEmail(String bannerID) {
+        User user = new User();
+        String email = "notfound";
+        try {
+            connection = DbConnection.getInstance();
+            connection.createDbConnection();
+            String query = String.format("SELECT * FROM CSCI5308_8_DEVINT.Users WHERE BannerID='%s'", bannerID);
+            ResultSet rs = connection.getRecords(query);
+            while (rs.next()) {
+                email = rs.getString("Email");
+            }
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        } finally {
+            connection.close();
+        }
+        return email;
     }
 }

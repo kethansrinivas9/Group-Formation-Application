@@ -14,4 +14,6 @@ public interface ResetPasswordDao {
     PasswordResetToken getRequestByToken(String bannerID, String token) throws SQLException;
 
     Boolean updatePassword(String bannerID, String password) throws SQLException;
+
+    String getUserEmail(String bannerID) throws SQLException;
 }
