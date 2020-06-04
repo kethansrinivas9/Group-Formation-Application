@@ -1,6 +1,6 @@
 package com.group8.dalsmartteamwork.course;
 
-import com.group8.dalsmartteamwork.course.model.dao.CourseDaoImpl;
+import com.group8.dalsmartteamwork.course.dao.CourseDaoImpl;
 import com.group8.dalsmartteamwork.utils.User;
 import org.junit.jupiter.api.Test;
 
