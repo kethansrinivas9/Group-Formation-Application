@@ -28,12 +28,9 @@ public class RoleAuthorization implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-        String[] roles = user.getRole();
+        String roles = user.getRole();
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        while (roles[i] != null) {
-            authorities.add(new SimpleGrantedAuthority(roles[i]));
-            i++;
-        }
+        authorities.add(new SimpleGrantedAuthority(roles));
         return authorities;
     }
 
