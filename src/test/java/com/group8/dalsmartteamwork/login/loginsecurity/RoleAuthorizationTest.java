@@ -13,17 +13,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 public class RoleAuthorizationTest {
 
     public boolean role;
-    User user = new User("123", "Ramya", "Ramathas", "ramya21@gmail.com", "test@123");
-
-    // @Test
-    // public void constructorRoleAuthorizationTest() {
-    // assertNull(user);
-    // }
+    User user = new User("123", "Test", "Test_last", "test124@gmail.com", "test@123");
 
     @Test
     public void getAuthroitiesTest() {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        role = authorities.add(new SimpleGrantedAuthority("Student"));
+        role = authorities.add(new SimpleGrantedAuthority("admin"));
         assertTrue(role);
     }
 
@@ -35,11 +30,6 @@ public class RoleAuthorizationTest {
     @Test
     public void getUsernameTest() {
         assertNotNull(user.getId());
-    }
-
-    @Test
-    public void isAccountNonExpiredTest() {
-        
     }
 
 }

@@ -56,6 +56,5 @@ public class WebController {
         username = (String) request.getSession().getAttribute("username");
         model.addAttribute("user", username);
         return "guestPage";
-
     }
 }

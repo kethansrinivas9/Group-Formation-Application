@@ -10,7 +10,7 @@ public class RoleTest {
     public static final String ROLE_NAME_1 = "STUDENT";
     public static final String ROLE_ID_1 = "2";
     public static final String ROLE_NAME = "ADMIN";
-    public static final String COURSE_NAME = "Web";
+
 
     @Test
     public void defaultConstructorRoleTest() {

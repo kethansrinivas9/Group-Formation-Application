@@ -41,9 +41,9 @@ public class Successhandler implements AuthenticationSuccessHandler {
                 response.sendRedirect("/student");
             } else if (courseRoles.contains("Instructor")) {
                 response.sendRedirect("/instructor");
-            } else
+            } else {
                 response.sendRedirect("/guest");
-
+            }   
         }
     }
 }
