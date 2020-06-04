@@ -11,4 +11,5 @@ public interface CourseDao {
     Boolean addTAtoCourse(String bannerID, int courseID) throws SQLException;
     List<User> getCurrentTAs(int courseID) throws SQLException;
     List<User> getCurrentStudents(int courseID) throws SQLException;
+    String getCourseName(int courseID) throws SQLException;
 }

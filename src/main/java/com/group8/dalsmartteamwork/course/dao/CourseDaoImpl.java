@@ -129,6 +129,25 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
+    public String getCourseName(int courseID) {
+        String result = "notfound";
+        try {
+            connection = DbConnection.getInstance();
+            connection.createDbConnection();
+            String query = String.format("SELECT * FROM Courses WHERE CourseID='%s'", courseID);
+            ResultSet rs = connection.getRecords(query);
+            while (rs.next()) {
+                result = rs.getString("BannerID");
+            }
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        } finally {
+            connection.close();
+        }
+        return result;
+    }
+
+    @Override
     public Boolean addTAtoCourse(String bannerID, int courseID) {
         try {
             connection = DbConnection.getInstance();
