@@ -27,7 +27,6 @@ build:
       - build/libs/*.jar
   tags:
     - ugrad
-    - local123
   
 test:
   stage: test
@@ -38,7 +37,6 @@ test:
     - ./gradlew check
   tags:
     - ugrad
-    - local123
 
 deploy-test:
   stage: deploy-test
@@ -51,7 +49,6 @@ deploy-test:
      - develop
   tags:
     - ugrad
-    - local123
 
 deploy-prod:
   stage: deploy-prod
@@ -64,4 +61,3 @@ deploy-prod:
       - develop
   tags:
     - ugrad
-    - local123
