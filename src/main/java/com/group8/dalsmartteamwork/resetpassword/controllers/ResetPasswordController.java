@@ -1,6 +1,5 @@
 package com.group8.dalsmartteamwork.resetpassword.controllers;
 
-import com.group8.dalsmartteamwork.login.dao.LoginImplementation;
 import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDao;
 import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDaoImpl;
 import com.group8.dalsmartteamwork.resetpassword.models.NewPassword;
@@ -9,8 +8,6 @@ import com.group8.dalsmartteamwork.resetpassword.models.ResetPasswordRequest;
 import com.group8.dalsmartteamwork.utils.Encryption;
 import com.group8.dalsmartteamwork.utils.Mail;
 import com.group8.dalsmartteamwork.utils.ResetToken;
-import com.group8.dalsmartteamwork.utils.User;
-import jdk.nashorn.internal.parser.Token;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,7 +42,7 @@ public class ResetPasswordController {
                 String email = resetPasswordDaoImpl.getUserEmail(resetPasswordRequest.getBannerID());
 //                String content="<a href=\"localhost:8080/resetpassword?bannerid="+resetPasswordRequest.getBannerID()+"&token="+token+"\">Click here</a> to reset your password.";
 //                String content="<html><body><a href=\"localhost:8080/resetpassword?bannerid="+resetPasswordRequest.getBannerID()+"&token="+token+"\">Click here</a> to reset your password. </body></html>";
-                String content = "localhost:8080/resetpassword?bannerid="+resetPasswordRequest.getBannerID()+"&token="+token;
+                String content = "localhost:8080/resetpassword?bannerid=" + resetPasswordRequest.getBannerID() + "&token=" + token;
                 mail.sendEmail(email, "Password Reset Request", content);
             }
         } catch (SQLException exception) {
@@ -77,8 +74,7 @@ public class ResetPasswordController {
     public String requestPasswordReset(@ModelAttribute NewPassword newPassword, Model model) {
         ResetPasswordDao resetPasswordDaoImpl = new ResetPasswordDaoImpl();
         Encryption encryption = new Encryption();
-//        String encrypted_password = encryption.encrypt(newPassword.getPassword());
-        String encrypted_password = newPassword.getPassword();
+        String encrypted_password = encryption.encrypt(newPassword.getPassword());
         try {
             Boolean updateStatus = resetPasswordDaoImpl.updatePassword(newPassword.getBannerID(), encrypted_password);
             if (!updateStatus) {
