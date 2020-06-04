@@ -1,4 +1,4 @@
-package com.group8.dalsmartteamwork.course.model.dao;
+package com.group8.dalsmartteamwork.course.dao;
 
 import com.group8.dalsmartteamwork.course.model.Course;
 import com.group8.dalsmartteamwork.utils.DbConnection;
