@@ -20,7 +20,7 @@ public class InstructorController {
         CourseDaoImpl courseDao = new CourseDaoImpl();
         if (courseDao.courseExists(courseid)) {
             List<User> currentTAList = courseDao.getCurrentTAs(courseid);
-            List<User> currentStudentList = courseDao.getCurrentTAs(courseid);
+            List<User> currentStudentList = courseDao.getCurrentStudents(courseid);
             model.addAttribute("course", courseid);
             model.addAttribute("currentTAList", currentTAList);
             model.addAttribute("currentStudentList", currentStudentList);
@@ -29,7 +29,6 @@ public class InstructorController {
         return "badrequest";
     }
 
-    //    @PostMapping("/add-ta/{courseid}")
     @PostMapping("/add-ta")
     public String addTA(@RequestParam(name = "courseid") int courseid, Model model) {
         CourseDaoImpl courseDao = new CourseDaoImpl();
