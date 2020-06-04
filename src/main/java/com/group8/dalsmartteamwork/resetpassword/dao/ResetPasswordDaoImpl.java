@@ -23,11 +23,8 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
             String token = resetToken.createToken();
             String query = String.format("INSERT INTO CSCI5308_8_DEVINT.PasswordResetToken (BannerID, Token, Timestamp, Status) VALUES ('%s', '%s', now(), 'valid')", bannerID, token);
             int records = connection.addRecords(query);
-            if (records > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            connection.close();
+            return records > 0;
         } catch (Exception exception) {
             System.out.print(exception.getMessage());
             return false;
@@ -43,11 +40,8 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
             connection.createDbConnection();
             String query = String.format("INSERT INTO CSCI5308_8_DEVINT.PasswordResetToken (BannerID, Token, Timestamp, Status) VALUES ('%s', '%s', now(), 'valid')", bannerID, token);
             int records = connection.addRecords(query);
-            if (records > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            connection.close();
+            return records > 0;
         } catch (Exception exception) {
             System.out.print(exception.getMessage());
             return false;
@@ -66,11 +60,8 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
             Statement statement = connection.getStatement();
             boolean records = statement.execute(query);
             statement.close();
-            if (records) {
-                return true;
-            } else {
-                return false;
-            }
+            connection.close();
+            return records;
         } catch (Exception exception) {
             System.out.print(exception.getMessage());
             return false;
@@ -103,7 +94,7 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         } finally {
-            connection.closeConnection();
+            connection.close();
         }
 
         if (status.equals("valid"))
@@ -124,18 +115,17 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
             String query = String.format("UPDATE CSCI5308_8_DEVINT.Users SET Password='%s' WHERE BannerID='%s'", password, bannerID);
             String updateStatusQuery = String.format("UPDATE CSCI5308_8_DEVINT.PasswordResetToken SET Status='expired' WHERE BannerID='%s'", bannerID);
             int records = connection.updateRecords(query);
-
             if (records > 0) {
                 records = connection.updateRecords(updateStatusQuery);
+                connection.close();
                 return true;
             } else {
+                connection.close();
                 return false;
             }
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
             return false;
-        } finally {
-            connection.closeConnection();
         }
     }
 }
