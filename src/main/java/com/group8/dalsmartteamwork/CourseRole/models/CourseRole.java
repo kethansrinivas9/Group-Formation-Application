@@ -5,7 +5,8 @@ public class CourseRole {
     private int courseID;
     private int roleID;
 
-    public CourseRole(){}
+    public CourseRole() {
+    }
 
     public CourseRole(String bannerID, int courseID, int roleID) {
         this.bannerID = bannerID;
