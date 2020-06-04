@@ -1,0 +1,21 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Courses</title>
+    <meta charset="UTF-8" content="text/html" http-equiv="Content-type"/>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" rel="stylesheet">
+</head>
+<body>
+<table class="table table-sm">
+    <tr class="d-flex">
+        <td class="col-1">CourseID</td>
+        <td class="col-1">Course Name</td>
+    </tr>
+    <tr class="d-flex" th:each="course : ${courses}">
+        <td class="col-sm-1" th:text="${course.getCourseID()}"/>
+        <td class="col-sm-1" th:text="${course.getCourseName()}"/>
+        <td class="col-sm-1"><a th:href="@{'/viewcourse/' + ${course.getCourseID()}}">Open</a></td>
+    </tr>
+</table>
+</body>
+</html>
