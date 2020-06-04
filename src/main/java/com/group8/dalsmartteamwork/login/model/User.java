@@ -1,19 +1,13 @@
 package com.group8.dalsmartteamwork.login.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class User {
-
     private String id;
     private String firstName;
     private String lastName;
-    private String[] role;
-    private String[] courses;
-    private Set<Role> roles = new HashSet<>();
+    private String role;
 
     private String email;
     @NotNull
@@ -21,10 +15,6 @@ public class User {
     private String password;
 
     public User() {
-    }
-
-    public User(String id) {
-        this.id = id;
     }
 
     public User(String id, String email, String password) {
@@ -88,27 +78,11 @@ public class User {
         return this.password;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
-    public String[] getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(String[] role) {
+    public void setRole(String role) {
         this.role = role;
-    }
-
-    public String[] getCourses() {
-        return courses;
-    }
-
-    public void setCourses(String[] courses) {
-        this.courses = courses;
     }
 }

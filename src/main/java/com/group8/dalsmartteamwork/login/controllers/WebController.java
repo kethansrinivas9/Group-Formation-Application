@@ -29,7 +29,7 @@ public class WebController {
         return "loginError";
     }
 
-    @GetMapping("student")
+   // @GetMapping("student")
     public String getStudentPage(HttpServletRequest request, Model model) {
         String[] courses = (String[]) request.getSession().getAttribute("courses");
         int i = 0;
@@ -55,7 +55,7 @@ public class WebController {
     public String getGuestPage(HttpServletRequest request, Model model) {
         username = (String) request.getSession().getAttribute("username");
         model.addAttribute("user", username);
-        return "guest";
+        return "guestPage";
 
     }
 }
