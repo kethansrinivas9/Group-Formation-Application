@@ -3,7 +3,8 @@ image: java:8-jdk
 stages:
   - build
   - test
-  - deploy
+  - deploy-test
+  - deploy-prod
 
 before_script:
   - echo "CI started..." 
@@ -52,8 +53,8 @@ deploy-test:
     - grad
     - local123
 
-deploy-production:
-  stage: deploy-production
+deploy-prod:
+  stage: deploy-prod
   variables:
     GIT_STRATEGY: clone
   script:
