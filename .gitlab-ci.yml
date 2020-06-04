@@ -26,6 +26,7 @@ build:
       - build/libs/*.jar
   tags:
     - grad
+    - local123
   
 test:
   stage: test
@@ -36,9 +37,10 @@ test:
     - ./gradlew check
   tags:
     - grad
+    - local123
 
-deploy:
-  stage: deploy
+deploy-test:
+  stage: deploy-test
   variables:
     GIT_STRATEGY: clone
   script:
@@ -48,3 +50,17 @@ deploy:
      - develop
   tags:
     - grad
+    - local123
+
+deploy-production:
+  stage: deploy-production
+  variables:
+    GIT_STRATEGY: clone
+  script:
+    - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_PRODUCTION_APP_REPO || true
+    - git push -f heroku HEAD:master
+  only:
+      - develop
+  tags:
+    - grad
+    - local123
