@@ -38,12 +38,12 @@ public class CourseDaoImpl implements CourseDao {
         try {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
-            String query = String.format("SELECT * FROM CSCI5308_8_DEVINT.CourseRole WHERE CourseID='%s'", courseID);
+            String query = String.format("SELECT * FROM CourseRole WHERE CourseID='%s'", courseID);
             ResultSet rs = connection.getRecords(query);
             while (rs.next()) {
                 enrolled.add(rs.getString("BannerID"));
             }
-            query = "SELECT * FROM CSCI5308_8_DEVINT.Users";
+            query = "SELECT * FROM Users";
             rs = connection.getRecords(query);
             while (rs.next()) {
                 String bannerID;
@@ -104,12 +104,12 @@ public class CourseDaoImpl implements CourseDao {
         try {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
-            String query = String.format("SELECT * FROM CSCI5308_8_DEVINT.CourseRole WHERE CourseID='%s' and RoleID=2", courseID);
+            String query = String.format("SELECT * FROM CourseRole WHERE CourseID='%s' and RoleID=2", courseID);
             ResultSet rs = connection.getRecords(query);
             while (rs.next()) {
                 studentBannerIDList.add(rs.getString("BannerID"));
             }
-            query = "SELECT * FROM CSCI5308_8_DEVINT.Users";
+            query = "SELECT * FROM Users";
             rs = connection.getRecords(query);
             while (rs.next()) {
                 String bannerID;
@@ -133,7 +133,7 @@ public class CourseDaoImpl implements CourseDao {
         try {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
-            String query = String.format("INSERT INTO CSCI5308_8_DEVINT.CourseRole (BannerID, CourseID, RoleID) VALUES ('%s', '%s', 3)", bannerID, courseID);
+            String query = String.format("INSERT INTO CourseRole (BannerID, CourseID, RoleID) VALUES ('%s', '%s', 3)", bannerID, courseID);
             int records = connection.addRecords(query);
             connection.close();
             return records > 0;
