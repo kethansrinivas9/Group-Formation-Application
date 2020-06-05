@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>This is the Admin Home page</title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<h1 class="sans-serif-font" style="text-align: center">Welcome to Admin page</h1>
+<div>
+    <div>
+        <h3 class="sans-serif-font inner-left"><b>Courses</b></h3>
+        <a th:href="@{/create-course}" class="button sans-serif-font">Create Course</a>
+    </div>
+    <div th:each="course : ${courses}">
+        <div class="card">
+            <div class="course-container sans-serif-font">
+                <div>
+                    <form method="POST" th:action="@{/delete-course}">
+                        <input type="hidden" name="courseID" id="courseID" th:value="${course.courseID}"/>
+                        <button type="submit" class="icon-btn" style="float: right" title="Delete"><i
+                                class="fa fa-trash"></i></button>
+                    </form>
+                    <form method="POST" th:action="@{/edit-course}">
+                        <input type="hidden" name="originalCourseID" id="originalCourseID"
+                               th:value="${course.courseID}"/>
+                        <input type="hidden" name="courseName" id="courseName" th:value="${course.courseName}"/>
+                        <button type="submit" class="icon-btn" style="float: right" title="Edit"><i
+                                class="fa fa-edit"></i></button>
+                    </form>
+                    <p style="float: left;"><h4 th:text="${course.courseName}"></h4></p>
+                </div>
+                <h4 style="float: bottom" th:text="${course.courseID}"></h4>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

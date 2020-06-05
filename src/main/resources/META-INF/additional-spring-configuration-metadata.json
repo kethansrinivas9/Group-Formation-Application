@@ -1,0 +1,99 @@
+{
+    "properties": [
+        {
+            "name": "crypt.key",
+            "type": "java.lang.String",
+            "description": "Secret Key for AES 256 encryption"
+        },
+        {
+            "name": "crypt.salt",
+            "type": "java.lang.String",
+            "description": "Salt for AES 256 encryption"
+        },
+        {
+            "name": "db.environment",
+            "type": "java.lang.String",
+            "description": "Environment for Database"
+        },
+        {
+            "name": "db.connection",
+            "type": "java.lang.String",
+            "description": "Db connection string"
+        },
+        {
+            "name": "db.dev.database",
+            "type": "java.lang.String",
+            "description": "Dev database"
+        },
+        {
+            "name": "db.dev.user",
+            "type": "java.lang.String",
+            "description": "dev user"
+        },
+        {
+            "name": "db.dev.password",
+            "type": "java.lang.String",
+            "description": "dev password'"
+        },
+        {
+            "name": "db.test.database",
+            "type": "java.lang.String",
+            "description": "Test database"
+        },
+        {
+            "name": "db.test.user",
+            "type": "java.lang.String",
+            "description": "Test User"
+        },
+        {
+            "name": "db.test.password",
+            "type": "java.lang.String",
+            "description": "Test password"
+        },
+        {
+            "name": "db.prod.database",
+            "type": "java.lang.String",
+            "description": "Production database"
+        },
+        {
+            "name": "db.prod.user",
+            "type": "java.lang.String",
+            "description": "Production user"
+        },
+        {
+            "name": "db.prod.password",
+            "type": "java.lang.String",
+            "description": "Production password"
+        },
+        {
+            "name": "mail.smtp.host",
+            "type": "java.lang.String",
+            "description": "Host SMTP server"
+        },
+        {
+            "name": "mail.smtp.port",
+            "type": "java.lang.String",
+            "description": "Port to connect to SMTP server"
+        },
+        {
+            "name": "mail.smtp.auth",
+            "type": "java.lang.String",
+            "description": "Enable SMTP authentication"
+        },
+        {
+            "name": "test.key",
+            "type": "java.lang.String",
+            "description": "Property to test the Props class"
+        },
+        {
+            "name": "mail.smtp.username",
+            "type": "java.lang.String",
+            "description": "SMTP username"
+        },
+        {
+            "name": "mail.smtp.password",
+            "type": "java.lang.String",
+            "description": "SMTP password"
+        }
+    ]
+}

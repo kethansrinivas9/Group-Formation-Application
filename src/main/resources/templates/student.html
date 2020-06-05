@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+
+    <title>Student Page</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+
+</head>
+
+<body>
+    <div style="text-align:center">
+        <h2>Student page </h2>
+        <br>
+    </div>
+    <table>
+        <tr>
+            <th>Course ID</th>
+            <th>Course Name</th>
+        </tr>
+
+        <tr th:each="course, itemStat: *{courses}">
+
+            <td><span th:text="${course.courseId}"></span></td>
+            <td><span th:text="${course.courseName}"></span></td>
+           
+
+        </tr>
+
+    </table>
+
+</body>
+
+</html>

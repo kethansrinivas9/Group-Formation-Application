@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <title>Course Admin</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <br>
+        <p>Course</p>
+        <p th:text="${courseId}" th:if="${courseId ne null}"></p>
+        <h3>Import Student List</h3>
+        <form th:action="@{/upload}" enctype="multipart/form-data" method="POST">
+            <input type="hidden" id="courseId" name="courseId" th:value="${courseId}">
+            <div class="form-group">
+                <label for="file">Select file</label>
+                <input type="file" name="file" class="form-control-file" id="file">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Upload File</button>
+            </div>
+        </form>
+        <p th:text="${message}" th:if="${message ne null}"></p>
+    </div>
+
+    <div class="container">
+        <table class="table table-sm" th:if="${details ne null}">
+            <thead>
+                <tr class="d-flex">
+                    <th class="col-1" scope="col">Banner ID</th>
+                    <th class="col-1" scope="col">First Name</th>
+                    <th class="col-1" scope="col">Last Name</th>
+                    <th class="col-2" scope="col">Email</th>
+                    <th class="col-1" scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr  class="d-flex" th:each="detail : ${details}">
+                    <td class="col-sm-1" th:text="${detail.getX().getId()}">Banner ID</td>
+                    <td class="col-sm-1" th:text="${detail.getX().getFirstName()}">First Name</td>
+                    <td class="col-sm-1" th:text="${detail.getX().getLastName()}">Last Name</td>
+                    <td class="col-sm-2" th:text="${detail.getX().getEmail()}">Email</td>
+                    <td class="col-sm-1">
+                        <p class="btn btn-secondary" th:if="${detail.getY()} ==false">Existing</p>
+                        <p class="btn btn-success" th:if="${detail.getY()} ==true">Invited</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>
