@@ -32,7 +32,7 @@ public class AdminController {
             model.addAttribute("courses", adminService.getAllCourses());
             return "redirect:/admin";
         } else {
-            return "/add-course";
+            return "add-course";
         }
     }
 
@@ -40,7 +40,7 @@ public class AdminController {
     public String viewEditCoursePage(String courseName, String originalCourseID, Model model) {
         String instructorID = adminService.getCourseInstructor(originalCourseID);
         model.addAttribute("course", new Course(Integer.parseInt(originalCourseID), courseName, instructorID));
-        return "/edit-course";
+        return "edit-course";
     }
 
     @PostMapping(value = "/update-course")
