@@ -137,7 +137,7 @@ public class CourseDaoImpl implements CourseDao {
             String query = String.format("SELECT * FROM Courses WHERE CourseID='%s'", courseID);
             ResultSet rs = connection.getRecords(query);
             while (rs.next()) {
-                result = rs.getString("BannerID");
+                result = rs.getString("CourseName");
             }
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
