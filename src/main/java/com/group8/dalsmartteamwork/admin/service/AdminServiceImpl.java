@@ -6,7 +6,15 @@ import com.group8.dalsmartteamwork.course.model.Course;
 import java.util.List;
 
 public class AdminServiceImpl implements AdminService {
-    private static final AdminDao adminDao = new AdminDao();
+    private AdminDao adminDao;
+
+    public AdminServiceImpl(){
+        this.adminDao = new AdminDao();
+    }
+
+    public AdminServiceImpl(AdminDao adminDao){
+        this.adminDao = adminDao;
+    }
 
     @Override
     public List<Course> getAllCourses() {
@@ -23,13 +31,13 @@ public class AdminServiceImpl implements AdminService {
         return adminDao.createNewCourse(courseDetails);
     }
 
-    public boolean updateCourse(String newCourseName, int newCourseID, int oldCourseID) {
-        return adminDao.updateCourse(newCourseName, newCourseID, oldCourseID);
+    public boolean updateCourse(String newCourseName, int newCourseID, String instructorID, int oldCourseID) {
+        return adminDao.updateCourse(newCourseName, newCourseID, instructorID, oldCourseID);
     }
 
     @Override
-    public boolean assignInstructorToCourse(String bannerID, String courseID, int roleID) {
-        return adminDao.assignInstructorToCourse(bannerID, courseID, roleID);
+    public String getCourseInstructor(String courseID) {
+        return adminDao.getCourseInstructor(courseID);
     }
 
     @Override

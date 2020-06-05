@@ -15,7 +15,8 @@ public interface AdminService {
 
     public List<String> getListOfNonAdminUsers();
 
-    public boolean assignInstructorToCourse(String bannerID, String courseID, int roleID);
+    public String getCourseInstructor(String courseID);
 
-    public boolean updateCourse(String newCourseName, int newCourseID, int oldCourseID);
+    public boolean updateCourse(String newCourseName, int newCourseID, String instructorID, int oldCourseID);
+
 }

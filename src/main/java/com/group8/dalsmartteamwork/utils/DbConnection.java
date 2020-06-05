@@ -33,7 +33,7 @@ public class DbConnection {
             InputStream propertiesStream = contextClassLoader.getResourceAsStream("application.properties");
             if (propertiesStream != null) {
                 properties.load(propertiesStream);
-                this.environment = properties.getProperty("db.environment");
+                this.environment = System.getenv("db.environment");
                 this.connection = properties.getProperty("db.connection");
                 switch (this.environment) {
                     case "TEST":
@@ -53,6 +53,7 @@ public class DbConnection {
                         this.user = properties.getProperty("db.dev.user");
                         this.password = properties.getProperty("db.dev.password");
                 }
+                System.out.println("Connecting to the "+ this.environment + " database");
                 conn = DriverManager.getConnection(this.connection + this.database + this.IGNORE_TIME_ZONE, this.user,
                         this.password);
                 this.statement = conn.createStatement();
