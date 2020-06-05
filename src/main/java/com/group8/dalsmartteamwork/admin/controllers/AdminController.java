@@ -1,5 +1,6 @@
 package com.group8.dalsmartteamwork.admin.controllers;
 
+import com.group8.dalsmartteamwork.admin.dao.AdminDao;
 import com.group8.dalsmartteamwork.admin.service.AdminService;
 import com.group8.dalsmartteamwork.admin.service.AdminServiceImpl;
 import com.group8.dalsmartteamwork.course.model.Course;
@@ -8,8 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.List;
 
 @Controller
 public class AdminController {
@@ -39,15 +38,14 @@ public class AdminController {
 
     @PostMapping(value = "/edit-course")
     public String viewEditCoursePage(String courseName, String originalCourseID, Model model) {
-        List<String> nonAdminUsers = adminService.getListOfNonAdminUsers();
-        model.addAttribute("course", new Course(Integer.parseInt(originalCourseID), courseName));
-        model.addAttribute("users", nonAdminUsers);
+        String instructorID = adminService.getCourseInstructor(originalCourseID);
+        model.addAttribute("course", new Course(Integer.parseInt(originalCourseID), courseName, instructorID));
         return "/edit-course";
     }
 
     @PostMapping(value = "/update-course")
-    public String editCourse(String courseName, String courseID, String originalCourseID, Model model) {
-        adminService.updateCourse(courseName, Integer.parseInt(courseID), Integer.parseInt(originalCourseID));
+    public String editCourse(String courseName, String courseID, String instructorID, String originalCourseID, Model model) {
+        adminService.updateCourse(courseName, Integer.parseInt(courseID), instructorID, Integer.parseInt(originalCourseID));
         model.addAttribute("courses", adminService.getAllCourses());
         return "redirect:/admin";
     }

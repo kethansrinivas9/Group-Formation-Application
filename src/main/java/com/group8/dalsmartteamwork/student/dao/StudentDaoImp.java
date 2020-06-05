@@ -3,6 +3,7 @@ package com.group8.dalsmartteamwork.student.dao;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
+
 import com.group8.dalsmartteamwork.student.model.Student;
 import com.group8.dalsmartteamwork.utils.DbConnection;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,8 +18,6 @@ public class StudentDaoImp implements StudentDao {
 
     @Override
     public ArrayList<Student> displayCourses() {
-        // TODO Auto-generated method stub
-
         try {
             dbConnection = DbConnection.getInstance();
             dbConnection.createDbConnection();

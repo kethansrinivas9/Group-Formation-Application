@@ -64,13 +64,20 @@ public class AdminDao {
 
     public boolean createNewCourse(Course courseDetails) {
         try {
-            String query = String.format(AdminQueryConstants.CREATE_COURSE, courseDetails.getCourseID(), courseDetails.getCourseName());
+            String createCourseQuery = String.format(AdminQueryConstants.CREATE_COURSE, courseDetails.getCourseID(), courseDetails.getCourseName());
+            String createInstructorQuery = String.format(AdminQueryConstants.CREATE_INSTRUCTOR, courseDetails.getInstructorID(), courseDetails.getCourseID(), '4');
             dbConnection = DbConnection.getInstance();
             dbConnection.createDbConnection();
-            int rs = dbConnection.addRecords(query);
+            int createCourseResultSet = dbConnection.addRecords(createCourseQuery);
 
-            if (rs >= 0) {
-                return true;
+            if (createCourseResultSet >= 0) {
+                System.out.println(createInstructorQuery);
+                int createInstructorResultSet = dbConnection.addRecords(createInstructorQuery);
+                if(createInstructorResultSet >= 0) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -80,14 +87,16 @@ public class AdminDao {
         return false;
     }
 
-    public boolean updateCourse(String newCourseName, int newCourseID, int oldCourseID) {
+    public boolean updateCourse(String newCourseName, int newCourseID, String instructorID, int oldCourseID) {
         try {
-            String query = String.format(AdminQueryConstants.UPDATE_COURSE, newCourseName, newCourseID, oldCourseID);
+            String updateCourseQuery = String.format(AdminQueryConstants.UPDATE_COURSE, newCourseName, newCourseID, oldCourseID);
+            String updateInstructorQuery = String.format(AdminQueryConstants.UPDATE_INSTRUCTOR, instructorID, newCourseID);
             dbConnection = DbConnection.getInstance();
             dbConnection.createDbConnection();
-            int rs = dbConnection.updateRecords(query);
+            int courseUpdateResultSet = dbConnection.updateRecords(updateCourseQuery);
+            int instructorUpdateResultSet = dbConnection.updateRecords(updateInstructorQuery);
 
-            if (rs >= 0) {
+            if (courseUpdateResultSet >= 0 && instructorUpdateResultSet >= 0) {
                 return true;
             }
         } catch (Exception e) {
@@ -116,7 +125,21 @@ public class AdminDao {
         return false;
     }
 
-    public boolean assignInstructorToCourse(String bannerID, String courseID, int roleID) {
-        return false;
+    public String getCourseInstructor(String courseID) {
+        try {
+            String query = String.format(AdminQueryConstants.GET_INSTRUCTOR_ID, courseID);
+            dbConnection = DbConnection.getInstance();
+            dbConnection.createDbConnection();
+            ResultSet rs = dbConnection.getRecords(query);
+
+            while (rs.next()) {
+                bannerID = rs.getObject("BannerID").toString();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            dbConnection.closeConnection();
+        }
+        return bannerID;
     }
 }
