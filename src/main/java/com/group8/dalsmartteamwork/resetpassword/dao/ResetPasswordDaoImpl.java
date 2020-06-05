@@ -22,7 +22,7 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
             String token = resetToken.createToken();
-            String query = String.format("INSERT INTO CSCI5308_8_DEVINT.PasswordResetToken (BannerID, Token, Timestamp, Status) VALUES ('%s', '%s', now(), 'valid')", bannerID, token);
+            String query = String.format("INSERT INTO PasswordResetToken (BannerID, Token, Timestamp, Status) VALUES ('%s', '%s', now(), 'valid')", bannerID, token);
             int records = connection.addRecords(query);
             connection.close();
             return records > 0;
@@ -39,7 +39,7 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
         try {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
-            String query = String.format("INSERT INTO CSCI5308_8_DEVINT.PasswordResetToken (BannerID, Token, Timestamp, Status) VALUES ('%s', '%s', now(), 'valid')", bannerID, token);
+            String query = String.format("INSERT INTO PasswordResetToken (BannerID, Token, Timestamp, Status) VALUES ('%s', '%s', now(), 'valid')", bannerID, token);
             int records = connection.addRecords(query);
             connection.close();
             return records > 0;
@@ -57,7 +57,7 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
 
-            String query = "CALL CSCI5308_8_DEVINT.resettokens";
+            String query = "CALL resettokens";
             Statement statement = connection.getStatement();
             boolean records = statement.execute(query);
             statement.close();
@@ -79,7 +79,7 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
 
-            String query = String.format("SELECT * FROM CSCI5308_8_DEVINT.PasswordResetToken WHERE BannerID='%s' and token='%s'", bannerID, token);
+            String query = String.format("SELECT * FROM PasswordResetToken WHERE BannerID='%s' and token='%s'", bannerID, token);
             ResultSet rs = connection.getRecords(query);
             while (rs.next()) {
                 passwordResetToken.setTokenID(rs.getInt("TokenID"));
@@ -113,8 +113,8 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
 
-            String query = String.format("UPDATE CSCI5308_8_DEVINT.Users SET Password='%s' WHERE BannerID='%s'", password, bannerID);
-            String updateStatusQuery = String.format("UPDATE CSCI5308_8_DEVINT.PasswordResetToken SET Status='expired' WHERE BannerID='%s'", bannerID);
+            String query = String.format("UPDATE Users SET Password='%s' WHERE BannerID='%s'", password, bannerID);
+            String updateStatusQuery = String.format("UPDATE PasswordResetToken SET Status='expired' WHERE BannerID='%s'", bannerID);
             int records = connection.updateRecords(query);
             if (records > 0) {
                 records = connection.updateRecords(updateStatusQuery);
@@ -137,7 +137,7 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
         try {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
-            String query = String.format("SELECT * FROM CSCI5308_8_DEVINT.Users WHERE BannerID='%s'", bannerID);
+            String query = String.format("SELECT * FROM Users WHERE BannerID='%s'", bannerID);
             ResultSet rs = connection.getRecords(query);
             while (rs.next()) {
                 email = rs.getString("Email");

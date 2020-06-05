@@ -17,7 +17,7 @@ public class CourseDaoImpl implements CourseDao {
         try {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
-            String query = String.format("SELECT * FROM CSCI5308_8_DEVINT.Courses WHERE CourseID='%s'", courseID);
+            String query = String.format("SELECT * FROM Courses WHERE CourseID='%s'", courseID);
             ResultSet rs = connection.getRecords(query);
             while (rs.next()) {
                 connection.close();
@@ -73,12 +73,12 @@ public class CourseDaoImpl implements CourseDao {
         try {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
-            String query = String.format("SELECT * FROM CSCI5308_8_DEVINT.CourseRole WHERE CourseID='%s' and RoleID=3", courseID);
+            String query = String.format("SELECT * FROM CourseRole WHERE CourseID='%s' and RoleID=3", courseID);
             ResultSet rs = connection.getRecords(query);
             while (rs.next()) {
                 taBannerIDList.add(rs.getString("BannerID"));
             }
-            query = "SELECT * FROM CSCI5308_8_DEVINT.Users";
+            query = "SELECT * FROM Users";
             rs = connection.getRecords(query);
             while (rs.next()) {
                 String bannerID;
