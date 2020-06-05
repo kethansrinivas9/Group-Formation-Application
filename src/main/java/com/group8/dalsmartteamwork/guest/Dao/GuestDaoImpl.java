@@ -17,7 +17,7 @@ public class GuestDaoImpl implements GuestDao {
         try {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
-            String query = "SELECT * FROM CSCI5308_8_DEVINT.Courses";
+            String query = "SELECT * FROM Courses";
             ResultSet rs = connection.getRecords(query);
             while (rs.next()) {
                 courses.add(new Course(rs.getInt("CourseID"), rs.getString("CourseName")));
