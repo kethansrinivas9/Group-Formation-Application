@@ -19,7 +19,6 @@ public class ResetPasswordDaoImplTest {
 
     @Test
     public void addTokenTwoArgumentsTest() {
-        ResetPasswordDaoImpl resetPasswordDaoImpl = new ResetPasswordDaoImpl();
         ResetToken resetToken = new ResetToken();
         String token = resetToken.createToken();
         when(resetPasswordDaoImplMock.addToken(TEMP_BANNERID, token)).thenReturn(true);
