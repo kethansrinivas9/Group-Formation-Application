@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
 
-public class ImportCsvServiceImplTest {
+class ImportCsvServiceImplTest {
     private ImportCsvServiceImpl service = null;
     private RegistrationDao dao = mock(RegistrationDaoImpl.class);
     private Mail mail = mock(Mail.class);

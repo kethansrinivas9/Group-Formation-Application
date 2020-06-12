@@ -1,7 +1,6 @@
 package com.group8.dalsmartteamwork.courseadmin.services;
 
 import com.group8.dalsmartteamwork.register.dao.RegistrationDao;
-import com.group8.dalsmartteamwork.register.dao.RegistrationDaoImpl;
 import com.group8.dalsmartteamwork.utils.Encryption;
 import com.group8.dalsmartteamwork.utils.Mail;
 import com.group8.dalsmartteamwork.utils.User;
@@ -14,12 +13,6 @@ public class ImportCsvServiceImpl implements ImportCsvService{
     private RegistrationDao dao;
     private Mail mail;
     private int courseId;
-
-    public ImportCsvServiceImpl(int courseId) {
-        this.courseId = courseId;
-        this.dao = new RegistrationDaoImpl();
-        this.mail = new Mail();
-    }
 
     public ImportCsvServiceImpl(int courseId, RegistrationDao dao, Mail mail){
         this.courseId = courseId;

@@ -1,8 +1,6 @@
 package com.group8.dalsmartteamwork.login.login_security;
 
 import org.springframework.context.annotation.Configuration;
-import com.group8.dalsmartteamwork.login.login_security.Successhandler;
-import com.group8.dalsmartteamwork.login.login_security.LoginAuthentication;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;

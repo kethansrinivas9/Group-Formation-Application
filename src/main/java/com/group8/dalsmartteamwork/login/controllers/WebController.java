@@ -2,11 +2,12 @@ package com.group8.dalsmartteamwork.login.controllers;
 
 import com.group8.dalsmartteamwork.utils.User;
 import org.springframework.stereotype.Controller;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class WebController {

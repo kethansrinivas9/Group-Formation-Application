@@ -1,7 +1,5 @@
 package com.group8.dalsmartteamwork.utils;
 
-import com.group8.dalsmartteamwork.utils.IUser;
-
 public class UserDetailsMock implements IUser {
     private String id;
     private String lastName;

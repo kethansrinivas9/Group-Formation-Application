@@ -1,8 +1,8 @@
 package com.group8.dalsmartteamwork.utils;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UserTest {
     public static final String TEMP_ID = "B99999999";

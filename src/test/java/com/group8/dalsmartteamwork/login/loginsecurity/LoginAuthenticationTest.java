@@ -1,9 +1,10 @@
 package com.group8.dalsmartteamwork.login.loginsecurity;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import com.group8.dalsmartteamwork.login.dao.LoginImplementation;
 import com.group8.dalsmartteamwork.login.model.User;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class LoginAuthenticationTest {
     User user = new User();

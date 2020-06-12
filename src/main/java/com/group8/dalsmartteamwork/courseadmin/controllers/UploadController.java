@@ -1,21 +1,21 @@
 package com.group8.dalsmartteamwork.courseadmin.controllers;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.group8.dalsmartteamwork.courseadmin.models.Pair;
-import com.group8.dalsmartteamwork.courseadmin.services.ImportCsvService;
-import com.group8.dalsmartteamwork.courseadmin.services.ImportCsvServiceImpl;
+import com.group8.dalsmartteamwork.courseadmin.services.*;
+import com.group8.dalsmartteamwork.register.dao.RegistrationDao;
+import com.group8.dalsmartteamwork.register.dao.RegistrationDaoImpl;
 import com.group8.dalsmartteamwork.utils.CsvReader;
+import com.group8.dalsmartteamwork.utils.ICsvReader;
+import com.group8.dalsmartteamwork.utils.Mail;
 import com.group8.dalsmartteamwork.utils.User;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 public class UploadController {
@@ -36,21 +36,22 @@ public class UploadController {
         }
         try {
             String fileName = file.getOriginalFilename();
-            CsvReader csvReader = new CsvReader(file.getInputStream());
-            List<User> users = csvReader.getUsers();
-            List<Boolean> status;
-            ImportCsvService service = new ImportCsvServiceImpl(courseId);
-            status = service.verifyRegistration(users);
-            List<Pair<User, Boolean>> details = new ArrayList<Pair<User, Boolean>>();
-            for (int i = 0; i < users.size(); i++) {
-                Pair<User, Boolean> temp = new Pair<User, Boolean>(users.get(i), status.get(i));
-                details.add(temp);
-            }
+            ICsvReader csvReader = new CsvReader(file);
+            Mail mail = new Mail();
+            RegistrationDao dao = new RegistrationDaoImpl();
+            ImportCsvService service = new ImportCsvServiceImpl(courseId, dao, mail);
+            ParseCsvService parseCsvService = new ParseCsvServiceImpl(csvReader);
+            MakePairService makePairService = new MakePairServiceImpl();
+            List<User> users = parseCsvService.getUsers();
+            List<Boolean> status = service.verifyRegistration(users);
+
+            List<Pair<User, Boolean>> details = makePairService.getUserDetails(users, status);
+
             model.addAttribute("details", details);
             model.addAttribute("message", String.format("Successfully uploaded file: %s", fileName));
             return "import-students";
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return "courseadmin";
         }

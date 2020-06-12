@@ -1,10 +1,8 @@
 package com.group8.dalsmartteamwork.utils;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import com.group8.dalsmartteamwork.utils.Mail;
-
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class MailTest {
 

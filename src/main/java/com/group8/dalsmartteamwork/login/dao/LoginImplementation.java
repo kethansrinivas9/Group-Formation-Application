@@ -1,7 +1,8 @@
 package com.group8.dalsmartteamwork.login.dao;
 
-import java.sql.ResultSet;
 import com.group8.dalsmartteamwork.utils.DbConnection;
+
+import java.sql.ResultSet;
 
 public class LoginImplementation implements LoginDao {
     public String role;
