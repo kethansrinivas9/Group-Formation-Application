@@ -1,14 +1,11 @@
 package com.group8.dalsmartteamwork.login.dao;
 
+import com.group8.dalsmartteamwork.utils.DbConnection;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import java.sql.ResultSet;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.servlet.http.HttpSession;
-
-import com.group8.dalsmartteamwork.utils.DbConnection;
-
-import org.springframework.security.core.context.SecurityContextHolder;
 
 public class CourseRoleImp {
 

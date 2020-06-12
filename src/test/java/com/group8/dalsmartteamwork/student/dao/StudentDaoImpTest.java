@@ -1,16 +1,13 @@
 package com.group8.dalsmartteamwork.student.dao;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import com.group8.dalsmartteamwork.student.model.Student;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import com.group8.dalsmartteamwork.student.model.Student;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.*;
 
 public class StudentDaoImpTest {
 

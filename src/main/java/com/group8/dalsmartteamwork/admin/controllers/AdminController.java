@@ -1,6 +1,5 @@
 package com.group8.dalsmartteamwork.admin.controllers;
 
-import com.group8.dalsmartteamwork.admin.dao.AdminDao;
 import com.group8.dalsmartteamwork.admin.service.AdminService;
 import com.group8.dalsmartteamwork.admin.service.AdminServiceImpl;
 import com.group8.dalsmartteamwork.course.model.Course;

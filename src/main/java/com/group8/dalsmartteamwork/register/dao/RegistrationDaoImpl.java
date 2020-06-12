@@ -2,9 +2,10 @@ package com.group8.dalsmartteamwork.register.dao;
 
 import com.group8.dalsmartteamwork.utils.DbConnection;
 import com.group8.dalsmartteamwork.utils.User;
-//import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.sql.ResultSet;
+
+//import com.sun.org.apache.xpath.internal.operations.Bool;
 
 public class RegistrationDaoImpl implements RegistrationDao {
     private DbConnection dbConnection;

@@ -1,10 +1,9 @@
 package com.group8.dalsmartteamwork.register.controllers;
 
-import javax.validation.Valid;
-
+import com.group8.dalsmartteamwork.register.dao.RegistrationDao;
 import com.group8.dalsmartteamwork.register.dao.RegistrationDaoImpl;
+import com.group8.dalsmartteamwork.register.services.RegistrationService;
 import com.group8.dalsmartteamwork.register.services.RegistrationServiceImpl;
-import com.group8.dalsmartteamwork.utils.Encryption;
 import com.group8.dalsmartteamwork.utils.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +25,9 @@ public class SignUpController {
         if (bindingResult.hasErrors()) {
             return "register";
         }
-        RegistrationServiceImpl service = new RegistrationServiceImpl();
+
+        RegistrationDao dao = new RegistrationDaoImpl();
+        RegistrationService service = new RegistrationServiceImpl(dao);
         Boolean status = service.registerUser(user);
         if (status) {
             return "login";

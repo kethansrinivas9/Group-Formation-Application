@@ -1,9 +1,8 @@
 package com.group8.dalsmartteamwork.utils;
 
-import com.group8.dalsmartteamwork.utils.Encryption;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class EncryptionTest {
     private static final String TEST_STRING = "HelloWorld123@";
