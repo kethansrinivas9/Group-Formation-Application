@@ -47,6 +47,7 @@ public class UploadController {
 
             List<Pair<User, Boolean>> details = makePairService.getUserDetails(users, status);
 
+            model.addAttribute("courseId", courseId);
             model.addAttribute("details", details);
             model.addAttribute("message", String.format("Successfully uploaded file: %s", fileName));
             return "import-students";

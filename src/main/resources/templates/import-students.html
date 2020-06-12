@@ -24,6 +24,9 @@
             </div>
         </form>
         <p th:text="${message}" th:if="${message ne null}"></p>
+        <div th:if="${message ne null}">
+            Imported Students successfully. Return to <a th:href="@{'/viewcourse/' + ${courseId}}" th:method="POST">Course Homepage</a>.
+        </div>
     </div>
 
     <div class="container">
