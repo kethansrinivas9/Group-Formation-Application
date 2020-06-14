@@ -149,4 +149,22 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
         }
         return email;
     }
+
+    @Override
+    public Boolean userExists(String bannerID) {
+        try {
+            connection = DbConnection.getInstance();
+            connection.createDbConnection();
+            String query = String.format("SELECT * FROM Users WHERE BannerID='%s'", bannerID);
+            ResultSet rs = connection.getRecords(query);
+            if (rs.next()) {
+                return true;
+            }
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        } finally {
+            connection.close();
+        }
+        return false;
+    }
 }

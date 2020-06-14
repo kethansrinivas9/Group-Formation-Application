@@ -68,4 +68,13 @@ public class ResetPasswordDaoImplTest {
         assertEquals(resetPasswordDaoImplMock.getUserEmail(TEMP_BANNERID), TEMP_EMAIL, "Failed to get user Email");
         verify(resetPasswordDaoImplMock).getUserEmail(TEMP_BANNERID);
     }
+
+    @Test
+    void userExistsTest() {
+        when(resetPasswordDaoImplMock.userExists(TEMP_BANNERID)).thenReturn(true);
+        assertTrue(resetPasswordDaoImplMock.userExists(TEMP_BANNERID));
+        verify(resetPasswordDaoImplMock).userExists(TEMP_BANNERID);
+    }
+
+
 }

@@ -16,4 +16,6 @@ public interface ResetPasswordDao {
     Boolean updatePassword(String bannerID, String password) throws SQLException;
 
     String getUserEmail(String bannerID) throws SQLException;
+
+    Boolean userExists(String bannerID)throws SQLException;
 }
