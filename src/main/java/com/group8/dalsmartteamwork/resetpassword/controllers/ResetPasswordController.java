@@ -24,7 +24,7 @@ public class ResetPasswordController {
     @GetMapping("/forgotpassword")
     public String viewResetPasswordForm(Model model) {
         model.addAttribute("resetpasswordrequest", new ResetPasswordRequest());
-        return "resetPasswordRequestForm";
+        return "resetPassword/resetPasswordRequestForm";
     }
 
     @PostMapping("/forgotpassword")
@@ -44,13 +44,13 @@ public class ResetPasswordController {
                     }
                 }
             } else {
-                return "resetPasswordUserNotFound";
+                return "resetPassword/resetPasswordUserNotFound";
             }
         } catch (SQLException exception) {
             System.out.println(exception.getMessage());
             exception.printStackTrace();
         }
-        return "resetPasswordEmailMessage";
+        return "resetPassword/resetPasswordEmailMessage";
     }
 
     @GetMapping("/resetpassword")
@@ -63,9 +63,9 @@ public class ResetPasswordController {
             NewPassword newPassword = new NewPassword();
             newPassword.setBannerID(bannerID);
             model.addAttribute("newpassword", newPassword);
-            return "resetPasswordForm";
+            return "resetPassword/resetPasswordForm";
         } else if (passwordResetToken.getStatus().equals("expired")) {
-            return "tokenexpired";
+            return "resetPassword/tokenexpired";
         } else {
             return "badrequest";
         }
@@ -79,12 +79,12 @@ public class ResetPasswordController {
         try {
             Boolean updateStatus = resetPasswordDaoImpl.updatePassword(newPassword.getBannerID(), encrypted_password);
             if (!updateStatus) {
-                return "resetPasswordUserNotFound";
+                return "resetPassword/resetPasswordUserNotFound";
             }
         } catch (SQLException exception) {
             System.out.println(exception.getMessage());
             exception.printStackTrace();
         }
-        return "passwordResetSuccess";
+        return "resetPassword/passwordResetSuccess";
     }
 }
