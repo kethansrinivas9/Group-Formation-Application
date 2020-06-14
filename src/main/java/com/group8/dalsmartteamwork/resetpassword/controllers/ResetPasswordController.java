@@ -5,8 +5,9 @@ import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDaoImpl;
 import com.group8.dalsmartteamwork.resetpassword.models.NewPassword;
 import com.group8.dalsmartteamwork.resetpassword.models.PasswordResetToken;
 import com.group8.dalsmartteamwork.resetpassword.models.ResetPasswordRequest;
+import com.group8.dalsmartteamwork.resetpassword.services.ResetPasswordService;
+import com.group8.dalsmartteamwork.resetpassword.services.ResetPasswordServiceImpl;
 import com.group8.dalsmartteamwork.utils.Encryption;
-import com.group8.dalsmartteamwork.utils.Mail;
 import com.group8.dalsmartteamwork.utils.ResetToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,22 +29,22 @@ public class ResetPasswordController {
 
     @PostMapping("/forgotpassword")
     public String requestPasswordReset(@ModelAttribute ResetPasswordRequest resetPasswordRequest, Model model) {
-        ResetPasswordDao resetPasswordDaoImpl = new ResetPasswordDaoImpl();
+        ResetPasswordDao resetPasswordDao = new ResetPasswordDaoImpl();
         model.addAttribute("resetPasswordRequest", resetPasswordRequest);
         try {
             ResetToken resetToken = new ResetToken();
             String token = resetToken.createToken();
-            Boolean updateStatus = resetPasswordDaoImpl.addToken(resetPasswordRequest.getBannerID(), token);
-            if (!updateStatus) {
-                return "resetPasswordUserNotFound";
+            if (resetPasswordDao.userExists(resetPasswordRequest.getBannerID())) {
+                Boolean updateStatus = resetPasswordDao.addToken(resetPasswordRequest.getBannerID(), token);
+                if (updateStatus) {
+                    ResetPasswordService resetPasswordService = new ResetPasswordServiceImpl();
+                    Boolean mailStatus = resetPasswordService.sendPasswordResetMail(resetPasswordRequest.getBannerID(), token);
+                    if (!mailStatus) {
+                        return "resetPassword/failedToSendEmail";
+                    }
+                }
             } else {
-                //Send Email with token and BannerID ("/resetpassword?bannerid=B00000000&token=a0a1a2a3a4a5a6a7a8a9")
-                Mail mail = new Mail();
-                String email = resetPasswordDaoImpl.getUserEmail(resetPasswordRequest.getBannerID());
-//                String content="<a href=\"localhost:8080/resetpassword?bannerid="+resetPasswordRequest.getBannerID()+"&token="+token+"\">Click here</a> to reset your password.";
-//                String content="<html><body><a href=\"localhost:8080/resetpassword?bannerid="+resetPasswordRequest.getBannerID()+"&token="+token+"\">Click here</a> to reset your password. </body></html>";
-                String content = "localhost:8080/resetpassword?bannerid=" + resetPasswordRequest.getBannerID() + "&token=" + token;
-                mail.sendEmail(email, "Password Reset Request", content);
+                return "resetPasswordUserNotFound";
             }
         } catch (SQLException exception) {
             System.out.println(exception.getMessage());
