@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.spec.KeySpec;
 import java.util.Base64;
 
-public class Encryption {
+public class Encryption implements IEncryption{
     private Cipher encryptCipher;
     private Cipher decryptCipher;
 

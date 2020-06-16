@@ -39,7 +39,7 @@ public class UploadController {
             ICsvReader csvReader = new CsvReader(file);
             Mail mail = new Mail();
             RegistrationDao dao = new RegistrationDaoImpl();
-            ImportCsvService service = new ImportCsvServiceImpl(courseId, dao, mail);
+            ImportStudentService service = new ImportStudentServiceImpl(courseId, dao, mail);
             ParseCsvService parseCsvService = new ParseCsvServiceImpl(csvReader);
             MakePairService makePairService = new MakePairServiceImpl();
             List<User> users = parseCsvService.getUsers();
