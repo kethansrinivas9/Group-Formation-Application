@@ -1,35 +1,35 @@
 package com.group8.dalsmartteamwork.courseadmin.services;
 
 import com.group8.dalsmartteamwork.register.dao.RegistrationDao;
-import com.group8.dalsmartteamwork.utils.Encryption;
-import com.group8.dalsmartteamwork.utils.Mail;
-import com.group8.dalsmartteamwork.utils.User;
+import com.group8.dalsmartteamwork.utils.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-public class ImportCsvServiceImpl implements ImportCsvService{
+public class ImportStudentServiceImpl implements ImportStudentService {
     private RegistrationDao dao;
     private Mail mail;
     private int courseId;
+    private IEncryption encryption;
+    private IPasswordGenerator passwordGenerator;
 
-    public ImportCsvServiceImpl(int courseId, RegistrationDao dao, Mail mail){
+    public ImportStudentServiceImpl(int courseId, RegistrationDao dao, Mail mail){
         this.courseId = courseId;
         this.dao = dao;
         this.mail = mail;
+        encryption = new Encryption();
+        passwordGenerator = new PasswordGenerator();
     }
 
     @Override
     public List<Boolean> verifyRegistration(List<User> users) {
         List<Boolean> status = new ArrayList<>();
         try {
-            Encryption encryption = new Encryption();
             if (users.size() == 0) {
                 return status;
             }
             for (User user : users) {
-                String password = generatePassword();
+                String password = passwordGenerator.generatePassword();
                 String encrypted_password = encryption.encrypt(password);
                 user.setPassword(encrypted_password);
                 Boolean userDbStatus = this.dao.isUserInDb(user.getId());
@@ -58,17 +58,5 @@ public class ImportCsvServiceImpl implements ImportCsvService{
             e.printStackTrace();
         }
         return status;
-    }
-
-    public String generatePassword() {
-        final int PASSWORD_LENGTH = 15;
-        String ALLOWED_CHARS = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM0987654321";
-        int len = ALLOWED_CHARS.length();
-        StringBuilder stringBuilder = new StringBuilder();
-        Random rand = new Random();
-        for (int i = 0; i < PASSWORD_LENGTH; i++) {
-            stringBuilder.append(ALLOWED_CHARS.charAt(rand.nextInt(len)));
-        }
-        return stringBuilder.toString();
     }
 }

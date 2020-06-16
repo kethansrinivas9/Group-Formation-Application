@@ -1,8 +1,6 @@
 package com.group8.dalsmartteamwork.utils;
 
-import java.io.InputStream;
 import java.sql.*;
-import java.util.Properties;
 
 public class DbConnection {
     private String environment;
@@ -27,37 +25,29 @@ public class DbConnection {
 
     public void createDbConnection() {
         try {
-            Properties properties = new Properties();
-            Thread currentThread = Thread.currentThread();
-            ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-            InputStream propertiesStream = contextClassLoader.getResourceAsStream("application.properties");
-            if (propertiesStream != null) {
-                properties.load(propertiesStream);
-                this.environment = System.getenv("db.environment");
-                this.connection = properties.getProperty("db.connection");
-                switch (this.environment) {
-                    case "TEST":
-                        this.database = properties.getProperty("db.test.database");
-                        this.user = properties.getProperty("db.test.user");
-                        this.password = properties.getProperty("db.test.password");
-                        break;
+            this.environment = System.getenv("db.environment");
+            this.connection = System.getenv("db.connection");
+            switch (this.environment) {
+                case "TEST":
+                    this.database = System.getenv("db.test.database");
+                    this.user = System.getenv("db.test.user");
+                    this.password = System.getenv("db.test.password");
+                    break;
 
-                    case "PRODUCTION":
-                        this.database = properties.getProperty("db.prod.database");
-                        this.user = properties.getProperty("db.prod.user");
-                        this.password = properties.getProperty("db.prod.password");
-                        break;
+                case "PRODUCTION":
+                    this.database = System.getenv("db.prod.database");
+                    this.user = System.getenv("db.prod.user");
+                    this.password = System.getenv("db.prod.password");
+                    break;
 
-                    default:
-                        this.database = properties.getProperty("db.dev.database");
-                        this.user = properties.getProperty("db.dev.user");
-                        this.password = properties.getProperty("db.dev.password");
-                }
-                System.out.println("Connecting to the "+ this.environment + " database");
-                conn = DriverManager.getConnection(this.connection + this.database + this.IGNORE_TIME_ZONE, this.user,
-                        this.password);
-                this.statement = conn.createStatement();
+                default:
+                    this.database = System.getenv("db.dev.database");
+                    this.user = System.getenv("db.dev.user");
+                    this.password = System.getenv("db.dev.password");
             }
+            conn = DriverManager.getConnection(this.connection + this.database + IGNORE_TIME_ZONE, this.user,
+                    this.password);
+            this.statement = conn.createStatement();
         } catch (Exception e) {
             // TODO: Add to Log
             e.printStackTrace();
