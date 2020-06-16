@@ -16,8 +16,8 @@ public class Encryption implements IEncryption{
 
     public Encryption() {
         try {
-            String secretKey = System.getenv("crypt.key");
-            String salt = System.getenv("crypt.salt");
+            String secretKey = System.getenv("CRYPT_KEY");
+            String salt = System.getenv("CRYPT_SALT");
             byte[] iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             IvParameterSpec ivSpec = new IvParameterSpec(iv);
             SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
