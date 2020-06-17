@@ -37,21 +37,6 @@ public class WebController {
         return "loginError";
     }
 
-    // @GetMapping("student")
-    public String getStudentPage(HttpServletRequest request, Model model) {
-        String[] courses = (String[]) request.getSession().getAttribute("courses");
-        int i = 0;
-        try {
-            while (courses[i] != null) {
-                model.addAttribute("course", courses[i]);
-                i++;
-            }
-        } catch (NullPointerException e) {
-            System.out.println("Null pointer exception");
-        }
-        return "student";
-    }
-
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public void dsiplayLogout(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -61,17 +46,9 @@ public class WebController {
         response.sendRedirect("/");
     } 
 
-    //@GetMapping("admin")
-    public String getAdminPage(HttpServletRequest request, Model model) {
-        username = (String) request.getSession().getAttribute("username");
-        model.addAttribute("user", username);
-        return "admin";
-    }
-
     @GetMapping("guest")
     public String getGuestPage(HttpServletRequest request, Model model) {
         username = (String) request.getSession().getAttribute("username");
-        //System.out.println("ID"+username);
         model.addAttribute("user", username);
         return "guestPage";
     }

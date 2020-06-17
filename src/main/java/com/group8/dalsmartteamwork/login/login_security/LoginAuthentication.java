@@ -29,7 +29,7 @@ public class LoginAuthentication implements AuthenticationManager {
         }
         try {
             if (status) {
-                role = loginImplementation.role;
+                role = loginImplementation.getRole();
                 user.setRole(role);
                 RoleAuthorization roleAuthorization = new RoleAuthorization(user);
                 return new UsernamePasswordAuthenticationToken(username, password, roleAuthorization.getAuthorities());

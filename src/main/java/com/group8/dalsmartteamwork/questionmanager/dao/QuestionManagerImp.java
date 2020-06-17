@@ -19,16 +19,13 @@ public class QuestionManagerImp implements QuestionManagerDao {
             connection.createDbConnection();
             final String query = String.format("Select Title from Question where BannerID = '%s' ", BannerID);
             ResultSet resultSet = connection.getRecords(query);
-            if (!resultSet.next()) {
-                return null;
-            }
-            do {
+            while (resultSet.next()) {
                 String title = resultSet.getString("Title");
                 sortedList.add(new Question(title));
-            } while (resultSet.next());
+            }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             connection.close();
         }
         return sortedList;
@@ -37,23 +34,21 @@ public class QuestionManagerImp implements QuestionManagerDao {
     @Override
     public List<Question> sortQuestionsByTitle(String BannerID) {
         List<Question> sortedListByTitle = new ArrayList<>();
-        // TODO Auto-generated method stub
         try {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
             final String query = String.format("Select Title from Question where BannerID = '%s' ORDER BY Title ",
                     BannerID);
             ResultSet resultSet = connection.getRecords(query);
-            if (!resultSet.next()) {
-                return null;
-            }
-            do {
+            while (resultSet.next())
+                ;
+            {
                 String title = resultSet.getString("Title");
                 sortedListByTitle.add(new Question(title));
-            } while (resultSet.next());
+            }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             connection.close();
         }
         return sortedListByTitle;
@@ -62,23 +57,19 @@ public class QuestionManagerImp implements QuestionManagerDao {
     @Override
     public List<Question> sortAllQuestionByDate(String BannerID) {
         List<Question> sortedListBydate = new ArrayList<>();
-        // TODO Auto-generated method stub
         try {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
             final String query = String.format("Select Title from Question where BannerID = '%s' ORDER BY DateCreated ",
                     BannerID);
             ResultSet resultSet = connection.getRecords(query);
-            if (!resultSet.next()) {
-                return null;
-            }
-            do {
+            while (resultSet.next()) {
                 String title = resultSet.getString("Title");
                 sortedListBydate.add(new Question(title));
-            } while (resultSet.next());
+            }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             connection.close();
         }
         return sortedListBydate;
@@ -86,7 +77,6 @@ public class QuestionManagerImp implements QuestionManagerDao {
 
     @Override
     public boolean deleteQuestion(String BannerID, int questionID) {
-        // TODO Auto-generated method stub
         try {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
@@ -98,7 +88,7 @@ public class QuestionManagerImp implements QuestionManagerDao {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             connection.close();
         }
         return true;
@@ -107,24 +97,20 @@ public class QuestionManagerImp implements QuestionManagerDao {
     @Override
     public List<Question> displayListOfQuestions(String BannerID) {
         List<Question> listOfQuestions = new ArrayList<>();
-        // TODO Auto-generated method stub
         try {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
             final String query = String.format("Select QuestionID, QuestionText from Question where BannerID = '%s' ",
                     BannerID);
             ResultSet resultSet = connection.getRecords(query);
-            if (!resultSet.next()) {
-                return null;
-            }
-            do {
+            while (resultSet.next()) {
                 int ID = resultSet.getInt("QuestionID");
                 String questionText = resultSet.getString("QuestionText");
                 listOfQuestions.add(new Question(ID, questionText));
-            } while (resultSet.next());
+            }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             connection.close();
         }
         return listOfQuestions;
