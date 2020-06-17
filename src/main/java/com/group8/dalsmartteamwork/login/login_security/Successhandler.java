@@ -21,7 +21,15 @@ public class Successhandler implements AuthenticationSuccessHandler {
 
     CourseRoleImp courseRole = new CourseRoleImp();
     User user = new User();
-    public String BannerID;
+    private String BannerID;
+
+    public String getBannerID() {
+        return BannerID;
+    }
+
+    public void setBannerID(String bannerID) {
+        BannerID = bannerID;
+    }
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -29,11 +37,9 @@ public class Successhandler implements AuthenticationSuccessHandler {
 
         HttpSession session = request.getSession();
         String username = authentication.getPrincipal().toString();
-        //session.setAttribute("user", authentication.getPrincipal());
         session.setAttribute("username", username);
         session.setAttribute("authorities", authentication.getAuthorities());
-        BannerID = (String) session.getAttribute("username");
-        
+        setBannerID((String) session.getAttribute("username"));
 
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
         Set<String> courseRoles = courseRole.getCourseRoles();
@@ -49,7 +55,8 @@ public class Successhandler implements AuthenticationSuccessHandler {
                 response.sendRedirect("/instructor");
             } else {
                 response.sendRedirect("/guest");
-            }   
+            }
         }
     }
+
 }
