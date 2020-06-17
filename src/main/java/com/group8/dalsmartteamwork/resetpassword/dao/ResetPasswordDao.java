@@ -9,9 +9,9 @@ public interface ResetPasswordDao {
 
     Boolean addToken(String bannerID, String token) throws SQLException;
 
-    Boolean resetTokens() throws SQLException;
+    Boolean updateTokenStatus() throws SQLException;
 
-    PasswordResetToken getRequestByToken(String bannerID, String token) throws SQLException;
+    PasswordResetToken getPasswordResetRequest(String bannerID, String token) throws SQLException;
 
     Boolean updatePassword(String bannerID, String password) throws SQLException;
 
