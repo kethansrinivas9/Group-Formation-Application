@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <title>front page</title>
+    <meta http-equiv="Content-type" content="text/html" ; charset="UTF-8" />
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+
+<body>
+    <div style="background-color:#337ab7; height:50px; color: black;">
+        <h2 style="float: left;">Group Formation Tool</h2>
+        <a style="float: right" href="/logout">Logout</a>
+        <!-- <a style="float: right" class="active" href="#account">Account</a>  -->
+    </div>
+
+    <h2 style="text-align: center;">Sort the Questions By Title</h2>
+    <div>
+    <table>
+        <tr>
+           
+            <th>Question Title</th>
+        </tr>
+
+        <tr th:each="list1, itemStat: *{list}">
+
+            <td><span th:text="${list1.questionTitle}"></span></td>
+           
+        </tr>
+
+    </table>
+
+    </div>
+</body>
+</html>
