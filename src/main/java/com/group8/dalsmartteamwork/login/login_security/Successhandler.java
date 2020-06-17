@@ -2,6 +2,8 @@ package com.group8.dalsmartteamwork.login.login_security;
 
 import com.group8.dalsmartteamwork.login.dao.CourseRoleImp;
 import com.group8.dalsmartteamwork.login.model.User;
+
+import org.springframework.boot.Banner;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -19,6 +21,7 @@ public class Successhandler implements AuthenticationSuccessHandler {
 
     CourseRoleImp courseRole = new CourseRoleImp();
     User user = new User();
+    public String BannerID;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -26,9 +29,11 @@ public class Successhandler implements AuthenticationSuccessHandler {
 
         HttpSession session = request.getSession();
         String username = authentication.getPrincipal().toString();
-        session.setAttribute("user", authentication.getPrincipal());
+        //session.setAttribute("user", authentication.getPrincipal());
         session.setAttribute("username", username);
         session.setAttribute("authorities", authentication.getAuthorities());
+        BannerID = (String) session.getAttribute("username");
+        
 
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
         Set<String> courseRoles = courseRole.getCourseRoles();

@@ -15,6 +15,12 @@ import java.util.List;
 @Controller
 public class InstructorController {
 
+    String username;
+    @GetMapping("/instructor")
+    public String getInstructor(){
+        return "instructor";
+
+    }
     @GetMapping("/viewcourse/{courseid}")
     public String view(@PathVariable int courseid, Model model) {
         CourseDaoImpl courseDao = new CourseDaoImpl();
