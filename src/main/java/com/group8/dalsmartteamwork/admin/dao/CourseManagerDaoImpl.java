@@ -10,6 +10,7 @@ import java.util.List;
 public class CourseManagerDaoImpl implements ICourseManagerDao{
     String courseID;
     String courseName;
+    final String INSTRUCTOR_ROLE_ID = "4";
     Course course;
     DbConnection dbConnection;
     List<Course> courseList;
@@ -67,7 +68,7 @@ public class CourseManagerDaoImpl implements ICourseManagerDao{
     public boolean updateCourse(String newCourseName, int newCourseID, String instructorID, int oldCourseID) {
         try {
             String updateCourseQuery = String.format(AdminQueryConstants.UPDATE_COURSE, newCourseName, newCourseID, oldCourseID);
-            String updateInstructorQuery = String.format(AdminQueryConstants.UPDATE_INSTRUCTOR, instructorID, newCourseID);
+            String updateInstructorQuery = String.format(AdminQueryConstants.UPDATE_INSTRUCTOR, instructorID, newCourseID, INSTRUCTOR_ROLE_ID);
             dbConnection = DbConnection.getInstance();
             dbConnection.createDbConnection();
             int courseUpdateResultSet = dbConnection.updateRecords(updateCourseQuery);
