@@ -2,11 +2,7 @@ package com.group8.dalsmartteamwork.resetpassword.controllers;
 
 import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDao;
 import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDaoImpl;
-import com.group8.dalsmartteamwork.resetpassword.models.NewPassword;
-import com.group8.dalsmartteamwork.resetpassword.models.PasswordResetToken;
-import com.group8.dalsmartteamwork.resetpassword.models.ResetPasswordRequest;
-import com.group8.dalsmartteamwork.resetpassword.services.ResetPasswordService;
-import com.group8.dalsmartteamwork.resetpassword.services.ResetPasswordServiceImpl;
+import com.group8.dalsmartteamwork.resetpassword.models.*;
 import com.group8.dalsmartteamwork.utils.Encryption;
 import com.group8.dalsmartteamwork.utils.ResetToken;
 import org.springframework.stereotype.Controller;
@@ -37,9 +33,8 @@ public class ResetPasswordController {
             if (resetPasswordDao.userExists(resetPasswordRequest.getBannerID())) {
                 Boolean updateStatus = resetPasswordDao.addToken(resetPasswordRequest.getBannerID(), token);
                 if (updateStatus) {
-                    ResetPasswordService resetPasswordService = new ResetPasswordServiceImpl();
-                    Boolean mailStatus = resetPasswordService.sendPasswordResetMail(resetPasswordRequest.getBannerID(), token);
-                    if (!mailStatus) {
+                    IResetPasswordManager resetPasswordManager = new ResetPasswordManagerImpl();
+                    if (!resetPasswordManager.sendPasswordResetMail(resetPasswordRequest.getBannerID(), token)) {
                         return "resetPassword/failedToSendEmail";
                     }
                 }
