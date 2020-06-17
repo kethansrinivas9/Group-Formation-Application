@@ -9,12 +9,12 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $("#more").click(function() {
-                var iX = $("#option-table").find("tr").length + 1;
+                var rowIndex = $("#option-table").find("tr").length + 1;
 
                 $('#option-table tbody>tr:last').clone(true).insertAfter('#option-table tbody>tr:last').find(".s-a")
-                    .attr("name","stored-as-" + iX).val(iX);
+                    .attr("name","stored-as-" + rowIndex).val(rowIndex);
                 $('#option-table tbody>tr:last .d-t')
-                    .attr("name","display-text-" + iX).val("");
+                    .attr("name","display-text-" + rowIndex).val("");
 
                 return false;
             });

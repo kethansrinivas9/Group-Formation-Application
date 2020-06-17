@@ -10,16 +10,16 @@ public class ParseRequest implements IParseRequest {
     public List<Option> getOptions(HttpServletRequest request){
         List<Option> options = new ArrayList<>();
         String displayText, storedAs;
-        int iX = 1;
+        int inputIndex = 1;
         while(true){
-            displayText = request.getParameter("display-text-"+iX+"");
-            storedAs = request.getParameter("stored-as-"+iX+"");
+            displayText = request.getParameter("display-text-"+inputIndex+"");
+            storedAs = request.getParameter("stored-as-"+inputIndex+"");
             if(displayText == null || storedAs == null){
                 break;
             }
             Option option = new Option(displayText, Integer.parseInt(storedAs));
             options.add(option);
-            iX++;
+            inputIndex++;
         }
         return options;
     }
