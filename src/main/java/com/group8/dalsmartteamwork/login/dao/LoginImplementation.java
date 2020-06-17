@@ -1,11 +1,12 @@
 package com.group8.dalsmartteamwork.login.dao;
 
+import com.group8.dalsmartteamwork.login.dao.LoginDao;
 import com.group8.dalsmartteamwork.utils.DbConnection;
 
 import java.sql.ResultSet;
 
 public class LoginImplementation implements LoginDao {
-    public String role;
+    public String role, BannerID;
     private String password_temp = null;
     DbConnection connection;
 
@@ -22,6 +23,7 @@ public class LoginImplementation implements LoginDao {
             while (resultSet.next()) {
                 password_temp = resultSet.getString("u.Password");
                 role = resultSet.getString("r.RoleName");
+                BannerID = resultSet.getString("u.BannerID");
             }
             if (password.equals(password_temp)) {
                 return true;
