@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Create a Question</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body class="jumbotron d-flex align-items-center">
+    <div  class="container">
+        <div th:if="${component == 0}">
+            <h3>Basic Question Information</h3>
+            <form th:action="@{/create-question-2}" method="post">
+                <div class="form-group form-inline row">
+                    <label class="col-md-1" for="title">Title</label>
+                    <input required type="text" class="form-control col-md-4" name="title" id="title">
+                </div>
+            <div class="form-group form-inline row">
+                <label class="col-md-1" for="question">Question</label>
+                <input required type="text" class="form-control col-md-4" name="question" id="question">
+            </div>
+            <div class="form-group form-inline row">
+                <label class="control-label col-md-1" for="type">Type</label>
+                <select class="form-control col-md-4" id="type" name="type">
+                    <option value="numeric">Numeric</option>
+                    <option value="mc-one">Multiple choice – Choose one</option>
+                    <option value="mc-multiple">Multiple choice – Choose multiple</option>
+                    <option value="free-text">Free text</option>
+                </select>
+            </div>
+            <hr class="mt-2 mb-3"/>
+            <div class="form-group float-right">
+                <button type="submit" class="btn btn-primary">Next</button>
+            </div>
+            </form>
+        </div>
+        <div th:if="${component == 1}">
+            <h3>Answers</h3>
+            <div class="form-group form-inline row">
+                <label for="answer1" th:text="${question}"></label>
+                <input style="margin-left: 5px;" required type="text" class="form-control col-md-1" name="answer1" id="answer1">
+            </div>
+        </div>
+        <div th:if="${component == 2}">
+            <h3>Answers</h3>
+            <div th:each="option: *{options}">
+                <div class="form-group form-inline row">
+                    <label for="display-text">Display Text</label>
+                    <input style="margin-left: 5px;" required type="text" class="form-control col-md-5" th:value="${option.getDisplayText()}" id="display-text">
+                    <label for="stored-as">Stored as</label>
+                    <input style="margin-left: 5px;" required type="text" class="form-control col-md-5" th:value="${option.getStoredAs()}" id="stored-as">
+                </div>
+            </div>
+
+        </div>
+        <div th:if="${component == 3}">
+
+        </div>
+        <div th:if="${component == 4}">
+            <div class="form-group">
+                <label for="answer4" th:text="${question}"></label>
+                <textarea style="margin-left: 5px; width: 400px;" required class="form-control" name="answer4" id="answer4"></textarea>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
