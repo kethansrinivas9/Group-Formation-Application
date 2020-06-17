@@ -12,8 +12,10 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
     DbConnection connection;
 
     public ResetPasswordDaoImpl() {
-        resetTokens();
+        updateTokenStatus();
     }
+
+    //TODO: Replace resultset's label names with index
 
     @Override
     public Boolean addToken(String bannerID) {
@@ -22,7 +24,7 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
             String token = resetToken.createToken();
-            String query = String.format("INSERT INTO PasswordResetToken (BannerID, Token, Timestamp, Status) VALUES ('%s', '%s', now(), 'valid')", bannerID, token);
+            String query = String.format(ResetPasswordQueryConstants.INSERT_TOKEN, bannerID, token);
             int records = connection.addRecords(query);
             connection.close();
             return records > 0;
@@ -39,7 +41,7 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
         try {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
-            String query = String.format("INSERT INTO PasswordResetToken (BannerID, Token, Timestamp, Status) VALUES ('%s', '%s', now(), 'valid')", bannerID, token);
+            String query = String.format(ResetPasswordQueryConstants.INSERT_TOKEN, bannerID, token);
             int records = connection.addRecords(query);
             connection.close();
             return records > 0;
@@ -52,12 +54,12 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
     }
 
     @Override
-    public Boolean resetTokens() {
+    public Boolean updateTokenStatus() {
         try {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
 
-            String query = "CALL resettokens";
+            String query = ResetPasswordQueryConstants.CALL_UPDATE_TOKEN_STATUS;
             Statement statement = connection.getStatement();
             boolean records = statement.execute(query);
             statement.close();
@@ -72,14 +74,14 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
     }
 
     @Override
-    public PasswordResetToken getRequestByToken(String bannerID, String token) {
+    public PasswordResetToken getPasswordResetRequest(String bannerID, String token) {
         PasswordResetToken passwordResetToken = new PasswordResetToken();
         String status = "notfound";
         try {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
 
-            String query = String.format("SELECT * FROM PasswordResetToken WHERE BannerID='%s' and token='%s'", bannerID, token);
+            String query = String.format(ResetPasswordQueryConstants.GET_RESET_REQUEST, bannerID, token);
             ResultSet rs = connection.getRecords(query);
             while (rs.next()) {
                 passwordResetToken.setTokenID(rs.getInt("TokenID"));
@@ -113,11 +115,11 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
 
-            String query = String.format("UPDATE Users SET Password='%s' WHERE BannerID='%s'", password, bannerID);
-            String updateStatusQuery = String.format("UPDATE PasswordResetToken SET Status='expired' WHERE BannerID='%s'", bannerID);
+            String query = String.format(ResetPasswordQueryConstants.UPDATE_PASSWORD, password, bannerID);
+            String updateStatusQuery = String.format(ResetPasswordQueryConstants.UPDATE_REQUEST_STATUS, bannerID);
             int records = connection.updateRecords(query);
             if (records > 0) {
-                records = connection.updateRecords(updateStatusQuery);
+                connection.updateRecords(updateStatusQuery);
                 connection.close();
                 return true;
             } else {
@@ -129,7 +131,7 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
             return false;
         }
     }
-
+    //TODO: Move getUserEmail to User related class if possible
     @Override
     public String getUserEmail(String bannerID) {
         User user = new User();
@@ -137,7 +139,7 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
         try {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
-            String query = String.format("SELECT * FROM Users WHERE BannerID='%s'", bannerID);
+            String query = String.format(ResetPasswordQueryConstants.GET_USER, bannerID);
             ResultSet rs = connection.getRecords(query);
             while (rs.next()) {
                 email = rs.getString("Email");
@@ -155,7 +157,7 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
         try {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
-            String query = String.format("SELECT * FROM Users WHERE BannerID='%s'", bannerID);
+            String query = String.format(ResetPasswordQueryConstants.GET_USER, bannerID);
             ResultSet rs = connection.getRecords(query);
             if (rs.next()) {
                 return true;
