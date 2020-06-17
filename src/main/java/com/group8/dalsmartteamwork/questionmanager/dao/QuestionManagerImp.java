@@ -41,7 +41,6 @@ public class QuestionManagerImp implements QuestionManagerDao {
                     BannerID);
             ResultSet resultSet = connection.getRecords(query);
             while (resultSet.next())
-                ;
             {
                 String title = resultSet.getString("Title");
                 sortedListByTitle.add(new Question(title));
