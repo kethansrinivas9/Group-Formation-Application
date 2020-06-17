@@ -1,25 +1,25 @@
 package com.group8.dalsmartteamwork.course.model;
 
 public class Course {
-    private int courseID;
+    private Integer courseID;
     private String courseName;
     private String instructorID;
 
     public Course() {
     }
 
-    public Course(int courseID, String courseName) {
+    public Course(Integer courseID, String courseName) {
         this.courseID = courseID;
         this.courseName = courseName;
     }
 
-    public Course(int courseID, String courseName, String instructorID) {
+    public Course(Integer courseID, String courseName, String instructorID) {
         this.courseID = courseID;
         this.courseName = courseName;
         this.instructorID = instructorID;
     }
 
-    public int getCourseID() {
+    public Integer getCourseID() {
         return courseID;
     }
 
