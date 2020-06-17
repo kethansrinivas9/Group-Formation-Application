@@ -69,6 +69,10 @@ public class DbConnection {
         return this.statement;
     }
 
+    public Connection getConnection(){
+        return this.conn;
+    }
+
     public ResultSet getRecords(String query) {
         try {
             return this.statement.executeQuery(query);
