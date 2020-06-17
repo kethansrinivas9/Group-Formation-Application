@@ -14,8 +14,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-class ImportCsvServiceImplTest {
-    private ImportCsvServiceImpl service = null;
+class ImportStudentServiceImplTest {
+    private ImportStudentServiceImpl service = null;
     private RegistrationDao dao = mock(RegistrationDaoImpl.class);
     private Mail mail = mock(Mail.class);
     private List<User> users;
@@ -25,7 +25,7 @@ class ImportCsvServiceImplTest {
 
     @BeforeEach
     void setup(){
-        this.service = new ImportCsvServiceImpl(COURSE_ID, dao, mail);
+        this.service = new ImportStudentServiceImpl(COURSE_ID, dao, mail);
         this.users = new ArrayList<>();
         users.add(this.existingUser);
         users.add(this.newUser);
@@ -44,8 +44,4 @@ class ImportCsvServiceImplTest {
         assertEquals(service.verifyRegistration(users), result);
     }
 
-    @Test
-    void generatePasswordTest(){
-        assertEquals(service.generatePassword().length(), 15);
-    }
 }

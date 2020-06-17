@@ -10,10 +10,14 @@ public class Mail {
 
     public Mail() {
         try {
-            Props props = new Props();
-            Properties properties = props.getProperties();
-            final String username = props.getValue("mail.smtp.username");
-            final String password = props.getValue("mail.smtp.password");
+            final String username = System.getenv("mail.smtp.username");
+            final String password = System.getenv("mail.smtp.password");
+
+            Properties properties = System.getProperties();
+            properties.setProperty("mail.smtp.host", System.getenv("mail.smtp.host"));
+            properties.setProperty("mail.smtp.host", System.getenv("mail.smtp.host"));
+            properties.setProperty("mail.smtp.port", System.getenv("mail.smtp.port"));
+            properties.setProperty("mail.smtp.auth", System.getenv("mail.smtp.auth"));
 
             Authenticator auth = new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -21,27 +25,23 @@ public class Mail {
                 }
             };
 
-            this.session = Session.getInstance(properties, auth);
+            session = Session.getInstance(properties, auth);
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
         }
     }
 
-    public Session getSession() {
-        return this.session;
-    }
-
     public Boolean sendEmail(String toEmail, String subject, String text) {
         try {
-            MimeMessage msg = new MimeMessage(this.session);
+            MimeMessage msg = new MimeMessage(session);
             msg.setSubject(subject, "UTF-8");
             msg.setText(text, "UTF-8");
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
             Transport.send(msg);
             return true;
         } catch (Exception e) {
-            // TODO: handle exception
+            // TODO: Add to Log
             e.printStackTrace();
             return false;
         }
