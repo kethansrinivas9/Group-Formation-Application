@@ -20,7 +20,7 @@ public class GuestDaoImpl implements GuestDao {
             String query = "SELECT * FROM Courses";
             ResultSet rs = connection.getRecords(query);
             while (rs.next()) {
-                courses.add(new Course(rs.getInt("CourseID"), rs.getString("CourseName")));
+                courses.add(new Course(Integer.parseInt(rs.getString("CourseID")), rs.getString("CourseName")));
             }
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
