@@ -9,6 +9,8 @@ import java.util.List;
 
 public class UserManagerDaoImpl implements IUserManagerDao {
     String bannerID, firstName, lastName;
+    final String INSTRUCTOR_ROLE_ID = "4";
+    final String GUEST_ROLE_ID = "1";
     User user;
     List<String> nonAdminUsersList;
     List<String> guestsOrInstructorsList;
@@ -17,7 +19,7 @@ public class UserManagerDaoImpl implements IUserManagerDao {
     public List<String> getListOfNonAdminUsers() {
         nonAdminUsersList = new ArrayList<String>();
         try {
-            String query = String.format(AdminQueryConstants.GET_ALL_NON_ADMIN_USERS);
+            String query = String.format(AdminQueryConstants.GET_ALL_NON_ADMIN_USERS, GUEST_ROLE_ID);
             dbConnection = DbConnection.getInstance();
             dbConnection.createDbConnection();
             ResultSet rs = dbConnection.getRecords(query);
@@ -39,7 +41,7 @@ public class UserManagerDaoImpl implements IUserManagerDao {
 
     public String getCourseInstructor(String courseID) {
         try {
-            String query = String.format(AdminQueryConstants.GET_INSTRUCTOR_ID, courseID);
+            String query = String.format(AdminQueryConstants.GET_INSTRUCTOR_ID, courseID, INSTRUCTOR_ROLE_ID);
             dbConnection = DbConnection.getInstance();
             dbConnection.createDbConnection();
             ResultSet rs = dbConnection.getRecords(query);
@@ -59,7 +61,7 @@ public class UserManagerDaoImpl implements IUserManagerDao {
         guestsOrInstructorsList = new ArrayList<String>();
         try {
 
-            String guestUserOrInstructorQuery = String.format(AdminQueryConstants.GET_USERS_WHO_ARE_GUEST_OR_INSTRUCTOR);
+            String guestUserOrInstructorQuery = String.format(AdminQueryConstants.GET_USERS_WHO_ARE_GUEST_OR_INSTRUCTOR, INSTRUCTOR_ROLE_ID, GUEST_ROLE_ID);
             dbConnection = DbConnection.getInstance();
             dbConnection.createDbConnection();
 
@@ -74,7 +76,7 @@ public class UserManagerDaoImpl implements IUserManagerDao {
                 guestsOrInstructorsList.add(0, "Select an Instructor");
             } else {
                 String currentInstructorBannerID = "Select an Instructor";
-                String instructorIdQuery = String.format(AdminQueryConstants.GET_INSTRUCTOR_ID, courseID);
+                String instructorIdQuery = String.format(AdminQueryConstants.GET_INSTRUCTOR_ID, courseID, INSTRUCTOR_ROLE_ID);
                 rs = dbConnection.getRecords(instructorIdQuery);
                 while (rs.next()) {
                     currentInstructorBannerID = rs.getObject("BannerID").toString();
