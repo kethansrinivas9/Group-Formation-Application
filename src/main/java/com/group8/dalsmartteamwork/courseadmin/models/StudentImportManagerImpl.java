@@ -46,12 +46,7 @@ public class StudentImportManagerImpl implements IStudentImportManager {
                     status.add(true);
                     String message = String.format(INVITE_TEXT_FORMAT, courseId, password);
                     Thread mailThread = new Thread(() -> {
-                        try {
-                            mail.sendEmail(user.getEmail(), INVITE_SUBJECT, message);
-                        } catch (MessagingException e) {
-                            // TODO: Add to Log
-                            e.printStackTrace();
-                        }
+                        mail.sendEmail(user.getEmail(), INVITE_SUBJECT, message);
                     });
                     mailThread.start();
                 }

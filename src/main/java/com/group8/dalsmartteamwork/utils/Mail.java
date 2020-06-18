@@ -32,12 +32,17 @@ public class Mail {
         }
     }
 
-    public Boolean sendEmail(String toEmail, String subject, String text) throws MessagingException {
-        MimeMessage msg = new MimeMessage(session);
-        msg.setSubject(subject, "UTF-8");
-        msg.setText(text, "UTF-8");
-        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
-        Transport.send(msg);
-        return true;
+    public Boolean sendEmail(String toEmail, String subject, String text) {
+        try {
+            MimeMessage msg = new MimeMessage(session);
+            msg.setSubject(subject, "UTF-8");
+            msg.setText(text, "UTF-8");
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
+            Transport.send(msg);
+            return true;
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

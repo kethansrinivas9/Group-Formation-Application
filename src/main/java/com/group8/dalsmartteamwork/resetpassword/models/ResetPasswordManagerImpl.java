@@ -56,11 +56,8 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
             domain = LOCALHOST_DOMAIN;
         }
         String mailContent = domain + "/resetpassword?bannerid=" + bannerID + "&token=" + token;
-        try {
-            mail.sendEmail(email, "Password Reset Request", mailContent);
+        if(mail.sendEmail(email, "Password Reset Request", mailContent)){
             return true;
-        } catch (MessagingException e) {
-            e.printStackTrace();
         }
         return false;
     }

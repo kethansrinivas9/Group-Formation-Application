@@ -7,6 +7,7 @@ import com.group8.dalsmartteamwork.utils.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +33,7 @@ class StudentImportManagerImplTest {
     }
 
     @Test
-    void verifyRegistrationTest(){
+    void verifyRegistrationTest() {
         List<Boolean> result = Arrays.asList(false,true);
         when(mail.sendEmail(anyString(), anyString(), anyString())).thenReturn(true);
         when(dao.isUserInDb(existingUser.getId())).thenReturn(true);
