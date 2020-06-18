@@ -29,12 +29,12 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
             return true;
         } catch (Exception exception) {
             System.out.print(exception.getMessage());
-            return false;
         } finally {
             if (storedProcedure != null) {
                 storedProcedure.cleanup();
             }
         }
+        return false;
     }
 
     @Override
@@ -48,12 +48,12 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
             return true;
         } catch (Exception exception) {
             System.out.print(exception.getMessage());
-            return false;
         } finally {
             if (storedProcedure != null) {
                 storedProcedure.cleanup();
             }
         }
+        return false;
     }
 
     @Override
@@ -99,7 +99,9 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         } finally {
-            storedProcedure.cleanup();
+            if (storedProcedure != null) {
+                storedProcedure.cleanup();
+            }
         }
         if (status.equals("valid"))
             passwordResetToken.setStatusValid();
@@ -132,6 +134,7 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
         }
     }
 
+    //TODO: Move getUserEmail to User related class if possible
     @Override
     public String getUserEmail(String bannerID) {
         String email = "notfound";
@@ -141,6 +144,7 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
             storedProcedure = new CallStoredProcedure("spGetUser(?)");
             storedProcedure.setParameter(1, bannerID);
             rs = storedProcedure.executeWithResults();
+
             while (rs.next()) {
                 email = rs.getString("Email");
             }
@@ -162,6 +166,7 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
             storedProcedure = new CallStoredProcedure("spGetUser(?)");
             storedProcedure.setParameter(1, bannerID);
             rs = storedProcedure.executeWithResults();
+
             if (rs.next()) {
                 return true;
             }

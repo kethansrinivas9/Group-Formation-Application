@@ -6,7 +6,6 @@ import com.group8.dalsmartteamwork.utils.DbConnection;
 import com.group8.dalsmartteamwork.utils.Encryption;
 
 import java.sql.ResultSet;
-import java.sql.Statement;
 
 public class PasswordHistoryManagerImpl implements IPasswordHistoryManager {
 
