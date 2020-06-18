@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE DEFINER=`CSCI5308_8_DEVINT_USER`@`%` PROCEDURE `spGetEligibleTAs`(IN courseID VARCHAR(40))
+BEGIN
+SELECT * FROM Users WHERE Users.BannerID NOT IN (SELECT BannerID FROM CourseRole where CourseRole.CourseID=courseID);
+END$$
+
+DELIMITER ;
