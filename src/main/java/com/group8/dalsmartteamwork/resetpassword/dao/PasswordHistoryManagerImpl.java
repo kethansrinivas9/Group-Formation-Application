@@ -1,11 +1,10 @@
 package com.group8.dalsmartteamwork.resetpassword.dao;
 
-import com.group8.dalsmartteamwork.resetpassword.models.PasswordPolicy;
-import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
 import com.group8.dalsmartteamwork.utils.DbConnection;
 import com.group8.dalsmartteamwork.utils.Encryption;
 
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class PasswordHistoryManagerImpl implements IPasswordHistoryManager {
 
@@ -13,52 +12,46 @@ public class PasswordHistoryManagerImpl implements IPasswordHistoryManager {
 
     @Override
     public Boolean moveCurrentPassword(String bannerID) {
-        CallStoredProcedure storedProcedure = null;
         try {
-            storedProcedure = new CallStoredProcedure("spMoveCurrentPassword(?, ?)");
-            PasswordPolicy passwordPolicy = new PasswordPolicy();
-            storedProcedure.setParameter(1, bannerID);
-            storedProcedure.setParameter(2, passwordPolicy.getHistoricalPasswordLimit());
-            storedProcedure.execute();
-            return true;
+            connection = DbConnection.getInstance();
+            connection.createDbConnection();
+            String query = String.format(PasswordHistoryQueryConstants.CALL_MOVE_CURRENT_PASSWORD, bannerID);
+            Statement statement = connection.getStatement();
+            Boolean records = statement.execute(query);
+            statement.close();
+            return records;
         } catch (Exception exception) {
             System.out.print(exception.getMessage());
         } finally {
-            if (storedProcedure != null) {
-                storedProcedure.cleanup();
-            }
+            connection.closeConnection();
         }
         return false;
     }
 
     @Override
     public Boolean passwordExists(String bannerID, String password) {
-        CallStoredProcedure storedProcedure = null;
-        ResultSet rs;
         try {
+            connection = DbConnection.getInstance();
+            connection.createDbConnection();
             Encryption encryption = new Encryption();
             String encryptedPassword = encryption.encrypt(password);
-            storedProcedure = new CallStoredProcedure("spGetPasswordHistory(?, ?)");
-            storedProcedure.setParameter(1, bannerID);
-            storedProcedure.setParameter(2, encryptedPassword);
-            rs = storedProcedure.executeWithResults();
+            String query = String.format(PasswordHistoryQueryConstants.GET_PASSWORD_HISTORY, bannerID, encryptedPassword);
+            ResultSet rs = connection.getRecords(query);
             while (rs.next()) {
                 return true;
             }
-            storedProcedure = new CallStoredProcedure("spGetCurrentPassword(?)");
-            storedProcedure.setParameter(1, bannerID);
-            rs = storedProcedure.executeWithResults();
-            while (rs.next()) {
-                if (encryptedPassword.equals(rs.getString("Password"))) {
+            rs.close();
+            query = String.format(PasswordHistoryQueryConstants.GET_CURRENT_PASSWORD, bannerID);
+            ResultSet currentPasswordResultSet = connection.getRecords(query);
+            while (currentPasswordResultSet.next()) {
+                if (encryptedPassword.equals(currentPasswordResultSet.getString("Password"))) {
                     return true;
                 }
             }
         } catch (Exception exception) {
             System.out.print(exception.getMessage());
         } finally {
-            if (storedProcedure != null) {
-                storedProcedure.cleanup();
-            }
+            connection.closeConnection();
         }
         return false;
     }
