@@ -1,4 +1,4 @@
-package com.group8.dalsmartteamwork.courseadmin.services;
+package com.group8.dalsmartteamwork.courseadmin.models;
 
 import com.group8.dalsmartteamwork.register.dao.RegistrationDao;
 import com.group8.dalsmartteamwork.register.dao.RegistrationDaoImpl;
@@ -14,8 +14,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-class ImportStudentServiceImplTest {
-    private ImportStudentServiceImpl service = null;
+class StudentImportManagerImplTest {
+    private StudentImportManagerImpl service = null;
     private RegistrationDao dao = mock(RegistrationDaoImpl.class);
     private Mail mail = mock(Mail.class);
     private List<User> users;
@@ -25,7 +25,7 @@ class ImportStudentServiceImplTest {
 
     @BeforeEach
     void setup(){
-        this.service = new ImportStudentServiceImpl(COURSE_ID, dao, mail);
+        this.service = new StudentImportManagerImpl(COURSE_ID, dao, mail);
         this.users = new ArrayList<>();
         users.add(this.existingUser);
         users.add(this.newUser);

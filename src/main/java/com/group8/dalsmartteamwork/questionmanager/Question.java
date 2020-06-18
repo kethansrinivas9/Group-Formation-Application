@@ -1,11 +1,11 @@
-package com.group8.dalsmartteamwork.questionmanager.model;
+package com.group8.dalsmartteamwork.questionmanager;
 
 public class Question {
 
-    public String BannerID;
-    public String questionTitle;
-    public String questionText;
-    public int questionID;
+    private String BannerID;
+    private String questionTitle;
+    private String questionText;
+    private int questionID;
     
     public Question(int questionID, String questionText) {
         this.questionText = questionText;

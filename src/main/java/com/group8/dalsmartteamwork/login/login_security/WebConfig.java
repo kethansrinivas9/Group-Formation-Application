@@ -25,6 +25,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/admin**").hasAnyAuthority("Admin")
             .antMatchers("/student**").hasAnyAuthority("Student", "TA","Instructor", "Guest")
             .antMatchers("/guest**").hasAnyAuthority("Student","TA","Instructor", "Guest")
+            .antMatchers("/instructor**").hasAnyAuthority("Instructor", "Guest")
             .antMatchers("/login").permitAll()
             .antMatchers("/loginError").permitAll()
             .antMatchers("/register").permitAll()       

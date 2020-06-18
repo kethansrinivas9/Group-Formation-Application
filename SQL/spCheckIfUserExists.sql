@@ -1,0 +1,9 @@
+DELIMITER $$
+CREATE DEFINER=`CSCI5308_8_DEVINT_USER`@`%` PROCEDURE `spCheckIfUserExists`(
+	IN bannerID VARCHAR(55)
+)
+BEGIN
+    SELECT * FROM Users where Users.BannerID = bannerID;
+END$$
+
+DELIMITER ;

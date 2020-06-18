@@ -1,4 +1,4 @@
-package com.group8.dalsmartteamwork.courseadmin.services;
+package com.group8.dalsmartteamwork.courseadmin.models;
 
 import com.group8.dalsmartteamwork.utils.CsvReader;
 import com.group8.dalsmartteamwork.utils.ICsvReader;
@@ -15,14 +15,14 @@ import static org.mockito.Mockito.when;
 
 class ParseCsvServiceImplTest {
     private ICsvReader reader = mock(CsvReader.class);
-    private ParseCsvService service;
+    private ICsvParser service;
     private List<User> users  = new ArrayList<>();
     private User existingUser = new User("B00000000", "fName", "lName", "email@email.com", "pwd");
     private User newUser = new User("B1111111", "fName", "lName", "email@email.com", "pwd");
 
     @BeforeEach
     public void setup(){
-        service = new ParseCsvServiceImpl(reader);
+        service = new CsvParserImpl(reader);
         users.add(existingUser);
         users.add(newUser);
     }
