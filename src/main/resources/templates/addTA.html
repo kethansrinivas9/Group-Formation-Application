@@ -4,26 +4,30 @@
     <title>List TAs</title>
     <meta charset="UTF-8" content="text/html" http-equiv="Content-type"/>
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" rel="stylesheet">
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" rel="stylesheet"/>
+    <script src="scripts/searchTA.js"></script>
 </head>
 <body>
-<table class="table table-sm">
-    <tr class="d-flex">
-        <td class="col-1">BannerID</td>
-        <td class="col-1">First Name</td>
-        <td class="col-1">Last Name</td>
-        <td class="col-2">Email</td>
-        <td class="col-1">Actions</td>
+<input type="text" id="searchInput" onkeyup="myFunction()" placeholder="Search BannerID">
+<table id="TAListTable" class="table table-striped table-bordered table-sm">
+    <thead>
+    <tr>
+        <th class="th-sm">BannerID</th>
+        <th class="th-sm">First Name</th>
+        <th class="th-sm">Last Name</th>
+        <th class="th-sm">Email</th>
+        <th class="th-sm">Actions</th>
     </tr>
-    <tr class="d-flex" th:each="user : ${users}">
-        <td class="col-sm-1" th:text="${user.getId()}"/>
-        <td class="col-sm-1" th:text="${user.getFirstName()}"/>
-        <td class="col-sm-1" th:text="${user.getLastName()}"/>
-        <td class="col-sm-2" th:text="${user.getEmail()}"/>
-        <td class="col-sm-1"><a th:href="@{'/confirm-add-ta?courseid=' + ${courseid} + '&bannerid=' + ${user.getId()}}">Add</a>
-        </td>
-
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.getId()}"></td>
+        <td th:text="${user.getFirstName()}"></td>
+        <td th:text="${user.getLastName()}"></td>
+        <td th:text="${user.getEmail()}"></td>
+        <td><a th:href="@{'/confirm-add-ta?courseid=' + ${courseid} + '&bannerid=' + ${user.getId()}}">Add</a></td>
     </tr>
+    </tbody>
 </table>
 </body>
 </html>

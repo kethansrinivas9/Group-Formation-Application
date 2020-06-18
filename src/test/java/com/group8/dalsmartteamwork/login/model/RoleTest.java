@@ -1,8 +1,8 @@
 package com.group8.dalsmartteamwork.login.model;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.Test;
 
 public class RoleTest {
 
@@ -10,7 +10,6 @@ public class RoleTest {
     public static final String ROLE_NAME_1 = "STUDENT";
     public static final String ROLE_ID_1 = "2";
     public static final String ROLE_NAME = "ADMIN";
-
 
     @Test
     public void defaultConstructorRoleTest() {

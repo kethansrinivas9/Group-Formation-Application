@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create a Question</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#more").click(function() {
+                var rowIndex = $("#option-table").find("tr").length + 1;
+
+                $('#option-table tbody>tr:last').clone(true).insertAfter('#option-table tbody>tr:last').find(".s-a")
+                    .attr("name","stored-as-" + rowIndex).val(rowIndex);
+                $('#option-table tbody>tr:last .d-t')
+                    .attr("name","display-text-" + rowIndex).val("");
+
+                return false;
+            });
+
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $(".delete").on("click",function(){
+                $(this).parent().parent('tr').remove();
+            });
+        });
+    </script>
+</head>
+<body class="jumbotron d-flex align-items-center">
+<div class="container">
+    <div th:if="${component == 0}">
+        <h3>Basic Question Information</h3>
+        <form th:action="@{/question-details}" method="post">
+            <div class="form-group form-inline row">
+                <label class="col-md-1" for="title">Title</label>
+                <input required type="text" class="form-control col-md-4" name="title" id="title">
+            </div>
+            <div class="form-group form-inline row">
+                <label class="col-md-1" for="question">Question</label>
+                <input required type="text" class="form-control col-md-4" name="question" id="question">
+            </div>
+            <div class="form-group form-inline row">
+                <label class="control-label col-md-1" for="type">Type</label>
+                <select class="form-control col-md-4" id="type" name="type">
+                    <option value="numeric">Numeric</option>
+                    <option value="mc-one">Multiple choice – Choose one</option>
+                    <option value="mc-multiple">Multiple choice – Choose multiple</option>
+                    <option value="free-text">Free text</option>
+                </select>
+            </div>
+            <hr class="mt-2 mb-3"/>
+            <div class="form-group float-right">
+                <a href="/instructor"> Home Page </a>
+                <button type="submit" name="action" value="next" class="btn btn-primary">Next</button>
+            </div>
+        </form>
+    </div>
+    <div th:if="${component == 1}">
+        <h3>Answers</h3>
+        <div class="form-group form-inline row">
+            <label for="answer1" th:text="${question}"></label>
+            <input style="margin-left: 5px;" required type="text" class="form-control col-md-1" name="answer1"
+                   id="answer1">
+        </div>
+    </div>
+    <form th:action="@{/validate-question}" method="post">
+        <div th:if="${component == 2 || component == 3}">
+            <h3>Answers</h3>
+            <table id="option-table">
+                <tbody>
+                    <tr>
+                        <td>
+                            <label>Display Text</label>
+                            <input class="d-t" name="display-text-1" type="text">
+                        </td>
+                        <td>
+                            <label>Stored as</label>
+                            <input class="s-a" name="stored-as-1" type="number" value="1">
+                        </td>
+                        <td>
+                            <a href="#" class="delete">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+            <a href="#"  id="more">More Options</a>
+
+        </div>
+        <div th:if="${component == 3}">
+
+        </div>
+        <div th:if="${component == 4}">
+            <div class="form-group">
+                <label for="answer4" th:text="${question}"></label>
+                <textarea style="margin-left: 5px; width: 400px;" required class="form-control" name="answer4"
+                          id="answer4"></textarea>
+            </div>
+        </div>
+        <div th:if="${component > 0}" >
+            <hr class="mt-2 mb-3"/>
+            <div class="form-group float-right">
+                <button type="submit" name="action" value="cancel" class="btn btn-danger">Cancel</button>
+                <button type="submit" name="action" value="save" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>

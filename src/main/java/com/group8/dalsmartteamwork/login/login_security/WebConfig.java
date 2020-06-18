@@ -1,8 +1,6 @@
 package com.group8.dalsmartteamwork.login.login_security;
 
 import org.springframework.context.annotation.Configuration;
-import com.group8.dalsmartteamwork.login.login_security.Successhandler;
-import com.group8.dalsmartteamwork.login.login_security.LoginAuthentication;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -27,6 +25,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/admin**").hasAnyAuthority("Admin")
             .antMatchers("/student**").hasAnyAuthority("Student", "TA","Instructor", "Guest")
             .antMatchers("/guest**").hasAnyAuthority("Student","TA","Instructor", "Guest")
+            .antMatchers("/instructor**").hasAnyAuthority("Instructor", "Guest")
             .antMatchers("/login").permitAll()
             .antMatchers("/loginError").permitAll()
             .antMatchers("/register").permitAll()       

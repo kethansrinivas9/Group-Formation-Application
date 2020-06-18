@@ -1,12 +1,12 @@
 package com.group8.dalsmartteamwork.login.model;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.Test;
 
 public class LoginUserTest {
 
-    public static final String [] roles = {"role1","role2","role3"};
+    public static final String[] roles = { "role1", "role2", "role3" };
 
     public User mockUser() {
         User user = new User();

@@ -1,6 +1,7 @@
 package com.group8.dalsmartteamwork.course.dao;
 
 import com.group8.dalsmartteamwork.course.model.Course;
+import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
 import com.group8.dalsmartteamwork.utils.DbConnection;
 import com.group8.dalsmartteamwork.utils.User;
 
@@ -14,19 +15,21 @@ public class CourseDaoImpl implements CourseDao {
     @Override
     public Boolean courseExists(int courseID) {
         Course course = new Course();
+        CallStoredProcedure storedProcedure = null;
+        ResultSet rs;
         try {
-            connection = DbConnection.getInstance();
-            connection.createDbConnection();
-            String query = String.format("SELECT * FROM Courses WHERE CourseID='%s'", courseID);
-            ResultSet rs = connection.getRecords(query);
+            storedProcedure = new CallStoredProcedure("spGetCourse(?)");
+            storedProcedure.setParameter(1, courseID);
+            rs = storedProcedure.executeWithResults();
             while (rs.next()) {
-                connection.close();
                 return true;
             }
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         } finally {
-            connection.close();
+            if (null != storedProcedure) {
+                storedProcedure.cleanup();
+            }
         }
         return false;
     }
@@ -34,96 +37,73 @@ public class CourseDaoImpl implements CourseDao {
     @Override
     public List<User> getUsersForTA(int courseID) {
         List<User> users = new ArrayList<>();
-        List<String> enrolled = new ArrayList<>();
+        CallStoredProcedure storedProcedure = null;
+        ResultSet rs;
         try {
-            connection = DbConnection.getInstance();
-            connection.createDbConnection();
-            String query = String.format("SELECT * FROM CourseRole WHERE CourseID='%s'", courseID);
-            ResultSet rs = connection.getRecords(query);
+            storedProcedure = new CallStoredProcedure("spGetEligibleTAs(?)");
+            storedProcedure.setParameter(1, courseID);
+            rs = storedProcedure.executeWithResults();
             while (rs.next()) {
-                enrolled.add(rs.getString("BannerID"));
-            }
-            query = "SELECT * FROM Users";
-            rs = connection.getRecords(query);
-            while (rs.next()) {
-                String bannerID;
-                Boolean alreadyExists = false;
-                for (String s : enrolled) {
-                    bannerID = rs.getString("BannerID");
-                    if (bannerID.equals(s)) {
-                        alreadyExists = true;
-                    }
-                }
-                if (!alreadyExists) {
-                    users.add(new User(rs.getString("BannerID"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Email"), ""));
-                }
+                users.add(new User(rs.getString("BannerID"),
+                        rs.getString("FirstName"),
+                        rs.getString("LastName"),
+                        rs.getString("Email"),
+                        ""));
             }
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         } finally {
-            connection.close();
+            if (null != storedProcedure) {
+                storedProcedure.cleanup();
+            }
         }
         return users;
     }
 
     @Override
     public List<User> getCurrentTAs(int courseID) {
-        List<String> taBannerIDList = new ArrayList<>();
         List<User> taList = new ArrayList<>();
+        CallStoredProcedure storedProcedure = null;
+        ResultSet rs;
         try {
-            connection = DbConnection.getInstance();
-            connection.createDbConnection();
-            String query = String.format("SELECT * FROM CourseRole WHERE CourseID='%s' and RoleID=3", courseID);
-            ResultSet rs = connection.getRecords(query);
+            storedProcedure = new CallStoredProcedure("spGetCurrentTAs(?)");
+            storedProcedure.setParameter(1, courseID);
+            rs = storedProcedure.executeWithResults();
             while (rs.next()) {
-                taBannerIDList.add(rs.getString("BannerID"));
-            }
-            query = "SELECT * FROM Users";
-            rs = connection.getRecords(query);
-            while (rs.next()) {
-                String bannerID;
-                for (String s : taBannerIDList) {
-                    bannerID = rs.getString("BannerID");
-                    if (bannerID.equals(s)) {
-                        taList.add(new User(rs.getString("BannerID"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Email"), ""));
-                    }
-                }
+                taList.add(new User(rs.getString("BannerID"),
+                        rs.getString("FirstName"),
+                        rs.getString("LastName"),
+                        rs.getString("Email"),
+                        ""));
             }
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         } finally {
-            connection.close();
+            if (null != storedProcedure) {
+                storedProcedure.cleanup();
+            }
         }
         return taList;
     }
 
     @Override
     public List<User> getCurrentStudents(int courseID) {
-        List<String> studentBannerIDList = new ArrayList<>();
         List<User> studentList = new ArrayList<>();
+        CallStoredProcedure storedProcedure = null;
+        ResultSet rs;
         try {
-            connection = DbConnection.getInstance();
-            connection.createDbConnection();
-            String query = String.format("SELECT * FROM CourseRole WHERE CourseID='%s' and RoleID=2", courseID);
-            ResultSet rs = connection.getRecords(query);
+            storedProcedure = new CallStoredProcedure("spGetCurrentStudents(?)");
+            storedProcedure.setParameter(1, courseID);
+            rs = storedProcedure.executeWithResults();
             while (rs.next()) {
-                studentBannerIDList.add(rs.getString("BannerID"));
-            }
-            query = "SELECT * FROM Users";
-            rs = connection.getRecords(query);
-            while (rs.next()) {
-                String bannerID;
-                for (String s : studentBannerIDList) {
-                    bannerID = rs.getString("BannerID");
-                    if (bannerID.equals(s)) {
-                        studentList.add(new User(rs.getString("BannerID"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Email"), ""));
-                    }
-                }
+                studentList.add(new User(rs.getString("BannerID"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Email"), ""));
             }
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         } finally {
-            connection.close();
+            if (null != storedProcedure) {
+                storedProcedure.cleanup();
+            }
         }
         return studentList;
     }
@@ -131,37 +111,41 @@ public class CourseDaoImpl implements CourseDao {
     @Override
     public String getCourseName(int courseID) {
         String result = "notfound";
+        CallStoredProcedure storedProcedure = null;
+        ResultSet rs;
         try {
-            connection = DbConnection.getInstance();
-            connection.createDbConnection();
-            String query = String.format("SELECT * FROM Courses WHERE CourseID='%s'", courseID);
-            ResultSet rs = connection.getRecords(query);
+            storedProcedure = new CallStoredProcedure("spGetCourseName(?)");
+            storedProcedure.setParameter(1, courseID);
+            rs = storedProcedure.executeWithResults();
             while (rs.next()) {
                 result = rs.getString("BannerID");
             }
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         } finally {
-            connection.close();
+            if (null != storedProcedure) {
+                storedProcedure.cleanup();
+            }
         }
         return result;
     }
 
     @Override
     public Boolean addTAtoCourse(String bannerID, int courseID) {
+        CallStoredProcedure storedProcedure = null;
         try {
-            connection = DbConnection.getInstance();
-            connection.createDbConnection();
-            String query = String.format("INSERT INTO CourseRole (BannerID, CourseID, RoleID) VALUES ('%s', '%s', 3)", bannerID, courseID);
-            int records = connection.addRecords(query);
-            connection.close();
-            return records > 0;
+            storedProcedure = new CallStoredProcedure("spAddTAtoCourse(?, ?)");
+            storedProcedure.setParameter(1, bannerID);
+            storedProcedure.setParameter(2, courseID);
+            storedProcedure.execute();
+            return true;
         } catch (Exception exception) {
             System.out.print(exception.getMessage());
-            connection.closeConnection();
             return false;
         } finally {
-            connection.closeConnection();
+            if (null != storedProcedure) {
+                storedProcedure.cleanup();
+            }
         }
     }
 }

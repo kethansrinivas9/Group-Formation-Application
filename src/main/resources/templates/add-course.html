@@ -9,17 +9,23 @@
 </head>
 
 <body>
+<br>
 <h1 class="sans-serif-font" style="text-align: center">Add a new course</h1>
-<div>
+<div align="center">
+    <br><br>
     <form action="#" th:action="@{/create-course}" th:object="${course}" method="post">
         <input required type="text" class="form-control mb-4" placeholder="Course Name" th:field="*{courseName}"
                style="width: 30%;"/>
         <input required type="text" class="form-control mb-4" placeholder="Course ID" th:field="*{courseID}"
                style="width: 30%;"/>
-        <input required type="text" class="form-control mb-4" placeholder="Instructor ID" th:field="*{instructorID}"
-               style="width: 30%;"/>
+        <select th:field="*{instructorID}">
+            <option th:each="p : ${listOfInstructors}" th:value="${p}" th:text="${p}"></option>
+        </select>
 
-        <p><input type="submit" class="btn btn-primary" value="Create"/></p>
+        <div align="center" style="width: 150px">
+            <p><input type="submit" class="btn btn-primary" name="create" style="float: left"/></p>
+            <p><a href="/admin" name="action" value="Cancel" class="btn btn-primary" style="float: right">Cancel</a></p>
+        </div>
     </form>
 </div>
 </body>

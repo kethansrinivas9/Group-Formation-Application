@@ -1,41 +1,25 @@
 package com.group8.dalsmartteamwork.utils;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-
-import com.group8.dalsmartteamwork.utils.CsvReader;
-
 import org.junit.jupiter.api.Test;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
-public class CsvReaderTest {
-    public static final String TEST_FILE = "B123,FN1,LN1,FN1@gmail.com,pwd\n" + "b124,fn2,lm2,FN2@gmail.com,pwd";
-    public static final String[] TEST_ARRAY = { "B124", "fn", "ln", "email@email.com", "password" };
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
-    @Test
-    public void constructorInputStreamTest() {
-        try {
-            InputStream inputStream = new ByteArrayInputStream(TEST_FILE.getBytes(StandardCharsets.UTF_8));
-            CsvReader reader = new CsvReader(inputStream);
-            assertNotNull(reader.getBufferedReader());
-        } catch (Exception e) {
-            // TODO: Add to Log
-            assertTrue(false);
-        }
-    }
+class CsvReaderTest {
+    private static final String TEST_FILE = "B123,FN1,LN1,FN1@gmail.com,pwd\n" + "b124,fn2,lm2,FN2@gmail.com,pwd";
+    private static final String TEST_FILE_NAME = "Test.csv";
 
     @Test
     public void getUsersTest() {
         try {
-            InputStream inputStream = new ByteArrayInputStream(TEST_FILE.getBytes(StandardCharsets.UTF_8));
-            CsvReader reader = new CsvReader(inputStream);
-            assertTrue(reader.getUsers().size() == 2);
+            MultipartFile file = new MockMultipartFile(TEST_FILE_NAME, TEST_FILE.getBytes());
+            CsvReader reader = new CsvReader(file);
+            assertEquals(2, reader.getUsers().size());
         } catch (Exception e) {
             // TODO: Add to Log
-            assertTrue(false);
+            fail();
         }
     }
 

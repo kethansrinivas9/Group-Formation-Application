@@ -4,7 +4,6 @@ stages:
   - build
   - test
   - deploy-test
-  - deploy-prod
 
 before_script:
   - echo "CI started..." 

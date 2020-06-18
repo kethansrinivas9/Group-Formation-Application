@@ -1,9 +1,9 @@
 package com.group8.dalsmartteamwork.login.login_security;
 
-import org.springframework.security.authentication.AuthenticationManager;
-import com.group8.dalsmartteamwork.login.dao.LoginImplementation;
+import com.group8.dalsmartteamwork.login.dao.LoginDaoImplementation;
 import com.group8.dalsmartteamwork.login.model.User;
 import com.group8.dalsmartteamwork.utils.Encryption;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -12,7 +12,7 @@ public class LoginAuthentication implements AuthenticationManager {
 
     public String role;
     Boolean status;
-    LoginImplementation loginImplementation = new LoginImplementation();
+    LoginDaoImplementation loginImplementation = new LoginDaoImplementation();
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -29,7 +29,7 @@ public class LoginAuthentication implements AuthenticationManager {
         }
         try {
             if (status) {
-                role = loginImplementation.role;
+                role = loginImplementation.getRole();
                 user.setRole(role);
                 RoleAuthorization roleAuthorization = new RoleAuthorization(user);
                 return new UsernamePasswordAuthenticationToken(username, password, roleAuthorization.getAuthorities());

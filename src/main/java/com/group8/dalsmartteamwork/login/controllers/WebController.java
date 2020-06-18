@@ -2,11 +2,18 @@ package com.group8.dalsmartteamwork.login.controllers;
 
 import com.group8.dalsmartteamwork.utils.User;
 import org.springframework.stereotype.Controller;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class WebController {
@@ -29,26 +36,11 @@ public class WebController {
         return "loginError";
     }
 
-   // @GetMapping("student")
-    public String getStudentPage(HttpServletRequest request, Model model) {
-        String[] courses = (String[]) request.getSession().getAttribute("courses");
-        int i = 0;
-        try {
-            while (courses[i] != null) {
-                model.addAttribute("course", courses[i]);
-                i++;
-            }
-        } catch (NullPointerException e) {
-            System.out.println("Null pointer exception");
-        }
-        return "student";
-    }
-
-    //@GetMapping("admin")
-    public String getAdminPage(HttpServletRequest request, Model model) {
-        username = (String) request.getSession().getAttribute("username");
-        model.addAttribute("user", username);
-        return "admin";
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public void dsiplayLogout(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getSession().invalidate();
+        response.sendRedirect("/");
     }
 
     @GetMapping("guest")
