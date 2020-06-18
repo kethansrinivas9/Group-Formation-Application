@@ -77,14 +77,25 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
 
     @Override
     public Boolean updatePassword(String bannerID, String password) {
+
         ResetPasswordDao resetPasswordDao = new ResetPasswordDaoImpl();
         IPasswordHistoryManager passwordHistory = new PasswordHistoryManagerImpl();
+        PasswordPolicy passwordPolicy = new PasswordPolicy();
+
+        if (!passwordPolicy.validate(password)) {
+            return false;
+        }
         Encryption encryption = new Encryption();
+
         String encrypted_password = encryption.encrypt(password);
 
         try {
-            if (passwordHistory.passwordExists(bannerID, encrypted_password)) {
-                return false;
+            if (passwordPolicy.getHistoryConstraint().equals("true")) {
+                if (passwordHistory.passwordExists(bannerID, encrypted_password)) {
+                    return false;
+                } else {
+                    passwordHistory.moveCurrentPassword(bannerID);
+                }
             }
             if (resetPasswordDao.updatePassword(bannerID, encrypted_password)) {
                 return true;
