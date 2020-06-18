@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -28,7 +27,7 @@ public class CreateQuestionController {
     public String getAnswerPage(@RequestParam("title") String title, @RequestParam("question") String text,
                                 @RequestParam("type") String type, Model model){
         Question question = Question.getInstance();
-        IHandleQuestion handleQuestion = new HandleQuestion(question);
+        IQuestionHandler handleQuestion = new QuestionHandler(question);
         handleQuestion.createQuestion(title, text, type);
         switch (type){
             case "numeric":
@@ -52,13 +51,13 @@ public class CreateQuestionController {
     public String saveDetails(HttpServletRequest request, Model model){
         List<Option> options;
         Question question = Question.getInstance();
-        ISaveQuestionOptions saveQuestionOptions;
-        IParseRequest parseRequest = new ParseRequest();
+        IQuestionOptionManager saveQuestionOptions;
+        IOptionRetrieveManager parseRequest = new OptionRetrieveManager();
         IQuestionDao questionDao = new QuestionDao();
         int questionId;
 
         options = parseRequest.getOptions(request);
-        saveQuestionOptions = new SaveQuestionOptions(questionDao);
+        saveQuestionOptions = new QuestionOptionManager(questionDao);
         questionId = saveQuestionOptions.saveQuestion(question);
         saveQuestionOptions.saveOptions(options, questionId);
         question.reset();
@@ -69,7 +68,7 @@ public class CreateQuestionController {
     @RequestMapping(value="/validate-question", method=RequestMethod.POST, params="action=cancel")
     public String cancelDetails(HttpServletRequest request, Model model){
         Question question = Question.getInstance();
-        IHandleQuestion handleQuestion = new HandleQuestion(question);
+        IQuestionHandler handleQuestion = new QuestionHandler(question);
         handleQuestion.resetQuestion();
         model.addAttribute("component", 0);
         return "create-question";

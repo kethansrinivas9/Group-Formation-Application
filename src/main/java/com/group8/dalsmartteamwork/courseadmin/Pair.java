@@ -1,4 +1,4 @@
-package com.group8.dalsmartteamwork.courseadmin.models;
+package com.group8.dalsmartteamwork.courseadmin;
 
 public class Pair<X, Y> {
     private X x;

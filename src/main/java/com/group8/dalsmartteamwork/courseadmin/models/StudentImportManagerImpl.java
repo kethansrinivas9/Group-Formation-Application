@@ -1,4 +1,4 @@
-package com.group8.dalsmartteamwork.courseadmin.services;
+package com.group8.dalsmartteamwork.courseadmin.models;
 
 import com.group8.dalsmartteamwork.register.dao.RegistrationDao;
 import com.group8.dalsmartteamwork.utils.*;
@@ -6,14 +6,14 @@ import com.group8.dalsmartteamwork.utils.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImportStudentServiceImpl implements ImportStudentService {
+public class StudentImportManagerImpl implements IStudentImportManager {
     private RegistrationDao dao;
     private Mail mail;
     private int courseId;
     private IEncryption encryption;
     private IPasswordGenerator passwordGenerator;
 
-    public ImportStudentServiceImpl(int courseId, RegistrationDao dao, Mail mail){
+    public StudentImportManagerImpl(int courseId, RegistrationDao dao, Mail mail){
         this.courseId = courseId;
         this.dao = dao;
         this.mail = mail;

@@ -1,14 +1,14 @@
-package com.group8.dalsmartteamwork.courseadmin.services;
+package com.group8.dalsmartteamwork.courseadmin.models;
 
 import com.group8.dalsmartteamwork.utils.ICsvReader;
 import com.group8.dalsmartteamwork.utils.User;
 
 import java.util.List;
 
-public class ParseCsvServiceImpl implements ParseCsvService {
+public class CsvParserImpl implements ICsvParser {
     private ICsvReader reader;
 
-    public ParseCsvServiceImpl(ICsvReader reader) {
+    public CsvParserImpl(ICsvReader reader) {
         this.reader = reader;
     }
 
