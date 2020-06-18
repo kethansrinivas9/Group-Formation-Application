@@ -1,9 +1,9 @@
 package com.group8.dalsmartteamwork.student.dao;
 
 import com.group8.dalsmartteamwork.student.model.Student;
+import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
 import com.group8.dalsmartteamwork.utils.DbConnection;
 import org.springframework.security.core.context.SecurityContextHolder;
-
 import javax.servlet.http.HttpServletRequest;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -18,26 +18,27 @@ public class StudentDaoImp implements StudentDao {
 
     @Override
     public ArrayList<Student> displayCourses() {
+
+        CallStoredProcedure procedure = null;
+        ResultSet resultSet;
         try {
-            dbConnection = DbConnection.getInstance();
-            dbConnection.createDbConnection();
             username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            String query = String.format(
-                    "select c.CourseID, c.CourseName, u.BannerID from Courses AS c INNER JOIN CourseRole AS cr on (c.CourseID = cr.CourseID) INNER JOIN Role AS r on (cr.RoleID = r.RoleID) INNER JOIN Users AS u on (u.BannerID = cr.BannerID) where r.RoleID='2' and u.BannerID= '%s' ;",
-                    username);
-            ResultSet resultSet = dbConnection.getRecords(query);
+            procedure = new CallStoredProcedure("spDisplayCourses(?)");
+            procedure.setParameter(1, username);
+            resultSet = procedure.executeWithResults();
             while (resultSet.next()) {
-                courseId = resultSet.getString("c.CourseID");
-                courseName = resultSet.getString("c.CourseName");
+                courseId = resultSet.getString(1);
+                courseName = resultSet.getString(2);
                 courseList.add(new Student(courseId, courseName));
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            dbConnection.closeConnection();
+            if (null != procedure) {
+                procedure.cleanup();
+            }
         }
         return courseList;
     }
-
 }

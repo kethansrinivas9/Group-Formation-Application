@@ -1,29 +1,28 @@
 package com.group8.dalsmartteamwork.login.dao;
 
 import com.group8.dalsmartteamwork.login.dao.LoginDao;
-import com.group8.dalsmartteamwork.utils.DbConnection;
+import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
 
 import java.sql.ResultSet;
 
-public class LoginImplementation implements LoginDao {
+public class LoginDaoImplementation implements LoginDao {
     private String role, BannerID;
     private String password_temp = null;
-    DbConnection connection;
 
     @Override
     public Boolean getUserDetails(String id, String firstName, String email, String password) {
 
+        CallStoredProcedure procedure = null;
+        ResultSet resultSet;
         try {
-            connection = DbConnection.getInstance();
-            connection.createDbConnection();
-            final String query = String.format(
-                    "Select u.Password, r.RoleName, u.BannerID from Users AS u INNER JOIN SystemRole AS s on (u.BannerID = s.BannerID) INNER JOIN Role AS r on (r.RoleID = s.RoleID) where u.BannerID = '%s' and u.Password= '%s' ",
-                    id, password);
-            ResultSet resultSet = connection.getRecords(query);
+            procedure = new CallStoredProcedure("spGetUserDetails(?, ?)");
+            procedure.setParameter(1, id);
+            procedure.setParameter(2, password);
+            resultSet = procedure.executeWithResults();
             while (resultSet.next()) {
-                password_temp = resultSet.getString("u.Password");
-                setRole(resultSet.getString("r.RoleName"));
-                setBannerID(resultSet.getString("u.BannerID"));
+                password_temp = resultSet.getString(1);
+                setRole(resultSet.getString(2));
+                setBannerID(resultSet.getString(3));
             }
             if (password.equals(password_temp)) {
                 return true;
@@ -31,7 +30,9 @@ public class LoginImplementation implements LoginDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            connection.close();
+            if (null != procedure) {
+                procedure.cleanup();
+            }
         }
         return false;
     }
