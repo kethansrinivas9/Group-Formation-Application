@@ -38,25 +38,11 @@ public class CourseDaoImpl implements CourseDao {
         try {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
-            String query = String.format("SELECT * FROM CourseRole WHERE CourseID='%s'", courseID);
+//            String query = String.format("SELECT * FROM CourseRole WHERE CourseID=%s", courseID);
+            String query = String.format("SELECT * FROM Users WHERE BannerID NOT IN (SELECT BannerID FROM CourseRole where CourseID=%s);", courseID);
             ResultSet rs = connection.getRecords(query);
             while (rs.next()) {
-                enrolled.add(rs.getString("BannerID"));
-            }
-            query = "SELECT * FROM Users";
-            rs = connection.getRecords(query);
-            while (rs.next()) {
-                String bannerID;
-                Boolean alreadyExists = false;
-                for (String s : enrolled) {
-                    bannerID = rs.getString("BannerID");
-                    if (bannerID.equals(s)) {
-                        alreadyExists = true;
-                    }
-                }
-                if (!alreadyExists) {
-                    users.add(new User(rs.getString("BannerID"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Email"), ""));
-                }
+                users.add(new User(rs.getString("BannerID"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Email"), ""));
             }
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
@@ -73,21 +59,10 @@ public class CourseDaoImpl implements CourseDao {
         try {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
-            String query = String.format("SELECT * FROM CourseRole WHERE CourseID='%s' and RoleID=3", courseID);
+            String query = String.format("SELECT * FROM Users u, CourseRole c WHERE c.CourseID=%s and c.RoleID=3 and u.BannerID=c.BannerID", courseID);
             ResultSet rs = connection.getRecords(query);
             while (rs.next()) {
-                taBannerIDList.add(rs.getString("BannerID"));
-            }
-            query = "SELECT * FROM Users";
-            rs = connection.getRecords(query);
-            while (rs.next()) {
-                String bannerID;
-                for (String s : taBannerIDList) {
-                    bannerID = rs.getString("BannerID");
-                    if (bannerID.equals(s)) {
-                        taList.add(new User(rs.getString("BannerID"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Email"), ""));
-                    }
-                }
+                taList.add(new User(rs.getString("BannerID"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Email"), ""));
             }
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
@@ -104,21 +79,10 @@ public class CourseDaoImpl implements CourseDao {
         try {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
-            String query = String.format("SELECT * FROM CourseRole WHERE CourseID='%s' and RoleID=2", courseID);
+            String query = String.format("SELECT * FROM Users u, CourseRole c WHERE CourseID=%s and RoleID=2 and u.BannerID=c.BannerID;", courseID);
             ResultSet rs = connection.getRecords(query);
             while (rs.next()) {
-                studentBannerIDList.add(rs.getString("BannerID"));
-            }
-            query = "SELECT * FROM Users";
-            rs = connection.getRecords(query);
-            while (rs.next()) {
-                String bannerID;
-                for (String s : studentBannerIDList) {
-                    bannerID = rs.getString("BannerID");
-                    if (bannerID.equals(s)) {
-                        studentList.add(new User(rs.getString("BannerID"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Email"), ""));
-                    }
-                }
+                studentList.add(new User(rs.getString("BannerID"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Email"), ""));
             }
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
