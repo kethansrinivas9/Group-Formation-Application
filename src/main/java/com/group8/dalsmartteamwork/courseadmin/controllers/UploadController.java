@@ -1,6 +1,8 @@
 package com.group8.dalsmartteamwork.courseadmin.controllers;
 
 import com.group8.dalsmartteamwork.courseadmin.Pair;
+import com.group8.dalsmartteamwork.courseadmin.dao.IStudentEnrollmentDao;
+import com.group8.dalsmartteamwork.courseadmin.dao.StudentEnrollmentDaoImpl;
 import com.group8.dalsmartteamwork.courseadmin.models.*;
 import com.group8.dalsmartteamwork.register.dao.RegistrationDao;
 import com.group8.dalsmartteamwork.register.dao.RegistrationDaoImpl;
@@ -28,7 +30,6 @@ public class UploadController {
 
     @PostMapping(value = "/upload")
     public String uploadFile(@RequestParam("file") MultipartFile file, int courseId, RedirectAttributes attributes, Model model) {
-        System.out.println(courseId);
         if (file.isEmpty()) {
             model.addAttribute("courseId", courseId);
             model.addAttribute("message", "Please select a file to upload.");
@@ -38,8 +39,9 @@ public class UploadController {
             String fileName = file.getOriginalFilename();
             ICsvReader csvReader = new CsvReader(file);
             Mail mail = new Mail();
-            RegistrationDao dao = new RegistrationDaoImpl();
-            IStudentImportManager service = new StudentImportManagerImpl(courseId, dao, mail);
+            RegistrationDao registrationDao = new RegistrationDaoImpl();
+            IStudentEnrollmentDao studentEnrollmentDao = new StudentEnrollmentDaoImpl();
+            IStudentImportManager service = new StudentImportManagerImpl(courseId, registrationDao, studentEnrollmentDao, mail);
             ICsvParser iCsvParser = new CsvParserImpl(csvReader);
             MakePairService makePairService = new MakePairServiceImpl();
             List<User> users = iCsvParser.getUsers();

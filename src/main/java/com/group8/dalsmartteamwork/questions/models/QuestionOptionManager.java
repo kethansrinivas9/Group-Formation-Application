@@ -18,7 +18,6 @@ public class QuestionOptionManager implements IQuestionOptionManager {
     public int saveQuestion(Question question) {
         String questionTypeString = question.getType();
         CurrentUser currentUser = CurrentUser.getInstance();
-        System.out.println(currentUser.getBannerId());
         int questionType;
         int questionId;
         switch (questionTypeString){

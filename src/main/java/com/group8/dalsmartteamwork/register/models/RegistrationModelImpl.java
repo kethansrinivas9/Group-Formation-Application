@@ -17,7 +17,7 @@ public class RegistrationModelImpl implements IRegistrationModel {
             Encryption encryption = new Encryption();
             user.setPassword(encryption.encrypt(user.getPassword()));
             Boolean createUserStatus = this.dao.addUserToDb(user);
-            Boolean addGuestRoleStatus = this.dao.addGuestRole(user.getId());
+            Boolean addGuestRoleStatus = this.dao.addGuestRoleToUser(user.getId());
             return createUserStatus && addGuestRoleStatus;
         }
         catch (Exception e){

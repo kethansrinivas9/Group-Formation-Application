@@ -60,7 +60,7 @@ public class ResetPasswordController {
 
                 if (passwordHistoryManager.passwordExists(newPassword.getBannerID(), newPassword.getPassword())) {
                     model.addAttribute("error",
-                            "New password cannot be same as current or last three old passwords.");
+                            "New password cannot be same as current or last" + passwordPolicy.getHistoricalPasswordLimit() + " old passwords.");
                     model.addAttribute("newPassword", newPassword);
                     return "resetPassword/resetPasswordForm";
                 } else {

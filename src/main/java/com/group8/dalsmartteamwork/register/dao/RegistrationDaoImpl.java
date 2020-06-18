@@ -55,7 +55,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
     }
 
     @Override
-    public Boolean addGuestRole(String id) {
+    public Boolean addGuestRoleToUser(String id) {
         CallStoredProcedure procedure = null;
         try {
             procedure = new CallStoredProcedure("spAssignGuestRoleToUser(?)");
@@ -74,23 +74,4 @@ public class RegistrationDaoImpl implements RegistrationDao {
 
     }
 
-    @Override
-    public Boolean assignCourseToUser(String userId, int courseId) {
-        CallStoredProcedure procedure = null;
-        try {
-            procedure = new CallStoredProcedure("spEnrollStudentToCourse(?, ?)");
-            procedure.setParameter(1, userId);
-            procedure.setParameter(2, courseId);
-            procedure.execute();
-            return true;
-        } catch (Exception e) {
-            //TODO: Add to Log
-            e.printStackTrace();
-        } finally {
-            if (null != procedure) {
-                procedure.cleanup();
-            }
-        }
-        return false;
-    }
 }

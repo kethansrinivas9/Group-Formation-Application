@@ -5,6 +5,5 @@ import com.group8.dalsmartteamwork.utils.User;
 public interface RegistrationDao{
     public Boolean isUserInDb(String id);
     public Boolean addUserToDb(User user);
-    public Boolean addGuestRole(String id);
-    public Boolean assignCourseToUser(String userId, int courseId);
+    public Boolean addGuestRoleToUser(String id);
 }
