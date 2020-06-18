@@ -31,7 +31,7 @@ class SaveQuestionOptionsTest {
         testQuestion.setTitle("title");
         testQuestion.setText("text");
         testQuestion.setType("numeric");
-        when(questionDao.addQuestionToDb(testQuestion, 1, "B456")).thenReturn(10);
+        when(questionDao.addQuestionToDb(testQuestion, 1, null)).thenReturn(10);
         SaveQuestionOptions saveQuestionOptions = new SaveQuestionOptions(questionDao);
         assertEquals(saveQuestionOptions.saveQuestion(testQuestion), 10);
     }
