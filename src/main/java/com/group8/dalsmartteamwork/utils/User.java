@@ -80,7 +80,4 @@ public class User implements IUser {
         return this.password;
     }
 
-    public String toString() {
-        return this.id.toUpperCase() + "," + this.firstName.toUpperCase() + " " + this.lastName.toUpperCase();
-    }
 }
