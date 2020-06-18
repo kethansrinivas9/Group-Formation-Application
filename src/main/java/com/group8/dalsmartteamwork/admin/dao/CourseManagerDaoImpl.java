@@ -1,7 +1,7 @@
 package com.group8.dalsmartteamwork.admin.dao;
 
 import com.group8.dalsmartteamwork.course.model.Course;
-import com.group8.dalsmartteamwork.utils.DbConnection;
+import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -10,19 +10,17 @@ import java.util.List;
 public class CourseManagerDaoImpl implements ICourseManagerDao{
     String courseID;
     String courseName;
-    final String INSTRUCTOR_ROLE_ID = "4";
     Course course;
-    DbConnection dbConnection;
     List<Course> courseList;
 
     @Override
     public List<Course> getAllCourses() {
         courseList = new ArrayList<Course>();
+        CallStoredProcedure storedProcedure = null;
+        ResultSet rs;
         try {
-            String query = String.format(AdminQueryConstants.GET_ALL_COURSES);
-            dbConnection = DbConnection.getInstance();
-            dbConnection.createDbConnection();
-            ResultSet rs = dbConnection.getRecords(query);
+            storedProcedure = new CallStoredProcedure("spGetAllCourses()");
+            rs = storedProcedure.executeWithResults();
 
             while (rs.next()) {
                 courseID = rs.getObject("CourseID").toString();
@@ -33,78 +31,84 @@ public class CourseManagerDaoImpl implements ICourseManagerDao{
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            dbConnection.closeConnection();
+            storedProcedure.cleanup();
         }
         return courseList;
     }
 
     @Override
     public boolean createNewCourse(String courseName, int courseID, String instructorId) {
+        CallStoredProcedure storedProcedure = null;
         try {
-            String createCourseQuery = String.format(AdminQueryConstants.CREATE_COURSE, courseID, courseName);
-            String createInstructorQuery = String.format(AdminQueryConstants.CREATE_INSTRUCTOR, instructorId, courseID, '4');
-            dbConnection = DbConnection.getInstance();
-            dbConnection.createDbConnection();
-            int createCourseResultSet = dbConnection.addRecords(createCourseQuery);
+            storedProcedure = new CallStoredProcedure("spCreateCourse(?, ?)");
+            storedProcedure.setParameter(1, courseID);
+            storedProcedure.setParameter(2, courseName);
+            storedProcedure.execute();
 
-            if (createCourseResultSet >= 0 && instructorId != "Select an Instructor") {
-                System.out.println(createInstructorQuery);
-                int createInstructorResultSet = dbConnection.addRecords(createInstructorQuery);
-                if(createInstructorResultSet >= 0) {
-                    return true;
-                } else {
-                    return false;
-                }
+            if (!instructorId.equals("Select an Instructor")) {
+                storedProcedure = new CallStoredProcedure("spCreateInstructor(?, ?)");
+                storedProcedure.setParameter(1, instructorId);
+                storedProcedure.setParameter(2, courseID);
+                storedProcedure.execute();
             }
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            dbConnection.closeConnection();
+            storedProcedure.cleanup();
         }
         return false;
     }
 
     @Override
     public boolean updateCourse(String newCourseName, int newCourseID, String instructorID, int oldCourseID) {
+        CallStoredProcedure storedProcedure = null;
+        int updatedRows = 0;
         try {
-            String updateCourseQuery = String.format(AdminQueryConstants.UPDATE_COURSE, newCourseName, newCourseID, oldCourseID);
-            String updateInstructorQuery = String.format(AdminQueryConstants.UPDATE_INSTRUCTOR, instructorID, newCourseID, INSTRUCTOR_ROLE_ID);
-            dbConnection = DbConnection.getInstance();
-            dbConnection.createDbConnection();
-            int courseUpdateResultSet = dbConnection.updateRecords(updateCourseQuery);
-            int instructorUpdateResultSet = dbConnection.updateRecords(updateInstructorQuery);
+            storedProcedure = new CallStoredProcedure("spUpdateCourse(?, ?, ?)");
+            storedProcedure.setParameter(1, newCourseName);
+            storedProcedure.setParameter(2, newCourseID);
+            storedProcedure.setParameter(3, oldCourseID);
+            storedProcedure.execute();
 
-            if (instructorUpdateResultSet <= 0) {
-                String createInstructorQuery = String.format(AdminQueryConstants.CREATE_INSTRUCTOR, instructorID, newCourseID, "4" );
-                instructorUpdateResultSet = dbConnection.addRecords(createInstructorQuery);
+            storedProcedure = new CallStoredProcedure("spUpdateInstructor(?, ?)");
+            storedProcedure.setParameter(1, instructorID);
+            storedProcedure.setParameter(2, newCourseID);
+            ResultSet rs = storedProcedure.executeWithResults();
+
+            while(rs.next()) {
+                updatedRows = rs.getInt(1);
             }
 
-            if (courseUpdateResultSet >= 0 && instructorUpdateResultSet >= 0) {
-                return true;
+            if (updatedRows <= 0) {
+                storedProcedure = new CallStoredProcedure("spCreateInstructor(?, ?)");
+                storedProcedure.setParameter(1, instructorID);
+                storedProcedure.setParameter(2, newCourseID);
+                storedProcedure.execute();
             }
+
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            dbConnection.closeConnection();
+            storedProcedure.cleanup();
         }
         return false;
     }
 
     @Override
     public boolean deleteCourse(String courseID) {
+        CallStoredProcedure storedProcedure = null;
         try {
-            String query = String.format(AdminQueryConstants.DELETE_COURSE, courseID);
-            dbConnection = DbConnection.getInstance();
-            dbConnection.createDbConnection();
-            int rs = dbConnection.deleteRecords(query);
+            storedProcedure = new CallStoredProcedure("spDeleteCourse(?)");
+            storedProcedure.setParameter(1, courseID);
+            storedProcedure.execute();
 
-            if (rs >= 0) {
-                return true;
-            }
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            dbConnection.closeConnection();
+            storedProcedure.cleanup();
         }
         return false;
     }
