@@ -41,7 +41,8 @@ public class InstructorController {
     }
 
     @GetMapping("/confirm-add-ta")
-    public String confirmAddTA(@RequestParam(name = "courseid") int courseID, @RequestParam(name = "bannerid") String bannerID, Model model) {
+    public String confirmAddTA(@RequestParam(name = "courseid") int courseID,
+                               @RequestParam(name = "bannerid") String bannerID, Model model) {
         ICourseInstructorManager courseInstructorManager = new CourseInstructorManagerImpl();
         if (courseInstructorManager.addTAtoCourse(bannerID, courseID)) {
             model.addAttribute("courseid", courseID);
