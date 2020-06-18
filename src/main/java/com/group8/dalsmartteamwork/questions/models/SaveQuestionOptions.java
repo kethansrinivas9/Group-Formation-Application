@@ -3,6 +3,7 @@ package com.group8.dalsmartteamwork.questions.models;
 import com.group8.dalsmartteamwork.questions.Option;
 import com.group8.dalsmartteamwork.questions.Question;
 import com.group8.dalsmartteamwork.questions.dao.IQuestionDao;
+import com.group8.dalsmartteamwork.utils.CurrentUser;
 
 import java.util.List;
 
@@ -15,9 +16,11 @@ public class SaveQuestionOptions implements ISaveQuestionOptions {
 
     @Override
     public int saveQuestion(Question question) {
+        String questionTypeString = question.getType();
+        CurrentUser currentUser = CurrentUser.getInstance();
+        System.out.println(currentUser.getBannerId());
         int questionType;
         int questionId;
-        String questionTypeString = question.getType();
         switch (questionTypeString){
             case "numeric":
                 questionType = 1;
@@ -31,7 +34,7 @@ public class SaveQuestionOptions implements ISaveQuestionOptions {
             default:
                 questionType = 4;
         }
-        questionId =  questionDao.addQuestionToDb(question, questionType, "B456");
+        questionId =  questionDao.addQuestionToDb(question, questionType, currentUser.getBannerId());
         return questionId;
     }
 

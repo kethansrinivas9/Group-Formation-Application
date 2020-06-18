@@ -3,6 +3,7 @@ package com.group8.dalsmartteamwork.login.login_security;
 import com.group8.dalsmartteamwork.login.dao.CourseRoleImp;
 import com.group8.dalsmartteamwork.login.model.User;
 
+import com.group8.dalsmartteamwork.utils.CurrentUser;
 import org.springframework.boot.Banner;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -20,7 +21,6 @@ import java.util.Set;
 public class Successhandler implements AuthenticationSuccessHandler {
 
     CourseRoleImp courseRole = new CourseRoleImp();
-    User user = new User();
     private String BannerID;
 
     public String getBannerID() {
@@ -34,7 +34,7 @@ public class Successhandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
-
+        CurrentUser currentUser = CurrentUser.getInstance();
         HttpSession session = request.getSession();
         String username = authentication.getPrincipal().toString();
         session.setAttribute("username", username);
@@ -44,9 +44,13 @@ public class Successhandler implements AuthenticationSuccessHandler {
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
         Set<String> courseRoles = courseRole.getCourseRoles();
 
+        currentUser.setBannerId(this.BannerID);
+
         if (roles.contains("Admin")) {
+            currentUser.setRoles(roles);
             response.sendRedirect("/admin");
         } else if (roles.contains("Guest")) {
+            currentUser.setRoles(courseRoles);
             if ((courseRoles.contains("Student") && courseRoles.contains("TA"))) {
                 response.sendRedirect("/viewallcourses");
             } else if (courseRoles.contains("Student")) {

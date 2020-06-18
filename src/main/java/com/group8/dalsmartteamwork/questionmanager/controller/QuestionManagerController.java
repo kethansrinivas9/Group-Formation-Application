@@ -3,7 +3,7 @@ package com.group8.dalsmartteamwork.questionmanager.controller;
 import java.security.Principal;
 import java.util.List;
 import com.group8.dalsmartteamwork.questionmanager.dao.QuestionManagerImp;
-import com.group8.dalsmartteamwork.questionmanager.model.Question;
+import com.group8.dalsmartteamwork.questionmanager.Question;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
