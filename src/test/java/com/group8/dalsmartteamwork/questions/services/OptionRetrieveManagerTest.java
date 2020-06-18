@@ -1,6 +1,6 @@
 package com.group8.dalsmartteamwork.questions.services;
 
-import com.group8.dalsmartteamwork.questions.models.ParseRequest;
+import com.group8.dalsmartteamwork.questions.models.OptionRetrieveManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class ParseRequestTest {
+class OptionRetrieveManagerTest {
     private HttpServletRequest request;
     private final String TEST_DISPLAY_TEXT = "DISPLAY_TEXT";
     private final int TEST_STORED_AS = 5;
@@ -23,7 +23,7 @@ class ParseRequestTest {
 
     @Test
     void getOptionsSuccessTest(){
-        ParseRequest parseRequest = new ParseRequest();
+        OptionRetrieveManager parseRequest = new OptionRetrieveManager();
         when(request.getParameter("display-text-1")).thenReturn(TEST_DISPLAY_TEXT);
         when(request.getParameter("stored-as-1")).thenReturn(String.valueOf(TEST_STORED_AS));
         when(request.getParameter("display-text-2")).thenReturn(null);
@@ -33,7 +33,7 @@ class ParseRequestTest {
 
     @Test
     void getOptionsFailTest(){
-        ParseRequest parseRequest = new ParseRequest();
+        OptionRetrieveManager parseRequest = new OptionRetrieveManager();
         when(request.getParameter("display-text-1")).thenReturn(null);
         when(request.getParameter("stored-as-1")).thenReturn(null);
         when(request.getParameter("display-text-2")).thenReturn(TEST_DISPLAY_TEXT);

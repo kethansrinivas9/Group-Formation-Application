@@ -7,10 +7,10 @@ import com.group8.dalsmartteamwork.utils.CurrentUser;
 
 import java.util.List;
 
-public class SaveQuestionOptions implements ISaveQuestionOptions {
+public class QuestionOptionManager implements IQuestionOptionManager {
     private IQuestionDao questionDao;
 
-    public SaveQuestionOptions(IQuestionDao questionDao){
+    public QuestionOptionManager(IQuestionDao questionDao){
         this.questionDao = questionDao;
     }
 

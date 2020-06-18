@@ -1,4 +1,4 @@
-package com.group8.dalsmartteamwork.courseadmin.services;
+package com.group8.dalsmartteamwork.courseadmin.models;
 
 import com.group8.dalsmartteamwork.utils.User;
 import org.junit.jupiter.api.BeforeAll;

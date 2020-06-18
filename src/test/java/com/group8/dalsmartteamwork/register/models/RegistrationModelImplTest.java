@@ -1,4 +1,4 @@
-package com.group8.dalsmartteamwork.register.services;
+package com.group8.dalsmartteamwork.register.models;
 
 import com.group8.dalsmartteamwork.register.dao.RegistrationDaoImpl;
 import com.group8.dalsmartteamwork.utils.User;
@@ -10,15 +10,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class RegistrationServiceImplTest {
-    private RegistrationService service = null;
+class RegistrationModelImplTest {
+    private IRegistrationModel service = null;
     private RegistrationDaoImpl dao = mock(RegistrationDaoImpl.class);
     private User existingUser = new User("B00000000", "fName", "lName", "email@email.com", "pwd");
     private User newUser = new User("B1111111", "fName", "lName", "email@email.com", "pwd");
 
     @BeforeEach
     void setup(){
-        this.service = new RegistrationServiceImpl(dao);
+        this.service = new RegistrationModelImpl(dao);
     }
 
     @Test

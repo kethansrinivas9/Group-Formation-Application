@@ -5,7 +5,7 @@ import com.group8.dalsmartteamwork.questions.Question;
 
 import java.util.List;
 
-public interface ISaveQuestionOptions {
+public interface IQuestionOptionManager {
     int saveQuestion(Question question);
     Boolean saveOptions(List<Option> options, int questionId);
 }

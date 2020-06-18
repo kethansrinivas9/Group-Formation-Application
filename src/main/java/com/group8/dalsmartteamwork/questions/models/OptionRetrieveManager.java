@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParseRequest implements IParseRequest {
+public class OptionRetrieveManager implements IOptionRetrieveManager {
     public List<Option> getOptions(HttpServletRequest request){
         List<Option> options = new ArrayList<>();
         String displayText, storedAs;

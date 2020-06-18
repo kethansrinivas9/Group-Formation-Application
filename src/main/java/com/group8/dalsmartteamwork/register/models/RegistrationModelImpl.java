@@ -1,13 +1,13 @@
-package com.group8.dalsmartteamwork.register.services;
+package com.group8.dalsmartteamwork.register.models;
 
 import com.group8.dalsmartteamwork.register.dao.RegistrationDao;
 import com.group8.dalsmartteamwork.utils.Encryption;
 import com.group8.dalsmartteamwork.utils.User;
 
-public class RegistrationServiceImpl implements RegistrationService {
+public class RegistrationModelImpl implements IRegistrationModel {
     private RegistrationDao dao;
 
-    public RegistrationServiceImpl(RegistrationDao dao){
+    public RegistrationModelImpl(RegistrationDao dao){
         this.dao = dao;
     }
 

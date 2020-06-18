@@ -4,9 +4,7 @@ import com.group8.dalsmartteamwork.questions.Option;
 import com.group8.dalsmartteamwork.questions.Question;
 import com.group8.dalsmartteamwork.questions.dao.IQuestionDao;
 import com.group8.dalsmartteamwork.questions.dao.QuestionDao;
-import com.group8.dalsmartteamwork.questions.models.SaveQuestionOptions;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import com.group8.dalsmartteamwork.questions.models.QuestionOptionManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class SaveQuestionOptionsTest {
+class QuestionOptionManagerTest {
     private IQuestionDao questionDao;
 
     @BeforeEach
@@ -32,7 +30,7 @@ class SaveQuestionOptionsTest {
         testQuestion.setText("text");
         testQuestion.setType("numeric");
         when(questionDao.addQuestionToDb(testQuestion, 1, null)).thenReturn(10);
-        SaveQuestionOptions saveQuestionOptions = new SaveQuestionOptions(questionDao);
+        QuestionOptionManager saveQuestionOptions = new QuestionOptionManager(questionDao);
         assertEquals(saveQuestionOptions.saveQuestion(testQuestion), 10);
     }
 
@@ -45,7 +43,7 @@ class SaveQuestionOptionsTest {
         options.add(option2);
         when(questionDao.addOptionToDb(option1,1)).thenReturn(true);
         when(questionDao.addOptionToDb(option2,1)).thenReturn(true);
-        SaveQuestionOptions saveQuestionOptions = new SaveQuestionOptions(questionDao);
+        QuestionOptionManager saveQuestionOptions = new QuestionOptionManager(questionDao);
         assertTrue(saveQuestionOptions.saveOptions(options,1));
     }
 
