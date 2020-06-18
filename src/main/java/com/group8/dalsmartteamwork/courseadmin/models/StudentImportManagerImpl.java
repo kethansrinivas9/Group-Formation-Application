@@ -1,5 +1,6 @@
 package com.group8.dalsmartteamwork.courseadmin.models;
 
+import com.group8.dalsmartteamwork.courseadmin.dao.IStudentEnrollmentDao;
 import com.group8.dalsmartteamwork.register.dao.RegistrationDao;
 import com.group8.dalsmartteamwork.utils.*;
 
@@ -7,15 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentImportManagerImpl implements IStudentImportManager {
-    private RegistrationDao dao;
+    private RegistrationDao registrationDao;
+    private IStudentEnrollmentDao studentEnrollmentDao;
     private Mail mail;
     private int courseId;
     private IEncryption encryption;
     private IPasswordGenerator passwordGenerator;
 
-    public StudentImportManagerImpl(int courseId, RegistrationDao dao, Mail mail){
+    public StudentImportManagerImpl(int courseId, RegistrationDao registrationDao, IStudentEnrollmentDao studentEnrollmentDao, Mail mail){
         this.courseId = courseId;
-        this.dao = dao;
+        this.registrationDao = registrationDao;
+        this.studentEnrollmentDao = studentEnrollmentDao;
         this.mail = mail;
         encryption = new Encryption();
         passwordGenerator = new PasswordGenerator();
@@ -32,14 +35,14 @@ public class StudentImportManagerImpl implements IStudentImportManager {
                 String password = passwordGenerator.generatePassword();
                 String encrypted_password = encryption.encrypt(password);
                 user.setPassword(encrypted_password);
-                Boolean userDbStatus = this.dao.isUserInDb(user.getId());
+                Boolean userDbStatus = this.registrationDao.isUserInDb(user.getId());
                 if(userDbStatus){
                     status.add(false);
-                    this.dao.assignCourseToUser(user.getId(), courseId);
+                    studentEnrollmentDao.assignCourseToUser(user.getId(), courseId);
                 }
                 else {
-                    this.dao.addUserToDb(user);
-                    this.dao.assignCourseToUser(user.getId(), courseId);
+                    registrationDao.addUserToDb(user);
+                    studentEnrollmentDao.assignCourseToUser(user.getId(), courseId);
                     final String INVITE_TEXT_FORMAT = "You have been registered to CatME and registered for the course %d. You can login with your email and password: %s";
                     final String INVITE_SUBJECT = "CatME Registration";
                     status.add(true);
