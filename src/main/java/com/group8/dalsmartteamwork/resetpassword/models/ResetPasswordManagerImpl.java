@@ -6,6 +6,7 @@ import com.group8.dalsmartteamwork.utils.Encryption;
 import com.group8.dalsmartteamwork.utils.Mail;
 import com.group8.dalsmartteamwork.utils.ResetToken;
 
+import javax.mail.MessagingException;
 import java.sql.SQLException;
 
 public class ResetPasswordManagerImpl implements IResetPasswordManager {
@@ -55,7 +56,13 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
             domain = LOCALHOST_DOMAIN;
         }
         String mailContent = domain + "/resetpassword?bannerid=" + bannerID + "&token=" + token;
-        return mail.sendEmail(email, "Password Reset Request", mailContent);
+        try {
+            mail.sendEmail(email, "Password Reset Request", mailContent);
+            return true;
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.group8.dalsmartteamwork.courseadmin.models;
 import com.group8.dalsmartteamwork.register.dao.RegistrationDao;
 import com.group8.dalsmartteamwork.utils.*;
 
+import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,13 +45,15 @@ public class StudentImportManagerImpl implements IStudentImportManager {
                     final String INVITE_SUBJECT = "CatME Registration";
                     status.add(true);
                     String message = String.format(INVITE_TEXT_FORMAT, courseId, password);
-                    Thread t = new Thread(new Runnable() {
-                        @Override
-                        public void run() {
+                    Thread mailThread = new Thread(() -> {
+                        try {
                             mail.sendEmail(user.getEmail(), INVITE_SUBJECT, message);
+                        } catch (MessagingException e) {
+                            // TODO: Add to Log
+                            e.printStackTrace();
                         }
                     });
-                    t.start();
+                    mailThread.start();
                 }
             }
         } catch (Exception e) {

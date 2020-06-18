@@ -7,7 +7,6 @@ import java.util.List;
 
 public class CourseManagerImpl implements ICourseManager {
     private ICourseManagerDao courseManagerDao;
-    private String instructorID;
 
     public CourseManagerImpl(ICourseManagerDao courseManagerDao) {
         this.courseManagerDao = courseManagerDao;
@@ -20,7 +19,8 @@ public class CourseManagerImpl implements ICourseManager {
 
     @Override
     public boolean createNewCourse(Course courseDetails) {
-        if (courseDetails.getInstructorID() != "Select an Instructor") {
+        String instructorID;
+        if (!courseDetails.getInstructorID().equals("Select an Instructor")) {
             instructorID = courseDetails.getInstructorID().split(",")[0];
         } else {
             instructorID = courseDetails.getInstructorID();

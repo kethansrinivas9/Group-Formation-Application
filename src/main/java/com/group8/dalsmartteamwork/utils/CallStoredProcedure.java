@@ -11,7 +11,7 @@ public class CallStoredProcedure {
     private Connection connection;
     private CallableStatement statement;
 
-    public CallStoredProcedure(String procedureName) {
+    public CallStoredProcedure(String procedureName) throws SQLException{
         this.procedureName = procedureName;
         connection = null;
         statement = null;
@@ -19,20 +19,14 @@ public class CallStoredProcedure {
         createStatement();
     }
 
-    private void openConnection() {
+    private void openConnection() throws SQLException {
         dbConnection = DbConnection.getInstance();
         dbConnection.createDbConnection();
         connection = dbConnection.getConnection();
     }
 
-    private void createStatement() {
-        try {
-            statement = connection.prepareCall("{call " + procedureName + "}");
-        } catch (SQLException e) {
-            e.printStackTrace();
-            //TODO: Add to Log
-        }
-
+    private void createStatement() throws SQLException {
+        statement = connection.prepareCall("{call " + procedureName + "}");
     }
 
     public void cleanup() {

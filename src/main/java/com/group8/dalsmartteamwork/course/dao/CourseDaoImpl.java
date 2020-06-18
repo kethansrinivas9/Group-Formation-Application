@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseDaoImpl implements CourseDao {
-    DbConnection connection;
+    private DbConnection connection;
 
     @Override
     public Boolean courseExists(int courseID) {
@@ -19,7 +19,7 @@ public class CourseDaoImpl implements CourseDao {
             connection.createDbConnection();
             String query = String.format("SELECT * FROM Courses WHERE CourseID='%s'", courseID);
             ResultSet rs = connection.getRecords(query);
-            while (rs.next()) {
+            if (rs.next()) {
                 connection.close();
                 return true;
             }
@@ -38,7 +38,6 @@ public class CourseDaoImpl implements CourseDao {
         try {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
-//            String query = String.format("SELECT * FROM CourseRole WHERE CourseID=%s", courseID);
             String query = String.format("SELECT * FROM Users WHERE BannerID NOT IN (SELECT BannerID FROM CourseRole where CourseID=%s);", courseID);
             ResultSet rs = connection.getRecords(query);
             while (rs.next()) {

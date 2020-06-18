@@ -8,12 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserManagerDaoImpl implements IUserManagerDao {
-    String bannerID, firstName, lastName;
-    User user;
+    private String bannerID;
 
     public List<String> getListOfNonAdminUsers() {
         List<String> nonAdminUsersList = new ArrayList<String>();
         CallStoredProcedure storedProcedure = null;
+        User user;
+        String firstName;
+        String lastName;
         try {
             storedProcedure = new CallStoredProcedure("spGetNonAdminUsers()");
             ResultSet rs = storedProcedure.executeWithResults();
@@ -28,7 +30,9 @@ public class UserManagerDaoImpl implements IUserManagerDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            storedProcedure.cleanup();
+            if(storedProcedure != null){
+                storedProcedure.cleanup();
+            }
         }
         return nonAdminUsersList;
     }
@@ -46,7 +50,9 @@ public class UserManagerDaoImpl implements IUserManagerDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            storedProcedure.cleanup();
+            if(storedProcedure!=null){
+                storedProcedure.cleanup();
+            }
         }
         return bannerID;
     }
@@ -79,7 +85,9 @@ public class UserManagerDaoImpl implements IUserManagerDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            storedProcedure.cleanup();
+            if(storedProcedure!=null){
+                storedProcedure.cleanup();
+            }
         }
         return guestsAndInstructorsList;
     }

@@ -8,14 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseManagerDaoImpl implements ICourseManagerDao{
-    String courseID;
-    String courseName;
-    Course course;
-    List<Course> courseList;
 
     @Override
     public List<Course> getAllCourses() {
-        courseList = new ArrayList<Course>();
+        List<Course> courseList = new ArrayList<Course>();
+        String courseID;
+        String courseName;
+        Course course;
         CallStoredProcedure storedProcedure = null;
         ResultSet rs;
         try {
@@ -31,7 +30,9 @@ public class CourseManagerDaoImpl implements ICourseManagerDao{
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            storedProcedure.cleanup();
+            if (storedProcedure != null){
+                storedProcedure.cleanup();
+            }
         }
         return courseList;
     }
@@ -55,7 +56,9 @@ public class CourseManagerDaoImpl implements ICourseManagerDao{
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            storedProcedure.cleanup();
+            if(storedProcedure != null){
+                storedProcedure.cleanup();
+            }
         }
         return false;
     }
@@ -91,7 +94,9 @@ public class CourseManagerDaoImpl implements ICourseManagerDao{
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            storedProcedure.cleanup();
+            if(storedProcedure != null){
+                storedProcedure.cleanup();
+            }
         }
         return false;
     }
@@ -108,7 +113,9 @@ public class CourseManagerDaoImpl implements ICourseManagerDao{
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            storedProcedure.cleanup();
+            if(storedProcedure != null){
+                storedProcedure.cleanup();
+            }
         }
         return false;
     }
