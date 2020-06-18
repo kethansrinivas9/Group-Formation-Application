@@ -13,6 +13,7 @@ public class PasswordPolicy {
     private String minSymbols;
     private String charsNotAllowed;
     private String historyConstraint;
+    private int historicalPasswords;
 
     public PasswordPolicy() {
         loadPolicy();
@@ -26,6 +27,7 @@ public class PasswordPolicy {
         this.minSymbols = System.getenv("password.minSymbols");
         this.charsNotAllowed = System.getenv("password.charsNotAllowed");
         this.historyConstraint = System.getenv("password.historyConstraint");
+        this.historicalPasswords = Integer.parseInt(System.getenv("password.historicalPasswords"));
         return true;
     }
 
@@ -55,6 +57,10 @@ public class PasswordPolicy {
 
     public String getHistoryConstraint() {
         return historyConstraint;
+    }
+
+    public int getHistoricalPasswords() {
+        return historicalPasswords;
     }
 
     public Boolean isValid(String password) {

@@ -1,5 +1,6 @@
 package com.group8.dalsmartteamwork.resetpassword.dao;
 
+import com.group8.dalsmartteamwork.resetpassword.models.PasswordPolicy;
 import com.group8.dalsmartteamwork.utils.DbConnection;
 import com.group8.dalsmartteamwork.utils.Encryption;
 
@@ -15,7 +16,8 @@ public class PasswordHistoryManagerImpl implements IPasswordHistoryManager {
         try {
             connection = DbConnection.getInstance();
             connection.createDbConnection();
-            String query = String.format(PasswordHistoryQueryConstants.CALL_MOVE_CURRENT_PASSWORD, bannerID);
+            PasswordPolicy passwordPolicy = new PasswordPolicy();
+            String query = String.format(PasswordHistoryQueryConstants.CALL_MOVE_CURRENT_PASSWORD, bannerID, passwordPolicy.getHistoricalPasswords());
             Statement statement = connection.getStatement();
             Boolean records = statement.execute(query);
             statement.close();
