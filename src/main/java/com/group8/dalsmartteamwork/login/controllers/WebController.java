@@ -15,7 +15,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 @Controller
 public class WebController {
 
@@ -40,11 +39,9 @@ public class WebController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public void dsiplayLogout(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println(request.getSession().getAttribute("username"));
         request.getSession().invalidate();
-        System.out.println(request.getSession().getAttribute("username"));
         response.sendRedirect("/");
-    } 
+    }
 
     @GetMapping("guest")
     public String getGuestPage(HttpServletRequest request, Model model) {

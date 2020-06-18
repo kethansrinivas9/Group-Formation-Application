@@ -1,10 +1,7 @@
 package com.group8.dalsmartteamwork.login.login_security;
 
-import com.group8.dalsmartteamwork.login.dao.CourseRoleImp;
-import com.group8.dalsmartteamwork.login.model.User;
-
+import com.group8.dalsmartteamwork.login.dao.CourseRoleDaoImp;
 import com.group8.dalsmartteamwork.utils.CurrentUser;
-import org.springframework.boot.Banner;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -20,7 +17,7 @@ import java.util.Set;
 @Component
 public class Successhandler implements AuthenticationSuccessHandler {
 
-    CourseRoleImp courseRole = new CourseRoleImp();
+    CourseRoleDaoImp courseRole = new CourseRoleDaoImp();
     private String BannerID;
 
     public String getBannerID() {

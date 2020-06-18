@@ -5,17 +5,28 @@ public class Question {
     private String text;
     private String type;
     private static Question question;
+    private int questionID;
 
-    private Question() {}
+    public Question() {
+    }
 
-    public static Question getInstance(){
-        if (question == null){
+    public static Question getInstance() {
+        if (question == null) {
             question = new Question();
         }
         return question;
     }
 
-    public void reset(){
+    public Question(String title) {
+        this.title = title;
+    }
+
+    public Question(int questionID, String text) {
+        this.text = text;
+        this.questionID = questionID;
+    }
+
+    public void reset() {
         title = null;
         text = null;
         type = null;
@@ -45,5 +56,12 @@ public class Question {
         this.type = type;
     }
 
+    public int getQuestionID() {
+        return questionID;
+    }
+
+    public void setQuestionID(int questionID) {
+        this.questionID = questionID;
+    }
 
 }

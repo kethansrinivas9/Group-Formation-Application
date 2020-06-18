@@ -1,9 +1,10 @@
-package com.group8.dalsmartteamwork.login.dao;
+package com.group8.dalsmartteamwork.login.model;
 
 import org.junit.jupiter.api.Test;
-
 import java.util.HashSet;
 import java.util.Set;
+
+import com.group8.dalsmartteamwork.login.dao.CourseRoleDaoImp;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -11,9 +12,9 @@ import static org.mockito.Mockito.*;
 
 public class CourseRoleImpTest {
 
-    CourseRoleImp courseRoleImp = mock(CourseRoleImp.class);
+    CourseRoleDaoImp courseRoleDaoImp = mock(CourseRoleDaoImp.class);
     Set<String> roleList = new HashSet<String>();
-    
+
     @Test
     public void addCourseRoleTest() {
         roleList.add("Student");
@@ -21,13 +22,13 @@ public class CourseRoleImpTest {
         assertNotNull(roleList.size());
     }
 
-    @Test 
+    @Test
     public void getCourseRolesTest() {
         roleList.add("Student");
         roleList.add("TA");
-        when(courseRoleImp.getCourseRoles()).thenReturn(roleList);
-        assertEquals(courseRoleImp.getCourseRoles(), roleList, "Failed");
-        verify(courseRoleImp).getCourseRoles();
+        when(courseRoleDaoImp.getCourseRoles()).thenReturn(roleList);
+        assertEquals(courseRoleDaoImp.getCourseRoles(), roleList, "Failed");
+        verify(courseRoleDaoImp).getCourseRoles();
     }
-    
+
 }

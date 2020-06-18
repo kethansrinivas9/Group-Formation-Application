@@ -1,6 +1,6 @@
 package com.group8.dalsmartteamwork.login.login_security;
 
-import com.group8.dalsmartteamwork.login.dao.LoginImplementation;
+import com.group8.dalsmartteamwork.login.dao.LoginDaoImplementation;
 import com.group8.dalsmartteamwork.login.model.User;
 import com.group8.dalsmartteamwork.utils.Encryption;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,7 +12,7 @@ public class LoginAuthentication implements AuthenticationManager {
 
     public String role;
     Boolean status;
-    LoginImplementation loginImplementation = new LoginImplementation();
+    LoginDaoImplementation loginImplementation = new LoginDaoImplementation();
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {

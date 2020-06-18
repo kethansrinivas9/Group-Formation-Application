@@ -9,13 +9,14 @@
 <body>
     <div style="background-color:#337ab7; height:50px; color: black;">
         <h2 style="float: left;">Group Formation Tool</h2>
-		<a style="float: right" href="/logout">Logout</a>
+        <a style="float: right; color: black;" href="/logout">Logout</a>
     </div>
-    
-    <div style="text-align:center">
-        <form th:action="@{/questionManager}" method="get">
+
+    <div>
+        <form style="text-align:center" th:action="@{/questionManager}" method="get">
+            <h2>Instructor</h2>
             <button
-                style="background-color: gray; box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"
+                style="background-color: cornflowerblue; box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"
                 type="submit">Question manager</button>
         </form>
     </div>

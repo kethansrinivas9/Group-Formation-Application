@@ -5,32 +5,32 @@
 
     <title>front page</title>
     <meta http-equiv="Content-type" content="text/html" ; charset="UTF-8" />
-    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 
 <body>
     <div style="background-color:#337ab7; height:50px; color: black;">
         <h2 style="float: left;">Group Formation Tool</h2>
-        <a style="float: right" href="/logout">Logout</a>
-        <!-- <a style="float: right" class="active" href="#account">Account</a>  -->
+        <a style="float: right; color: black;" href="/logout">Logout</a>
     </div>
 
     <h2 style="text-align: center;">Sort the Questions By Date</h2>
     <div>
-    <table>
-        <tr>
-           
-            <th>Question Title</th>
-        </tr>
+        <table style="width: 10%;">
+            <tr>
 
-        <tr th:each="list1, itemStat: *{list}">
+                <th>Question Title</th>
+            </tr>
 
-            <td><span th:text="${list1.questionTitle}"></span></td>
-           
-        </tr>
+            <tr th:each="list1, itemStat: *{list}">
 
-    </table>
+                <td><span th:text="${list1.title}"></span></td>
+
+            </tr>
+
+        </table>
 
     </div>
 </body>
+
 </html>
