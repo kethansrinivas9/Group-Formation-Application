@@ -2,7 +2,6 @@ package com.group8.dalsmartteamwork.admin.dao;
 
 import com.group8.dalsmartteamwork.course.model.Course;
 import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
-import com.group8.dalsmartteamwork.utils.DbConnection;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -11,9 +10,7 @@ import java.util.List;
 public class CourseManagerDaoImpl implements ICourseManagerDao{
     String courseID;
     String courseName;
-    final String INSTRUCTOR_ROLE_ID = "4";
     Course course;
-    DbConnection dbConnection;
     List<Course> courseList;
 
     @Override

@@ -1,7 +1,6 @@
 package com.group8.dalsmartteamwork.admin.dao;
 
 import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
-import com.group8.dalsmartteamwork.utils.DbConnection;
 import com.group8.dalsmartteamwork.utils.User;
 
 import java.sql.ResultSet;
@@ -10,10 +9,7 @@ import java.util.List;
 
 public class UserManagerDaoImpl implements IUserManagerDao {
     String bannerID, firstName, lastName;
-    final String INSTRUCTOR_ROLE_ID = "4";
-    final String GUEST_ROLE_ID = "1";
     User user;
-    DbConnection dbConnection;
 
     public List<String> getListOfNonAdminUsers() {
         List<String> nonAdminUsersList = new ArrayList<String>();
@@ -55,7 +51,7 @@ public class UserManagerDaoImpl implements IUserManagerDao {
         return bannerID;
     }
 
-    public List<String> getUsersWhoAreGuestsOrInstructors(String courseID){
+    public List<String> getUsersWhoAreGuestsOrInstructors(String courseID) {
         CallStoredProcedure storedProcedure = null;
         List<String> guestsAndInstructorsList = new ArrayList<String>();
         try {
