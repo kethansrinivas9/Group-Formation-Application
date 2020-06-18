@@ -1,17 +1,15 @@
 package com.group8.dalsmartteamwork.resetpassword.controllers;
 
-import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDao;
-import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDaoImpl;
-import com.group8.dalsmartteamwork.resetpassword.models.*;
-import com.group8.dalsmartteamwork.utils.Encryption;
+import com.group8.dalsmartteamwork.resetpassword.models.IResetPasswordManager;
+import com.group8.dalsmartteamwork.resetpassword.models.NewPassword;
+import com.group8.dalsmartteamwork.resetpassword.models.ResetPasswordManagerImpl;
+import com.group8.dalsmartteamwork.resetpassword.models.ResetPasswordRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.sql.SQLException;
 
 @Controller
 public class ResetPasswordController {
@@ -27,12 +25,8 @@ public class ResetPasswordController {
 
         IResetPasswordManager resetPasswordManager = new ResetPasswordManagerImpl();
         model.addAttribute("bannerID", resetPasswordRequest.getBannerID());
-        try {
-            if (!resetPasswordManager.addResetRequest(resetPasswordRequest.getBannerID())) {
-                return "resetPassword/resetPasswordUserNotFound";
-            }
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+        if (!resetPasswordManager.addResetRequest(resetPasswordRequest.getBannerID())) {
+            return "resetPassword/resetPasswordUserNotFound";
         }
         return "resetPassword/resetPasswordEmailMessage";
     }
@@ -41,15 +35,13 @@ public class ResetPasswordController {
     public String resetPassword(@RequestParam(name = "bannerid") String bannerID,
                                 @RequestParam(name = "token") String token,
                                 Model model) {
-        ResetPasswordDaoImpl resetPasswordDaoImpl = new ResetPasswordDaoImpl();
-        PasswordResetToken passwordResetToken = resetPasswordDaoImpl.getPasswordResetRequest(bannerID, token);
-        if (passwordResetToken.getStatus().equals("valid")) {
+        IResetPasswordManager resetPasswordManager = new ResetPasswordManagerImpl();
+
+        if (resetPasswordManager.isRequestValid(bannerID, token)) {
             NewPassword newPassword = new NewPassword();
             newPassword.setBannerID(bannerID);
-            model.addAttribute("newpassword", newPassword);
+            model.addAttribute("newPassword", newPassword);
             return "resetPassword/resetPasswordForm";
-        } else if (passwordResetToken.getStatus().equals("expired")) {
-            return "resetPassword/tokenexpired";
         } else {
             return "badrequest";
         }
@@ -57,18 +49,11 @@ public class ResetPasswordController {
 
     @PostMapping("/resetpassword")
     public String requestPasswordReset(@ModelAttribute NewPassword newPassword, Model model) {
-        ResetPasswordDao resetPasswordDaoImpl = new ResetPasswordDaoImpl();
-        Encryption encryption = new Encryption();
-        String encrypted_password = encryption.encrypt(newPassword.getPassword());
-        try {
-            Boolean updateStatus = resetPasswordDaoImpl.updatePassword(newPassword.getBannerID(), encrypted_password);
-            if (!updateStatus) {
-                return "resetPassword/resetPasswordUserNotFound";
-            }
-        } catch (SQLException exception) {
-            System.out.println(exception.getMessage());
-            exception.printStackTrace();
+        IResetPasswordManager resetPasswordManager = new ResetPasswordManagerImpl();
+        if (resetPasswordManager.updatePassword(newPassword.getBannerID(), newPassword.getPassword())) {
+            return "resetPassword/passwordResetSuccess";
+        } else {
+            return "resetPassword/failedToUpdatePassword";
         }
-        return "resetPassword/passwordResetSuccess";
     }
 }
