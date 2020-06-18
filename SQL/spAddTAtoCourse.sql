@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE DEFINER=`CSCI5308_8_DEVINT_USER`@`%` PROCEDURE `spAddTAtoCourse`(IN bannerID VARCHAR(40), IN courseID VARCHAR(40))
+BEGIN
+INSERT INTO CourseRole (BannerID, CourseID, RoleID) VALUES (bannerID, courseID, 3);
+END$$
+
+DELIMITER ;
