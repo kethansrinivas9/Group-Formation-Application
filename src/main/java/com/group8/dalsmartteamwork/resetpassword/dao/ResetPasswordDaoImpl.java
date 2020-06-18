@@ -4,10 +4,8 @@ import com.group8.dalsmartteamwork.resetpassword.models.PasswordResetToken;
 import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
 import com.group8.dalsmartteamwork.utils.DbConnection;
 import com.group8.dalsmartteamwork.utils.ResetToken;
-import com.group8.dalsmartteamwork.utils.User;
 
 import java.sql.ResultSet;
-import java.sql.Statement;
 
 public class ResetPasswordDaoImpl implements ResetPasswordDao {
     DbConnection connection;
@@ -103,12 +101,13 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
                 storedProcedure.cleanup();
             }
         }
-        if (status.equals("valid"))
+        if (status.equals("valid")) {
             passwordResetToken.setStatusValid();
-        else if (status.equals("expired"))
+        } else if (status.equals("expired")) {
             passwordResetToken.setStatusExpired();
-        else
+        } else {
             passwordResetToken.setStatusNotFound();
+        }
         return passwordResetToken;
     }
 
