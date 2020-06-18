@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE DEFINER=`CSCI5308_8_DEVINT_USER`@`%` PROCEDURE `spGetGuestsAndInstructors`(
+)
+BEGIN
+    SELECT BannerID FROM CourseRole WHERE RoleID = 4 UNION (SELECT BannerID FROM SystemRole WHERE RoleID = 1 AND BannerID NOT IN (SELECT BannerID from CourseRole));
+END$$
+DELIMITER ;

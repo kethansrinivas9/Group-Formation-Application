@@ -1,0 +1,8 @@
+DELIMITER $$
+CREATE DEFINER=`CSCI5308_8_DEVINT_USER`@`%` PROCEDURE `spDeleteCourse`(
+    IN courseId int
+)
+BEGIN
+    DELETE FROM Courses WHERE Courses.CourseID = CourseID;
+END$$
+DELIMITER ;
