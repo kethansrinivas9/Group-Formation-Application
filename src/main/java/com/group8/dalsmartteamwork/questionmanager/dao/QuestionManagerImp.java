@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.group8.dalsmartteamwork.questionmanager.model.Question;
+import com.group8.dalsmartteamwork.questionmanager.Question;
 import com.group8.dalsmartteamwork.utils.DbConnection;
 
 public class QuestionManagerImp implements QuestionManagerDao {

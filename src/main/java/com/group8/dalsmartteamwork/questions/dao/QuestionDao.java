@@ -20,7 +20,7 @@ public class QuestionDao implements IQuestionDao {
             proc.setParameter(1, question.getTitle());
             proc.setParameter(2, questionType);
             proc.setParameter(3, question.getText());
-            proc.setParameter(4, "B456");
+            proc.setParameter(4, bannerId);
             resultSet = proc.executeWithResults();
             while(resultSet.next()){
                 questionId = resultSet.getInt(1);

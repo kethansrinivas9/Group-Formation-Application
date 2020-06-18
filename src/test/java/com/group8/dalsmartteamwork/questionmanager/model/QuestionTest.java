@@ -3,7 +3,7 @@ package com.group8.dalsmartteamwork.questionmanager.model;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.group8.dalsmartteamwork.questionmanager.model.Question;
+import com.group8.dalsmartteamwork.questionmanager.Question;
 
 import org.junit.jupiter.api.Test;
 
