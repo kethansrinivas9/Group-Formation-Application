@@ -1,7 +1,7 @@
 package com.group8.dalsmartteamwork.questionmanager.dao;
 
 import java.util.List;
-import com.group8.dalsmartteamwork.questionmanager.model.Question;
+import com.group8.dalsmartteamwork.questionmanager.Question;
 
 public interface QuestionManagerDao {
 
