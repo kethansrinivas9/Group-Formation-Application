@@ -2,25 +2,21 @@ package com.group8.dalsmartteamwork.resetpassword.models;
 
 import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDao;
 import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDaoImpl;
+import com.group8.dalsmartteamwork.utils.Encryption;
 import com.group8.dalsmartteamwork.utils.Mail;
+import com.group8.dalsmartteamwork.utils.ResetToken;
 
 import java.sql.SQLException;
-import java.util.Random;
 
 public class ResetPasswordManagerImpl implements IResetPasswordManager {
-
-    public static char getRandomChar() {
-        String characterSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
-        Random random = new Random();
-        return characterSet.charAt(random.nextInt(62));
-    }
 
     @Override
     public Boolean addResetRequest(String bannerID) {
         ResetPasswordDao resetPasswordDao = new ResetPasswordDaoImpl();
         try {
             if (resetPasswordDao.userExists(bannerID)) {
-                String token = createToken();
+                ResetToken resetToken = new ResetToken();
+                String token = resetToken.createToken();
                 if (resetPasswordDao.addToken(bannerID, token)) {
                     sendPasswordResetMail(bannerID, token);
                     return true;
@@ -62,15 +58,33 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
         return mail.sendEmail(email, "Password Reset Request", mailContent);
     }
 
-    public String createToken() {
-        String tokenResult = "";
+    @Override
+    public Boolean isRequestValid(String bannerID, String token) {
         try {
-            for (int i = 0; i < 20; i++) {
-                tokenResult += getRandomChar();
+            ResetPasswordDao resetPasswordDao = new ResetPasswordDaoImpl();
+            PasswordResetToken passwordResetToken = resetPasswordDao.getPasswordResetRequest(bannerID, token);
+            if (passwordResetToken.getStatus().equals("valid")) {
+                return true;
             }
-        } catch (Exception exception) {
-            System.out.print(exception.getMessage());
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+            return false;
         }
-        return tokenResult;
+        return false;
+    }
+
+    @Override
+    public Boolean updatePassword(String bannerID, String password) {
+        ResetPasswordDao resetPasswordDao = new ResetPasswordDaoImpl();
+        Encryption encryption = new Encryption();
+        String encrypted_password = encryption.encrypt(password);
+        try {
+            if (resetPasswordDao.updatePassword(bannerID, encrypted_password)) {
+                return true;
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return false;
     }
 }

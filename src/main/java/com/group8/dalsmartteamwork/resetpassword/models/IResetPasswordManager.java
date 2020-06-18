@@ -1,9 +1,11 @@
 package com.group8.dalsmartteamwork.resetpassword.models;
 
-import java.sql.SQLException;
-
 public interface IResetPasswordManager {
-    Boolean sendPasswordResetMail(String bannerID, String token) throws SQLException;
+    Boolean sendPasswordResetMail(String bannerID, String token);
 
-    Boolean addResetRequest(String bannerID) throws SQLException;
+    Boolean addResetRequest(String bannerID);
+
+    Boolean isRequestValid(String bannerID, String token);
+
+    Boolean updatePassword(String bannerID, String password);
 }
