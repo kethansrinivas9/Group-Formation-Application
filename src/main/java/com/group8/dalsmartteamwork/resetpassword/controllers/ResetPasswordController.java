@@ -22,7 +22,6 @@ public class ResetPasswordController {
 
     @PostMapping("/forgotpassword")
     public String requestPasswordReset(@ModelAttribute ResetPasswordRequest resetPasswordRequest, Model model) {
-
         IResetPasswordManager resetPasswordManager = new ResetPasswordManagerImpl();
         model.addAttribute("bannerID", resetPasswordRequest.getBannerID());
         if (!resetPasswordManager.addResetRequest(resetPasswordRequest.getBannerID())) {
@@ -36,7 +35,6 @@ public class ResetPasswordController {
                                 @RequestParam(name = "token") String token,
                                 Model model) {
         IResetPasswordManager resetPasswordManager = new ResetPasswordManagerImpl();
-
         if (resetPasswordManager.isRequestValid(bannerID, token)) {
             NewPassword newPassword = new NewPassword();
             newPassword.setBannerID(bannerID);

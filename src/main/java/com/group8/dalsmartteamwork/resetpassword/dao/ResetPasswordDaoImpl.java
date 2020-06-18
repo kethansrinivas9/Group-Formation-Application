@@ -15,8 +15,6 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
         updateTokenStatus();
     }
 
-    //TODO: Replace resultset's label names with index
-
     @Override
     public Boolean addToken(String bannerID) {
         ResetToken resetToken = new ResetToken();
@@ -131,6 +129,7 @@ public class ResetPasswordDaoImpl implements ResetPasswordDao {
             return false;
         }
     }
+
     //TODO: Move getUserEmail to User related class if possible
     @Override
     public String getUserEmail(String bannerID) {

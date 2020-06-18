@@ -1,5 +1,7 @@
 package com.group8.dalsmartteamwork.resetpassword.models;
 
+import com.group8.dalsmartteamwork.resetpassword.dao.IPasswordHistoryManager;
+import com.group8.dalsmartteamwork.resetpassword.dao.PasswordHistoryManagerImpl;
 import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDao;
 import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDaoImpl;
 import com.group8.dalsmartteamwork.utils.Encryption;
@@ -76,9 +78,14 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
     @Override
     public Boolean updatePassword(String bannerID, String password) {
         ResetPasswordDao resetPasswordDao = new ResetPasswordDaoImpl();
+        IPasswordHistoryManager passwordHistory = new PasswordHistoryManagerImpl();
         Encryption encryption = new Encryption();
         String encrypted_password = encryption.encrypt(password);
+
         try {
+            if (passwordHistory.passwordExists(bannerID, encrypted_password)) {
+                return false;
+            }
             if (resetPasswordDao.updatePassword(bannerID, encrypted_password)) {
                 return true;
             }
