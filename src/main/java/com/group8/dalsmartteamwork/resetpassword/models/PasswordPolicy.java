@@ -63,14 +63,14 @@ public class PasswordPolicy {
 
         if (!this.minLength.equals("false")) {
             int minLength = Integer.parseInt(this.minLength);
-            if (minLength >= passwordLength) {
+            if (minLength > passwordLength) {
                 return false;
             }
         }
 
         if (!this.maxLength.equals("false")) {
             int maxLength = Integer.parseInt(this.maxLength);
-            if (maxLength <= passwordLength) {
+            if (maxLength < passwordLength) {
                 return false;
             }
         }
