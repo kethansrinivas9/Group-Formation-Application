@@ -1,9 +1,6 @@
 package com.group8.dalsmartteamwork.resetpassword.controllers;
 
-import com.group8.dalsmartteamwork.resetpassword.models.IResetPasswordManager;
-import com.group8.dalsmartteamwork.resetpassword.models.NewPassword;
-import com.group8.dalsmartteamwork.resetpassword.models.ResetPasswordManagerImpl;
-import com.group8.dalsmartteamwork.resetpassword.models.ResetPasswordRequest;
+import com.group8.dalsmartteamwork.resetpassword.models.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,10 +45,17 @@ public class ResetPasswordController {
     @PostMapping("/resetpassword")
     public String requestPasswordReset(@ModelAttribute NewPassword newPassword, Model model) {
         IResetPasswordManager resetPasswordManager = new ResetPasswordManagerImpl();
-        if (resetPasswordManager.updatePassword(newPassword.getBannerID(), newPassword.getPassword())) {
-            return "resetPassword/passwordResetSuccess";
+        PasswordPolicy passwordPolicy = new PasswordPolicy();
+        if (!passwordPolicy.isValid(newPassword.getPassword())) {
+            model.addAttribute("errorMessages", passwordPolicy.generateErrorMessage());
+            model.addAttribute("newPassword", newPassword);
+            return "resetPassword/resetPasswordForm";
         } else {
-            return "resetPassword/failedToUpdatePassword";
+            if (resetPasswordManager.updatePassword(newPassword.getBannerID(), newPassword.getPassword())) {
+                return "resetPassword/passwordResetSuccess";
+            } else {
+                return "resetPassword/failedToUpdatePassword";
+            }
         }
     }
 }

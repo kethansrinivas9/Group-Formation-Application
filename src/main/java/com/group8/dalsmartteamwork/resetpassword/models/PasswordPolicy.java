@@ -20,7 +20,7 @@ public class PasswordPolicy {
 
     public Boolean loadPolicy() {
         this.minLength = System.getenv("password.minLength");
-        this.maxLength = System.getenv("password.maxLenth");
+        this.maxLength = System.getenv("password.maxLength");
         this.minUpper = System.getenv("password.minUpper");
         this.minLower = System.getenv("password.minLower");
         this.minSymbols = System.getenv("password.minSymbols");
@@ -57,7 +57,7 @@ public class PasswordPolicy {
         return historyConstraint;
     }
 
-    public Boolean validate(String password) {
+    public Boolean isValid(String password) {
 
         int passwordLength = password.length();
 

@@ -25,8 +25,8 @@ public class PasswordPolicyTest {
     @Test
     public void validateTest() {
         PasswordPolicy passwordPolicy = mock(PasswordPolicy.class);
-        when(passwordPolicy.validate(TEMP_PASSWORD)).thenReturn(true);
-        assertTrue(passwordPolicy.validate(TEMP_PASSWORD));
+        when(passwordPolicy.isValid(TEMP_PASSWORD)).thenReturn(true);
+        assertTrue(passwordPolicy.isValid(TEMP_PASSWORD));
     }
 
     @Test

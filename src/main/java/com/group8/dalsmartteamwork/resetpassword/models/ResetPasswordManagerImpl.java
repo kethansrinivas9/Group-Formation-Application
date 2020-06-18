@@ -81,10 +81,6 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
         ResetPasswordDao resetPasswordDao = new ResetPasswordDaoImpl();
         IPasswordHistoryManager passwordHistory = new PasswordHistoryManagerImpl();
         PasswordPolicy passwordPolicy = new PasswordPolicy();
-
-        if (!passwordPolicy.validate(password)) {
-            return false;
-        }
         Encryption encryption = new Encryption();
 
         String encrypted_password = encryption.encrypt(password);
@@ -105,4 +101,6 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
         }
         return false;
     }
+
+
 }
