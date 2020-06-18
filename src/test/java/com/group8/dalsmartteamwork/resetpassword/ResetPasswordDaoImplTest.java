@@ -35,24 +35,24 @@ public class ResetPasswordDaoImplTest {
 
     @Test
     public void resetTokensTest() {
-        when(resetPasswordDaoImplMock.resetTokens()).thenReturn(true);
-        assertTrue(resetPasswordDaoImplMock.resetTokens(), "Tokens were not reset");
-        verify(resetPasswordDaoImplMock).resetTokens();
+        when(resetPasswordDaoImplMock.updateTokenStatus()).thenReturn(true);
+        assertTrue(resetPasswordDaoImplMock.updateTokenStatus(), "Tokens were not reset");
+        verify(resetPasswordDaoImplMock).updateTokenStatus();
     }
 
     @Test
     public void getRequestByTokenTest() {
         PasswordResetToken passwordResetToken = new PasswordResetToken(1, TEMP_BANNERID, TEMP_TOKEN, new Date(), "valid");
 
-        when(resetPasswordDaoImplMock.getRequestByToken(TEMP_BANNERID, TEMP_TOKEN)).thenReturn(passwordResetToken);
-        passwordResetToken = resetPasswordDaoImplMock.getRequestByToken(TEMP_BANNERID, TEMP_TOKEN);
+        when(resetPasswordDaoImplMock.getPasswordResetRequest(TEMP_BANNERID, TEMP_TOKEN)).thenReturn(passwordResetToken);
+        passwordResetToken = resetPasswordDaoImplMock.getPasswordResetRequest(TEMP_BANNERID, TEMP_TOKEN);
         if (!passwordResetToken.getStatus().equals("expired") && !passwordResetToken.getStatus().equals("notfound")) {
             assertEquals(passwordResetToken.getBannerID(), TEMP_BANNERID, "Unable to retrieve Password Token Data");
             assertEquals(passwordResetToken.getToken(), TEMP_TOKEN, "Unable to retrieve Password Token Data");
             assertNotNull(passwordResetToken.getTimestamp(), "Unable to retrieve Password Token Data");
             assertEquals(passwordResetToken.getStatus(), "valid", "Unable to retrieve Password Token Data");
         }
-        verify(resetPasswordDaoImplMock).getRequestByToken(TEMP_BANNERID, TEMP_TOKEN);
+        verify(resetPasswordDaoImplMock).getPasswordResetRequest(TEMP_BANNERID, TEMP_TOKEN);
     }
 
     @Test
@@ -68,4 +68,13 @@ public class ResetPasswordDaoImplTest {
         assertEquals(resetPasswordDaoImplMock.getUserEmail(TEMP_BANNERID), TEMP_EMAIL, "Failed to get user Email");
         verify(resetPasswordDaoImplMock).getUserEmail(TEMP_BANNERID);
     }
+
+    @Test
+    void userExistsTest() {
+        when(resetPasswordDaoImplMock.userExists(TEMP_BANNERID)).thenReturn(true);
+        assertTrue(resetPasswordDaoImplMock.userExists(TEMP_BANNERID));
+        verify(resetPasswordDaoImplMock).userExists(TEMP_BANNERID);
+    }
+
+
 }
