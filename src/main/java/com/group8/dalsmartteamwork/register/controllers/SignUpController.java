@@ -4,6 +4,7 @@ import com.group8.dalsmartteamwork.register.dao.RegistrationDao;
 import com.group8.dalsmartteamwork.register.dao.RegistrationDaoImpl;
 import com.group8.dalsmartteamwork.register.models.IRegistrationModel;
 import com.group8.dalsmartteamwork.register.models.RegistrationModelImpl;
+import com.group8.dalsmartteamwork.resetpassword.models.PasswordPolicy;
 import com.group8.dalsmartteamwork.utils.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,13 @@ public class SignUpController {
     @PostMapping(value = "/register")
     public String submitDetails(User user, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            return "register";
+        }
+
+        PasswordPolicy passwordPolicy = new PasswordPolicy();
+        if (!passwordPolicy.isValid(user.getPassword())) {
+            model.addAttribute("errorMessages", passwordPolicy.generateErrorMessage());
+            model.addAttribute("user", new User());
             return "register";
         }
 

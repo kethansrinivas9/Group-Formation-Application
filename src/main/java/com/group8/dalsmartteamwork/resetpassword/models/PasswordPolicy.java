@@ -15,6 +15,7 @@ public class PasswordPolicy {
     private String historyConstraint;
     private int historicalPasswordLimit;
 
+
     public PasswordPolicy() {
         loadPolicy();
     }
