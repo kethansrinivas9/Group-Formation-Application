@@ -15,7 +15,6 @@ public class PasswordHistoryManagerImpl implements IPasswordHistoryManager {
     @Override
     public Boolean moveCurrentPassword(String bannerID) {
         CallStoredProcedure storedProcedure = null;
-
         try {
             storedProcedure = new CallStoredProcedure("spMoveCurrentPassword(?, ?)");
             PasswordPolicy passwordPolicy = new PasswordPolicy();

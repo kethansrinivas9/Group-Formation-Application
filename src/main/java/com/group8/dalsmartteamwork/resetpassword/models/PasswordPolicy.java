@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import static java.lang.Character.isLowerCase;
 import static java.lang.Character.isUpperCase;
 
-public class PasswordPolicy {
+public class PasswordPolicy implements IPasswordPolicy{
     private String minLength;
     private String maxLength;
     private String minUpper;
@@ -20,6 +20,7 @@ public class PasswordPolicy {
         loadPolicy();
     }
 
+    @Override
     public Boolean loadPolicy() {
         this.minLength = System.getenv("password.minLength");
         this.maxLength = System.getenv("password.maxLength");
@@ -64,6 +65,7 @@ public class PasswordPolicy {
         return historicalPasswordLimit;
     }
 
+    @Override
     public Boolean isValid(String password) {
 
         int passwordLength = password.length();
@@ -134,6 +136,7 @@ public class PasswordPolicy {
         return true;
     }
 
+    @Override
     public ArrayList<String> generateErrorMessage() {
         ArrayList<String> errorMessages = new ArrayList<>();
 
