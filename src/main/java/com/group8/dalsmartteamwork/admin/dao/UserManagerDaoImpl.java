@@ -1,5 +1,6 @@
 package com.group8.dalsmartteamwork.admin.dao;
 
+import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
 import com.group8.dalsmartteamwork.utils.DbConnection;
 import com.group8.dalsmartteamwork.utils.User;
 
@@ -12,17 +13,14 @@ public class UserManagerDaoImpl implements IUserManagerDao {
     final String INSTRUCTOR_ROLE_ID = "4";
     final String GUEST_ROLE_ID = "1";
     User user;
-    List<String> nonAdminUsersList;
-    List<String> guestsOrInstructorsList;
     DbConnection dbConnection;
 
     public List<String> getListOfNonAdminUsers() {
-        nonAdminUsersList = new ArrayList<String>();
+        List<String> nonAdminUsersList = new ArrayList<String>();
+        CallStoredProcedure storedProcedure = null;
         try {
-            String query = String.format(AdminQueryConstants.GET_ALL_NON_ADMIN_USERS, GUEST_ROLE_ID);
-            dbConnection = DbConnection.getInstance();
-            dbConnection.createDbConnection();
-            ResultSet rs = dbConnection.getRecords(query);
+            storedProcedure = new CallStoredProcedure("spGetNonAdminUsers()");
+            ResultSet rs = storedProcedure.executeWithResults();
 
             while (rs.next()) {
                 bannerID = rs.getObject("BannerID").toString();
@@ -34,17 +32,17 @@ public class UserManagerDaoImpl implements IUserManagerDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            dbConnection.closeConnection();
+            storedProcedure.cleanup();
         }
         return nonAdminUsersList;
     }
 
     public String getCourseInstructor(String courseID) {
+        CallStoredProcedure storedProcedure = null;
         try {
-            String query = String.format(AdminQueryConstants.GET_INSTRUCTOR_ID, courseID, INSTRUCTOR_ROLE_ID);
-            dbConnection = DbConnection.getInstance();
-            dbConnection.createDbConnection();
-            ResultSet rs = dbConnection.getRecords(query);
+            storedProcedure = new CallStoredProcedure("spGetCourseInstructors(?)");
+            storedProcedure.setParameter(1, courseID);
+            ResultSet rs = storedProcedure.executeWithResults();
 
             while (rs.next()) {
                 bannerID = rs.getObject("BannerID").toString();
@@ -52,43 +50,41 @@ public class UserManagerDaoImpl implements IUserManagerDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            dbConnection.closeConnection();
+            storedProcedure.cleanup();
         }
         return bannerID;
     }
 
     public List<String> getUsersWhoAreGuestsOrInstructors(String courseID){
-        guestsOrInstructorsList = new ArrayList<String>();
+        CallStoredProcedure storedProcedure = null;
+        List<String> guestsAndInstructorsList = new ArrayList<String>();
         try {
-
-            String guestUserOrInstructorQuery = String.format(AdminQueryConstants.GET_USERS_WHO_ARE_GUEST_OR_INSTRUCTOR, INSTRUCTOR_ROLE_ID, GUEST_ROLE_ID);
-            dbConnection = DbConnection.getInstance();
-            dbConnection.createDbConnection();
-
-            ResultSet rs = dbConnection.getRecords(guestUserOrInstructorQuery);
+            storedProcedure = new CallStoredProcedure("spGetGuestsAndInstructors()");
+            ResultSet rs = storedProcedure.executeWithResults();
 
             while (rs.next()) {
                 bannerID = rs.getObject("BannerID").toString();
-                guestsOrInstructorsList.add(bannerID);
+                guestsAndInstructorsList.add(bannerID);
             }
 
             if (courseID.isEmpty()) {
-                guestsOrInstructorsList.add(0, "Select an Instructor");
+                guestsAndInstructorsList.add(0, "Select an Instructor");
             } else {
                 String currentInstructorBannerID = "Select an Instructor";
-                String instructorIdQuery = String.format(AdminQueryConstants.GET_INSTRUCTOR_ID, courseID, INSTRUCTOR_ROLE_ID);
-                rs = dbConnection.getRecords(instructorIdQuery);
+                storedProcedure = new CallStoredProcedure("spGetCourseInstructors(?)");
+                storedProcedure.setParameter(1, courseID);
+                rs = storedProcedure.executeWithResults();
                 while (rs.next()) {
                     currentInstructorBannerID = rs.getObject("BannerID").toString();
                 }
-                guestsOrInstructorsList.remove(currentInstructorBannerID);
-                guestsOrInstructorsList.add(0, currentInstructorBannerID);
+                guestsAndInstructorsList.remove(currentInstructorBannerID);
+                guestsAndInstructorsList.add(0, currentInstructorBannerID);
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            dbConnection.closeConnection();
+            storedProcedure.cleanup();
         }
-        return guestsOrInstructorsList;
+        return guestsAndInstructorsList;
     }
 }
