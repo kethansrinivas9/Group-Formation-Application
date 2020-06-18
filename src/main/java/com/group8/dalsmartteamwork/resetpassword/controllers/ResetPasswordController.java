@@ -4,7 +4,6 @@ import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDao;
 import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDaoImpl;
 import com.group8.dalsmartteamwork.resetpassword.models.*;
 import com.group8.dalsmartteamwork.utils.Encryption;
-import com.group8.dalsmartteamwork.utils.ResetToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,24 +24,14 @@ public class ResetPasswordController {
 
     @PostMapping("/forgotpassword")
     public String requestPasswordReset(@ModelAttribute ResetPasswordRequest resetPasswordRequest, Model model) {
-        ResetPasswordDao resetPasswordDao = new ResetPasswordDaoImpl();
-        model.addAttribute("resetPasswordRequest", resetPasswordRequest);
+
+        IResetPasswordManager resetPasswordManager = new ResetPasswordManagerImpl();
+        model.addAttribute("bannerID", resetPasswordRequest.getBannerID());
         try {
-            ResetToken resetToken = new ResetToken();
-            String token = resetToken.createToken();
-            if (resetPasswordDao.userExists(resetPasswordRequest.getBannerID())) {
-                Boolean updateStatus = resetPasswordDao.addToken(resetPasswordRequest.getBannerID(), token);
-                if (updateStatus) {
-                    IResetPasswordManager resetPasswordManager = new ResetPasswordManagerImpl();
-                    if (!resetPasswordManager.sendPasswordResetMail(resetPasswordRequest.getBannerID(), token)) {
-                        return "resetPassword/failedToSendEmail";
-                    }
-                }
-            } else {
+            if (!resetPasswordManager.addResetRequest(resetPasswordRequest.getBannerID())) {
                 return "resetPassword/resetPasswordUserNotFound";
             }
         } catch (SQLException exception) {
-            System.out.println(exception.getMessage());
             exception.printStackTrace();
         }
         return "resetPassword/resetPasswordEmailMessage";
@@ -53,7 +42,7 @@ public class ResetPasswordController {
                                 @RequestParam(name = "token") String token,
                                 Model model) {
         ResetPasswordDaoImpl resetPasswordDaoImpl = new ResetPasswordDaoImpl();
-        PasswordResetToken passwordResetToken = resetPasswordDaoImpl.getRequestByToken(bannerID, token);
+        PasswordResetToken passwordResetToken = resetPasswordDaoImpl.getPasswordResetRequest(bannerID, token);
         if (passwordResetToken.getStatus().equals("valid")) {
             NewPassword newPassword = new NewPassword();
             newPassword.setBannerID(bannerID);
