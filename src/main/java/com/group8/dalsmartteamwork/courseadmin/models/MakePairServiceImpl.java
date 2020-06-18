@@ -1,6 +1,6 @@
-package com.group8.dalsmartteamwork.courseadmin.services;
+package com.group8.dalsmartteamwork.courseadmin.models;
 
-import com.group8.dalsmartteamwork.courseadmin.models.Pair;
+import com.group8.dalsmartteamwork.courseadmin.Pair;
 import com.group8.dalsmartteamwork.utils.User;
 
 import java.util.ArrayList;

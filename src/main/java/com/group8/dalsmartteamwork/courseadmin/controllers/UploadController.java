@@ -1,7 +1,7 @@
 package com.group8.dalsmartteamwork.courseadmin.controllers;
 
-import com.group8.dalsmartteamwork.courseadmin.models.Pair;
-import com.group8.dalsmartteamwork.courseadmin.services.*;
+import com.group8.dalsmartteamwork.courseadmin.Pair;
+import com.group8.dalsmartteamwork.courseadmin.models.*;
 import com.group8.dalsmartteamwork.register.dao.RegistrationDao;
 import com.group8.dalsmartteamwork.register.dao.RegistrationDaoImpl;
 import com.group8.dalsmartteamwork.utils.CsvReader;
@@ -39,10 +39,10 @@ public class UploadController {
             ICsvReader csvReader = new CsvReader(file);
             Mail mail = new Mail();
             RegistrationDao dao = new RegistrationDaoImpl();
-            ImportStudentService service = new ImportStudentServiceImpl(courseId, dao, mail);
-            ParseCsvService parseCsvService = new ParseCsvServiceImpl(csvReader);
+            IStudentImportManager service = new StudentImportManagerImpl(courseId, dao, mail);
+            ICsvParser iCsvParser = new CsvParserImpl(csvReader);
             MakePairService makePairService = new MakePairServiceImpl();
-            List<User> users = parseCsvService.getUsers();
+            List<User> users = iCsvParser.getUsers();
             List<Boolean> status = service.verifyRegistration(users);
 
             List<Pair<User, Boolean>> details = makePairService.getUserDetails(users, status);
