@@ -17,27 +17,27 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
     protected AuthenticationManager authenticationManager() throws Exception {
         return new LoginAuthentication();
     }
-    
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests()
-            .antMatchers("/admin**").hasAnyAuthority("Admin")
-            .antMatchers("/student**").hasAnyAuthority("Student", "TA","Instructor", "Guest")
-            .antMatchers("/guest**").hasAnyAuthority("Student","TA","Instructor", "Guest")
-            .antMatchers("/instructor**").hasAnyAuthority("Instructor", "Guest")
-            .antMatchers("/login").permitAll()
-            .antMatchers("/loginError").permitAll()
-            .antMatchers("/register").permitAll()       
-            .and()
-            .formLogin()
-            .loginPage("/login").permitAll()
-            .failureUrl("/loginError")
-            .successHandler(successHandler)
-            .and()
-            .logout().permitAll()
-            .and()
-            .httpBasic();
+                .authorizeRequests()
+                .antMatchers("/admin**").hasAnyAuthority("Admin")
+                .antMatchers("/student**").hasAnyAuthority("Student", "TA", "Instructor", "Guest")
+                .antMatchers("/guest**").hasAnyAuthority("Student", "TA", "Instructor", "Guest")
+                .antMatchers("/instructor**").hasAnyAuthority("Instructor", "Guest")
+                .antMatchers("/login").permitAll()
+                .antMatchers("/loginError").permitAll()
+                .antMatchers("/register").permitAll()
+                .and()
+                .formLogin()
+                .loginPage("/login").permitAll()
+                .failureUrl("/loginError")
+                .successHandler(successHandler)
+                .and()
+                .logout().permitAll()
+                .and()
+                .httpBasic();
     }
 
     @Override

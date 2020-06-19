@@ -6,5 +6,5 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface IOptionRetrieveManager {
-    public List<Option> getOptions(HttpServletRequest request);
+    List<Option> getOptions(HttpServletRequest request);
 }

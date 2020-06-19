@@ -1,5 +1,6 @@
 package com.group8.dalsmartteamwork.student.model;
 
+import com.group8.dalsmartteamwork.student.Student;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -7,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StudentTest {
 
-    public Student studentMock(){
+    public Student studentMock() {
         Student student = new Student();
         student.setBannerId("B00884438");
         student.setCourseId("1100");
@@ -41,7 +42,7 @@ public class StudentTest {
     public void setBannerIDtest() {
         Student student = studentMock();
         student.setBannerId("B00884438");
-        assertTrue(student.getBannerId().equals ("B00884438"));
+        assertTrue(student.getBannerId().equals("B00884438"));
     }
 
     @Test
@@ -56,7 +57,7 @@ public class StudentTest {
         student.setFirstName("name");
         assertTrue(student.getFirstName().equals("name"));
     }
- 
+
     @Test
     public void getLastNameTest() {
         Student student = studentMock();
@@ -108,5 +109,5 @@ public class StudentTest {
         student.setRole("student");
         assertTrue(student.getRole().equals("student"));
     }
-    
+
 }

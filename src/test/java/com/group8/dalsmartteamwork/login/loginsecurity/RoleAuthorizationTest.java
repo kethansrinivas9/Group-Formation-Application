@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class RoleAuthorizationTest {
 
     public boolean role;
-    private User user = new User("123", "Test", "Test_last", "test124@gmail.com", "test@123");
+    private final User user = new User("123", "Test", "Test_last", "test124@gmail.com", "test@123");
 
     @Test
     public void getAuthroitiesTest() {

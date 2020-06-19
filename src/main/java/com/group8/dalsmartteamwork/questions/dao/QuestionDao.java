@@ -14,15 +14,14 @@ public class QuestionDao implements IQuestionDao {
         CallStoredProcedure proc = null;
         ResultSet resultSet;
         int questionId = -1;
-        try
-        {
+        try {
             proc = new CallStoredProcedure("spCreateQuestion(?, ?, ?, ?)");
             proc.setParameter(1, question.getTitle());
             proc.setParameter(2, questionType);
             proc.setParameter(3, question.getText());
             proc.setParameter(4, bannerId);
             resultSet = proc.executeWithResults();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 questionId = resultSet.getInt(1);
             }
         } catch (SQLException e) {
@@ -45,12 +44,10 @@ public class QuestionDao implements IQuestionDao {
             proc.setParameter(3, option.getStoredAs());
             proc.execute();
             return true;
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
             return false;
-        }
-        finally{
+        } finally {
             if (null != proc) {
                 proc.cleanup();
             }

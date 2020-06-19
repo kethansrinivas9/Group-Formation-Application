@@ -12,32 +12,32 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class OptionRetrieveManagerTest {
-    private HttpServletRequest request;
     private final String TEST_DISPLAY_TEXT = "DISPLAY_TEXT";
     private final int TEST_STORED_AS = 5;
+    private HttpServletRequest request;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         request = mock(HttpServletRequest.class);
     }
 
     @Test
-    void getOptionsSuccessTest(){
+    void getOptionsSuccessTest() {
         OptionRetrieveManager parseRequest = new OptionRetrieveManager();
         when(request.getParameter("display-text-1")).thenReturn(TEST_DISPLAY_TEXT);
         when(request.getParameter("stored-as-1")).thenReturn(String.valueOf(TEST_STORED_AS));
         when(request.getParameter("display-text-2")).thenReturn(null);
         when(request.getParameter("stored-as-2")).thenReturn(null);
-        assertEquals(parseRequest.getOptions(request).size(),1);
+        assertEquals(parseRequest.getOptions(request).size(), 1);
     }
 
     @Test
-    void getOptionsFailTest(){
+    void getOptionsFailTest() {
         OptionRetrieveManager parseRequest = new OptionRetrieveManager();
         when(request.getParameter("display-text-1")).thenReturn(null);
         when(request.getParameter("stored-as-1")).thenReturn(null);
         when(request.getParameter("display-text-2")).thenReturn(TEST_DISPLAY_TEXT);
         when(request.getParameter("stored-as-2")).thenReturn(String.valueOf(TEST_STORED_AS));
-        assertNotEquals(parseRequest.getOptions(request).size(),1);
+        assertNotEquals(parseRequest.getOptions(request).size(), 1);
     }
 }

@@ -1,4 +1,4 @@
-package com.group8.dalsmartteamwork.CourseRole.models;
+package com.group8.dalsmartteamwork.utils;
 
 public class CourseRole {
     private String bannerID;

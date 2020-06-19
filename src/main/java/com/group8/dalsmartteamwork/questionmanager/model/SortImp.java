@@ -1,11 +1,12 @@
 package com.group8.dalsmartteamwork.questionmanager.model;
 
-import java.util.List;
 import com.group8.dalsmartteamwork.questionmanager.dao.SortDao;
 import com.group8.dalsmartteamwork.questions.Question;
 
+import java.util.List;
+
 public class SortImp implements Sort {
-    private SortDao sortDao;
+    private final SortDao sortDao;
 
     public SortImp(SortDao sortDao) {
         this.sortDao = sortDao;

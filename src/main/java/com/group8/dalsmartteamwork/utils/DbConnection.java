@@ -1,8 +1,13 @@
 package com.group8.dalsmartteamwork.utils;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DbConnection {
+    private static final String IGNORE_TIME_ZONE = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private static DbConnection dbConnection;
     private String environment;
     private String user;
     private String password;
@@ -10,8 +15,6 @@ public class DbConnection {
     private String database;
     private Statement statement;
     private Connection conn;
-    private static DbConnection dbConnection;
-    private static final String IGNORE_TIME_ZONE = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
     private DbConnection() {
     }
@@ -69,45 +72,7 @@ public class DbConnection {
         return this.statement;
     }
 
-    public Connection getConnection(){
+    public Connection getConnection() {
         return this.conn;
     }
-
-    public ResultSet getRecords(String query) {
-        try {
-            return this.statement.executeQuery(query);
-        } catch (Exception e) {
-            // TODO: Add to Log
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public int updateRecords(String query) {
-        try {
-            return this.statement.executeUpdate(query);
-        } catch (Exception e) {
-            // TODO: Add to Log
-            e.printStackTrace();
-            return 0;
-        }
-    }
-
-    public int addRecords(String query) {
-        return this.updateRecords(query);
-    }
-
-    public int deleteRecords(String query) {
-        return this.updateRecords(query);
-    }
-
-    public void close() {
-        try {
-            this.conn.close();
-        } catch (Exception e) {
-            // TODO: Add to Log
-            e.printStackTrace();
-        }
-    }
-
 }

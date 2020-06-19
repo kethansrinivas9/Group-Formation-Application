@@ -1,13 +1,13 @@
 package com.group8.dalsmartteamwork.admin.dao;
 
-import com.group8.dalsmartteamwork.course.model.Course;
+import com.group8.dalsmartteamwork.course.Course;
 import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseManagerDaoImpl implements ICourseManagerDao{
+public class CourseManagerDaoImpl implements ICourseManagerDao {
     String courseID;
     String courseName;
     Course course;
@@ -76,7 +76,7 @@ public class CourseManagerDaoImpl implements ICourseManagerDao{
             storedProcedure.setParameter(2, newCourseID);
             ResultSet rs = storedProcedure.executeWithResults();
 
-            while(rs.next()) {
+            while (rs.next()) {
                 updatedRows = rs.getInt(1);
             }
 

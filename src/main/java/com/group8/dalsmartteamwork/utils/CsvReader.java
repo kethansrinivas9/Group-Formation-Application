@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CsvReader implements ICsvReader{
+public class CsvReader implements ICsvReader {
     private BufferedReader bufferedReader;
 
     public CsvReader(MultipartFile file) {

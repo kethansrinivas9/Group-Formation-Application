@@ -1,11 +1,12 @@
 package com.group8.dalsmartteamwork.questionmanager.model;
 
-import java.util.List;
 import com.group8.dalsmartteamwork.questionmanager.dao.DeleteDao;
 import com.group8.dalsmartteamwork.questions.Question;
 
+import java.util.List;
+
 public class DeleteImp implements Delete {
-    private DeleteDao deleteDao;
+    private final DeleteDao deleteDao;
 
     public DeleteImp(DeleteDao deleteDao) {
         this.deleteDao = deleteDao;

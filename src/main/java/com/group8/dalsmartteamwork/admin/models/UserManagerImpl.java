@@ -5,9 +5,9 @@ import com.group8.dalsmartteamwork.admin.dao.IUserManagerDao;
 import java.util.List;
 
 public class UserManagerImpl implements IUserManager {
-    private IUserManagerDao userManagerDao;
+    private final IUserManagerDao userManagerDao;
 
-    public UserManagerImpl(IUserManagerDao userManagerDao){
+    public UserManagerImpl(IUserManagerDao userManagerDao) {
         this.userManagerDao = userManagerDao;
     }
 

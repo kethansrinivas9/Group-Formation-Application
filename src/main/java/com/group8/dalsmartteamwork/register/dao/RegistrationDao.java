@@ -2,8 +2,10 @@ package com.group8.dalsmartteamwork.register.dao;
 
 import com.group8.dalsmartteamwork.utils.User;
 
-public interface RegistrationDao{
-    public Boolean isUserInDb(String id);
-    public Boolean addUserToDb(User user);
-    public Boolean addGuestRoleToUser(String id);
+public interface RegistrationDao {
+    Boolean isUserInDb(String id);
+
+    Boolean addUserToDb(User user);
+
+    Boolean addGuestRoleToUser(String id);
 }

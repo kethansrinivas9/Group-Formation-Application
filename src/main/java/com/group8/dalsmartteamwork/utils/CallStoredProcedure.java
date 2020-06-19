@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CallStoredProcedure {
-    private String procedureName;
+    private final String procedureName;
     private DbConnection dbConnection;
     private Connection connection;
     private CallableStatement statement;

@@ -17,10 +17,10 @@ public class RegistrationDaoImpl implements RegistrationDao {
             procedure = new CallStoredProcedure("spCheckIfUserExists(?)");
             procedure.setParameter(1, id);
             resultSet = procedure.executeWithResults();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 return true;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             //TODO: Add to Log
             e.printStackTrace();
         } finally {
@@ -43,7 +43,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
             procedure.setParameter(5, user.getPassword());
             procedure.execute();
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             //TODO: Add to Log
             e.printStackTrace();
         } finally {
@@ -62,7 +62,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
             procedure.setParameter(1, id);
             procedure.execute();
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             //TODO: Add to Log
             e.printStackTrace();
         } finally {

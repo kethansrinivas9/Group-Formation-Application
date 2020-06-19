@@ -3,6 +3,12 @@ package com.group8.dalsmartteamwork.utils;
 import java.util.Random;
 
 public class ResetToken {
+    public static char getRandomChar() {
+        String characterSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+        Random random = new Random();
+        return characterSet.charAt(random.nextInt(62));
+    }
+
     public String createToken() {
         String tokenResult = "";
         try {
@@ -13,11 +19,5 @@ public class ResetToken {
             System.out.print(exception.getMessage());
         }
         return tokenResult;
-    }
-
-    public static char getRandomChar() {
-        String characterSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
-        Random random = new Random();
-        return characterSet.charAt(random.nextInt(62));
     }
 }

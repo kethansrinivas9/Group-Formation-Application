@@ -2,24 +2,24 @@ package com.group8.dalsmartteamwork.utils;
 
 public interface IUser {
 
-    public void setId(String id);
+    String getId();
 
-    public void setFirstName(String firstName);
+    void setId(String id);
 
-    public void setLastName(String lastName);
+    String getFirstName();
 
-    public void setEmail(String email);
+    void setFirstName(String firstName);
 
-    public void setPassword(String password);
+    String getLastName();
 
-    public String getId();
+    void setLastName(String lastName);
 
-    public String getFirstName();
+    String getEmail();
 
-    public String getLastName();
+    void setEmail(String email);
 
-    public String getEmail();
+    String getPassword();
 
-    public String getPassword();
+    void setPassword(String password);
 
 }

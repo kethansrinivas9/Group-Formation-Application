@@ -4,33 +4,33 @@
 <head>
 
     <title>front page</title>
-    <meta http-equiv="Content-type" content="text/html" ; charset="UTF-8" />
-    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <meta ; charset="UTF-8" content="text/html" http-equiv="Content-type"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 
 <body>
-    <div style="background-color:#337ab7; height:50px; color: black;">
-        <h2 style="float: left;">Group Formation Tool</h2>
-        <a style="float: right; color: black;" href="/logout">Logout</a>
-    </div>
+<div style="background-color:#337ab7; height:50px; color: black;">
+    <h2 style="float: left;">Group Formation Tool</h2>
+    <a href="/logout" style="float: right; color: black;">Logout</a>
+</div>
 
-    <h2 style="text-align: center;">Sort the Questions By Title</h2>
-    <div>
-        <table style="width: 10%;">
-            <tr>
+<h2 style="text-align: center;">Sort the Questions By Title</h2>
+<div>
+    <table style="width: 10%;">
+        <tr>
 
-                <th>Question Title</th>
-            </tr>
+            <th>Question Title</th>
+        </tr>
 
-            <tr th:each="list1, itemStat: *{list}">
+        <tr th:each="list1, itemStat: *{list}">
 
-                <td><span th:text="${list1.title}"></span></td>
+            <td><span th:text="${list1.title}"></span></td>
 
-            </tr>
+        </tr>
 
-        </table>
+    </table>
 
-    </div>
+</div>
 </body>
 
 </html>

@@ -14,21 +14,21 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class ParseCsvServiceImplTest {
-    private ICsvReader reader = mock(CsvReader.class);
+    private final ICsvReader reader = mock(CsvReader.class);
     private ICsvParser service;
-    private List<User> users  = new ArrayList<>();
-    private User existingUser = new User("B00000000", "fName", "lName", "email@email.com", "pwd");
-    private User newUser = new User("B1111111", "fName", "lName", "email@email.com", "pwd");
+    private final List<User> users = new ArrayList<>();
+    private final User existingUser = new User("B00000000", "fName", "lName", "email@email.com", "pwd");
+    private final User newUser = new User("B1111111", "fName", "lName", "email@email.com", "pwd");
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         service = new CsvParserImpl(reader);
         users.add(existingUser);
         users.add(newUser);
     }
 
     @Test
-    public void getUsersTest(){
+    public void getUsersTest() {
         when(reader.getUsers()).thenReturn(users);
         assertSame(service.getUsers(), users);
     }

@@ -1,10 +1,11 @@
 package com.group8.dalsmartteamwork.questionmanager.dao;
 
+import com.group8.dalsmartteamwork.questions.Question;
+import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
+
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import com.group8.dalsmartteamwork.questions.Question;
-import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
 
 public class SortDaoImp implements SortDao {
 

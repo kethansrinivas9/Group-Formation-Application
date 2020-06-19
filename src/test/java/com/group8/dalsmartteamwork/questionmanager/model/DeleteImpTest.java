@@ -5,21 +5,21 @@ import com.group8.dalsmartteamwork.questionmanager.dao.DeleteDaoImp;
 import com.group8.dalsmartteamwork.questions.Question;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.*;
+
 public class DeleteImpTest {
 
-    private Delete delete = null;
     private final DeleteDao deleteDao = mock(DeleteDaoImp.class);
     private final List<Question> sortedList = Arrays.asList(new Question("java"), new Question("C++"));
     private final String BannerID = "B00123456";
     private final int QuestionID = 12;
+    private Delete delete = null;
 
     @BeforeEach
     public void setup() {

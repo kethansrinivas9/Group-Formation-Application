@@ -1,4 +1,4 @@
-package com.group8.dalsmartteamwork.course.model;
+package com.group8.dalsmartteamwork.course;
 
 public class Course {
     private Integer courseID;

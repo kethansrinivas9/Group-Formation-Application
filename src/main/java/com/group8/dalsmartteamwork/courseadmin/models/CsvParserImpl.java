@@ -6,7 +6,7 @@ import com.group8.dalsmartteamwork.utils.User;
 import java.util.List;
 
 public class CsvParserImpl implements ICsvParser {
-    private ICsvReader reader;
+    private final ICsvReader reader;
 
     public CsvParserImpl(ICsvReader reader) {
         this.reader = reader;
