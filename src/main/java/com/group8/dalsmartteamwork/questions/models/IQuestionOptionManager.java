@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface IQuestionOptionManager {
     int saveQuestion(Question question);
+
     Boolean saveOptions(List<Option> options, int questionId);
 }

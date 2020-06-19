@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
-public class CourseDaoImplTest {
+public class ICourseDaoImplTest {
     public static final int TEMP_COURSEID = 9999;
     public static final String TEMP_BANNERID = "B00000000";
     public static final String TEMP_COURSENAME = "Course1";

@@ -2,15 +2,16 @@ package com.group8.dalsmartteamwork.login.dao;
 
 import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
 import org.springframework.security.core.context.SecurityContextHolder;
+
 import java.sql.ResultSet;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CourseRoleDaoImp implements CourseRoleDao  {
+public class CourseRoleDaoImp implements ICourseRoleDao {
 
     public String username;
     Set<String> roleList = new HashSet<>();
-    String RoleId, RoleName;
+    String RoleName;
 
     public Set<String> getCourseRoles() {
         CallStoredProcedure procedure = null;

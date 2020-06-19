@@ -6,15 +6,10 @@ public class Role {
     public String roleName;
 
     public Role() {
-
     }
 
     public Role(String roleId, String roleName) {
         this.roleId = roleId;
-        this.roleName = roleName;
-    }
-
-    public Role(String roleName) {
         this.roleName = roleName;
     }
 

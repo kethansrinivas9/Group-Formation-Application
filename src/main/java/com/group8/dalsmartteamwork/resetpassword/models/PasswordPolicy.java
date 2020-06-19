@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import static java.lang.Character.isLowerCase;
 import static java.lang.Character.isUpperCase;
 
-public class PasswordPolicy implements IPasswordPolicy{
+public class PasswordPolicy implements IPasswordPolicy {
     private String minLength;
     private String maxLength;
     private String minUpper;

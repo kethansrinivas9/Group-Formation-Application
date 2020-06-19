@@ -4,7 +4,7 @@ import com.group8.dalsmartteamwork.admin.dao.CourseManagerDaoImpl;
 import com.group8.dalsmartteamwork.admin.dao.ICourseManagerDao;
 import com.group8.dalsmartteamwork.admin.models.CourseManagerImpl;
 import com.group8.dalsmartteamwork.admin.models.ICourseManager;
-import com.group8.dalsmartteamwork.course.model.Course;
+import com.group8.dalsmartteamwork.course.Course;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,12 +18,12 @@ import static org.mockito.Mockito.when;
 
 
 public class CourseManagerImplTest {
-    private ICourseManager iCourseManager = null;
     private final ICourseManagerDao courseManagerDao = mock(CourseManagerDaoImpl.class);
     private final List<Course> courses = new ArrayList<>();
     private final Course courseOne = new Course(123, "SAMPLE_COURSE_NAME", "Instructor123");
     private final Course courseTwo = new Course(123, "SAMPLE_COURSE_NAME", "Instructor123");
     private final String instructorID = "B00123456";
+    private ICourseManager iCourseManager = null;
 
     @BeforeEach
     public void setup() {

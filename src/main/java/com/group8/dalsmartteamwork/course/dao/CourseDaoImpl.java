@@ -1,20 +1,16 @@
 package com.group8.dalsmartteamwork.course.dao;
 
-import com.group8.dalsmartteamwork.course.model.Course;
 import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
-import com.group8.dalsmartteamwork.utils.DbConnection;
 import com.group8.dalsmartteamwork.utils.User;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseDaoImpl implements CourseDao {
-    DbConnection connection;
+public class CourseDaoImpl implements ICourseDao {
 
     @Override
     public Boolean courseExists(int courseID) {
-        Course course = new Course();
         CallStoredProcedure storedProcedure = null;
         ResultSet rs;
         try {

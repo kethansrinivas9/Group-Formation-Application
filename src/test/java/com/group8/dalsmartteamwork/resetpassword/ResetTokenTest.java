@@ -17,7 +17,7 @@ public class ResetTokenTest {
     @Test
     public void getRandomCharTest() {
         ResetToken resetToken = new ResetToken();
-        char randomChar = resetToken.getRandomChar();
+        char randomChar = ResetToken.getRandomChar();
         assertNotNull(String.valueOf(randomChar), "Random character for token generation not generated.");
     }
 }

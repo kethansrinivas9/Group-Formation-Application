@@ -1,6 +1,6 @@
 package com.group8.dalsmartteamwork.courseRole;
 
-import com.group8.dalsmartteamwork.CourseRole.models.CourseRole;
+import com.group8.dalsmartteamwork.utils.CourseRole;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

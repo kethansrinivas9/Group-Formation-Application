@@ -1,6 +1,5 @@
 package com.group8.dalsmartteamwork.course;
 
-import com.group8.dalsmartteamwork.course.model.Course;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

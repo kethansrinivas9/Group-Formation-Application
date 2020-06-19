@@ -1,6 +1,6 @@
 package com.group8.dalsmartteamwork.admin.models;
 
-import com.group8.dalsmartteamwork.course.model.Course;
+import com.group8.dalsmartteamwork.course.Course;
 
 import java.util.List;
 

@@ -8,14 +8,14 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class PasswordResetTokenTest{
+public class PasswordResetTokenTest {
 
     private static final String TEMP_BANNERID = "B00000000";
     private static final String TEMP_TOKEN = "a0a1a2a3a4a5a6a7a8a9";
-    private static  final Date TEMP_TIMESTAMP = new Date();
+    private static final Date TEMP_TIMESTAMP = new Date();
 
     @Test
-    public void defaultConstructorTest(){
+    public void defaultConstructorTest() {
         PasswordResetToken passwordResetToken = new PasswordResetToken();
         assertEquals(passwordResetToken.getTokenID(), 0, "Default constructor of PasswordResetToken failed.");
         assertNull(passwordResetToken.getBannerID(), "Default constructor of PasswordResetToken failed.");
@@ -25,7 +25,7 @@ public class PasswordResetTokenTest{
     }
 
     @Test
-    public void constructorWithThreeArgumentsTest(){
+    public void constructorWithThreeArgumentsTest() {
         PasswordResetToken passwordResetToken = new PasswordResetToken(1, TEMP_BANNERID, TEMP_TOKEN, TEMP_TIMESTAMP, "valid");
         assertEquals(passwordResetToken.getTokenID(), 1, "TokenID not set.");
         assertEquals(passwordResetToken.getBannerID(), TEMP_BANNERID, "BannerID not set.");
@@ -35,76 +35,80 @@ public class PasswordResetTokenTest{
     }
 
     @Test
-    public void getTokenIDTest(){
+    public void getTokenIDTest() {
         PasswordResetToken passwordResetToken = new PasswordResetToken(1, TEMP_BANNERID, TEMP_TOKEN, TEMP_TIMESTAMP, "valid");
         assertEquals(passwordResetToken.getTokenID(), 1, "Unable to retrieve TokenID.");
     }
 
     @Test
-    public void setTokenIDTest(){
+    public void setTokenIDTest() {
         PasswordResetToken passwordResetToken = new PasswordResetToken();
         passwordResetToken.setTokenID(1);
         assertEquals(passwordResetToken.getTokenID(), 1, "TokenID was not added to the PasswordResetToken object.");
     }
 
-    @Test void getBannerIDTest(){
+    @Test
+    void getBannerIDTest() {
         PasswordResetToken passwordResetToken = new PasswordResetToken(1, TEMP_BANNERID, TEMP_TOKEN, TEMP_TIMESTAMP, "valid");
         assertEquals(passwordResetToken.getBannerID(), TEMP_BANNERID, "Unable to retrieve BannerID.");
     }
 
     @Test
-    public void setBannerIDTest(){
+    public void setBannerIDTest() {
         PasswordResetToken passwordResetToken = new PasswordResetToken();
         passwordResetToken.setBannerID(TEMP_BANNERID);
         assertEquals(passwordResetToken.getBannerID(), TEMP_BANNERID, "BannerID was not added to the PasswordResetToken object.");
     }
 
-    @Test void getTokenTest(){
+    @Test
+    void getTokenTest() {
         PasswordResetToken passwordResetToken = new PasswordResetToken(1, TEMP_BANNERID, TEMP_TOKEN, TEMP_TIMESTAMP, "valid");
         assertEquals(passwordResetToken.getToken(), TEMP_TOKEN, "Unable to retrieve Token.");
     }
 
     @Test
-    public void setTokenTest(){
+    public void setTokenTest() {
         PasswordResetToken passwordResetToken = new PasswordResetToken();
         passwordResetToken.setToken(TEMP_TOKEN);
         assertEquals(passwordResetToken.getToken(), TEMP_TOKEN, "Token was not added to the PasswordResetToken object.");
     }
 
-    @Test void getTimestampTest(){
+    @Test
+    void getTimestampTest() {
         PasswordResetToken passwordResetToken = new PasswordResetToken(1, TEMP_BANNERID, TEMP_TOKEN, TEMP_TIMESTAMP, "valid");
         assertEquals(passwordResetToken.getTimestamp(), TEMP_TIMESTAMP, "Unable to retrieve Timestamp.");
     }
 
     @Test
-    public void setTimestampTest(){
+    public void setTimestampTest() {
         PasswordResetToken passwordResetToken = new PasswordResetToken();
         passwordResetToken.setTimestamp(TEMP_TIMESTAMP);
-        System.out.println("TIMESTAMP IS: "+ TEMP_TIMESTAMP);
+        System.out.println("TIMESTAMP IS: " + TEMP_TIMESTAMP);
         assertEquals(passwordResetToken.getTimestamp(), TEMP_TIMESTAMP, "Timestamp was not added to the PasswordResetToken object.");
     }
 
-    @Test void getStatusTest(){
+    @Test
+    void getStatusTest() {
         PasswordResetToken passwordResetToken = new PasswordResetToken(1, TEMP_BANNERID, TEMP_TOKEN, TEMP_TIMESTAMP, "valid");
         assertEquals(passwordResetToken.getStatus(), "valid", "Unable to retrieve token status.");
     }
 
     @Test
-    public void setStatusValidTest(){
+    public void setStatusValidTest() {
         PasswordResetToken passwordResetToken = new PasswordResetToken();
         passwordResetToken.setStatusValid();
         assertEquals(passwordResetToken.getStatus(), "valid", "Status was not added/updated to the PasswordResetToken object.");
     }
 
     @Test
-    public void setStatusExpiredTest(){
+    public void setStatusExpiredTest() {
         PasswordResetToken passwordResetToken = new PasswordResetToken();
         passwordResetToken.setStatusExpired();
         assertEquals(passwordResetToken.getStatus(), "expired", "Status was not added/updated to the PasswordResetToken object.");
     }
 
     @Test
-    public void setStatusNotFoundTest(){
+    public void setStatusNotFoundTest() {
         PasswordResetToken passwordResetToken = new PasswordResetToken();
         passwordResetToken.setStatusNotFound();
         assertEquals(passwordResetToken.getStatus(), "notfound", "Status was not added/updated to the PasswordResetToken object.");

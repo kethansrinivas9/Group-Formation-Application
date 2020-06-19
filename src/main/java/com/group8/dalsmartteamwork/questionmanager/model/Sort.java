@@ -1,14 +1,15 @@
 package com.group8.dalsmartteamwork.questionmanager.model;
 
-import java.util.List;
 import com.group8.dalsmartteamwork.questions.Question;
+
+import java.util.List;
 
 public interface Sort {
 
-    public List<Question> getAllQuestion(String BannerID);
+    List<Question> getAllQuestion(String BannerID);
 
-    public List<Question> sortQuestionsByTitle(String BannerID);
+    List<Question> sortQuestionsByTitle(String BannerID);
 
-    public List<Question> sortAllQuestionByDate(String BannerID);
+    List<Question> sortAllQuestionByDate(String BannerID);
 
 }

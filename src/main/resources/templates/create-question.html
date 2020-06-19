@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Create a Question</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
-            $("#more").click(function() {
+        $(document).ready(function () {
+            $("#more").click(function () {
                 var rowIndex = $("#option-table").find("tr").length + 1;
 
                 $('#option-table tbody>tr:last').clone(true).insertAfter('#option-table tbody>tr:last').find(".s-a")
-                    .attr("name","stored-as-" + rowIndex).val(rowIndex);
+                    .attr("name", "stored-as-" + rowIndex).val(rowIndex);
                 $('#option-table tbody>tr:last .d-t')
-                    .attr("name","display-text-" + rowIndex).val("");
+                    .attr("name", "display-text-" + rowIndex).val("");
 
                 return false;
             });
@@ -22,8 +22,8 @@
         });
     </script>
     <script>
-        $(document).ready(function() {
-            $(".delete").on("click",function(){
+        $(document).ready(function () {
+            $(".delete").on("click", function () {
                 $(this).parent().parent('tr').remove();
             });
         });
@@ -33,14 +33,14 @@
 <div class="container">
     <div th:if="${component == 0}">
         <h3>Basic Question Information</h3>
-        <form th:action="@{/question-details}" method="post">
+        <form method="post" th:action="@{/question-details}">
             <div class="form-group form-inline row">
                 <label class="col-md-1" for="title">Title</label>
-                <input required type="text" class="form-control col-md-4" name="title" id="title">
+                <input class="form-control col-md-4" id="title" name="title" required type="text">
             </div>
             <div class="form-group form-inline row">
                 <label class="col-md-1" for="question">Question</label>
-                <input required type="text" class="form-control col-md-4" name="question" id="question">
+                <input class="form-control col-md-4" id="question" name="question" required type="text">
             </div>
             <div class="form-group form-inline row">
                 <label class="control-label col-md-1" for="type">Type</label>
@@ -54,7 +54,7 @@
             <hr class="mt-2 mb-3"/>
             <div class="form-group float-right">
                 <a href="/instructor"> Home Page </a>
-                <button type="submit" name="action" value="next" class="btn btn-primary">Next</button>
+                <button class="btn btn-primary" name="action" type="submit" value="next">Next</button>
             </div>
         </form>
     </div>
@@ -62,32 +62,32 @@
         <h3>Answers</h3>
         <div class="form-group form-inline row">
             <label for="answer1" th:text="${question}"></label>
-            <input style="margin-left: 5px;" required type="text" class="form-control col-md-1" name="answer1"
-                   id="answer1">
+            <input class="form-control col-md-1" id="answer1" name="answer1" required style="margin-left: 5px;"
+                   type="text">
         </div>
     </div>
-    <form th:action="@{/validate-question}" method="post">
+    <form method="post" th:action="@{/validate-question}">
         <div th:if="${component == 2 || component == 3}">
             <h3>Answers</h3>
             <table id="option-table">
                 <tbody>
-                    <tr>
-                        <td>
-                            <label>Display Text</label>
-                            <input class="d-t" name="display-text-1" type="text">
-                        </td>
-                        <td>
-                            <label>Stored as</label>
-                            <input class="s-a" name="stored-as-1" type="number" value="1">
-                        </td>
-                        <td>
-                            <a href="#" class="delete">Delete</a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        <label>Display Text</label>
+                        <input class="d-t" name="display-text-1" type="text">
+                    </td>
+                    <td>
+                        <label>Stored as</label>
+                        <input class="s-a" name="stored-as-1" type="number" value="1">
+                    </td>
+                    <td>
+                        <a class="delete" href="#">Delete</a>
+                    </td>
+                </tr>
                 </tbody>
 
             </table>
-            <a href="#"  id="more">More Options</a>
+            <a href="#" id="more">More Options</a>
 
         </div>
         <div th:if="${component == 3}">
@@ -96,15 +96,15 @@
         <div th:if="${component == 4}">
             <div class="form-group">
                 <label for="answer4" th:text="${question}"></label>
-                <textarea style="margin-left: 5px; width: 400px;" required class="form-control" name="answer4"
-                          id="answer4"></textarea>
+                <textarea class="form-control" id="answer4" name="answer4" required
+                          style="margin-left: 5px; width: 400px;"></textarea>
             </div>
         </div>
-        <div th:if="${component > 0}" >
+        <div th:if="${component > 0}">
             <hr class="mt-2 mb-3"/>
             <div class="form-group float-right">
-                <button type="submit" name="action" value="cancel" class="btn btn-danger">Cancel</button>
-                <button type="submit" name="action" value="save" class="btn btn-primary">Save</button>
+                <button class="btn btn-danger" name="action" type="submit" value="cancel">Cancel</button>
+                <button class="btn btn-primary" name="action" type="submit" value="save">Save</button>
             </div>
         </div>
     </form>

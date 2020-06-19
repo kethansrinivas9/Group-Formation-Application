@@ -2,15 +2,11 @@ package com.group8.dalsmartteamwork.resetpassword.dao;
 
 import com.group8.dalsmartteamwork.resetpassword.models.PasswordPolicy;
 import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
-import com.group8.dalsmartteamwork.utils.DbConnection;
 import com.group8.dalsmartteamwork.utils.Encryption;
 
 import java.sql.ResultSet;
-import java.sql.Statement;
 
 public class PasswordHistoryManagerImpl implements IPasswordHistoryManager {
-
-    DbConnection connection;
 
     @Override
     public Boolean moveCurrentPassword(String bannerID) {

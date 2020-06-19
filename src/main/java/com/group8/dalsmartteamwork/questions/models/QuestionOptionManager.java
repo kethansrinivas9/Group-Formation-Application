@@ -8,9 +8,9 @@ import com.group8.dalsmartteamwork.utils.CurrentUser;
 import java.util.List;
 
 public class QuestionOptionManager implements IQuestionOptionManager {
-    private IQuestionDao questionDao;
+    private final IQuestionDao questionDao;
 
-    public QuestionOptionManager(IQuestionDao questionDao){
+    public QuestionOptionManager(IQuestionDao questionDao) {
         this.questionDao = questionDao;
     }
 
@@ -20,7 +20,7 @@ public class QuestionOptionManager implements IQuestionOptionManager {
         CurrentUser currentUser = CurrentUser.getInstance();
         int questionType;
         int questionId;
-        switch (questionTypeString){
+        switch (questionTypeString) {
             case "numeric":
                 questionType = 1;
                 break;
@@ -33,14 +33,14 @@ public class QuestionOptionManager implements IQuestionOptionManager {
             default:
                 questionType = 4;
         }
-        questionId =  questionDao.addQuestionToDb(question, questionType, currentUser.getBannerId());
+        questionId = questionDao.addQuestionToDb(question, questionType, currentUser.getBannerId());
         return questionId;
     }
 
     @Override
     public Boolean saveOptions(List<Option> options, int questionId) {
         Boolean status = true;
-        for(Option option: options){
+        for (Option option : options) {
             status = status && questionDao.addOptionToDb(option, questionId);
         }
         return status;

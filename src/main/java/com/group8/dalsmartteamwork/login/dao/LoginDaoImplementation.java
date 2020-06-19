@@ -1,11 +1,10 @@
 package com.group8.dalsmartteamwork.login.dao;
 
-import com.group8.dalsmartteamwork.login.dao.LoginDao;
 import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
 
 import java.sql.ResultSet;
 
-public class LoginDaoImplementation implements LoginDao {
+public class LoginDaoImplementation implements ILoginDao {
     private String role, BannerID;
     private String password_temp = null;
 

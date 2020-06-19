@@ -1,10 +1,10 @@
 package com.group8.dalsmartteamwork.login.model;
 
+import com.group8.dalsmartteamwork.login.dao.CourseRoleDaoImp;
 import org.junit.jupiter.api.Test;
+
 import java.util.HashSet;
 import java.util.Set;
-
-import com.group8.dalsmartteamwork.login.dao.CourseRoleDaoImp;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

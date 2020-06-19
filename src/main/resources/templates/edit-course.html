@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>This is the Edit Course page</title>
     <link rel="stylesheet" th:href="@{/css/admin.css}"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" rel="stylesheet">
 </head>
 
 <body>
@@ -13,19 +13,19 @@
 <h1 class="sans-serif-font" style="text-align: center">Edit course</h1>
 <div align="center">
     <br><br>
-    <form action="#" th:action="@{/update-course}" th:object="${course}" method="post">
-        <input type="hidden" name="originalCourseID" id="originalCourseID" th:value="${course.courseID}"/>
-        <input required type="text" class="form-control mb-4" placeholder="Course Name" th:field="*{courseName}"
-               style="width: 30%;"/>
-        <input required type="text" class="form-control mb-4" placeholder="Course ID" th:field="*{courseID}"
-               style="width: 30%;"/>
+    <form action="#" method="post" th:action="@{/update-course}" th:object="${course}">
+        <input id="originalCourseID" name="originalCourseID" th:value="${course.courseID}" type="hidden"/>
+        <input class="form-control mb-4" placeholder="Course Name" required style="width: 30%;" th:field="*{courseName}"
+               type="text"/>
+        <input class="form-control mb-4" placeholder="Course ID" required style="width: 30%;" th:field="*{courseID}"
+               type="text"/>
         <select th:field="*{instructorID}">
-            <option th:each="p : ${listOfInstructors}" th:value="${p}" th:text="${p}"></option>
+            <option th:each="p : ${listOfInstructors}" th:text="${p}" th:value="${p}"></option>
         </select>
 
         <div align="center" style="width: 150px">
-        <p><input type="submit" class="btn btn-primary" name="save" style="float: left"/></p>
-        <p><a href="/admin" name="cancel" class="btn btn-primary" style="float: right">Cancel</a></p>
+            <p><input class="btn btn-primary" name="save" style="float: left" type="submit"/></p>
+            <p><a class="btn btn-primary" href="/admin" name="cancel" style="float: right">Cancel</a></p>
         </div>
     </form>
 

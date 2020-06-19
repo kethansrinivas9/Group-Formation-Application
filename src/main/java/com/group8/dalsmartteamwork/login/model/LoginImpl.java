@@ -1,12 +1,12 @@
 package com.group8.dalsmartteamwork.login.model;
 
-import com.group8.dalsmartteamwork.login.dao.LoginDao;
+import com.group8.dalsmartteamwork.login.dao.ILoginDao;
 
-public class LoginImplementation implements Login {
+public class LoginImpl implements ILogin {
 
-    private LoginDao loginDao;
+    private final ILoginDao loginDao;
 
-    public LoginImplementation(LoginDao loginDao) {
+    public LoginImpl(ILoginDao loginDao) {
         this.loginDao = loginDao;
     }
 

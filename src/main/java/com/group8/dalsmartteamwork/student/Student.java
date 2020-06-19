@@ -1,4 +1,4 @@
-package com.group8.dalsmartteamwork.student.model;
+package com.group8.dalsmartteamwork.student;
 
 public class Student {
     private String BannerId;
