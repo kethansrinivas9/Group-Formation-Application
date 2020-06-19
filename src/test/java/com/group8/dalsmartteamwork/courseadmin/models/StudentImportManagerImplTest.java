@@ -17,17 +17,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 class StudentImportManagerImplTest {
-    private StudentImportManagerImpl service = null;
-    private RegistrationDao registrationDao = mock(RegistrationDaoImpl.class);
-    private IStudentEnrollmentDao studentEnrollmentDao = mock(StudentEnrollmentDaoImpl.class);
-    private Mail mail = mock(Mail.class);
-    private List<User> users;
     private static final int COURSE_ID = 5308;
-    private User existingUser = new User("B00000000", "fName", "lName", "email@email.com", "pwd");
-    private User newUser = new User("B1111111", "fName", "lName", "email@email.com", "pwd");
+    private StudentImportManagerImpl service = null;
+    private final RegistrationDao registrationDao = mock(RegistrationDaoImpl.class);
+    private final IStudentEnrollmentDao studentEnrollmentDao = mock(StudentEnrollmentDaoImpl.class);
+    private final Mail mail = mock(Mail.class);
+    private List<User> users;
+    private final User existingUser = new User("B00000000", "fName", "lName", "email@email.com", "pwd");
+    private final User newUser = new User("B1111111", "fName", "lName", "email@email.com", "pwd");
 
     @BeforeEach
-    void setup(){
+    void setup() {
         this.service = new StudentImportManagerImpl(COURSE_ID, registrationDao, studentEnrollmentDao, mail);
         this.users = new ArrayList<>();
         users.add(this.existingUser);
@@ -35,8 +35,8 @@ class StudentImportManagerImplTest {
     }
 
     @Test
-    void verifyRegistrationTest(){
-        List<Boolean> result = Arrays.asList(false,true);
+    void verifyRegistrationTest() {
+        List<Boolean> result = Arrays.asList(false, true);
         when(mail.sendEmail(anyString(), anyString(), anyString())).thenReturn(true);
         when(registrationDao.isUserInDb(existingUser.getId())).thenReturn(true);
         when(registrationDao.isUserInDb(newUser.getId())).thenReturn(false);

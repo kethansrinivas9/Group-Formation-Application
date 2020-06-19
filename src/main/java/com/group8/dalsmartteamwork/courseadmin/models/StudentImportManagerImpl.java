@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentImportManagerImpl implements IStudentImportManager {
-    private RegistrationDao registrationDao;
-    private IStudentEnrollmentDao studentEnrollmentDao;
-    private Mail mail;
-    private int courseId;
-    private IEncryption encryption;
-    private IPasswordGenerator passwordGenerator;
+    private final RegistrationDao registrationDao;
+    private final IStudentEnrollmentDao studentEnrollmentDao;
+    private final Mail mail;
+    private final int courseId;
+    private final IEncryption encryption;
+    private final IPasswordGenerator passwordGenerator;
 
-    public StudentImportManagerImpl(int courseId, RegistrationDao registrationDao, IStudentEnrollmentDao studentEnrollmentDao, Mail mail){
+    public StudentImportManagerImpl(int courseId, RegistrationDao registrationDao, IStudentEnrollmentDao studentEnrollmentDao, Mail mail) {
         this.courseId = courseId;
         this.registrationDao = registrationDao;
         this.studentEnrollmentDao = studentEnrollmentDao;
@@ -36,11 +36,10 @@ public class StudentImportManagerImpl implements IStudentImportManager {
                 String encrypted_password = encryption.encrypt(password);
                 user.setPassword(encrypted_password);
                 Boolean userDbStatus = this.registrationDao.isUserInDb(user.getId());
-                if(userDbStatus){
+                if (userDbStatus) {
                     status.add(false);
                     studentEnrollmentDao.assignCourseToUser(user.getId(), courseId);
-                }
-                else {
+                } else {
                     registrationDao.addUserToDb(user);
                     studentEnrollmentDao.assignCourseToUser(user.getId(), courseId);
                     final String INVITE_TEXT_FORMAT = "You have been registered to CatME and registered for the course %d. You can login with your email and password: %s";

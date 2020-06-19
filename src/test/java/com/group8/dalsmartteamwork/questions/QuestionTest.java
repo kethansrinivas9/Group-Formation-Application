@@ -7,15 +7,20 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class QuestionTest {
+    static Question question;
     private final String TEST_TITLE = "title";
     private final String TEST_TEXT = "text";
     private final String TEST_TYPE = "numeric";
     private final int TEST_QUESTION_ID = 1;
-    static Question question;
 
     @BeforeAll
-    static void setup(){
+    static void setup() {
         question = Question.getInstance();
+    }
+
+    @AfterAll
+    static void reset() {
+        question.reset();
     }
 
     @Test
@@ -31,7 +36,7 @@ public class QuestionTest {
     }
 
     @Test
-    void getTextTest(){
+    void getTextTest() {
         question.setText(TEST_TEXT);
         assertEquals(question.getText(), TEST_TEXT);
     }
@@ -43,7 +48,7 @@ public class QuestionTest {
     }
 
     @Test
-    void getTypeTest(){
+    void getTypeTest() {
     }
 
     @Test
@@ -53,7 +58,7 @@ public class QuestionTest {
     }
 
     @Test
-    void getQuestionID(){
+    void getQuestionID() {
         question.setQuestionID(TEST_QUESTION_ID);
         assertEquals(question.getQuestionID(), TEST_QUESTION_ID);
     }
@@ -62,10 +67,5 @@ public class QuestionTest {
     void setQuestionID() {
         question.setQuestionID(TEST_QUESTION_ID);
         assertEquals(question.getQuestionID(), TEST_QUESTION_ID);
-    }
-
-    @AfterAll
-    static void reset(){
-        question.reset();
     }
 }

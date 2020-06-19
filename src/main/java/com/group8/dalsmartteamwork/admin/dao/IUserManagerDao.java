@@ -4,10 +4,10 @@ import java.util.List;
 
 public interface IUserManagerDao {
 
-    public List<String> getListOfNonAdminUsers();
+    List<String> getListOfNonAdminUsers();
 
-    public String getCourseInstructor(String courseID);
+    String getCourseInstructor(String courseID);
 
-    public List<String> getUsersWhoAreGuestsOrInstructors(String courseID);
+    List<String> getUsersWhoAreGuestsOrInstructors(String courseID);
 
 }

@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.spec.KeySpec;
 import java.util.Base64;
 
-public class Encryption implements IEncryption{
+public class Encryption implements IEncryption {
     private Cipher encryptCipher;
     private Cipher decryptCipher;
 
@@ -18,7 +18,7 @@ public class Encryption implements IEncryption{
         try {
             String secretKey = System.getenv("CRYPT_KEY");
             String salt = System.getenv("CRYPT_SALT");
-            byte[] iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            byte[] iv = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
             IvParameterSpec ivSpec = new IvParameterSpec(iv);
             SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
             KeySpec keySpec = new PBEKeySpec(secretKey.toCharArray(), salt.getBytes(), 65536, 256);

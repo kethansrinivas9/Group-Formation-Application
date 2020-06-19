@@ -7,10 +7,11 @@ public class CurrentUser {
     private String BannerId;
     private Set<String> Roles;
 
-    private CurrentUser(){}
+    private CurrentUser() {
+    }
 
-    public static CurrentUser getInstance(){
-        if(currentUser == null){
+    public static CurrentUser getInstance() {
+        if (currentUser == null) {
             currentUser = new CurrentUser();
         }
         return currentUser;

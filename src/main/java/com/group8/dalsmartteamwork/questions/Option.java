@@ -4,9 +4,10 @@ public class Option {
     private String displayText;
     private int storedAs;
 
-    public Option(){}
+    public Option() {
+    }
 
-    public Option(String displayText, int storedAs){
+    public Option(String displayText, int storedAs) {
         this.displayText = displayText;
         this.storedAs = storedAs;
     }

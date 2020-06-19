@@ -2,7 +2,7 @@ package com.group8.dalsmartteamwork.courseadmin.dao;
 
 import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
 
-public class StudentEnrollmentDaoImpl implements IStudentEnrollmentDao{
+public class StudentEnrollmentDaoImpl implements IStudentEnrollmentDao {
     @Override
     public Boolean assignCourseToUser(String userId, int courseId) {
         CallStoredProcedure procedure = null;

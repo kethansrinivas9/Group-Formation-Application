@@ -1,20 +1,21 @@
 package com.group8.dalsmartteamwork.student.dao;
 
-import com.group8.dalsmartteamwork.student.model.Student;
+import com.group8.dalsmartteamwork.student.Student;
 import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
 import com.group8.dalsmartteamwork.utils.DbConnection;
 import org.springframework.security.core.context.SecurityContextHolder;
+
 import javax.servlet.http.HttpServletRequest;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class StudentDaoImp implements StudentDao {
+public class StudentDaoImpl implements IStudentDao {
+    public String username;
     Student student;
     String courseName, courseId;
     ArrayList<Student> courseList = new ArrayList<Student>();
     DbConnection dbConnection;
     HttpServletRequest request;
-    public String username;
 
     @Override
     public ArrayList<Student> displayCourses() {

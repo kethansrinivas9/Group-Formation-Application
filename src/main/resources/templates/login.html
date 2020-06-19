@@ -4,7 +4,7 @@
 <head>
 
     <title>Login Page</title>
-    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 
 <body style="background-color:#ededed;">
@@ -14,12 +14,12 @@
 <div id="loginStyles">
     <div class="loginBox">
         <h2>Login Page </h2>
-        <form style="text-align:center" th:action="@{/login}" method="POST">
-            <input style="font-size: large;" required type="text" id="username" name="username"
-                   th:placeholder="BannerID"/>
+        <form method="POST" style="text-align:center" th:action="@{/login}">
+            <input id="username" name="username" required style="font-size: large;" th:placeholder="BannerID"
+                   type="text"/>
             <br/>
-            <input style="font-size: large;" required type="password" id="password" name="password"
-                   th:placeholder="Password"/>
+            <input id="password" name="password" required style="font-size: large;" th:placeholder="Password"
+                   type="password"/>
             <br/>
             <input id="submit" type="submit" value="Log in"/>
             <br/>

@@ -8,7 +8,7 @@ import com.group8.dalsmartteamwork.admin.models.CourseManagerImpl;
 import com.group8.dalsmartteamwork.admin.models.ICourseManager;
 import com.group8.dalsmartteamwork.admin.models.IUserManager;
 import com.group8.dalsmartteamwork.admin.models.UserManagerImpl;
-import com.group8.dalsmartteamwork.course.model.Course;
+import com.group8.dalsmartteamwork.course.Course;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

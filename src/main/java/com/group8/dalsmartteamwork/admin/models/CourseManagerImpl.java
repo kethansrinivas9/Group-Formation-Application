@@ -1,12 +1,12 @@
 package com.group8.dalsmartteamwork.admin.models;
 
 import com.group8.dalsmartteamwork.admin.dao.ICourseManagerDao;
-import com.group8.dalsmartteamwork.course.model.Course;
+import com.group8.dalsmartteamwork.course.Course;
 
 import java.util.List;
 
 public class CourseManagerImpl implements ICourseManager {
-    private ICourseManagerDao courseManagerDao;
+    private final ICourseManagerDao courseManagerDao;
     private String instructorID;
 
     public CourseManagerImpl(ICourseManagerDao courseManagerDao) {

@@ -4,32 +4,32 @@
 <head>
 
     <title>front page</title>
-    <meta http-equiv="Content-type" content="text/html" ; charset="UTF-8" />
+    <meta ; charset="UTF-8" content="text/html" http-equiv="Content-type"/>
 
 </head>
 
 <body>
-    <div style="background-color:#337ab7; height:50px; color: black;">
-        <h2 style="float: left;">Group Formation Tool</h2>
-        <a style="float: right; color: black;" href="/logout">Logout</a>
-    </div>
+<div style="background-color:#337ab7; height:50px; color: black;">
+    <h2 style="float: left;">Group Formation Tool</h2>
+    <a href="/logout" style="float: right; color: black;">Logout</a>
+</div>
 
 <br/>
-    <div>
-        <ul>
-            <li>
-                <a style="float: left;"  href="/create-question">Create a Question</a>
-            </li>
-               
-                <li><a style="float: left" href="/sortQuestion">Sort the questions</a>
-                </li>
-                
-             <li> <a style="float: left" href="/listDeleteQuestions">Delete the question</a></li>
-    
-        </ul>
+<div>
+    <ul>
+        <li>
+            <a href="/create-question" style="float: left;">Create a Question</a>
+        </li>
 
-    </div>
-    <div th:text="${message}" th:if="${message}"></div>
+        <li><a href="/sortQuestion" style="float: left">Sort the questions</a>
+        </li>
+
+        <li><a href="/listDeleteQuestions" style="float: left">Delete the question</a></li>
+
+    </ul>
+
+</div>
+<div th:if="${message}" th:text="${message}"></div>
 </body>
 
 </html>

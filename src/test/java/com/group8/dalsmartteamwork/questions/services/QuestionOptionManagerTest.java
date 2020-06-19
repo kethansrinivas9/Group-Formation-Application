@@ -11,7 +11,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -19,12 +20,12 @@ class QuestionOptionManagerTest {
     private IQuestionDao questionDao;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         questionDao = mock(QuestionDao.class);
     }
 
     @Test
-    void saveQuestionTest(){
+    void saveQuestionTest() {
         Question testQuestion = Question.getInstance();
         testQuestion.setTitle("title");
         testQuestion.setText("text");
@@ -35,16 +36,16 @@ class QuestionOptionManagerTest {
     }
 
     @Test
-    void saveOptionsTest(){
+    void saveOptionsTest() {
         List<Option> options = new ArrayList<>();
         Option option1 = new Option("display_text", 1);
         Option option2 = new Option("display_text_2", 2);
         options.add(option1);
         options.add(option2);
-        when(questionDao.addOptionToDb(option1,1)).thenReturn(true);
-        when(questionDao.addOptionToDb(option2,1)).thenReturn(true);
+        when(questionDao.addOptionToDb(option1, 1)).thenReturn(true);
+        when(questionDao.addOptionToDb(option2, 1)).thenReturn(true);
         QuestionOptionManager saveQuestionOptions = new QuestionOptionManager(questionDao);
-        assertTrue(saveQuestionOptions.saveOptions(options,1));
+        assertTrue(saveQuestionOptions.saveOptions(options, 1));
     }
 
 }

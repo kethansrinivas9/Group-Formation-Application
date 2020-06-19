@@ -1,20 +1,13 @@
 package com.group8.dalsmartteamwork.questions;
 
 public class Question {
+    private static Question question;
     private String title;
     private String text;
     private String type;
-    private static Question question;
     private int questionID;
 
     public Question() {
-    }
-
-    public static Question getInstance() {
-        if (question == null) {
-            question = new Question();
-        }
-        return question;
     }
 
     public Question(String title) {
@@ -24,6 +17,13 @@ public class Question {
     public Question(int questionID, String text) {
         this.text = text;
         this.questionID = questionID;
+    }
+
+    public static Question getInstance() {
+        if (question == null) {
+            question = new Question();
+        }
+        return question;
     }
 
     public void reset() {

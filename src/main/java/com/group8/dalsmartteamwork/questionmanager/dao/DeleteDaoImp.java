@@ -1,12 +1,13 @@
 package com.group8.dalsmartteamwork.questionmanager.dao;
 
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 import com.group8.dalsmartteamwork.questions.Question;
 import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
 
-public class DeleteDaoImp implements DeleteDao{
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+public class DeleteDaoImp implements DeleteDao {
 
     @Override
     public List<Question> displayListOfQuestions(String BannerID) {

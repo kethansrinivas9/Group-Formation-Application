@@ -7,7 +7,10 @@ import com.group8.dalsmartteamwork.questions.dao.QuestionDao;
 import com.group8.dalsmartteamwork.questions.models.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,19 +20,19 @@ import java.util.List;
 public class CreateQuestionController {
 
     @GetMapping("/create-question")
-    public ModelAndView getQuestionPage(){
+    public ModelAndView getQuestionPage() {
         ModelAndView modelAndView = new ModelAndView("create-question");
         modelAndView.addObject("component", 0);
         return modelAndView;
     }
 
-    @RequestMapping(value= "/question-details", method= RequestMethod.POST)
+    @RequestMapping(value = "/question-details", method = RequestMethod.POST)
     public String getAnswerPage(@RequestParam("title") String title, @RequestParam("question") String text,
-                                @RequestParam("type") String type, Model model){
+                                @RequestParam("type") String type, Model model) {
         Question question = Question.getInstance();
         IQuestionHandler handleQuestion = new QuestionHandler(question);
         handleQuestion.createQuestion(title, text, type);
-        switch (type){
+        switch (type) {
             case "numeric":
                 model.addAttribute("component", 1);
                 break;
@@ -47,8 +50,8 @@ public class CreateQuestionController {
     }
 
 
-    @RequestMapping(value="/validate-question", method=RequestMethod.POST, params="action=save")
-    public String saveDetails(HttpServletRequest request, Model model){
+    @RequestMapping(value = "/validate-question", method = RequestMethod.POST, params = "action=save")
+    public String saveDetails(HttpServletRequest request, Model model) {
         List<Option> options;
         Question question = Question.getInstance();
         IQuestionOptionManager saveQuestionOptions;
@@ -65,8 +68,8 @@ public class CreateQuestionController {
         return "create-question";
     }
 
-    @RequestMapping(value="/validate-question", method=RequestMethod.POST, params="action=cancel")
-    public String cancelDetails(HttpServletRequest request, Model model){
+    @RequestMapping(value = "/validate-question", method = RequestMethod.POST, params = "action=cancel")
+    public String cancelDetails(HttpServletRequest request, Model model) {
         Question question = Question.getInstance();
         IQuestionHandler handleQuestion = new QuestionHandler(question);
         handleQuestion.resetQuestion();

@@ -5,30 +5,30 @@
 
 
     <title>Student Page</title>
-    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 
 </head>
 
 <body>
-    <div style="text-align:center">
-        <h2>Student page </h2>
-        <br>
-    </div>
-    <table>
-        <tr>
-            <th>Course ID</th>
-            <th>Course Name</th>
-        </tr>
+<div style="text-align:center">
+    <h2>Student page </h2>
+    <br>
+</div>
+<table>
+    <tr>
+        <th>Course ID</th>
+        <th>Course Name</th>
+    </tr>
 
-        <tr th:each="course, itemStat: *{courses}">
+    <tr th:each="course, itemStat: *{courses}">
 
-            <td><span th:text="${course.courseId}"></span></td>
-            <td><span th:text="${course.courseName}"></span></td>
-           
+        <td><span th:text="${course.courseId}"></span></td>
+        <td><span th:text="${course.courseName}"></span></td>
 
-        </tr>
 
-    </table>
+    </tr>
+
+</table>
 
 </body>
 

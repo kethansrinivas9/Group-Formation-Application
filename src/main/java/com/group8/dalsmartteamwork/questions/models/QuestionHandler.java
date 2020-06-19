@@ -3,9 +3,9 @@ package com.group8.dalsmartteamwork.questions.models;
 import com.group8.dalsmartteamwork.questions.Question;
 
 public class QuestionHandler implements IQuestionHandler {
-    private Question question;
+    private final Question question;
 
-    public QuestionHandler(Question question){
+    public QuestionHandler(Question question) {
         this.question = question;
     }
 

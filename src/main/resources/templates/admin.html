@@ -4,29 +4,29 @@
     <meta charset="UTF-8">
     <title>This is the Admin Home page</title>
     <link rel="stylesheet" th:href="@{/css/admin.css}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
 <h1 class="sans-serif-font" style="text-align: center">This change is to demonstrate the CI-CD pipeline</h1>
 <div>
     <div>
         <h3 class="sans-serif-font inner-left"><b>Courses</b></h3>
-        <a th:href="@{/create-course}" class="button sans-serif-font">Create Course</a>
+        <a class="button sans-serif-font" th:href="@{/create-course}">Create Course</a>
     </div>
     <div th:each="course : ${courses}">
         <div class="card">
             <div class="course-container sans-serif-font">
                 <div>
                     <form method="POST" th:action="@{/delete-course}">
-                        <input type="hidden" name="courseID" id="courseID" th:value="${course.courseID}"/>
-                        <button type="submit" class="icon-btn" style="float: right" title="Delete"><i
+                        <input id="courseID" name="courseID" th:value="${course.courseID}" type="hidden"/>
+                        <button class="icon-btn" style="float: right" title="Delete" type="submit"><i
                                 class="fa fa-trash"></i></button>
                     </form>
                     <form method="POST" th:action="@{/edit-course}">
-                        <input type="hidden" name="originalCourseID" id="originalCourseID"
-                               th:value="${course.courseID}"/>
-                        <input type="hidden" name="courseName" id="courseName" th:value="${course.courseName}"/>
-                        <button type="submit" class="icon-btn" style="float: right" title="Edit"><i
+                        <input id="originalCourseID" name="originalCourseID" th:value="${course.courseID}"
+                               type="hidden"/>
+                        <input id="courseName" name="courseName" th:value="${course.courseName}" type="hidden"/>
+                        <button class="icon-btn" style="float: right" title="Edit" type="submit"><i
                                 class="fa fa-edit"></i></button>
                     </form>
                     <p style="float: left;"><h4 th:text="${course.courseName}"></h4></p>

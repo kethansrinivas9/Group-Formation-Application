@@ -3,28 +3,30 @@
 
 <head>
     <title>front page</title>
-    <meta http-equiv="Content-type" content="text/html" charset="UTF-8" />
+    <meta charset="UTF-8" content="text/html" http-equiv="Content-type"/>
 </head>
 
 <body>
-    <div style="background-color:#337ab7; height:50px; color: black;">
-        <h2 style="float: left;">Group Formation Tool</h2>
-        <a style="float: right; color: black;" href="/logout">Logout</a>
-    </div>
+<div style="background-color:#337ab7; height:50px; color: black;">
+    <h2 style="float: left;">Group Formation Tool</h2>
+    <a href="/logout" style="float: right; color: black;">Logout</a>
+</div>
 
-    <div>
-        <form style="text-align:center" th:action="@{/questionManager}" method="get">
-            <h2>Instructor</h2>
-            <button
+<div>
+    <form method="get" style="text-align:center" th:action="@{/questionManager}">
+        <h2>Instructor</h2>
+        <button
                 style="background-color: cornflowerblue; box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"
-                type="submit">Question manager</button>
-        </form>
-        <form style="text-align:center" th:action="@{/viewallcourses}" method="get">
-            <button
-                    style="background-color: cornflowerblue; box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"
-                    type="submit">Courses</button>
-        </form>
-    </div>
+                type="submit">Question manager
+        </button>
+    </form>
+    <form method="get" style="text-align:center" th:action="@{/viewallcourses}">
+        <button
+                style="background-color: cornflowerblue; box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"
+                type="submit">Courses
+        </button>
+    </form>
+</div>
 </body>
 
 </html>

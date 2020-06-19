@@ -9,18 +9,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 class QuestionHandlerTest {
+    private static Question question;
     private final String TEST_TITLE = "title";
     private final String TEST_TEXT = "text";
     private final String TEST_TYPE = "numeric";
-    private static Question question;
 
     @BeforeAll
-    static void setup(){
+    static void setup() {
         question = Question.getInstance();
     }
 
     @Test
-    void createQuestionTest(){
+    void createQuestionTest() {
         QuestionHandler questionHandler = new QuestionHandler(question);
         Question result = questionHandler.createQuestion(TEST_TITLE, TEST_TEXT, TEST_TYPE);
         assertEquals(result.getTitle(), TEST_TITLE);
@@ -29,7 +29,7 @@ class QuestionHandlerTest {
     }
 
     @Test
-    void resetQuestionTest(){
+    void resetQuestionTest() {
         QuestionHandler questionHandler = new QuestionHandler(question);
         questionHandler.resetQuestion();
         assertNull(question.getTitle());
