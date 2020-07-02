@@ -1,4 +1,4 @@
-package com.group8.dalsmartteamwork.utils;
+package com.group8.dalsmartteamwork.database;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;

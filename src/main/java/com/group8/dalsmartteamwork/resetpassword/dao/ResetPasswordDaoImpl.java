@@ -1,8 +1,8 @@
 package com.group8.dalsmartteamwork.resetpassword.dao;
 
 import com.group8.dalsmartteamwork.resetpassword.models.PasswordResetToken;
-import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
-import com.group8.dalsmartteamwork.utils.ResetToken;
+import com.group8.dalsmartteamwork.database.CallStoredProcedure;
+import com.group8.dalsmartteamwork.resetpassword.models.ResetToken;
 
 import java.sql.ResultSet;
 

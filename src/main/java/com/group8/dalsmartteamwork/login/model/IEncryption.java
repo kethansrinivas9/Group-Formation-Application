@@ -1,4 +1,4 @@
-package com.group8.dalsmartteamwork.utils;
+package com.group8.dalsmartteamwork.login.model;
 
 public interface IEncryption {
     String encrypt(String strToEncrypt);

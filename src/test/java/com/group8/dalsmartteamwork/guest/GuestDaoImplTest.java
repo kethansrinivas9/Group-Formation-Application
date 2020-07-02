@@ -1,4 +1,4 @@
-package com.group8.dalsmartteamwork.Guest;
+package com.group8.dalsmartteamwork.guest;
 
 import com.group8.dalsmartteamwork.course.Course;
 import com.group8.dalsmartteamwork.guest.Dao.GuestDaoImpl;

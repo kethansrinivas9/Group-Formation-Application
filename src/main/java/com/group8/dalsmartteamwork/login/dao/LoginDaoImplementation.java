@@ -1,6 +1,6 @@
 package com.group8.dalsmartteamwork.login.dao;
 
-import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
+import com.group8.dalsmartteamwork.database.CallStoredProcedure;
 
 import java.sql.ResultSet;
 

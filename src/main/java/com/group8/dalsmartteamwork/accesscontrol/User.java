@@ -1,4 +1,4 @@
-package com.group8.dalsmartteamwork.utils;
+package com.group8.dalsmartteamwork.accesscontrol;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

@@ -2,7 +2,7 @@ package com.group8.dalsmartteamwork.login.login_security;
 
 import com.group8.dalsmartteamwork.login.dao.CourseRoleDaoImp;
 import com.group8.dalsmartteamwork.login.dao.ICourseRoleDao;
-import com.group8.dalsmartteamwork.utils.CurrentUser;
+import com.group8.dalsmartteamwork.accesscontrol.CurrentUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -47,7 +47,7 @@ public class Successhandler implements AuthenticationSuccessHandler {
         if (roles.contains("Admin")) {
             currentUser.setRoles(roles);
             response.sendRedirect("/admin");
-        } else if (roles.contains("Guest")) {
+        } else if (roles.contains("guest")) {
             currentUser.setRoles(courseRoles);
             if (courseRoles.contains("TA")) {
                 response.sendRedirect("/viewallcourses");

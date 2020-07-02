@@ -1,5 +1,7 @@
-package com.group8.dalsmartteamwork.utils;
+package com.group8.dalsmartteamwork.login;
 
+import com.group8.dalsmartteamwork.login.model.Encryption;
+import com.group8.dalsmartteamwork.login.model.IEncryption;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;

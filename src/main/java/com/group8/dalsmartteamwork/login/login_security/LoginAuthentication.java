@@ -2,7 +2,7 @@ package com.group8.dalsmartteamwork.login.login_security;
 
 import com.group8.dalsmartteamwork.login.dao.LoginDaoImplementation;
 import com.group8.dalsmartteamwork.login.model.User;
-import com.group8.dalsmartteamwork.utils.Encryption;
+import com.group8.dalsmartteamwork.login.model.Encryption;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

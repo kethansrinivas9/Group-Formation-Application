@@ -4,8 +4,8 @@ import com.group8.dalsmartteamwork.courseadmin.dao.IStudentEnrollmentDao;
 import com.group8.dalsmartteamwork.courseadmin.dao.StudentEnrollmentDaoImpl;
 import com.group8.dalsmartteamwork.register.dao.RegistrationDao;
 import com.group8.dalsmartteamwork.register.dao.RegistrationDaoImpl;
-import com.group8.dalsmartteamwork.utils.Mail;
-import com.group8.dalsmartteamwork.utils.User;
+import com.group8.dalsmartteamwork.resetpassword.models.Mail;
+import com.group8.dalsmartteamwork.accesscontrol.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

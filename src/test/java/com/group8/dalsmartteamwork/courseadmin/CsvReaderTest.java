@@ -1,5 +1,6 @@
-package com.group8.dalsmartteamwork.utils;
+package com.group8.dalsmartteamwork.courseadmin;
 
+import com.group8.dalsmartteamwork.courseadmin.models.CsvReader;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
