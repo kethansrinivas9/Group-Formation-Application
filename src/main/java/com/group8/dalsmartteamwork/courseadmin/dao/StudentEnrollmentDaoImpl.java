@@ -1,6 +1,6 @@
 package com.group8.dalsmartteamwork.courseadmin.dao;
 
-import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
+import com.group8.dalsmartteamwork.database.CallStoredProcedure;
 
 public class StudentEnrollmentDaoImpl implements IStudentEnrollmentDao {
     @Override

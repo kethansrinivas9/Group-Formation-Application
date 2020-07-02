@@ -2,9 +2,7 @@ package com.group8.dalsmartteamwork.resetpassword.models;
 
 import com.group8.dalsmartteamwork.resetpassword.dao.IResetPasswordDao;
 import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDaoImpl;
-import com.group8.dalsmartteamwork.utils.Encryption;
-import com.group8.dalsmartteamwork.utils.Mail;
-import com.group8.dalsmartteamwork.utils.ResetToken;
+import com.group8.dalsmartteamwork.login.model.Encryption;
 
 import java.sql.SQLException;
 

@@ -1,4 +1,4 @@
-package com.group8.dalsmartteamwork.utils;
+package com.group8.dalsmartteamwork.login.model;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;

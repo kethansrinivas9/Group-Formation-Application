@@ -1,8 +1,8 @@
 package com.group8.dalsmartteamwork.resetpassword.dao;
 
 import com.group8.dalsmartteamwork.resetpassword.models.PasswordPolicy;
-import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
-import com.group8.dalsmartteamwork.utils.Encryption;
+import com.group8.dalsmartteamwork.database.CallStoredProcedure;
+import com.group8.dalsmartteamwork.login.model.Encryption;
 
 import java.sql.ResultSet;
 

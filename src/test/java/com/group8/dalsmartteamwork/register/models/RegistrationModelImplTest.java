@@ -1,7 +1,7 @@
 package com.group8.dalsmartteamwork.register.models;
 
 import com.group8.dalsmartteamwork.register.dao.RegistrationDaoImpl;
-import com.group8.dalsmartteamwork.utils.User;
+import com.group8.dalsmartteamwork.accesscontrol.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

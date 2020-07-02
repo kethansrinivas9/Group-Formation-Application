@@ -1,4 +1,4 @@
-package com.group8.dalsmartteamwork.utils;
+package com.group8.dalsmartteamwork.accesscontrol;
 
 public interface IUser {
 

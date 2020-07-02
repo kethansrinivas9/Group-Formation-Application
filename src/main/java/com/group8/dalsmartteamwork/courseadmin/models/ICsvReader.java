@@ -4,6 +4,6 @@ import com.group8.dalsmartteamwork.accesscontrol.User;
 
 import java.util.List;
 
-public interface ICsvParser {
+public interface ICsvReader {
     List<User> getUsers();
 }

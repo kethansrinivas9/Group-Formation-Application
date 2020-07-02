@@ -1,6 +1,6 @@
 package com.group8.dalsmartteamwork.course.dao;
 
-import com.group8.dalsmartteamwork.utils.User;
+import com.group8.dalsmartteamwork.accesscontrol.User;
 
 import java.sql.SQLException;
 import java.util.List;

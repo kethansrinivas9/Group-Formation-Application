@@ -5,7 +5,7 @@ import com.group8.dalsmartteamwork.register.dao.RegistrationDaoImpl;
 import com.group8.dalsmartteamwork.register.models.IRegistrationModel;
 import com.group8.dalsmartteamwork.register.models.RegistrationModelImpl;
 import com.group8.dalsmartteamwork.resetpassword.models.PasswordPolicy;
-import com.group8.dalsmartteamwork.utils.User;
+import com.group8.dalsmartteamwork.accesscontrol.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

@@ -1,4 +1,4 @@
-package com.group8.dalsmartteamwork.utils;
+package com.group8.dalsmartteamwork.resetpassword.models;
 
 import java.util.Random;
 

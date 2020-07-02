@@ -1,5 +1,6 @@
-package com.group8.dalsmartteamwork.utils;
+package com.group8.dalsmartteamwork.courseadmin.models;
 
+import com.group8.dalsmartteamwork.accesscontrol.User;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedReader;
