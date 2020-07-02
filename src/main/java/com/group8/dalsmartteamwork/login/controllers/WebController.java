@@ -1,6 +1,6 @@
 package com.group8.dalsmartteamwork.login.controllers;
 
-import com.group8.dalsmartteamwork.utils.User;
+import com.group8.dalsmartteamwork.accesscontrol.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

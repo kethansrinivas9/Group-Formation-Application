@@ -1,7 +1,7 @@
 package com.group8.dalsmartteamwork.admin.dao;
 
 import com.group8.dalsmartteamwork.course.Course;
-import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
+import com.group8.dalsmartteamwork.database.CallStoredProcedure;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;

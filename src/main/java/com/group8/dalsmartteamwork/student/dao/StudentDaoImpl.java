@@ -1,8 +1,8 @@
 package com.group8.dalsmartteamwork.student.dao;
 
 import com.group8.dalsmartteamwork.student.Student;
-import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
-import com.group8.dalsmartteamwork.utils.DbConnection;
+import com.group8.dalsmartteamwork.database.CallStoredProcedure;
+import com.group8.dalsmartteamwork.database.DbConnection;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.servlet.http.HttpServletRequest;

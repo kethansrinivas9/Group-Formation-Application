@@ -1,4 +1,6 @@
-package com.group8.dalsmartteamwork.utils;
+package com.group8.dalsmartteamwork.courseadmin.models;
+
+import com.group8.dalsmartteamwork.courseadmin.models.IPasswordGenerator;
 
 import java.util.Random;
 

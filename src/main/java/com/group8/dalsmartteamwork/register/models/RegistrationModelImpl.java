@@ -1,8 +1,8 @@
 package com.group8.dalsmartteamwork.register.models;
 
 import com.group8.dalsmartteamwork.register.dao.RegistrationDao;
-import com.group8.dalsmartteamwork.utils.Encryption;
-import com.group8.dalsmartteamwork.utils.User;
+import com.group8.dalsmartteamwork.login.model.Encryption;
+import com.group8.dalsmartteamwork.accesscontrol.User;
 
 public class RegistrationModelImpl implements IRegistrationModel {
     private final RegistrationDao dao;

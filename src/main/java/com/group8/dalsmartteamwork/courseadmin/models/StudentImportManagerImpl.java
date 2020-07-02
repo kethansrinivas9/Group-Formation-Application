@@ -1,8 +1,11 @@
 package com.group8.dalsmartteamwork.courseadmin.models;
 
+import com.group8.dalsmartteamwork.accesscontrol.User;
 import com.group8.dalsmartteamwork.courseadmin.dao.IStudentEnrollmentDao;
+import com.group8.dalsmartteamwork.login.model.Encryption;
+import com.group8.dalsmartteamwork.login.model.IEncryption;
 import com.group8.dalsmartteamwork.register.dao.RegistrationDao;
-import com.group8.dalsmartteamwork.utils.*;
+import com.group8.dalsmartteamwork.resetpassword.models.Mail;
 
 import java.util.ArrayList;
 import java.util.List;
