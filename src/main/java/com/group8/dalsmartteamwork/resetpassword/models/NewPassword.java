@@ -1,6 +1,6 @@
 package com.group8.dalsmartteamwork.resetpassword.models;
 
-public class NewPassword {
+public class NewPassword implements INewPassword {
     private String password;
     private String bannerID;
 
@@ -12,18 +12,22 @@ public class NewPassword {
         this.password = password;
     }
 
+    @Override
     public String getBannerID() {
         return bannerID;
     }
 
+    @Override
     public void setBannerID(String bannerID) {
         this.bannerID = bannerID;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
 
+    @Override
     public void setPassword(String password) {
         this.password = password;
     }
