@@ -35,7 +35,7 @@ public class ResetPasswordController {
                                 Model model) {
         IResetPasswordManager resetPasswordManager = new ResetPasswordManagerImpl();
         if (resetPasswordManager.isRequestValid(bannerID, token)) {
-            NewPassword newPassword = new NewPassword();
+            INewPassword newPassword = new NewPassword();
             newPassword.setBannerID(bannerID);
             model.addAttribute("newPassword", newPassword);
             return "resetPassword/resetPasswordForm";
@@ -47,7 +47,7 @@ public class ResetPasswordController {
     @PostMapping("/resetpassword")
     public String requestPasswordReset(@ModelAttribute NewPassword newPassword, Model model) {
         IResetPasswordManager resetPasswordManager = new ResetPasswordManagerImpl();
-        PasswordPolicy passwordPolicy = new PasswordPolicy();
+        IPasswordPolicy passwordPolicy = new PasswordPolicy();
 
         if (!passwordPolicy.isValid(newPassword.getPassword())) {
             model.addAttribute("errorMessages", passwordPolicy.generateErrorMessage());

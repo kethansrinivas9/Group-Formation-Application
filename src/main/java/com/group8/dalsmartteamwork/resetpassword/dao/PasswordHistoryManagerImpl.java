@@ -1,5 +1,6 @@
 package com.group8.dalsmartteamwork.resetpassword.dao;
 
+import com.group8.dalsmartteamwork.resetpassword.models.IPasswordPolicy;
 import com.group8.dalsmartteamwork.resetpassword.models.PasswordPolicy;
 import com.group8.dalsmartteamwork.database.CallStoredProcedure;
 import com.group8.dalsmartteamwork.login.model.Encryption;
@@ -13,7 +14,7 @@ public class PasswordHistoryManagerImpl implements IPasswordHistoryManager {
         CallStoredProcedure storedProcedure = null;
         try {
             storedProcedure = new CallStoredProcedure("spMoveCurrentPassword(?, ?)");
-            PasswordPolicy passwordPolicy = new PasswordPolicy();
+            IPasswordPolicy passwordPolicy = new PasswordPolicy();
             storedProcedure.setParameter(1, bannerID);
             storedProcedure.setParameter(2, passwordPolicy.getHistoricalPasswordLimit());
             storedProcedure.execute();
