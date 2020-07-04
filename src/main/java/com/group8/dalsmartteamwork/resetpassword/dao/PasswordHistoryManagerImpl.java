@@ -1,5 +1,6 @@
 package com.group8.dalsmartteamwork.resetpassword.dao;
 
+import com.group8.dalsmartteamwork.login.model.IEncryption;
 import com.group8.dalsmartteamwork.resetpassword.models.IPasswordPolicy;
 import com.group8.dalsmartteamwork.resetpassword.models.PasswordPolicy;
 import com.group8.dalsmartteamwork.database.CallStoredProcedure;
@@ -34,7 +35,7 @@ public class PasswordHistoryManagerImpl implements IPasswordHistoryManager {
         CallStoredProcedure storedProcedure = null;
         ResultSet rs;
         try {
-            Encryption encryption = new Encryption();
+            IEncryption encryption = new Encryption();
             String encryptedPassword = encryption.encrypt(password);
             storedProcedure = new CallStoredProcedure("spGetPasswordHistory(?, ?)");
             storedProcedure.setParameter(1, bannerID);

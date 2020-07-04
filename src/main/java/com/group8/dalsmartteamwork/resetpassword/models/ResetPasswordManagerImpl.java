@@ -1,17 +1,20 @@
 package com.group8.dalsmartteamwork.resetpassword.models;
 
+import com.group8.dalsmartteamwork.login.model.Encryption;
 import com.group8.dalsmartteamwork.login.model.IEncryption;
 import com.group8.dalsmartteamwork.resetpassword.dao.IResetPasswordDao;
-import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDaoImpl;
-import com.group8.dalsmartteamwork.login.model.Encryption;
 
 import java.sql.SQLException;
 
 public class ResetPasswordManagerImpl implements IResetPasswordManager {
+    IResetPasswordDao resetPasswordDao;
+
+    public ResetPasswordManagerImpl(IResetPasswordDao resetPasswordDao) {
+        this.resetPasswordDao = resetPasswordDao;
+    }
 
     @Override
     public Boolean addResetRequest(String bannerID) {
-        IResetPasswordDao resetPasswordDao = new ResetPasswordDaoImpl();
         try {
             if (resetPasswordDao.userExists(bannerID)) {
                 IResetToken resetToken = new ResetToken();
@@ -35,7 +38,6 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
         String LOCALHOST_DOMAIN = "localhost:8080";
 
         IMail mail = new Mail();
-        IResetPasswordDao resetPasswordDao = new ResetPasswordDaoImpl();
 
         String environment = System.getenv("db.environment");
         String domain;
@@ -60,7 +62,6 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
     @Override
     public Boolean isRequestValid(String bannerID, String token) {
         try {
-            IResetPasswordDao resetPasswordDao = new ResetPasswordDaoImpl();
             IPasswordResetToken passwordResetToken = resetPasswordDao.getPasswordResetRequest(bannerID, token);
             if (passwordResetToken.getStatus().equals("valid")) {
                 return true;
@@ -74,7 +75,6 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
 
     @Override
     public Boolean updatePassword(String bannerID, String password) {
-        IResetPasswordDao resetPasswordDao = new ResetPasswordDaoImpl();
         IEncryption encryption = new Encryption();
 
         String encrypted_password = encryption.encrypt(password);
