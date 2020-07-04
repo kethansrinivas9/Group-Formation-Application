@@ -7,7 +7,7 @@ import com.group8.dalsmartteamwork.resetpassword.dao.IResetPasswordDao;
 import java.sql.SQLException;
 
 public class ResetPasswordManagerImpl implements IResetPasswordManager {
-    IResetPasswordDao resetPasswordDao;
+    private IResetPasswordDao resetPasswordDao;
 
     public ResetPasswordManagerImpl(IResetPasswordDao resetPasswordDao) {
         this.resetPasswordDao = resetPasswordDao;
