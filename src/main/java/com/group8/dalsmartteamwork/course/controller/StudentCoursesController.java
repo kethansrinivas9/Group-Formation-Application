@@ -1,6 +1,6 @@
 package com.group8.dalsmartteamwork.course.controller;
 
-import com.group8.dalsmartteamwork.student.Student;
+import com.group8.dalsmartteamwork.student.model.Student;
 import com.group8.dalsmartteamwork.student.dao.IStudentDao;
 import com.group8.dalsmartteamwork.student.dao.StudentDaoImpl;
 import org.springframework.stereotype.Controller;

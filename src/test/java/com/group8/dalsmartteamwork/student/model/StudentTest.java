@@ -1,10 +1,11 @@
 package com.group8.dalsmartteamwork.student.model;
 
-import com.group8.dalsmartteamwork.student.Student;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import com.group8.dalsmartteamwork.student.model.Student;
 
 public class StudentTest {
 
