@@ -22,4 +22,8 @@ public interface IUser {
 
     void setPassword(String password);
 
+    String getRole();
+
+    void setRole(String role);
+
 }
