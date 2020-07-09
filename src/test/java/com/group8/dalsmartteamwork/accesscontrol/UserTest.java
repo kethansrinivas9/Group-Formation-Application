@@ -10,11 +10,13 @@ public class UserTest {
     public static final String TEMP_LAST_NAME = "TEST_LAST_NAME";
     public static final String TEMP_EMAIL = "TEST_EMAIL@EMAIL.COM";
     public static final String TEMP_PASSWORD = "TEST_PASSWORD";
+    public static final String TEMP_ROLE = "Admin";
     public static final String NEW_ID = "B99999998";
     public static final String NEW_FIRST_NAME = "NEW_FIRST_NAME";
     public static final String NEW_LAST_NAME = "NEW_LAST_NAME";
     public static final String NEW_EMAIL = "NEW_EMAIL@EMAIL.COM";
     public static final String NEW_PASSWORD = "NEW_PASSWORD";
+    public static final String NEW_ROLE = "Admin";
 
     @Test
     public void defaultConstructorTest() {
@@ -87,4 +89,10 @@ public class UserTest {
         assertTrue(userDetailsMock.getPassword().equals(TEMP_PASSWORD));
     }
 
+    @Test
+    public void setRoleTest() {
+        UserDetailsMock userDetailsMock = new UserDetailsMock();
+        userDetailsMock.setRole(NEW_ROLE);
+        assertTrue(userDetailsMock.getRole().equals(NEW_ROLE));
+    }
 }

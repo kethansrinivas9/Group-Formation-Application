@@ -1,6 +1,6 @@
 package com.group8.dalsmartteamwork.login.loginsecurity;
 
-import com.group8.dalsmartteamwork.login.model.User;
+import com.group8.dalsmartteamwork.accesscontrol.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 

@@ -8,6 +8,7 @@ public class User implements IUser {
     private String firstName;
     private String lastName;
     private String email;
+    private String role;
     @NotNull
     @Size(min = 8, max = 30)
     private String password;
@@ -78,6 +79,16 @@ public class User implements IUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String getRole() {
+        return role;
+    }
+
+    @Override
+    public void setRole(String role) {
+        this.role = role;
     }
 
 }
