@@ -1,6 +1,6 @@
-package com.group8.dalsmartteamwork.student.model;
+package com.group8.dalsmartteamwork.student.dao;
 
-import com.group8.dalsmartteamwork.student.Student;
+import com.group8.dalsmartteamwork.student.model.Student;
 import com.group8.dalsmartteamwork.student.dao.IStudentDao;
 import com.group8.dalsmartteamwork.student.dao.StudentDaoImpl;
 import org.junit.jupiter.api.Test;
