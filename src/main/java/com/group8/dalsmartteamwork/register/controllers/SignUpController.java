@@ -1,11 +1,12 @@
 package com.group8.dalsmartteamwork.register.controllers;
 
+import com.group8.dalsmartteamwork.accesscontrol.User;
 import com.group8.dalsmartteamwork.register.dao.RegistrationDao;
 import com.group8.dalsmartteamwork.register.dao.RegistrationDaoImpl;
 import com.group8.dalsmartteamwork.register.models.IRegistrationModel;
 import com.group8.dalsmartteamwork.register.models.RegistrationModelImpl;
+import com.group8.dalsmartteamwork.resetpassword.models.IPasswordPolicy;
 import com.group8.dalsmartteamwork.resetpassword.models.PasswordPolicy;
-import com.group8.dalsmartteamwork.accesscontrol.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,7 +28,7 @@ public class SignUpController {
             return "register";
         }
 
-        PasswordPolicy passwordPolicy = new PasswordPolicy();
+        IPasswordPolicy passwordPolicy = new PasswordPolicy();
         if (!passwordPolicy.isValid(user.getPassword())) {
             model.addAttribute("errorMessages", passwordPolicy.generateErrorMessage());
             model.addAttribute("user", new User());

@@ -8,4 +8,20 @@ public interface IPasswordPolicy {
     Boolean isValid(String password);
 
     ArrayList<String> generateErrorMessage();
+
+    String getMinLength();
+
+    String getMaxLength();
+
+    String getMinUpper();
+
+    String getMinLower();
+
+    String getMinSymbols();
+
+    String getCharsNotAllowed();
+
+    String getHistoryConstraint();
+
+    int getHistoricalPasswordLimit();
 }

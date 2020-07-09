@@ -1,6 +1,7 @@
 package com.group8.dalsmartteamwork.resetpassword;
 
 import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDaoImpl;
+import com.group8.dalsmartteamwork.resetpassword.models.IPasswordResetToken;
 import com.group8.dalsmartteamwork.resetpassword.models.PasswordResetToken;
 import com.group8.dalsmartteamwork.resetpassword.models.ResetToken;
 import org.junit.jupiter.api.Test;
@@ -42,7 +43,7 @@ public class ResetPasswordDaoImplTest {
 
     @Test
     public void getRequestByTokenTest() {
-        PasswordResetToken passwordResetToken = new PasswordResetToken(1, TEMP_BANNERID, TEMP_TOKEN, new Date(), "valid");
+        IPasswordResetToken passwordResetToken = new PasswordResetToken(1, TEMP_BANNERID, TEMP_TOKEN, new Date(), "valid");
 
         when(resetPasswordDaoImplMock.getPasswordResetRequest(TEMP_BANNERID, TEMP_TOKEN)).thenReturn(passwordResetToken);
         passwordResetToken = resetPasswordDaoImplMock.getPasswordResetRequest(TEMP_BANNERID, TEMP_TOKEN);

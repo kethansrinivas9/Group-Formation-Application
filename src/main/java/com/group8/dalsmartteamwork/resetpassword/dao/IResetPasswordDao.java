@@ -1,5 +1,6 @@
 package com.group8.dalsmartteamwork.resetpassword.dao;
 
+import com.group8.dalsmartteamwork.resetpassword.models.IPasswordResetToken;
 import com.group8.dalsmartteamwork.resetpassword.models.PasswordResetToken;
 
 import java.sql.SQLException;
@@ -11,7 +12,7 @@ public interface IResetPasswordDao {
 
     Boolean updateTokenStatus() throws SQLException;
 
-    PasswordResetToken getPasswordResetRequest(String bannerID, String token) throws SQLException;
+    IPasswordResetToken getPasswordResetRequest(String bannerID, String token) throws SQLException;
 
     Boolean updatePassword(String bannerID, String password) throws SQLException;
 

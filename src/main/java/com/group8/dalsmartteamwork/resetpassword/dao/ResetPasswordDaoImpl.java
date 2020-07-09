@@ -1,5 +1,7 @@
 package com.group8.dalsmartteamwork.resetpassword.dao;
 
+import com.group8.dalsmartteamwork.resetpassword.models.IPasswordResetToken;
+import com.group8.dalsmartteamwork.resetpassword.models.IResetToken;
 import com.group8.dalsmartteamwork.resetpassword.models.PasswordResetToken;
 import com.group8.dalsmartteamwork.database.CallStoredProcedure;
 import com.group8.dalsmartteamwork.resetpassword.models.ResetToken;
@@ -13,7 +15,7 @@ public class ResetPasswordDaoImpl implements IResetPasswordDao {
 
     @Override
     public Boolean addToken(String bannerID) {
-        ResetToken resetToken = new ResetToken();
+        IResetToken resetToken = new ResetToken();
         CallStoredProcedure storedProcedure = null;
         try {
             storedProcedure = new CallStoredProcedure("spInsertToken(?, ?)");
@@ -69,8 +71,8 @@ public class ResetPasswordDaoImpl implements IResetPasswordDao {
     }
 
     @Override
-    public PasswordResetToken getPasswordResetRequest(String bannerID, String token) {
-        PasswordResetToken passwordResetToken = new PasswordResetToken();
+    public IPasswordResetToken getPasswordResetRequest(String bannerID, String token) {
+        IPasswordResetToken passwordResetToken = new PasswordResetToken();
         String status = "notfound";
         CallStoredProcedure storedProcedure = null;
         ResultSet rs;
@@ -130,7 +132,6 @@ public class ResetPasswordDaoImpl implements IResetPasswordDao {
         }
     }
 
-    //TODO: Move getUserEmail to User related class if possible
     @Override
     public String getUserEmail(String bannerID) {
         String email = "notfound";

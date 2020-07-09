@@ -9,7 +9,6 @@ import static org.mockito.Mockito.*;
 
 public class PasswordHistoryManagerImplTest {
     public static final String TEMP_BANNERID = "B00000000";
-    public static final String TEMP_TOKEN = "a0a1a2a3a4a5a6a7a8a9";
     public static final String TEMP_PASSWORD = "password123";
 
     @Test

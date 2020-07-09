@@ -33,34 +33,42 @@ public class PasswordPolicy implements IPasswordPolicy {
         return true;
     }
 
+    @Override
     public String getMinLength() {
         return minLength;
     }
 
+    @Override
     public String getMaxLength() {
         return maxLength;
     }
 
+    @Override
     public String getMinUpper() {
         return minUpper;
     }
 
+    @Override
     public String getMinLower() {
         return minLower;
     }
 
+    @Override
     public String getMinSymbols() {
         return minSymbols;
     }
 
+    @Override
     public String getCharsNotAllowed() {
         return charsNotAllowed;
     }
 
+    @Override
     public String getHistoryConstraint() {
         return historyConstraint;
     }
 
+    @Override
     public int getHistoricalPasswordLimit() {
         return historicalPasswordLimit;
     }
@@ -171,13 +179,15 @@ public class PasswordPolicy implements IPasswordPolicy {
         }
 
         if (!this.charsNotAllowed.equals("false")) {
-            String errorMessage = "";
-            errorMessage += "Using ";
+            StringBuilder errorMessage = new StringBuilder();
+            errorMessage.append("Using ");
             for (int i = 0; i < charsNotAllowed.length() - 1; i++) {
-                errorMessage += charsNotAllowed.charAt(i) + ", ";
+                errorMessage.append(charsNotAllowed.charAt(i));
+                errorMessage.append(", ");
             }
-            errorMessage += charsNotAllowed.charAt(charsNotAllowed.length() - 1) + " is not allowed.";
-            errorMessages.add(errorMessage);
+            errorMessage.append(charsNotAllowed.charAt(charsNotAllowed.length() - 1));
+            errorMessage.append(" is not allowed.");
+            errorMessages.add(errorMessage.toString());
         }
         return errorMessages;
     }

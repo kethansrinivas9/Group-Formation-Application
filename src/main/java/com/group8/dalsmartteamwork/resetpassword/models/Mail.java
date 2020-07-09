@@ -5,7 +5,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
-public class Mail {
+public class Mail implements IMail {
     private Session session;
 
     public Mail() {
@@ -32,6 +32,7 @@ public class Mail {
         }
     }
 
+    @Override
     public Boolean sendEmail(String toEmail, String subject, String text) {
         try {
             MimeMessage msg = new MimeMessage(session);
