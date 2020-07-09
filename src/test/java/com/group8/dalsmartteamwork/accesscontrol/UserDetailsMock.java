@@ -8,6 +8,7 @@ public class UserDetailsMock implements IUser {
     private String firstName;
     private String email;
     private String password;
+    private String role;
 
     public UserDetailsMock() {
         setToDefault();
@@ -69,5 +70,15 @@ public class UserDetailsMock implements IUser {
     @Override
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String getRole() {
+        return role;
+    }
+
+    @Override
+    public void setRole(String role) {
+        this.role = role;
     }
 }

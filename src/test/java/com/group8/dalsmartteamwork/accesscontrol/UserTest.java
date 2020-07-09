@@ -15,6 +15,7 @@ public class UserTest {
     public static final String NEW_LAST_NAME = "NEW_LAST_NAME";
     public static final String NEW_EMAIL = "NEW_EMAIL@EMAIL.COM";
     public static final String NEW_PASSWORD = "NEW_PASSWORD";
+    public static final String Role = "Admin";
 
     @Test
     public void defaultConstructorTest() {
@@ -85,6 +86,19 @@ public class UserTest {
     public void getPasswordTest() {
         UserDetailsMock userDetailsMock = new UserDetailsMock();
         assertTrue(userDetailsMock.getPassword().equals(TEMP_PASSWORD));
+    }
+
+    @Test
+    public void setRoleTest() {
+        UserDetailsMock userDetailsMock = new UserDetailsMock();
+        userDetailsMock.setRole(Role);
+        assertTrue(userDetailsMock.getRole().equals(Role));
+    }
+
+    @Test
+    public void getRoleTest() {
+        UserDetailsMock userDetailsMock = new UserDetailsMock();
+        assertTrue(userDetailsMock.getRole().equals(Role));
     }
 
 }
