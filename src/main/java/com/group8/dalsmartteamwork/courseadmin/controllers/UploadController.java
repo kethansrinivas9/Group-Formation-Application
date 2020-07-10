@@ -1,15 +1,13 @@
 package com.group8.dalsmartteamwork.courseadmin.controllers;
 
+import com.group8.dalsmartteamwork.accesscontrol.User;
 import com.group8.dalsmartteamwork.courseadmin.Pair;
 import com.group8.dalsmartteamwork.courseadmin.dao.IStudentEnrollmentDao;
 import com.group8.dalsmartteamwork.courseadmin.dao.StudentEnrollmentDaoImpl;
 import com.group8.dalsmartteamwork.courseadmin.models.*;
 import com.group8.dalsmartteamwork.register.dao.RegistrationDao;
 import com.group8.dalsmartteamwork.register.dao.RegistrationDaoImpl;
-import com.group8.dalsmartteamwork.courseadmin.models.CsvReader;
-import com.group8.dalsmartteamwork.courseadmin.models.ICsvReader;
 import com.group8.dalsmartteamwork.resetpassword.models.Mail;
-import com.group8.dalsmartteamwork.accesscontrol.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;

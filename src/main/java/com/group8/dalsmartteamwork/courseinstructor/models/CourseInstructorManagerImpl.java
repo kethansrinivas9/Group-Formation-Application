@@ -1,7 +1,7 @@
 package com.group8.dalsmartteamwork.courseinstructor.models;
 
-import com.group8.dalsmartteamwork.course.dao.ICourseDao;
 import com.group8.dalsmartteamwork.accesscontrol.User;
+import com.group8.dalsmartteamwork.course.dao.ICourseDao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

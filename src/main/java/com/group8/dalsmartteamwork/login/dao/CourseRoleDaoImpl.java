@@ -7,13 +7,12 @@ import java.sql.ResultSet;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CourseRoleDaoImp implements ICourseRoleDao {
-
+public class CourseRoleDaoImpl implements ICourseRoleDao {
     public String username;
-    Set<String> roleList = new HashSet<>();
     String RoleName;
 
     public Set<String> getCourseRoles() {
+        Set<String> roleList = new HashSet<>();
         CallStoredProcedure procedure = null;
         ResultSet resultSet;
         try {
@@ -25,7 +24,6 @@ public class CourseRoleDaoImp implements ICourseRoleDao {
                 RoleName = resultSet.getString(1);
                 roleList.add(RoleName);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

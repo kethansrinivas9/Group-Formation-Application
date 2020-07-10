@@ -1,5 +1,6 @@
-package com.group8.dalsmartteamwork.login.model;
+package com.group8.dalsmartteamwork.login;
 
+import com.group8.dalsmartteamwork.login.model.Role;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNull;

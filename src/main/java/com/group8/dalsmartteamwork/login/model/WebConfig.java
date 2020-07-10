@@ -1,4 +1,4 @@
-package com.group8.dalsmartteamwork.login.login_security;
+package com.group8.dalsmartteamwork.login.model;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,6 +26,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/student**").hasAnyAuthority("Student", "TA", "Instructor", "Guest")
                 .antMatchers("/guest**").hasAnyAuthority("Student", "TA", "Instructor", "Guest")
                 .antMatchers("/instructor**").hasAnyAuthority("Instructor", "Guest")
+                .antMatchers("/view**").hasAnyAuthority("Instructor", "TA", "Guest")
                 .antMatchers("/login").permitAll()
                 .antMatchers("/loginError").permitAll()
                 .antMatchers("/register").permitAll()

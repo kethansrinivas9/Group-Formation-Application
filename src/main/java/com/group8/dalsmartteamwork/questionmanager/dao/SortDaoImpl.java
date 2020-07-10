@@ -1,13 +1,13 @@
 package com.group8.dalsmartteamwork.questionmanager.dao;
 
-import com.group8.dalsmartteamwork.questions.Question;
 import com.group8.dalsmartteamwork.database.CallStoredProcedure;
+import com.group8.dalsmartteamwork.questions.Question;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SortDaoImp implements SortDao {
+public class SortDaoImpl implements SortDao {
 
     @Override
     public List<Question> getAllQuestion(String BannerID) {

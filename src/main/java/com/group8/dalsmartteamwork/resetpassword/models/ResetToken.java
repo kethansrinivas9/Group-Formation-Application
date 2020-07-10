@@ -2,7 +2,7 @@ package com.group8.dalsmartteamwork.resetpassword.models;
 
 import java.util.Random;
 
-public class ResetToken implements IResetToken{
+public class ResetToken implements IResetToken {
     public static char getRandomChar() {
         String characterSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
         Random random = new Random();
@@ -17,7 +17,7 @@ public class ResetToken implements IResetToken{
                 tokenResult.append(getRandomChar());
             }
         } catch (Exception exception) {
-            System.out.print(exception.getMessage());
+            exception.printStackTrace();
         }
         return tokenResult.toString();
     }

@@ -1,16 +1,18 @@
-package com.group8.dalsmartteamwork.login.model;
+package com.group8.dalsmartteamwork.login;
 
 import com.group8.dalsmartteamwork.login.dao.ILoginDao;
-import com.group8.dalsmartteamwork.login.dao.LoginDaoImplementation;
+import com.group8.dalsmartteamwork.login.dao.LoginDaoImpl;
+import com.group8.dalsmartteamwork.login.model.ILogin;
+import com.group8.dalsmartteamwork.login.model.LoginImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
-public class LoginImpTest {
+public class LoginImplTest {
 
-    private final ILoginDao loginDao = mock(LoginDaoImplementation.class);
+    private final ILoginDao loginDao = mock(LoginDaoImpl.class);
     private final String BannerID = "B00123456";
     private final String FIRSTNAME = "TEST_user";
     private final String EMAIL = "TEST@gmail.com";

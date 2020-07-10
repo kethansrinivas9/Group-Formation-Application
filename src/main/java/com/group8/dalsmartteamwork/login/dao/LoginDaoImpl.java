@@ -4,7 +4,7 @@ import com.group8.dalsmartteamwork.database.CallStoredProcedure;
 
 import java.sql.ResultSet;
 
-public class LoginDaoImplementation implements ILoginDao {
+public class LoginDaoImpl implements ILoginDao {
     private String role, BannerID;
     private String password_temp = null;
 

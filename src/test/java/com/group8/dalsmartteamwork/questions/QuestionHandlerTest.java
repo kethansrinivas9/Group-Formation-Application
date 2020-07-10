@@ -1,6 +1,5 @@
-package com.group8.dalsmartteamwork.questions.services;
+package com.group8.dalsmartteamwork.questions;
 
-import com.group8.dalsmartteamwork.questions.Question;
 import com.group8.dalsmartteamwork.questions.models.QuestionHandler;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

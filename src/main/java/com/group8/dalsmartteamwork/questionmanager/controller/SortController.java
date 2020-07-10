@@ -1,7 +1,7 @@
 package com.group8.dalsmartteamwork.questionmanager.controller;
 
 import com.group8.dalsmartteamwork.questionmanager.dao.SortDao;
-import com.group8.dalsmartteamwork.questionmanager.dao.SortDaoImp;
+import com.group8.dalsmartteamwork.questionmanager.dao.SortDaoImpl;
 import com.group8.dalsmartteamwork.questions.Question;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,8 +20,8 @@ public class SortController {
 
     @GetMapping("/sortQuestion")
     public String sortQuestions(Principal principal, Model model) {
-        SortDao sortDaoImp = new SortDaoImp();
-        List<Question> sortedQuestionList = sortDaoImp.getAllQuestion(principal.getName());
+        SortDao sortDaoImpl = new SortDaoImpl();
+        List<Question> sortedQuestionList = sortDaoImpl.getAllQuestion(principal.getName());
         model.addAttribute("list", sortedQuestionList);
         if (!model.containsAttribute("list")) {
             return "questionManager";
@@ -31,16 +31,16 @@ public class SortController {
 
     @GetMapping("/sortQuestionByTitle")
     public String sortQuestionsBasedOnTitle(Principal principal, Model model) {
-        SortDao sortDaoImp = new SortDaoImp();
-        List<Question> sortedList = sortDaoImp.sortQuestionsByTitle(principal.getName());
+        SortDao sortDaoImpl = new SortDaoImpl();
+        List<Question> sortedList = sortDaoImpl.sortQuestionsByTitle(principal.getName());
         model.addAttribute("list", sortedList);
         return "sortQuestionByTitle";
     }
 
     @GetMapping("/sortQuestionByDate")
     public String sortQuestionsBasedOnDate(Principal principal, Model model) {
-        SortDao sortDaoImp = new SortDaoImp();
-        List<Question> sortedList = sortDaoImp.sortAllQuestionByDate(principal.getName());
+        SortDao sortDaoImpl = new SortDaoImpl();
+        List<Question> sortedList = sortDaoImpl.sortAllQuestionByDate(principal.getName());
         model.addAttribute("list", sortedList);
         return "sortQuestionByDate";
     }

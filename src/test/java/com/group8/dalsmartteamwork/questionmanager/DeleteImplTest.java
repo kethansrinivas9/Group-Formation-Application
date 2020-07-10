@@ -1,7 +1,9 @@
-package com.group8.dalsmartteamwork.questionmanager.model;
+package com.group8.dalsmartteamwork.questionmanager;
 
 import com.group8.dalsmartteamwork.questionmanager.dao.DeleteDao;
-import com.group8.dalsmartteamwork.questionmanager.dao.DeleteDaoImp;
+import com.group8.dalsmartteamwork.questionmanager.dao.DeleteDaoImpl;
+import com.group8.dalsmartteamwork.questionmanager.model.Delete;
+import com.group8.dalsmartteamwork.questionmanager.model.DeleteImpl;
 import com.group8.dalsmartteamwork.questions.Question;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,9 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
-public class DeleteImpTest {
+public class DeleteImplTest {
 
-    private final DeleteDao deleteDao = mock(DeleteDaoImp.class);
+    private final DeleteDao deleteDao = mock(DeleteDaoImpl.class);
     private final List<Question> sortedList = Arrays.asList(new Question("java"), new Question("C++"));
     private final String BannerID = "B00123456";
     private final int QuestionID = 12;
@@ -23,7 +25,7 @@ public class DeleteImpTest {
 
     @BeforeEach
     public void setup() {
-        delete = new DeleteImp(deleteDao);
+        delete = new DeleteImpl(deleteDao);
     }
 
     @Test

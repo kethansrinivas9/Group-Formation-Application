@@ -1,9 +1,9 @@
 package com.group8.dalsmartteamwork.questions.models;
 
+import com.group8.dalsmartteamwork.accesscontrol.CurrentUser;
 import com.group8.dalsmartteamwork.questions.Option;
 import com.group8.dalsmartteamwork.questions.Question;
 import com.group8.dalsmartteamwork.questions.dao.IQuestionDao;
-import com.group8.dalsmartteamwork.accesscontrol.CurrentUser;
 
 import java.util.List;
 

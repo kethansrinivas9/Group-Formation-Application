@@ -1,7 +1,7 @@
 package com.group8.dalsmartteamwork.course.dao;
 
-import com.group8.dalsmartteamwork.database.CallStoredProcedure;
 import com.group8.dalsmartteamwork.accesscontrol.User;
+import com.group8.dalsmartteamwork.database.CallStoredProcedure;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class CourseDaoImpl implements ICourseDao {
                 return true;
             }
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+            exception.printStackTrace();
         } finally {
             if (null != storedProcedure) {
                 storedProcedure.cleanup();
@@ -47,7 +47,7 @@ public class CourseDaoImpl implements ICourseDao {
                         ""));
             }
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+            exception.printStackTrace();
         } finally {
             if (null != storedProcedure) {
                 storedProcedure.cleanup();
@@ -73,7 +73,7 @@ public class CourseDaoImpl implements ICourseDao {
                         ""));
             }
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+            exception.printStackTrace();
         } finally {
             if (null != storedProcedure) {
                 storedProcedure.cleanup();
@@ -95,7 +95,7 @@ public class CourseDaoImpl implements ICourseDao {
                 studentList.add(new User(rs.getString("BannerID"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Email"), ""));
             }
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+            exception.printStackTrace();
         } finally {
             if (null != storedProcedure) {
                 storedProcedure.cleanup();
@@ -117,7 +117,7 @@ public class CourseDaoImpl implements ICourseDao {
                 result = rs.getString("BannerID");
             }
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+            exception.printStackTrace();
         } finally {
             if (null != storedProcedure) {
                 storedProcedure.cleanup();
@@ -136,7 +136,7 @@ public class CourseDaoImpl implements ICourseDao {
             storedProcedure.execute();
             return true;
         } catch (Exception exception) {
-            System.out.print(exception.getMessage());
+            exception.printStackTrace();
             return false;
         } finally {
             if (null != storedProcedure) {

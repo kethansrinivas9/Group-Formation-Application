@@ -1,8 +1,8 @@
 package com.group8.dalsmartteamwork.register.dao;
 
+import com.group8.dalsmartteamwork.accesscontrol.User;
 import com.group8.dalsmartteamwork.database.CallStoredProcedure;
 import com.group8.dalsmartteamwork.database.DbConnection;
-import com.group8.dalsmartteamwork.accesscontrol.User;
 
 import java.sql.ResultSet;
 

@@ -1,8 +1,8 @@
-package com.group8.dalsmartteamwork.student.dao;
+package com.group8.dalsmartteamwork.student;
 
-import com.group8.dalsmartteamwork.student.model.Student;
 import com.group8.dalsmartteamwork.student.dao.IStudentDao;
 import com.group8.dalsmartteamwork.student.dao.StudentDaoImpl;
+import com.group8.dalsmartteamwork.student.model.Student;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -13,25 +13,25 @@ import static org.mockito.Mockito.*;
 
 public class StudentDaoImplTest {
 
+    private final IStudentDao studentDaoImpl = mock(StudentDaoImpl.class);
     Student student = new Student("1100", "C++");
     Student student1 = new Student("1120", "C");
     ArrayList<Student> studentArray = new ArrayList<>();
     private boolean check = false;
-    private final IStudentDao studentDaoImp = mock(StudentDaoImpl.class);
 
     @Test
     public void displayCoursesTest() {
         studentArray.add(student);
         studentArray.add(student1);
-        when(studentDaoImp.displayCourses()).thenReturn(studentArray);
-        assertEquals(studentDaoImp.displayCourses(), studentArray, "failed");
-        verify(studentDaoImp).displayCourses();
+        when(studentDaoImpl.displayCourses()).thenReturn(studentArray);
+        assertEquals(studentDaoImpl.displayCourses(), studentArray, "failed");
+        verify(studentDaoImpl).displayCourses();
 
     }
 
     @Test
     public void verifyCoursesTest() {
-        check = studentDaoImp.displayCourses().add(student);
+        check = studentDaoImpl.displayCourses().add(student);
         assertTrue(check);
     }
 
