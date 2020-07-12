@@ -1,9 +1,9 @@
-package com.group8.dalsmartteamwork.courseinstructor.controllers;
+package com.group8.dalsmartteamwork.course.controllers;
 
 import com.group8.dalsmartteamwork.course.dao.CourseDaoImpl;
 import com.group8.dalsmartteamwork.course.dao.ICourseDao;
-import com.group8.dalsmartteamwork.courseinstructor.models.CourseInstructorManagerImpl;
-import com.group8.dalsmartteamwork.courseinstructor.models.ICourseInstructorManager;
+import com.group8.dalsmartteamwork.course.models.CourseInstructorManagerImpl;
+import com.group8.dalsmartteamwork.course.models.ICourseInstructorManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Page</title>
+</head>
+<body>
+    <h3 th:if="${courseId ne null}" th:text="${'Course ' + courseId}"></h3>
+    <h5 th:if="${bannerId ne null}" th:text="${'Student ' + bannerId}"></h5>
+</body>
+</html>

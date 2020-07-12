@@ -2,11 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
-
     <title>Student Page</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
-
 </head>
 
 <body>
@@ -22,8 +19,8 @@
 
     <tr th:each="course, itemStat: *{courses}">
 
-        <td><span th:text="${course.courseId}"></span></td>
-        <td><span th:text="${course.courseName}"></span></td>
+        <td><a th:href="@{/student-course(courseId = ${course.getCourseId()})}"><span th:text="${course.getCourseId()}"></span></a></td>
+        <td><a><span th:text="${course.getCourseName()}"></span></a></td>
 
 
     </tr>
