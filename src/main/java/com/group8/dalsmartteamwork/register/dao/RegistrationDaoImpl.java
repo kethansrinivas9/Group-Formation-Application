@@ -6,7 +6,7 @@ import com.group8.dalsmartteamwork.database.DbConnection;
 
 import java.sql.ResultSet;
 
-public class RegistrationDaoImpl implements RegistrationDao {
+public class RegistrationDaoImpl implements IRegistrationDao {
     private DbConnection dbConnection;
 
     @Override

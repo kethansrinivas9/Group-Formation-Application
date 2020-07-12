@@ -5,8 +5,11 @@ import com.group8.dalsmartteamwork.courseadmin.Pair;
 import com.group8.dalsmartteamwork.courseadmin.dao.IStudentEnrollmentDao;
 import com.group8.dalsmartteamwork.courseadmin.dao.StudentEnrollmentDaoImpl;
 import com.group8.dalsmartteamwork.courseadmin.models.*;
-import com.group8.dalsmartteamwork.register.dao.RegistrationDao;
+import com.group8.dalsmartteamwork.register.dao.IRegistrationDao;
 import com.group8.dalsmartteamwork.register.dao.RegistrationDaoImpl;
+import com.group8.dalsmartteamwork.register.models.IRegistrationFactory;
+import com.group8.dalsmartteamwork.register.models.RegistrationFactoryImpl;
+import com.group8.dalsmartteamwork.resetpassword.models.IMail;
 import com.group8.dalsmartteamwork.resetpassword.models.Mail;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,13 +39,14 @@ public class UploadController {
         try {
             String fileName = file.getOriginalFilename();
             ICsvReader csvReader = new CsvReader(file);
-            Mail mail = new Mail();
-            RegistrationDao registrationDao = new RegistrationDaoImpl();
-            IStudentEnrollmentDao studentEnrollmentDao = new StudentEnrollmentDaoImpl();
-            IStudentImportManager service = new StudentImportManagerImpl(courseId, registrationDao, studentEnrollmentDao, mail);
+            IRegistrationFactory iRegistrationFactory = new RegistrationFactoryImpl();
+            IStudentEnrollmentFactory iStudentEnrollmentFactory = new StudentEnrollmentFactoryImpl();
+            IStudentImportManager service = new StudentImportManagerImpl(courseId, iRegistrationFactory, iStudentEnrollmentFactory);
+
             ICsvParser iCsvParser = new CsvParserImpl(csvReader);
-            MakePairService makePairService = new MakePairServiceImpl();
             List<User> users = iCsvParser.getUsers();
+
+            MakePairService makePairService = new MakePairServiceImpl();
             List<Boolean> status = service.verifyRegistration(users);
 
             List<Pair<User, Boolean>> details = makePairService.getUserDetails(users, status);

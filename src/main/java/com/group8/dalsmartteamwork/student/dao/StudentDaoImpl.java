@@ -1,5 +1,6 @@
 package com.group8.dalsmartteamwork.student.dao;
 
+import com.group8.dalsmartteamwork.accesscontrol.CurrentUser;
 import com.group8.dalsmartteamwork.database.CallStoredProcedure;
 import com.group8.dalsmartteamwork.database.DbConnection;
 import com.group8.dalsmartteamwork.student.model.Student;
@@ -10,12 +11,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class StudentDaoImpl implements IStudentDao {
-    public String username;
-    Student student;
-    String courseName, courseId;
-    ArrayList<Student> courseList = new ArrayList<Student>();
-    DbConnection dbConnection;
-    HttpServletRequest request;
+    private String username;
+    private String courseName, courseId;
+    private ArrayList<Student> courseList = new ArrayList<Student>();
 
     @Override
     public ArrayList<Student> displayCourses() {
@@ -23,8 +21,8 @@ public class StudentDaoImpl implements IStudentDao {
         CallStoredProcedure procedure = null;
         ResultSet resultSet;
         try {
-            username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            procedure = new CallStoredProcedure("spDisplayCourses(?)");
+            username = CurrentUser.getInstance().getBannerId();
+            procedure = new CallStoredProcedure("spGetEnrolledCourses(?)");
             procedure.setParameter(1, username);
             resultSet = procedure.executeWithResults();
             while (resultSet.next()) {
