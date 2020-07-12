@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class StudentCoursesController {
 
     @GetMapping(value = "/student")
-    public String getEnrolledCoursesPage(Model model) {
+    public String getStudentEnrolledCoursesPage(Model model) {
         IStudentDao coursePage = new StudentDaoImpl();
         ArrayList<Student> courseList = coursePage.displayCourses();
         model.addAttribute("courses", courseList);
