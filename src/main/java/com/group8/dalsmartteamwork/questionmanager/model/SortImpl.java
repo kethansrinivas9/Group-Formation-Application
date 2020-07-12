@@ -5,10 +5,10 @@ import com.group8.dalsmartteamwork.questions.Question;
 
 import java.util.List;
 
-public class SortImp implements Sort {
+public class SortImpl implements Sort {
     private final SortDao sortDao;
 
-    public SortImp(SortDao sortDao) {
+    public SortImpl(SortDao sortDao) {
         this.sortDao = sortDao;
     }
 

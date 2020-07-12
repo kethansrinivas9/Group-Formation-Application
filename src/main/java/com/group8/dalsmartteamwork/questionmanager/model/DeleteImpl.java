@@ -5,10 +5,10 @@ import com.group8.dalsmartteamwork.questions.Question;
 
 import java.util.List;
 
-public class DeleteImp implements Delete {
+public class DeleteImpl implements Delete {
     private final DeleteDao deleteDao;
 
-    public DeleteImp(DeleteDao deleteDao) {
+    public DeleteImpl(DeleteDao deleteDao) {
         this.deleteDao = deleteDao;
     }
 

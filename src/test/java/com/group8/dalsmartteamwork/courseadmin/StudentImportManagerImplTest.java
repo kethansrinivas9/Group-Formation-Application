@@ -1,11 +1,12 @@
-package com.group8.dalsmartteamwork.courseadmin.models;
+package com.group8.dalsmartteamwork.courseadmin;
 
+import com.group8.dalsmartteamwork.accesscontrol.User;
 import com.group8.dalsmartteamwork.courseadmin.dao.IStudentEnrollmentDao;
 import com.group8.dalsmartteamwork.courseadmin.dao.StudentEnrollmentDaoImpl;
+import com.group8.dalsmartteamwork.courseadmin.models.StudentImportManagerImpl;
 import com.group8.dalsmartteamwork.register.dao.RegistrationDao;
 import com.group8.dalsmartteamwork.register.dao.RegistrationDaoImpl;
 import com.group8.dalsmartteamwork.resetpassword.models.Mail;
-import com.group8.dalsmartteamwork.accesscontrol.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,13 +19,13 @@ import static org.mockito.Mockito.*;
 
 class StudentImportManagerImplTest {
     private static final int COURSE_ID = 5308;
-    private StudentImportManagerImpl service = null;
     private final RegistrationDao registrationDao = mock(RegistrationDaoImpl.class);
     private final IStudentEnrollmentDao studentEnrollmentDao = mock(StudentEnrollmentDaoImpl.class);
     private final Mail mail = mock(Mail.class);
-    private List<User> users;
     private final User existingUser = new User("B00000000", "fName", "lName", "email@email.com", "pwd");
     private final User newUser = new User("B1111111", "fName", "lName", "email@email.com", "pwd");
+    private StudentImportManagerImpl service = null;
+    private List<User> users;
 
     @BeforeEach
     void setup() {

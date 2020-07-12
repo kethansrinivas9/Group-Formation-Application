@@ -1,7 +1,6 @@
-package com.group8.dalsmartteamwork.questions.services;
+package com.group8.dalsmartteamwork.questions;
 
-import com.group8.dalsmartteamwork.questions.Option;
-import com.group8.dalsmartteamwork.questions.Question;
+import com.group8.dalsmartteamwork.accesscontrol.CurrentUser;
 import com.group8.dalsmartteamwork.questions.dao.IQuestionDao;
 import com.group8.dalsmartteamwork.questions.dao.QuestionDao;
 import com.group8.dalsmartteamwork.questions.models.QuestionOptionManager;
@@ -30,7 +29,7 @@ class QuestionOptionManagerTest {
         testQuestion.setTitle("title");
         testQuestion.setText("text");
         testQuestion.setType("numeric");
-        when(questionDao.addQuestionToDb(testQuestion, 1, null)).thenReturn(10);
+        when(questionDao.addQuestionToDb(testQuestion, 1, CurrentUser.getInstance().getBannerId())).thenReturn(10);
         QuestionOptionManager saveQuestionOptions = new QuestionOptionManager(questionDao);
         assertEquals(saveQuestionOptions.saveQuestion(testQuestion), 10);
     }

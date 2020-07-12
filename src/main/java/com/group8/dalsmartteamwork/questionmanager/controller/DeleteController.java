@@ -1,7 +1,7 @@
 package com.group8.dalsmartteamwork.questionmanager.controller;
 
 import com.group8.dalsmartteamwork.questionmanager.dao.DeleteDao;
-import com.group8.dalsmartteamwork.questionmanager.dao.DeleteDaoImp;
+import com.group8.dalsmartteamwork.questionmanager.dao.DeleteDaoImpl;
 import com.group8.dalsmartteamwork.questions.Question;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +19,9 @@ public class DeleteController {
 
     @GetMapping("/listDeleteQuestions")
     public String listDeleteQuestion(Principal principal, Model model) {
-        DeleteDao deleteDaoImp = new DeleteDaoImp();
+        DeleteDao deleteDaoImpl = new DeleteDaoImpl();
         Question question = new Question();
-        List<Question> sList = deleteDaoImp.displayListOfQuestions(principal.getName());
+        List<Question> sList = deleteDaoImpl.displayListOfQuestions(principal.getName());
         model.addAttribute("list", sList);
         model.addAttribute("question", question);
         return "listDeleteQuestions";
@@ -30,8 +30,8 @@ public class DeleteController {
     @RequestMapping(value = "/listDeleteQuestions", method = RequestMethod.POST)
     public String deleteQuestion(@ModelAttribute("question") Question question, Principal principal, Model model,
                                  RedirectAttributes redirectAttributes) {
-        DeleteDao deleteDaoImp = new DeleteDaoImp();
-        Boolean status = deleteDaoImp.deleteQuestion(question.getQuestionID());
+        DeleteDao deleteDaoImpl = new DeleteDaoImpl();
+        Boolean status = deleteDaoImpl.deleteQuestion(question.getQuestionID());
         if (status != true) {
             redirectAttributes.addFlashAttribute("message", "Failed to delete the question");
             return "redirect:/questionManager";

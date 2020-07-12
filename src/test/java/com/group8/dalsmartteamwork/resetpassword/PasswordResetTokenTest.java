@@ -84,7 +84,6 @@ public class PasswordResetTokenTest {
     public void setTimestampTest() {
         IPasswordResetToken passwordResetToken = new PasswordResetToken();
         passwordResetToken.setTimestamp(TEMP_TIMESTAMP);
-        System.out.println("TIMESTAMP IS: " + TEMP_TIMESTAMP);
         assertEquals(passwordResetToken.getTimestamp(), TEMP_TIMESTAMP, "Timestamp was not added to the PasswordResetToken object.");
     }
 

@@ -1,4 +1,4 @@
-package com.group8.dalsmartteamwork.login.login_security;
+package com.group8.dalsmartteamwork.login.model;
 
 import com.group8.dalsmartteamwork.accesscontrol.User;
 import org.springframework.security.core.GrantedAuthority;

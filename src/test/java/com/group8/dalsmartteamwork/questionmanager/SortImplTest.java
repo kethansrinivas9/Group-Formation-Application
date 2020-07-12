@@ -1,7 +1,9 @@
-package com.group8.dalsmartteamwork.questionmanager.model;
+package com.group8.dalsmartteamwork.questionmanager;
 
 import com.group8.dalsmartteamwork.questionmanager.dao.SortDao;
-import com.group8.dalsmartteamwork.questionmanager.dao.SortDaoImp;
+import com.group8.dalsmartteamwork.questionmanager.dao.SortDaoImpl;
+import com.group8.dalsmartteamwork.questionmanager.model.Sort;
+import com.group8.dalsmartteamwork.questionmanager.model.SortImpl;
 import com.group8.dalsmartteamwork.questions.Question;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,15 +14,15 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class SortImpTest {
-    private final SortDao sortDao = mock(SortDaoImp.class);
+public class SortImplTest {
+    private final SortDao sortDao = mock(SortDaoImpl.class);
     private final List<Question> sortedList = Arrays.asList(new Question("java"), new Question("C++"));
     private final String BannerID = "B00123456";
     private Sort sort = null;
 
     @BeforeEach
     public void setup() {
-        sort = new SortImp(sortDao);
+        sort = new SortImpl(sortDao);
     }
 
     @Test

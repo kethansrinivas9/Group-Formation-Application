@@ -1,9 +1,9 @@
 package com.group8.dalsmartteamwork.resetpassword.dao;
 
+import com.group8.dalsmartteamwork.database.CallStoredProcedure;
 import com.group8.dalsmartteamwork.resetpassword.models.IPasswordResetToken;
 import com.group8.dalsmartteamwork.resetpassword.models.IResetToken;
 import com.group8.dalsmartteamwork.resetpassword.models.PasswordResetToken;
-import com.group8.dalsmartteamwork.database.CallStoredProcedure;
 import com.group8.dalsmartteamwork.resetpassword.models.ResetToken;
 
 import java.sql.ResultSet;
@@ -25,7 +25,7 @@ public class ResetPasswordDaoImpl implements IResetPasswordDao {
             storedProcedure.execute();
             return true;
         } catch (Exception exception) {
-            System.out.print(exception.getMessage());
+            exception.printStackTrace();
         } finally {
             if (storedProcedure != null) {
                 storedProcedure.cleanup();
@@ -44,7 +44,7 @@ public class ResetPasswordDaoImpl implements IResetPasswordDao {
             storedProcedure.execute();
             return true;
         } catch (Exception exception) {
-            System.out.print(exception.getMessage());
+            exception.printStackTrace();
         } finally {
             if (storedProcedure != null) {
                 storedProcedure.cleanup();
@@ -61,7 +61,7 @@ public class ResetPasswordDaoImpl implements IResetPasswordDao {
             storedProcedure.execute();
             return true;
         } catch (Exception exception) {
-            System.out.print(exception.getMessage());
+            exception.printStackTrace();
             return false;
         } finally {
             if (storedProcedure != null) {
@@ -94,7 +94,7 @@ public class ResetPasswordDaoImpl implements IResetPasswordDao {
                 }
             }
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+            exception.printStackTrace();
         } finally {
             if (storedProcedure != null) {
                 storedProcedure.cleanup();
@@ -123,7 +123,7 @@ public class ResetPasswordDaoImpl implements IResetPasswordDao {
             storedProcedure.execute();
             return true;
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+            exception.printStackTrace();
             return false;
         } finally {
             if (storedProcedure != null) {
@@ -146,7 +146,7 @@ public class ResetPasswordDaoImpl implements IResetPasswordDao {
                 email = rs.getString("Email");
             }
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+            exception.printStackTrace();
         } finally {
             if (storedProcedure != null) {
                 storedProcedure.cleanup();
@@ -168,7 +168,7 @@ public class ResetPasswordDaoImpl implements IResetPasswordDao {
                 return true;
             }
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+            exception.printStackTrace();
         } finally {
             if (storedProcedure != null) {
                 storedProcedure.cleanup();

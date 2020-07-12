@@ -2,7 +2,7 @@ package com.group8.dalsmartteamwork.resetpassword.models;
 
 import java.util.Date;
 
-public class PasswordResetToken implements IPasswordResetToken{
+public class PasswordResetToken implements IPasswordResetToken {
     private int tokenID;
     private String bannerID;
     private String token;

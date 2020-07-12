@@ -1,6 +1,6 @@
 package com.group8.dalsmartteamwork.student.model;
 
-public class Student implements IStudent{
+public class Student implements IStudent {
     private String BannerId;
     private String firstName;
     private String LastName;

@@ -1,10 +1,10 @@
 package com.group8.dalsmartteamwork.resetpassword.dao;
 
+import com.group8.dalsmartteamwork.database.CallStoredProcedure;
+import com.group8.dalsmartteamwork.login.model.Encryption;
 import com.group8.dalsmartteamwork.login.model.IEncryption;
 import com.group8.dalsmartteamwork.resetpassword.models.IPasswordPolicy;
 import com.group8.dalsmartteamwork.resetpassword.models.PasswordPolicy;
-import com.group8.dalsmartteamwork.database.CallStoredProcedure;
-import com.group8.dalsmartteamwork.login.model.Encryption;
 
 import java.sql.ResultSet;
 
@@ -21,7 +21,7 @@ public class PasswordHistoryManagerImpl implements IPasswordHistoryManager {
             storedProcedure.execute();
             return true;
         } catch (Exception exception) {
-            System.out.print(exception.getMessage());
+            exception.printStackTrace();
         } finally {
             if (storedProcedure != null) {
                 storedProcedure.cleanup();
@@ -54,7 +54,7 @@ public class PasswordHistoryManagerImpl implements IPasswordHistoryManager {
                 }
             }
         } catch (Exception exception) {
-            System.out.print(exception.getMessage());
+            exception.printStackTrace();
         } finally {
             if (storedProcedure != null) {
                 storedProcedure.cleanup();

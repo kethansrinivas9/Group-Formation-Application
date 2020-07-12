@@ -1,4 +1,4 @@
-package com.group8.dalsmartteamwork.questions.services;
+package com.group8.dalsmartteamwork.questions;
 
 import com.group8.dalsmartteamwork.questions.models.OptionRetrieveManager;
 import org.junit.jupiter.api.BeforeEach;

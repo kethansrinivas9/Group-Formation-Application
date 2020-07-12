@@ -1,6 +1,6 @@
-package com.group8.dalsmartteamwork.login.loginsecurity;
+package com.group8.dalsmartteamwork.login;
 
-import com.group8.dalsmartteamwork.login.login_security.LoginAuthentication;
+import com.group8.dalsmartteamwork.login.model.LoginAuthentication;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.core.Authentication;
 

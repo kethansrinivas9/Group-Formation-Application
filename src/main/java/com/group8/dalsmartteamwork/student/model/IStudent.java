@@ -1,29 +1,29 @@
 package com.group8.dalsmartteamwork.student.model;
 
 public interface IStudent {
-    
-    public String getBannerId();
 
-    public void setBannerId(String bannerId);
-    
-    public String getFirstName();
+    String getBannerId();
 
-    public void setFirstName(String firstName);
+    void setBannerId(String bannerId);
 
-    public String getLastName();
+    String getFirstName();
 
-    public void setLastName(String lastName);
+    void setFirstName(String firstName);
 
-    public String getCourseName();
+    String getLastName();
 
-    public void setCourseName(String courseName);
+    void setLastName(String lastName);
 
-    public String getCourseId();
+    String getCourseName();
 
-    public void setCourseId(String courseId);
+    void setCourseName(String courseName);
 
-    public String getRole();
+    String getCourseId();
 
-    public void setRole(String role);
+    void setCourseId(String courseId);
+
+    String getRole();
+
+    void setRole(String role);
 
 }

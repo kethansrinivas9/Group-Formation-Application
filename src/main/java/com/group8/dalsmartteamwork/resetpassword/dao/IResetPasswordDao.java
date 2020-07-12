@@ -1,7 +1,6 @@
 package com.group8.dalsmartteamwork.resetpassword.dao;
 
 import com.group8.dalsmartteamwork.resetpassword.models.IPasswordResetToken;
-import com.group8.dalsmartteamwork.resetpassword.models.PasswordResetToken;
 
 import java.sql.SQLException;
 

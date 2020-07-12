@@ -1,8 +1,8 @@
 package com.group8.dalsmartteamwork.courseInstructor;
 
+import com.group8.dalsmartteamwork.accesscontrol.User;
 import com.group8.dalsmartteamwork.courseinstructor.models.CourseInstructorManagerImpl;
 import com.group8.dalsmartteamwork.courseinstructor.models.ICourseInstructorManager;
-import com.group8.dalsmartteamwork.accesscontrol.User;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
