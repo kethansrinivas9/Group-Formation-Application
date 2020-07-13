@@ -2,29 +2,29 @@ package com.group8.dalsmartteamwork.courseadmin.models;
 
 import com.group8.dalsmartteamwork.accesscontrol.User;
 import com.group8.dalsmartteamwork.courseadmin.dao.IStudentEnrollmentDao;
-import com.group8.dalsmartteamwork.login.model.Encryption;
 import com.group8.dalsmartteamwork.login.model.IEncryption;
-import com.group8.dalsmartteamwork.register.dao.RegistrationDao;
-import com.group8.dalsmartteamwork.resetpassword.models.Mail;
+import com.group8.dalsmartteamwork.register.dao.IRegistrationDao;
+import com.group8.dalsmartteamwork.register.models.IRegistrationFactory;
+import com.group8.dalsmartteamwork.resetpassword.models.IMail;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StudentImportManagerImpl implements IStudentImportManager {
-    private final RegistrationDao registrationDao;
+    private final IRegistrationDao registrationDao;
     private final IStudentEnrollmentDao studentEnrollmentDao;
-    private final Mail mail;
-    private final int courseId;
+    private final IMail mail;
     private final IEncryption encryption;
     private final IPasswordGenerator passwordGenerator;
+    private final int courseId;
 
-    public StudentImportManagerImpl(int courseId, RegistrationDao registrationDao, IStudentEnrollmentDao studentEnrollmentDao, Mail mail) {
+    public StudentImportManagerImpl(int courseId, IRegistrationFactory iRegistrationFactory, IStudentEnrollmentFactory iStudentEnrollmentFactory) {
         this.courseId = courseId;
-        this.registrationDao = registrationDao;
-        this.studentEnrollmentDao = studentEnrollmentDao;
-        this.mail = mail;
-        encryption = new Encryption();
-        passwordGenerator = new PasswordGenerator();
+        registrationDao = iRegistrationFactory.getRegistrationDaoObject();
+        mail = iRegistrationFactory.getMailObject();
+        encryption = iRegistrationFactory.getEncryptionObject();
+        studentEnrollmentDao = iStudentEnrollmentFactory.getStudentEnrollmentDaoObject();
+        passwordGenerator = iStudentEnrollmentFactory.getPasswordGeneratorObject();
     }
 
     @Override

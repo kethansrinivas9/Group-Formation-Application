@@ -1,9 +1,9 @@
 package com.group8.dalsmartteamwork.register.controllers;
 
 import com.group8.dalsmartteamwork.accesscontrol.User;
-import com.group8.dalsmartteamwork.register.dao.RegistrationDao;
-import com.group8.dalsmartteamwork.register.dao.RegistrationDaoImpl;
+import com.group8.dalsmartteamwork.register.models.IRegistrationFactory;
 import com.group8.dalsmartteamwork.register.models.IRegistrationModel;
+import com.group8.dalsmartteamwork.register.models.RegistrationFactoryImpl;
 import com.group8.dalsmartteamwork.register.models.RegistrationModelImpl;
 import com.group8.dalsmartteamwork.resetpassword.models.IPasswordPolicy;
 import com.group8.dalsmartteamwork.resetpassword.models.PasswordPolicy;
@@ -35,8 +35,8 @@ public class SignUpController {
             return "register";
         }
 
-        RegistrationDao dao = new RegistrationDaoImpl();
-        IRegistrationModel service = new RegistrationModelImpl(dao);
+        IRegistrationFactory iRegistrationFactory = new RegistrationFactoryImpl();
+        IRegistrationModel service = new RegistrationModelImpl(iRegistrationFactory);
         Boolean status = service.registerUser(user);
         if (status) {
             return "login";

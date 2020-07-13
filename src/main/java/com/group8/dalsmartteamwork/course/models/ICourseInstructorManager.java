@@ -1,4 +1,4 @@
-package com.group8.dalsmartteamwork.courseinstructor.models;
+package com.group8.dalsmartteamwork.course.models;
 
 import com.group8.dalsmartteamwork.accesscontrol.User;
 
