@@ -2,7 +2,6 @@ package com.group8.dalsmartteamwork.student;
 
 import com.group8.dalsmartteamwork.student.dao.IStudentDao;
 import com.group8.dalsmartteamwork.student.dao.StudentDaoImpl;
-import com.group8.dalsmartteamwork.student.model.Student;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

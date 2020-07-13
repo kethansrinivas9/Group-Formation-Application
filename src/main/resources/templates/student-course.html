@@ -3,9 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Course Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body>
     <h3 th:if="${courseId ne null}" th:text="${'Course ' + courseId}"></h3>
     <h5 th:if="${bannerId ne null}" th:text="${'Student ' + bannerId}"></h5>
+
+    <div>
+        <table class="table table-sm" style="table-layout: fixed; padding: 20px" th:each="question: ${questions}">
+            <tr>
+                <td th:text="${question.key.getText()}"></td>
+                <td>
+                    <table class="table table-sm" th:if="${question.value ne null}" th:each="option: ${question.value}">
+                        <tr>
+
+                            <td th:if="${question.key.getType()==2}">
+                                <input id="option2" name="option2" type="radio">
+                                <label for="option2" th:text="${option.getDisplayText()}"></label>
+                            </td>
+                            <td th:if="${question.key.getType()==3}">
+                                <input id="option3" name="option3" type="checkbox">
+                                <label for="option3" th:text="${option.getDisplayText()}"></label>
+                            </td>
+
+                        </tr>
+                    </table>
+                    <div th:if="${question.key.getType()==1}">
+                        <input id="option1" name="option1" type="text">
+                        <label for="option1">Answer</label>
+                    </div>
+                    <div th:if="${question.key.getType()==4}">
+                        <textarea id="option4" name="option4"></textarea>
+                        <label for="option4">Answer</label>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>
