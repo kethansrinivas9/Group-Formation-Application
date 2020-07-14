@@ -8,6 +8,7 @@ import com.group8.dalsmartteamwork.student.QuestionDetails;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class SurveyManagerDaoImpl implements ISurveyManagerDao {
@@ -51,6 +52,7 @@ public class SurveyManagerDaoImpl implements ISurveyManagerDao {
                 IOption iOption = new Option();
                 iOption.setDisplayText(resultSet.getString("DisplayText"));
                 iOption.setOptionId(resultSet.getInt("OptionID"));
+                iOption.setStoredAs(resultSet.getInt("StoredAs"));
                 options.add(iOption);
             }
         } catch (Exception e) {
@@ -62,5 +64,24 @@ public class SurveyManagerDaoImpl implements ISurveyManagerDao {
             }
         }
         return options;
+    }
+
+    @Override
+    public void saveResponses(int questionId, String response, String bannerID) {
+        CallStoredProcedure procedure = null;
+        try {
+            procedure = new CallStoredProcedure("spSaveResponse(?, ?, ?)");
+            procedure.setParameter(1, questionId);
+            procedure.setParameter(2, response);
+            procedure.setParameter(3, bannerID);
+            procedure.execute();
+        } catch (Exception e) {
+            //TODO: Add to Log
+            e.printStackTrace();
+        } finally {
+            if (null != procedure) {
+                procedure.cleanup();
+            }
+        }
     }
 }
