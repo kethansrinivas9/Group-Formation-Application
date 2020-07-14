@@ -8,7 +8,6 @@ import com.group8.dalsmartteamwork.student.QuestionDetails;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class SurveyManagerDaoImpl implements ISurveyManagerDao {
@@ -21,7 +20,7 @@ public class SurveyManagerDaoImpl implements ISurveyManagerDao {
             procedure = new CallStoredProcedure("spGetSurveyQuestions(?)");
             procedure.setParameter(1, courseId);
             resultSet = procedure.executeWithResults();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 IQuestionDetails iQuestionDetails = new QuestionDetails();
                 iQuestionDetails.setQuestionId(resultSet.getInt("QuestionID"));
                 iQuestionDetails.setText(resultSet.getString("QuestionText"));
@@ -48,7 +47,7 @@ public class SurveyManagerDaoImpl implements ISurveyManagerDao {
             procedure = new CallStoredProcedure("spGetQuestionOptions(?)");
             procedure.setParameter(1, questionId);
             resultSet = procedure.executeWithResults();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 IOption iOption = new Option();
                 iOption.setDisplayText(resultSet.getString("DisplayText"));
                 iOption.setOptionId(resultSet.getInt("OptionID"));
@@ -67,13 +66,14 @@ public class SurveyManagerDaoImpl implements ISurveyManagerDao {
     }
 
     @Override
-    public void saveResponses(int questionId, String response, String bannerID) {
+    public void saveResponses(int questionId, String response, String bannerId, int courseId) {
         CallStoredProcedure procedure = null;
         try {
-            procedure = new CallStoredProcedure("spSaveResponse(?, ?, ?)");
+            procedure = new CallStoredProcedure("spSaveResponse(?, ?, ?, ?)");
             procedure.setParameter(1, questionId);
             procedure.setParameter(2, response);
-            procedure.setParameter(3, bannerID);
+            procedure.setParameter(3, bannerId);
+            procedure.setParameter(4, courseId);
             procedure.execute();
         } catch (Exception e) {
             //TODO: Add to Log

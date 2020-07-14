@@ -12,22 +12,20 @@ public class ResponseHandler implements IResponseHandler {
     @Override
     public void getResponses(HttpServletRequest request, Map<IQuestionDetails, List<IOption>> questions) {
         Answer answer = Answer.getInstance();
-        for(IQuestionDetails question: questions.keySet()){
-            if (questions.get(question) == null || question.getType() == 2){
+        for (IQuestionDetails question : questions.keySet()) {
+            if (questions.get(question) == null || question.getType() == 2) {
                 String parameter = "result" + question.getQuestionId();
                 String response = request.getParameter(parameter);
-                if(response != null){
+                if (response != null) {
                     answer.addAnswer(question.getQuestionId(), response);
                 }
-                System.out.println(parameter + " : " + request.getParameter(parameter));
             } else {
-                for(IOption option: questions.get(question)){
+                for (IOption option : questions.get(question)) {
                     String parameter = "result" + question.getQuestionId() + "option" + option.getStoredAs();
                     String response = request.getParameter(parameter);
-                    if(response!=null){
+                    if (response != null) {
                         answer.addAnswer(question.getQuestionId(), response);
                     }
-                    System.out.println(parameter + " : " + request.getParameter(parameter));
                 }
             }
         }

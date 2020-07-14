@@ -16,22 +16,22 @@ public class QuestionDetails implements IQuestionDetails {
     }
 
     @Override
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    @Override
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    @Override
     public String getText() {
         return text;
     }
 
     @Override
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    @Override
     public int getType() {
         return type;
+    }
+
+    @Override
+    public void setType(int type) {
+        this.type = type;
     }
 }

@@ -24,7 +24,7 @@
                     </table>
                     <div th:if="${question.key.getType()==2}">
                         <label for="option2"></label>
-                        <select id="option2" name="option2">
+                        <select id="option2" th:name="${'result'+question.key.getQuestionId()}">
                             <option th:each="option, iO: ${question.value}" th:value="${option.getDisplayText()}" th:text="${option.getDisplayText()}"></option>
                         </select>
                     </div>
