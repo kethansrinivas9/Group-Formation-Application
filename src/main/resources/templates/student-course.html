@@ -3,9 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Course Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body>
     <h3 th:if="${courseId ne null}" th:text="${'Course ' + courseId}"></h3>
     <h5 th:if="${bannerId ne null}" th:text="${'Student ' + bannerId}"></h5>
+
+    <form th:action="@{/submit-survey}"  method="post">
+        <table class="table table-sm" style="table-layout: fixed; padding: 20px" th:each="question, iQ: ${questions}">
+            <tr>
+                <td th:text="${question.key.getText()}"></td>
+                <td>
+                    <table class="table table-sm" th:if="${question.value ne null}" th:each="option, iO: ${question.value}">
+                        <tr>
+                            <td th:if="${question.key.getType()==3}">
+                                <input id="option3" th:name="${'result'+question.key.getQuestionId()+'option'+option.getStoredAs()}" th:value="${option.getDisplayText()}" type="checkbox">
+                                <label for="option3" th:text="${option.getDisplayText()}"></label>
+                            </td>
+                        </tr>
+                    </table>
+                    <div th:if="${question.key.getType()==2}">
+                        <label for="option2"></label>
+                        <select id="option2" th:name="${'result'+question.key.getQuestionId()}">
+                            <option th:each="option, iO: ${question.value}" th:value="${option.getDisplayText()}" th:text="${option.getDisplayText()}"></option>
+                        </select>
+                    </div>
+                    <div th:if="${question.key.getType()==1}">
+                        <input id="option1" th:name="${'result'+question.key.getQuestionId()}" type="number">
+                        <label for="option1">Answer</label>
+                    </div>
+                    <div th:if="${question.key.getType()==4}">
+                        <textarea id="option4" th:name="${'result'+question.key.getQuestionId()}"></textarea>
+                        <label for="option4">Answer</label>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <input id="questions" name="questions" type="hidden" th:value="${questions}">
+        <button type="submit">Submit</button>
+    </form>
+
 </body>
 </html>

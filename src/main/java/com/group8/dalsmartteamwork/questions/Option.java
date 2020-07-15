@@ -1,8 +1,17 @@
 package com.group8.dalsmartteamwork.questions;
 
-public class Option {
+public class Option implements IOption {
+    private int optionId;
     private String displayText;
     private int storedAs;
+
+    public int getOptionId() {
+        return optionId;
+    }
+
+    public void setOptionId(int optionId) {
+        this.optionId = optionId;
+    }
 
     public Option() {
     }

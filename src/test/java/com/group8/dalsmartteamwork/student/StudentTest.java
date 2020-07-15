@@ -1,6 +1,5 @@
 package com.group8.dalsmartteamwork.student;
 
-import com.group8.dalsmartteamwork.student.model.Student;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
