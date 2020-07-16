@@ -7,25 +7,7 @@
     <meta ; charset="UTF-8" content="text/html" http-equiv="Content-type"/>
 
 </head>
-<script>
-var array=[]
-function myFunction(text1) {
-    console.warn("Text to print on console");
-  var checkBox = document.getElementById("question");
-  if (checkBox.checked == true)
-  {
-    array.push(text1);
-  }
-  console.warn("Text to print on console");
-  getValues();
-}
-function getValues()
-{
-	$("#getValues").html(array.join("<br>"));
-    return array;
-}
 
-</script>
 <body>
 <div style="background-color:#337ab7; height:50px; color: black;">
     <h2 style="float: left;">Group Formation Tool</h2>
@@ -40,15 +22,22 @@ function getValues()
          <div th:each="questions : ${list}">
     <th>
         <td><input type="checkbox" id="question" name="question" th:text="${questions.text}"
-            th:value="${questions.questionID}" onclick="javascript:myFunction(${questions.questionID})" /></td>
+            th:value="${questions.questionID}"/></td>
     <div ></div>
         </th>
         <br/>
     </form>
-    <button onclick="return confirm('Are you sure you want to create a Survey?');"
+        <button
+                style="color:black; cursor: pointer; width: 20%; background-color: cornflowerblue; height: 30px;"
+                name="action" value="save"
+                type="submit">Save Questions
+        </button>
+    <button onclick="return confirm('Are you sure you want to publish Survey?');"
                 style="color:black; cursor: pointer; margin-top: 200px;  width: 20%; background-color: cornflowerblue; height: 30px;"
+                name="action" value="publish"
                 type="submit">Publish
         </button>
+       
 
 </div>
 <div th:if="${message}" th:text="${message}"></div>

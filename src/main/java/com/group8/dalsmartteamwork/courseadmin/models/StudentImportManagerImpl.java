@@ -6,11 +6,14 @@ import com.group8.dalsmartteamwork.login.model.IEncryption;
 import com.group8.dalsmartteamwork.register.dao.IRegistrationDao;
 import com.group8.dalsmartteamwork.register.models.IRegistrationFactory;
 import com.group8.dalsmartteamwork.resetpassword.models.IMail;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StudentImportManagerImpl implements IStudentImportManager {
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
     private final IRegistrationDao registrationDao;
     private final IStudentEnrollmentDao studentEnrollmentDao;
     private final IMail mail;
@@ -59,8 +62,7 @@ public class StudentImportManagerImpl implements IStudentImportManager {
                 }
             }
         } catch (Exception e) {
-            // TODO: Add to Log
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while verifying user registration.", e);
         }
         return status;
     }

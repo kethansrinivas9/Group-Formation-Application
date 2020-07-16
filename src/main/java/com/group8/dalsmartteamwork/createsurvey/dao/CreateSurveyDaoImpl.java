@@ -11,6 +11,7 @@ import java.util.List;
 
 public class CreateSurveyDaoImpl implements CreateSurveyDao {
     public int published;
+
     @Override
     public List<Course> displayListOfCourses(String BannerID) {
         List<Course> listOfCourses = new ArrayList<>();
@@ -44,7 +45,7 @@ public class CreateSurveyDaoImpl implements CreateSurveyDao {
             resultSet = procedure.executeWithResults();
             while (resultSet.next()) {
                 published = resultSet.getInt(1);
-                if(published > 0){
+                if (published > 0) {
                     return false;
                 }
             }
@@ -59,17 +60,17 @@ public class CreateSurveyDaoImpl implements CreateSurveyDao {
     }
 
     @Override
-    public List<Question> displayQuestions(String BannerID,int courseID) {
+    public List<Question> displayQuestions(String BannerID, int courseID) {
         List<Question> listOfQuestions = new ArrayList<>();
         CallStoredProcedure procedure = null;
         ResultSet resultSet;
         try {
             procedure = new CallStoredProcedure("spDisplayQuestions(?,?)");
-            
+
             procedure.setParameter(1, courseID);
             procedure.setParameter(2, BannerID);
             resultSet = procedure.executeWithResults();
-        
+
             while (resultSet.next()) {
                 int ID = resultSet.getInt(1);
                 String questionText = resultSet.getString(2);
@@ -84,21 +85,51 @@ public class CreateSurveyDaoImpl implements CreateSurveyDao {
         }
         return listOfQuestions;
     }
-    
+
     @Override
-    public boolean addQuestionToSurvey(int courseID,List<Integer> questionID) {
+    public boolean saveQuestions(int courseID, List<Integer> questionID) {
+
         CallStoredProcedure procedure = null;
-        int surveyStatus = published+1;
         try {
+            procedure = new CallStoredProcedure("spDeleteQuestions(?)");
+            procedure.setParameter(1, courseID);
+            procedure.execute();
             procedure = new CallStoredProcedure("spInsertQuestions(?, ?)");
-            for(int i =0;i<questionID.size();i++) {
+            for (int i = 0; i < questionID.size(); i++) {
                 procedure.setParameter(1, courseID);
                 procedure.setParameter(2, questionID.get(i));
                 procedure.execute();
             }
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (null != procedure) {
+                procedure.cleanup();
+            }
+        }
+
+    }
+
+    @Override
+    public boolean publishSurvey(int courseID) {
+        CallStoredProcedure procedure = null;
+        int surveyStatus = published + 1;
+        ResultSet resultSet;
+        try {
+            procedure = new CallStoredProcedure("spCheckIfQuestionsExist(?)");
+            procedure.setParameter(1, courseID);
+            resultSet = procedure.executeWithResults();
+            while (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                if (count == 0) {
+                    return false;
+                }
+            }
             procedure = new CallStoredProcedure("spUpdateSurveyStatus(?,?)");
-            procedure.setParameter(1,courseID);
-            procedure.setParameter(2,surveyStatus);
+            procedure.setParameter(1, courseID);
+            procedure.setParameter(2, surveyStatus);
             procedure.execute();
             return true;
         } catch (SQLException e) {
@@ -109,7 +140,7 @@ public class CreateSurveyDaoImpl implements CreateSurveyDao {
                 procedure.cleanup();
             }
         }
-        
+
     }
 
 }

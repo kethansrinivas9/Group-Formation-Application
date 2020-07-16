@@ -5,12 +5,16 @@ import com.group8.dalsmartteamwork.questions.IOption;
 import com.group8.dalsmartteamwork.questions.Option;
 import com.group8.dalsmartteamwork.student.IQuestionDetails;
 import com.group8.dalsmartteamwork.student.QuestionDetails;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SurveyManagerDaoImpl implements ISurveyManagerDao {
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+
     @Override
     public List<IQuestionDetails> getSurveyQuestions(int courseId) {
         CallStoredProcedure procedure = null;
@@ -28,8 +32,7 @@ public class SurveyManagerDaoImpl implements ISurveyManagerDao {
                 questions.add(iQuestionDetails);
             }
         } catch (Exception e) {
-            //TODO: Add to Log
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while getting survey questions. ", e);
         } finally {
             if (null != procedure) {
                 procedure.cleanup();
@@ -55,8 +58,7 @@ public class SurveyManagerDaoImpl implements ISurveyManagerDao {
                 options.add(iOption);
             }
         } catch (Exception e) {
-            //TODO: Add to Log
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while getting question's options. QuestionID: " + questionId + ".", e);
         } finally {
             if (null != procedure) {
                 procedure.cleanup();
@@ -77,8 +79,7 @@ public class SurveyManagerDaoImpl implements ISurveyManagerDao {
             procedure.execute();
             return true;
         } catch (Exception e) {
-            //TODO: Add to Log
-            e.printStackTrace();
+            LOGGER.error(String.format("Exception occurred while saving responses of questionID: %s, BannerID: %s, courseID: %d.", questionId, bannerId, courseId), e);
         } finally {
             if (null != procedure) {
                 procedure.cleanup();
