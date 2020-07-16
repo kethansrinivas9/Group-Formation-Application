@@ -21,6 +21,11 @@ public class InstructorController {
 	public String getInstructor() {
 		return "instructor";
 	}
+	
+    @GetMapping("/TApage")
+    public String getTA() {
+        return "TApage";
+    }
 
 	@GetMapping("/viewcourse/{courseid}")
 	public String view(@PathVariable int courseid, Model model) {

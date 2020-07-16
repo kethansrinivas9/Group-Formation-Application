@@ -63,5 +63,4 @@ public class Question {
     public void setQuestionID(int questionID) {
         this.questionID = questionID;
     }
-
 }

@@ -5,6 +5,7 @@ import com.group8.dalsmartteamwork.student.Answer;
 import com.group8.dalsmartteamwork.student.IQuestionDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.group8.dalsmartteamwork.student.IResponseObject;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -13,22 +14,28 @@ import java.util.Map;
 public class ResponseHandler implements IResponseHandler {
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
+    private IResponseFactory iResponseFactory;
+
+    public ResponseHandler(IResponseFactory iResponseFactory){
+        this.iResponseFactory = iResponseFactory;
+    }
+
     @Override
     public void getResponses(HttpServletRequest request, Map<IQuestionDetails, List<IOption>> questions) {
-        Answer answer = Answer.getInstance();
         for (IQuestionDetails question : questions.keySet()) {
-            if (questions.get(question) == null || question.getType() == 2) {
-                String parameter = "result" + question.getQuestionId();
-                String response = request.getParameter(parameter);
-                if (response != null) {
-                    answer.addAnswer(question.getQuestionId(), response);
-                }
-            } else {
+            int questionId = question.getQuestionId();
+            IResponseObject iResponseObject = iResponseFactory.getResponseObject(questionId);
+            String parameter = "" + question.getQuestionId() + "result";
+            String response = request.getParameter(parameter);
+            if (response != null) {
+                iResponseObject.addResponse(questionId, response);
+            }
+            if (questions.get(question) != null){
                 for (IOption option : questions.get(question)) {
-                    String parameter = "result" + question.getQuestionId() + "option" + option.getStoredAs();
-                    String response = request.getParameter(parameter);
+                    parameter = "" + question.getQuestionId() + "result" + option.getStoredAs();
+                    response = request.getParameter(parameter);
                     if (response != null) {
-                        answer.addAnswer(question.getQuestionId(), response);
+                        iResponseObject.addResponse(questionId, response);
                     }
                 }
             }

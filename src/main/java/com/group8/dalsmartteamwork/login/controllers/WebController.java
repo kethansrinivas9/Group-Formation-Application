@@ -3,6 +3,7 @@ package com.group8.dalsmartteamwork.login.controllers;
 import com.group8.dalsmartteamwork.accesscontrol.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.group8.dalsmartteamwork.student.Answer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +40,7 @@ public class WebController {
 	public void displayLogout(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.getSession().invalidate();
+        Answer.getInstance().destroy();
 		response.sendRedirect("/");
 	}
 

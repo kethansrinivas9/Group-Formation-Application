@@ -8,6 +8,6 @@ import java.util.Map;
 
 public interface ISurveyHandler {
     Map<IQuestionDetails, List<IOption>> getQuestions(int courseId);
-
-    void saveResponses(Map<Integer, List<String>> answers, String bannerId, int courseId);
+    Boolean saveResponses(Map<Integer, List<String>> answers, String bannerId, int courseId);
+    Boolean getSurveyPublishStatus(int courseId);
 }

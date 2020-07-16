@@ -52,7 +52,7 @@ public class Successhandler implements AuthenticationSuccessHandler {
             currentUser.setRoles(courseRoles);
 
             if (courseRoles.contains("TA")) {
-                response.sendRedirect("/viewallcourses");
+                response.sendRedirect("/TApage");
             } else if (courseRoles.contains("Student")) {
                 response.sendRedirect("/student");
             } else if (courseRoles.contains("Instructor")) {
