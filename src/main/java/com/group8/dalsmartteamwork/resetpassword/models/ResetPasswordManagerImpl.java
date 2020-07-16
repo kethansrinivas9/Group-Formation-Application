@@ -3,12 +3,16 @@ package com.group8.dalsmartteamwork.resetpassword.models;
 import com.group8.dalsmartteamwork.login.model.Encryption;
 import com.group8.dalsmartteamwork.login.model.IEncryption;
 import com.group8.dalsmartteamwork.resetpassword.dao.IResetPasswordDao;
+import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDaoFactory;
 
 import java.sql.SQLException;
 
 public class ResetPasswordManagerImpl implements IResetPasswordManager {
     private final IResetPasswordDao resetPasswordDao;
 
+    public ResetPasswordManagerImpl(){
+        resetPasswordDao = ResetPasswordDaoFactory.instance().resetPasswordDao();
+    }
     public ResetPasswordManagerImpl(IResetPasswordDao resetPasswordDao) {
         this.resetPasswordDao = resetPasswordDao;
     }
