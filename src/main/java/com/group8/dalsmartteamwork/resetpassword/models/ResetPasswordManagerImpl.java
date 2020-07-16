@@ -25,7 +25,6 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
 				String token = resetToken.createToken();
 				if (resetPasswordDao.addToken(bannerID, token)) {
 					sendPasswordResetMail(bannerID, token);
-					LOGGER.info("Password reset mail sent to user with BannerID: " + bannerID);
 					return true;
 				}
 			}

@@ -3,12 +3,16 @@ package com.group8.dalsmartteamwork.student.models;
 import com.group8.dalsmartteamwork.questions.IOption;
 import com.group8.dalsmartteamwork.student.Answer;
 import com.group8.dalsmartteamwork.student.IQuestionDetails;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
 public class ResponseHandler implements IResponseHandler {
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+
     @Override
     public void getResponses(HttpServletRequest request, Map<IQuestionDetails, List<IOption>> questions) {
         Answer answer = Answer.getInstance();

@@ -153,7 +153,6 @@ public class ResetPasswordDaoImpl implements IResetPasswordDao {
 			storedProcedure = new CallStoredProcedure("spGetUser(?)");
 			storedProcedure.setParameter(1, bannerID);
 			rs = storedProcedure.executeWithResults();
-			LOGGER.info(String.format("User record fetched for user with bannerID: %s", bannerID));
 
 			while (rs.next()) {
 				email = rs.getString("Email");
@@ -176,7 +175,6 @@ public class ResetPasswordDaoImpl implements IResetPasswordDao {
 			storedProcedure = new CallStoredProcedure("spGetUser(?)");
 			storedProcedure.setParameter(1, bannerID);
 			rs = storedProcedure.executeWithResults();
-			LOGGER.info(String.format("User record fetched for user with bannerID: %s", bannerID));
 			if (rs.next()) {
 				return true;
 			}
