@@ -41,18 +41,22 @@ public class LoginDaoImpl implements ILoginDao {
         return false;
     }
 
+    @Override
     public String getRole() {
         return role;
     }
 
+    @Override
     public void setRole(String role) {
         this.role = role;
     }
 
+    @Override
     public String getBannerID() {
         return BannerID;
     }
 
+    @Override
     public void setBannerID(String bannerID) {
         BannerID = bannerID;
     }

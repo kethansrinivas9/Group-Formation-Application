@@ -27,6 +27,7 @@ public class QuestionDao implements IQuestionDao {
             while (resultSet.next()) {
                 questionId = resultSet.getInt(1);
             }
+            LOGGER.info("Question added to the database. QuestionID: " + questionId);
         } catch (SQLException e) {
             LOGGER.error("Exception occurred while adding question to the database. ", e);
         } finally {

@@ -1,6 +1,7 @@
 package com.group8.dalsmartteamwork.questions.models;
 
 import com.group8.dalsmartteamwork.questions.Option;
+import com.group8.dalsmartteamwork.questions.QuestionsFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

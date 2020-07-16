@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class WebConfig extends WebSecurityConfigurerAdapter {
 
-    public Successhandler successHandler = new Successhandler();
+    public Successhandler successHandler = LoginModelFactory.instance().successhandler();
 
     @Override
     protected AuthenticationManager authenticationManager() throws Exception {

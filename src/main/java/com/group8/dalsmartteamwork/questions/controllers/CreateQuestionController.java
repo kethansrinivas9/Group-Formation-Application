@@ -4,6 +4,7 @@ import com.group8.dalsmartteamwork.questions.Option;
 import com.group8.dalsmartteamwork.questions.Question;
 import com.group8.dalsmartteamwork.questions.dao.IQuestionDao;
 import com.group8.dalsmartteamwork.questions.dao.QuestionDao;
+import com.group8.dalsmartteamwork.questions.dao.QuestionsDaoFactory;
 import com.group8.dalsmartteamwork.questions.models.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,8 +30,7 @@ public class CreateQuestionController {
     @RequestMapping(value = "/question-details", method = RequestMethod.POST)
     public String getAnswerPage(@RequestParam("title") String title, @RequestParam("question") String text,
                                 @RequestParam("type") String type, Model model) {
-        Question question = Question.getInstance();
-        IQuestionHandler handleQuestion = new QuestionHandler(question);
+        IQuestionHandler handleQuestion = QuestionModelsFactory.instance().questionHandler();
         handleQuestion.createQuestion(title, text, type);
         switch (type) {
             case "numeric":
@@ -55,12 +55,11 @@ public class CreateQuestionController {
         List<Option> options;
         Question question = Question.getInstance();
         IQuestionOptionManager saveQuestionOptions;
-        IOptionRetrieveManager parseRequest = new OptionRetrieveManager();
-        IQuestionDao questionDao = new QuestionDao();
+        IOptionRetrieveManager parseRequest = QuestionModelsFactory.instance().optionRetrieveManager();
         int questionId;
 
         options = parseRequest.getOptions(request);
-        saveQuestionOptions = new QuestionOptionManager(questionDao);
+        saveQuestionOptions = QuestionModelsFactory.instance().questionOptionManager();
         questionId = saveQuestionOptions.saveQuestion(question);
         saveQuestionOptions.saveOptions(options, questionId);
         question.reset();
@@ -70,8 +69,7 @@ public class CreateQuestionController {
 
     @RequestMapping(value = "/validate-question", method = RequestMethod.POST, params = "action=cancel")
     public String cancelDetails(HttpServletRequest request, Model model) {
-        Question question = Question.getInstance();
-        IQuestionHandler handleQuestion = new QuestionHandler(question);
+        IQuestionHandler handleQuestion = QuestionModelsFactory.instance().questionHandler();
         handleQuestion.resetQuestion();
         model.addAttribute("component", 0);
         return "create-question";

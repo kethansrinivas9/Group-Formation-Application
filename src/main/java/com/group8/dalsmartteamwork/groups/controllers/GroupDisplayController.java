@@ -3,8 +3,10 @@ package com.group8.dalsmartteamwork.groups.controllers;
 import com.group8.dalsmartteamwork.accesscontrol.CurrentUser;
 import com.group8.dalsmartteamwork.groups.IGroup;
 import com.group8.dalsmartteamwork.groups.dao.GroupRetrieverDaoImpl;
+import com.group8.dalsmartteamwork.groups.dao.GroupsDaoFactory;
 import com.group8.dalsmartteamwork.groups.dao.IGroupRetrieverDao;
 import com.group8.dalsmartteamwork.groups.models.GroupDisplayManagerImpl;
+import com.group8.dalsmartteamwork.groups.models.GroupsModelsFactory;
 import com.group8.dalsmartteamwork.groups.models.IGroupDisplayManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,8 +23,7 @@ public class GroupDisplayController {
 
     @GetMapping(value = "/instructor-courses")
     public String getInstructorCourses(Model model){
-        IGroupRetrieverDao iGroupRetrieverDao = new GroupRetrieverDaoImpl();
-        IGroupDisplayManager iGroupDisplayManager = new GroupDisplayManagerImpl(iGroupRetrieverDao);
+        IGroupDisplayManager iGroupDisplayManager = GroupsModelsFactory.instance().groupDisplayManager();
         String bannerId = CurrentUser.getInstance().getBannerId();
         List<Integer> courses = iGroupDisplayManager.getInstructorCourses(bannerId);
         model.addAttribute("courses", courses);
@@ -31,8 +32,7 @@ public class GroupDisplayController {
 
     @PostMapping(value = "/course-groups")
     public String getCourseGroups(HttpServletRequest request, Model model){
-        IGroupRetrieverDao iGroupRetrieverDao = new GroupRetrieverDaoImpl();
-        IGroupDisplayManager iGroupDisplayManager = new GroupDisplayManagerImpl(iGroupRetrieverDao);
+        IGroupDisplayManager iGroupDisplayManager = GroupsModelsFactory.instance().groupDisplayManager();
         int courseId = Integer.parseInt(request.getParameter("courseId"));
         String bannerId = CurrentUser.getInstance().getBannerId();
         List<IGroup> groups = iGroupDisplayManager.getGroups(courseId);

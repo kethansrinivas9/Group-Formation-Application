@@ -26,7 +26,7 @@ public class GuestDaoImpl implements IGuestDao {
         } catch (Exception exception) {
             LOGGER.error("Exception occurred while fetching courses from the database.", exception);
         } finally {
-            if (storedProcedure != null) {
+            if (null != storedProcedure) {
                 storedProcedure.cleanup();
             }
         }

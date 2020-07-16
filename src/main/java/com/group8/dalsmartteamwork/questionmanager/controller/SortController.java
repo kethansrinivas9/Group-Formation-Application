@@ -2,6 +2,7 @@ package com.group8.dalsmartteamwork.questionmanager.controller;
 
 import com.group8.dalsmartteamwork.questionmanager.dao.SortDao;
 import com.group8.dalsmartteamwork.questionmanager.dao.SortDaoImpl;
+import com.group8.dalsmartteamwork.questionmanager.model.QuestionManagerModelFactory;
 import com.group8.dalsmartteamwork.questionmanager.model.Sort;
 import com.group8.dalsmartteamwork.questionmanager.model.SortImpl;
 import com.group8.dalsmartteamwork.questions.Question;
@@ -25,8 +26,7 @@ public class SortController {
 
     @GetMapping("/sortQuestion")
     public String sortQuestions(Principal principal, Model model) {
-        SortDao sortDao = new SortDaoImpl();
-        Sort sort = new SortImpl(sortDao);
+        Sort sort = QuestionManagerModelFactory.instance().sort();
         List<Question> sortedQuestionList = sort.getAllQuestion(principal.getName());
         model.addAttribute("list", sortedQuestionList);
 		if (model.containsAttribute("list")) {
@@ -39,8 +39,7 @@ public class SortController {
 
     @GetMapping("/sortQuestionByTitle")
     public String sortQuestionsBasedOnTitle(Principal principal, Model model) {
-        SortDao sortDao = new SortDaoImpl();
-        Sort sort = new SortImpl(sortDao);
+        Sort sort = QuestionManagerModelFactory.instance().sort();
         List<Question> sortedList = sort.sortQuestionsByTitle(principal.getName());
         model.addAttribute("list", sortedList);
         return "sortQuestionByTitle";
@@ -48,8 +47,7 @@ public class SortController {
 
     @GetMapping("/sortQuestionByDate")
     public String sortQuestionsBasedOnDate(Principal principal, Model model) {
-        SortDao sortDao = new SortDaoImpl();
-        Sort sort = new SortImpl(sortDao);
+        Sort sort = QuestionManagerModelFactory.instance().sort();
         List<Question> sortedList = sort.sortAllQuestionByDate(principal.getName());
         model.addAttribute("list", sortedList);
         return "sortQuestionByDate";

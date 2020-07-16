@@ -1,6 +1,8 @@
 package com.group8.dalsmartteamwork.login.model;
 
 import com.group8.dalsmartteamwork.accesscontrol.User;
+import com.group8.dalsmartteamwork.login.dao.ILoginDao;
+import com.group8.dalsmartteamwork.login.dao.LoginDaoFactory;
 import com.group8.dalsmartteamwork.login.dao.LoginDaoImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,14 +16,14 @@ public class LoginAuthentication implements AuthenticationManager {
 
     public String role;
     Boolean status;
-    LoginDaoImpl loginImplementation = new LoginDaoImpl();
+    ILoginDao loginImplementation = LoginDaoFactory.instance().loginDao();
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         User user = new User();
         String username = authentication.getPrincipal().toString();
         String password = authentication.getCredentials().toString();
-        IEncryption encryption = new Encryption();
+        IEncryption encryption = LoginModelFactory.instance().encryption();
         String encryptedPassword = encryption.encrypt(password);
         try {
             status = loginImplementation.getUserDetails(username, user.getFirstName(), user.getEmail(),

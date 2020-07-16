@@ -2,8 +2,10 @@ package com.group8.dalsmartteamwork.questionmanager.controller;
 
 import com.group8.dalsmartteamwork.questionmanager.dao.DeleteDao;
 import com.group8.dalsmartteamwork.questionmanager.dao.DeleteDaoImpl;
+import com.group8.dalsmartteamwork.questionmanager.dao.QuestionManagerDaoFactory;
 import com.group8.dalsmartteamwork.questionmanager.model.Delete;
 import com.group8.dalsmartteamwork.questionmanager.model.DeleteImpl;
+import com.group8.dalsmartteamwork.questionmanager.model.QuestionManagerModelFactory;
 import com.group8.dalsmartteamwork.questions.Question;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,8 +26,7 @@ public class DeleteController {
 
     @GetMapping("/listDeleteQuestions")
     public String listDeleteQuestion(Principal principal, Model model) {
-        DeleteDao deleteDao = new DeleteDaoImpl();
-        Delete delete = new DeleteImpl(deleteDao);
+        Delete delete = QuestionManagerModelFactory.instance().delete();
         List<Question> sList = delete.displayListOfQuestions(principal.getName());
         model.addAttribute("list", sList);
         model.addAttribute(new Question());
@@ -35,8 +36,7 @@ public class DeleteController {
     @RequestMapping(value = "/listDeleteQuestions", method = RequestMethod.POST)
     public String deleteQuestion(@ModelAttribute("question") Question question, Principal principal, Model model,
                                  RedirectAttributes redirectAttributes) {
-        DeleteDao deleteDao = new DeleteDaoImpl();
-        Delete delete = new DeleteImpl(deleteDao);
+        Delete delete = QuestionManagerModelFactory.instance().delete();
         Boolean status = delete.deleteQuestion(question.getQuestionID());
 		if (status) {
 			LOGGER.info("Deleted the question with QuestionID: " + question.getQuestionID());

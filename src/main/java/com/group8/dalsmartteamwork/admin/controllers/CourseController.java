@@ -4,11 +4,9 @@ import com.group8.dalsmartteamwork.admin.dao.CourseManagerDaoImpl;
 import com.group8.dalsmartteamwork.admin.dao.ICourseManagerDao;
 import com.group8.dalsmartteamwork.admin.dao.IUserManagerDao;
 import com.group8.dalsmartteamwork.admin.dao.UserManagerDaoImpl;
-import com.group8.dalsmartteamwork.admin.models.CourseManagerImpl;
-import com.group8.dalsmartteamwork.admin.models.ICourseManager;
-import com.group8.dalsmartteamwork.admin.models.IUserManager;
-import com.group8.dalsmartteamwork.admin.models.UserManagerImpl;
+import com.group8.dalsmartteamwork.admin.models.*;
 import com.group8.dalsmartteamwork.course.Course;
+import com.group8.dalsmartteamwork.course.CourseFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -25,10 +23,9 @@ public class CourseController {
 
     @GetMapping(value = "/create-course")
     public String viewCourseCreationPage(Model model) {
-        IUserManagerDao iUserManagerDao = new UserManagerDaoImpl();
-        IUserManager iUserManager = new UserManagerImpl(iUserManagerDao);
+        IUserManager iUserManager = AdminModelsFactory.instance().userManager();
 
-        model.addAttribute(new Course());
+        model.addAttribute(CourseFactory.instance().course());
         List<String> listOfGuestsOrInstructors = iUserManager.getUsersWhoAreGuestsOrInstructors("");
         model.addAttribute("listOfInstructors", listOfGuestsOrInstructors);
         return "add-course";
@@ -36,8 +33,7 @@ public class CourseController {
 
     @PostMapping(value = "/create-course")
     public String createCourse(@ModelAttribute Course course, Model model) {
-        ICourseManagerDao iCourseManagerDao = new CourseManagerDaoImpl();
-        ICourseManager iCourseManager = new CourseManagerImpl(iCourseManagerDao);
+        ICourseManager iCourseManager = AdminModelsFactory.instance().courseManager();
 
         if (iCourseManager.createNewCourse(course)) {
             model.addAttribute("courses", iCourseManager.getAllCourses());
@@ -50,8 +46,7 @@ public class CourseController {
 
     @PostMapping(value = "/edit-course")
     public String viewEditCoursePage(String courseName, String originalCourseID, Model model) {
-        IUserManagerDao iUserManagerDao = new UserManagerDaoImpl();
-        IUserManager iUserManager = new UserManagerImpl(iUserManagerDao);
+        IUserManager iUserManager = AdminModelsFactory.instance().userManager();
         String instructorID = iUserManager.getCourseInstructor(originalCourseID);
 
         model.addAttribute("course", new Course(Integer.parseInt(originalCourseID), courseName, instructorID));
@@ -63,7 +58,7 @@ public class CourseController {
     @PostMapping(value = "/update-course")
     public String editCourse(String courseName, String courseID, String instructorID, String originalCourseID, Model model) {
         ICourseManagerDao iCourseManagerDao = new CourseManagerDaoImpl();
-        ICourseManager iCourseManager = new CourseManagerImpl(iCourseManagerDao);
+        ICourseManager iCourseManager = AdminModelsFactory.instance().courseManager();
 
         iCourseManager.updateCourse(courseName, Integer.parseInt(courseID), instructorID, Integer.parseInt(originalCourseID));
         model.addAttribute("courses", iCourseManager.getAllCourses());
@@ -72,8 +67,7 @@ public class CourseController {
 
     @PostMapping(value = "/delete-course")
     public String deleteCourse(String courseID, Model model) {
-        ICourseManagerDao iCourseManagerDao = new CourseManagerDaoImpl();
-        ICourseManager iCourseManager = new CourseManagerImpl(iCourseManagerDao);
+        ICourseManager iCourseManager = AdminModelsFactory.instance().courseManager();
 
         iCourseManager.deleteCourse(courseID);
         model.addAttribute("courses", iCourseManager.getAllCourses());

@@ -3,6 +3,7 @@ package com.group8.dalsmartteamwork.course.controllers;
 import com.group8.dalsmartteamwork.course.dao.CourseDaoImpl;
 import com.group8.dalsmartteamwork.course.dao.ICourseDao;
 import com.group8.dalsmartteamwork.course.models.CourseInstructorManagerImpl;
+import com.group8.dalsmartteamwork.course.models.CourseModelsFactory;
 import com.group8.dalsmartteamwork.course.models.ICourseInstructorManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,8 +30,7 @@ public class InstructorController {
 
     @GetMapping("/viewcourse/{courseid}")
     public String view(@PathVariable int courseid, Model model) {
-        ICourseDao courseDao = new CourseDaoImpl();
-        ICourseInstructorManager courseInstructorManager = new CourseInstructorManagerImpl(courseDao);
+        ICourseInstructorManager courseInstructorManager = CourseModelsFactory.instance().courseInstructorManager();
         if (courseInstructorManager.courseExists(courseid)) {
             model.addAttribute("course", courseid);
             model.addAttribute("currentTAList", courseInstructorManager.getCurrentTAs(courseid));
@@ -44,8 +44,7 @@ public class InstructorController {
 
     @PostMapping("/add-ta")
     public String addTA(@RequestParam(name = "courseid") int courseid, Model model) {
-        ICourseDao courseDao = new CourseDaoImpl();
-        ICourseInstructorManager courseInstructorManager = new CourseInstructorManagerImpl(courseDao);
+        ICourseInstructorManager courseInstructorManager = CourseModelsFactory.instance().courseInstructorManager();
         model.addAttribute("users", courseInstructorManager.getEligibleTAs(courseid));
         model.addAttribute("courseid", courseid);
         return "addTA";
@@ -54,8 +53,7 @@ public class InstructorController {
     @GetMapping("/confirm-add-ta")
     public String confirmAddTA(@RequestParam(name = "courseid") int courseID,
                                @RequestParam(name = "bannerid") String bannerID, Model model) {
-        ICourseDao courseDao = new CourseDaoImpl();
-        ICourseInstructorManager courseInstructorManager = new CourseInstructorManagerImpl(courseDao);
+        ICourseInstructorManager courseInstructorManager = CourseModelsFactory.instance().courseInstructorManager();
         if (courseInstructorManager.addTAtoCourse(bannerID, courseID)) {
             model.addAttribute("courseid", courseID);
             return "successAddTA";

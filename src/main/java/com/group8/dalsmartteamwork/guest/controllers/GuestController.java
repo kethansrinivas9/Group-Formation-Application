@@ -1,6 +1,7 @@
 package com.group8.dalsmartteamwork.guest.controllers;
 
 import com.group8.dalsmartteamwork.course.Course;
+import com.group8.dalsmartteamwork.guest.Dao.GuestDaoFactory;
 import com.group8.dalsmartteamwork.guest.Dao.GuestDaoImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

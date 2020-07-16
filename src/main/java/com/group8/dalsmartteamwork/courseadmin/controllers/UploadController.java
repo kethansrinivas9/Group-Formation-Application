@@ -5,6 +5,7 @@ import com.group8.dalsmartteamwork.courseadmin.Pair;
 import com.group8.dalsmartteamwork.courseadmin.models.*;
 import com.group8.dalsmartteamwork.register.models.IRegistrationFactory;
 import com.group8.dalsmartteamwork.register.models.RegistrationFactoryImpl;
+import com.group8.dalsmartteamwork.register.models.RegistrationModelsFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -37,14 +38,14 @@ public class UploadController {
         try {
             String fileName = file.getOriginalFilename();
             ICsvReader csvReader = new CsvReader(file);
-            IRegistrationFactory iRegistrationFactory = new RegistrationFactoryImpl();
+            IRegistrationFactory iRegistrationFactory = RegistrationModelsFactory.instance().registrationFactory();
             IStudentEnrollmentFactory iStudentEnrollmentFactory = new StudentEnrollmentFactoryImpl();
             IStudentImportManager service = new StudentImportManagerImpl(courseId, iRegistrationFactory, iStudentEnrollmentFactory);
 
             ICsvParser iCsvParser = new CsvParserImpl(csvReader);
             List<User> users = iCsvParser.getUsers();
 
-            MakePairService makePairService = new MakePairServiceImpl();
+            MakePairService makePairService = CourseAdminModelsFactory.instance().makePairService();
             List<Boolean> status = service.verifyRegistration(users);
 
             List<Pair<User, Boolean>> details = makePairService.getUserDetails(users, status);

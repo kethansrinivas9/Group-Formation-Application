@@ -24,7 +24,7 @@ public class DeleteDaoImpl implements DeleteDao {
             while (resultSet.next()) {
                 int ID = resultSet.getInt(1);
                 String questionText = resultSet.getString(2);
-                listOfQuestions.add(new Question(ID, questionText));
+                listOfQuestions.add(new  Question(ID, questionText));
             }
         } catch (Exception e) {
             LOGGER.error("Exception occurred while getting all questions from the database. ", e);
