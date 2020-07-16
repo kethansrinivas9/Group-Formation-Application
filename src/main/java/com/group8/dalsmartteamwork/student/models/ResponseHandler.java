@@ -1,7 +1,6 @@
 package com.group8.dalsmartteamwork.student.models;
 
 import com.group8.dalsmartteamwork.questions.IOption;
-import com.group8.dalsmartteamwork.student.Answer;
 import com.group8.dalsmartteamwork.student.IQuestionDetails;
 import com.group8.dalsmartteamwork.student.IResponseObject;
 
