@@ -1,10 +1,14 @@
 package com.group8.dalsmartteamwork.login.dao;
 
 import com.group8.dalsmartteamwork.database.CallStoredProcedure;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.ResultSet;
 
 public class LoginDaoImpl implements ILoginDao {
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+
     private String role, BannerID;
     private String password_temp = null;
 
@@ -24,10 +28,11 @@ public class LoginDaoImpl implements ILoginDao {
                 setBannerID(resultSet.getString(3));
             }
             if (password.equals(password_temp)) {
+                LOGGER.info("User details fetched for user with BannerID: " + id);
                 return true;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while fetching user details. ", e);
         } finally {
             if (null != procedure) {
                 procedure.cleanup();

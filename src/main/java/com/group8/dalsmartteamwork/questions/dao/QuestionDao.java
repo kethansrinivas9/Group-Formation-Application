@@ -3,11 +3,14 @@ package com.group8.dalsmartteamwork.questions.dao;
 import com.group8.dalsmartteamwork.database.CallStoredProcedure;
 import com.group8.dalsmartteamwork.questions.Option;
 import com.group8.dalsmartteamwork.questions.Question;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class QuestionDao implements IQuestionDao {
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public int addQuestionToDb(Question question, int questionType, String bannerId) {
@@ -25,13 +28,13 @@ public class QuestionDao implements IQuestionDao {
                 questionId = resultSet.getInt(1);
             }
         } catch (SQLException e) {
-            //TODO: Add to Log
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while adding question to the database. ", e);
         } finally {
             if (null != proc) {
                 proc.cleanup();
             }
         }
+        LOGGER.info("Question added. QuestionID: " + questionId);
         return questionId;
     }
 
@@ -43,9 +46,10 @@ public class QuestionDao implements IQuestionDao {
             proc.setParameter(2, option.getDisplayText());
             proc.setParameter(3, option.getStoredAs());
             proc.execute();
+            LOGGER.info("Option added. QuestionID: " + questionId + " OptionID: " + option.getOptionId());
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while adding question to the database. ", e);
             return false;
         } finally {
             if (null != proc) {

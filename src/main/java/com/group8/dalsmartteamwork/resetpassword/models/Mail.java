@@ -1,18 +1,21 @@
 package com.group8.dalsmartteamwork.resetpassword.models;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 public class Mail implements IMail {
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
     private Session session;
 
     public Mail() {
         try {
             final String username = System.getenv("mail.smtp.username");
             final String password = System.getenv("mail.smtp.password");
-
             Properties properties = System.getProperties();
             properties.setProperty("mail.smtp.host", System.getenv("mail.smtp.host"));
             properties.setProperty("mail.smtp.host", System.getenv("mail.smtp.host"));
@@ -27,8 +30,7 @@ public class Mail implements IMail {
 
             session = Session.getInstance(properties, auth);
         } catch (Exception e) {
-            // TODO: handle exception
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while trying to initialize Mail class. ", e);
         }
     }
 
@@ -42,8 +44,7 @@ public class Mail implements IMail {
             Transport.send(msg);
             return true;
         } catch (Exception e) {
-            // TODO: Add to Log
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while trying to send email. ", e);
             return false;
         }
     }

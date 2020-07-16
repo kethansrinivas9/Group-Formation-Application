@@ -2,12 +2,16 @@ package com.group8.dalsmartteamwork.admin.dao;
 
 import com.group8.dalsmartteamwork.course.Course;
 import com.group8.dalsmartteamwork.database.CallStoredProcedure;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CourseManagerDaoImpl implements ICourseManagerDao {
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+
     String courseID;
     String courseName;
     Course course;
@@ -28,11 +32,14 @@ public class CourseManagerDaoImpl implements ICourseManagerDao {
                 course = new Course(Integer.parseInt(courseID), courseName);
                 courseList.add(course);
             }
+            LOGGER.info("All courses fetched from the database.");
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while fetching all courses from the Database. ", e);
         } finally {
             storedProcedure.cleanup();
         }
+
+        LOGGER.info("Course Deleted. CourseID: " + courseID);
         return courseList;
     }
 
@@ -51,9 +58,11 @@ public class CourseManagerDaoImpl implements ICourseManagerDao {
                 storedProcedure.setParameter(2, courseID);
                 storedProcedure.execute();
             }
+
+            LOGGER.info("Course Created. CourseID: " + courseID);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while adding new course to the Database. ", e);
         } finally {
             storedProcedure.cleanup();
         }
@@ -87,9 +96,10 @@ public class CourseManagerDaoImpl implements ICourseManagerDao {
                 storedProcedure.execute();
             }
 
+            LOGGER.info("Course updated. CourseID: " + courseID);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while updating course in the Database. ", e);
         } finally {
             storedProcedure.cleanup();
         }
@@ -103,10 +113,10 @@ public class CourseManagerDaoImpl implements ICourseManagerDao {
             storedProcedure = new CallStoredProcedure("spDeleteCourse(?)");
             storedProcedure.setParameter(1, courseID);
             storedProcedure.execute();
-
+            LOGGER.info("Course Deleted. CourseID: " + courseID);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while deleting course in the Database. ", e);
         } finally {
             storedProcedure.cleanup();
         }

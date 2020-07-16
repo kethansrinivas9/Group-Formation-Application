@@ -2,12 +2,15 @@ package com.group8.dalsmartteamwork.questionmanager.dao;
 
 import com.group8.dalsmartteamwork.database.CallStoredProcedure;
 import com.group8.dalsmartteamwork.questions.Question;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DeleteDaoImpl implements DeleteDao {
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public List<Question> displayListOfQuestions(String BannerID) {
@@ -24,12 +27,13 @@ public class DeleteDaoImpl implements DeleteDao {
                 listOfQuestions.add(new Question(ID, questionText));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while getting all questions from the database. ", e);
         } finally {
             if (null != procedure) {
                 procedure.cleanup();
             }
         }
+        LOGGER.info("List of questions retrieved from the database");
         return listOfQuestions;
     }
 
@@ -41,12 +45,13 @@ public class DeleteDaoImpl implements DeleteDao {
             procedure.setParameter(1, questionID);
             procedure.execute();
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while deleting question from the database. ", e);
         } finally {
             if (null != procedure) {
                 procedure.cleanup();
             }
         }
+        LOGGER.info("Question deleted. QuestionID: " + questionID);
         return true;
     }
 

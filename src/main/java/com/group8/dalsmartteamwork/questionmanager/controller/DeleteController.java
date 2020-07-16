@@ -5,6 +5,8 @@ import com.group8.dalsmartteamwork.questionmanager.dao.DeleteDaoImpl;
 import com.group8.dalsmartteamwork.questionmanager.model.Delete;
 import com.group8.dalsmartteamwork.questionmanager.model.DeleteImpl;
 import com.group8.dalsmartteamwork.questions.Question;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,7 @@ import java.util.List;
 
 @Controller
 public class DeleteController {
+	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping("/listDeleteQuestions")
     public String listDeleteQuestion(Principal principal, Model model) {
@@ -35,12 +38,13 @@ public class DeleteController {
         DeleteDao deleteDao = new DeleteDaoImpl();
         Delete delete = new DeleteImpl(deleteDao);
         Boolean status = delete.deleteQuestion(question.getQuestionID());
-        if (status != true) {
-            redirectAttributes.addFlashAttribute("message", "Failed to delete the question");
-            return "redirect:/questionManager";
-        }
-        redirectAttributes.addFlashAttribute("message", "Successfully deleted the question!");
-        return "redirect:/questionManager";
-
-    }
+		if (status) {
+			LOGGER.info("Deleted the question with QuestionID: " + question.getQuestionID());
+			redirectAttributes.addFlashAttribute("message", "Successfully deleted the question!");
+		} else {
+			LOGGER.info("Failed to delete the question with QuestionID: " + question.getQuestionID());
+			redirectAttributes.addFlashAttribute("message", "Failed to delete the question");
+		}
+		return "redirect:/questionManager";
+	}
 }

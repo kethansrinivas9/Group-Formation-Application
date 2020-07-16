@@ -1,6 +1,8 @@
 package com.group8.dalsmartteamwork.courseadmin.models;
 
 import com.group8.dalsmartteamwork.accesscontrol.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedReader;
@@ -10,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CsvReader implements ICsvReader {
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+
     private BufferedReader bufferedReader;
 
     public CsvReader(MultipartFile file) {
@@ -17,7 +21,7 @@ public class CsvReader implements ICsvReader {
             InputStream inputStream = file.getInputStream();
             this.bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         } catch (Exception e) {
-            // TODO: Add to Log
+            LOGGER.error("Exception occurred while reading CSV file.", e);
             this.bufferedReader = null;
         }
     }
@@ -36,9 +40,9 @@ public class CsvReader implements ICsvReader {
                 line = bufferedReader.readLine();
             }
         } catch (Exception e) {
-            // TODO: handle exception
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while getting students data (users) from the CSV file.", e);
         }
+        LOGGER.info("Imported student data (users) from CSV file.");
         return users;
     }
 
