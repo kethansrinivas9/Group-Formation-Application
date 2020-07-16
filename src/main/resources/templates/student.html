@@ -7,10 +7,17 @@
 </head>
 
 <body>
+<div style="background-color:#337ab7; height:50px; color: black;">
+    <h2 style="float: left;">Group Formation Tool</h2>
+    <a href="/logout" style="float: right; color: black;">Logout</a>
+</div>
+
 <div style="text-align:center">
     <h2>Student page </h2>
     <br>
 </div>
+
+<p th:if="${surveyStatus ==false }">Error Submitting Survey. Try again in 5 minutes</p>
 <table>
     <tr>
         <th>Course ID</th>

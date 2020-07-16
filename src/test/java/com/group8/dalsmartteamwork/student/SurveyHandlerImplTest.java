@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 class SurveyHandlerImplTest {
@@ -25,21 +26,16 @@ class SurveyHandlerImplTest {
     @BeforeEach
     void setup() {
         iSurveyManagerDao = mock(SurveyManagerDaoImpl.class);
+        iSurveyHandler = new SurveyHandlerImpl(iSurveyManagerDao);
     }
 
     @Test
     void getQuestionsTest() {
         List<IQuestionDetails> questionDetails = new ArrayList<>();
-        IQuestionDetails question1 = new QuestionDetails();
-        IQuestionDetails question2 = new QuestionDetails();
+        IQuestionDetails question1 = new QuestionDetails(1, "TEXT1", 1);
+        IQuestionDetails question2 = new QuestionDetails(2, "TEXT2", 2);
         List<IOption> options = new ArrayList<>();
         IOption option = new Option();
-        question1.setQuestionId(1);
-        question1.setText("TEXT1");
-        question1.setType(1);
-        question2.setQuestionId(2);
-        question2.setText("TEXT2");
-        question2.setType(2);
         questionDetails.add(question1);
         questionDetails.add(question2);
         option.setOptionId(1);
@@ -48,16 +44,20 @@ class SurveyHandlerImplTest {
         options.add(option);
         when(iSurveyManagerDao.getSurveyQuestions(courseId)).thenReturn(questionDetails);
         when(iSurveyManagerDao.getQuestionOptions(2)).thenReturn(options);
-        iSurveyHandler = new SurveyHandlerImpl(iSurveyManagerDao);
         assertEquals(2, iSurveyHandler.getQuestions(courseId).size());
-
     }
 
     @Test
     void saveResponsesTest() {
-        doNothing().when(iSurveyManagerDao).saveResponses(1, "TEST", "TEST", 1);
+        when(iSurveyManagerDao.saveResponses(1, "TEST", "TEST", 1)).thenReturn(true);
         iSurveyHandler = new SurveyHandlerImpl(iSurveyManagerDao);
         Map<Integer, List<String>> answers = new HashMap<>();
         iSurveyHandler.saveResponses(answers, "TEST", 1);
+    }
+
+    @Test
+    void getSurveyPublishStatusTest(){
+        when(iSurveyManagerDao.getSurveyPublishStatus(courseId)).thenReturn(true);
+        assertTrue(iSurveyHandler.getSurveyPublishStatus(courseId));
     }
 }

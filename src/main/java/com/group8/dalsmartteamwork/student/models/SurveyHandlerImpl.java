@@ -31,12 +31,19 @@ public class SurveyHandlerImpl implements ISurveyHandler {
     }
 
     @Override
-    public void saveResponses(Map<Integer, List<String>> answers, String bannerId, int courseId) {
+    public Boolean saveResponses(Map<Integer, List<String>> answers, String bannerId, int courseId) {
+        Boolean status = true;
         for (Integer questionId : answers.keySet()) {
             for (String response : answers.get(questionId)) {
-                iSurveyManagerDao.saveResponses(questionId, response, bannerId, courseId);
+                status = status && iSurveyManagerDao.saveResponses(questionId, response, bannerId, courseId);
             }
         }
+        return status;
+    }
+
+    @Override
+    public Boolean getSurveyPublishStatus(int courseId) {
+        return iSurveyManagerDao.getSurveyPublishStatus(courseId);
     }
 
 }

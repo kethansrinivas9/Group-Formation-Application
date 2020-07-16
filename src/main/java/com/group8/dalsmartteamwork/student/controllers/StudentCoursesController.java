@@ -9,10 +9,7 @@ import com.group8.dalsmartteamwork.student.dao.IStudentDao;
 import com.group8.dalsmartteamwork.student.dao.ISurveyManagerDao;
 import com.group8.dalsmartteamwork.student.dao.StudentDaoImpl;
 import com.group8.dalsmartteamwork.student.dao.SurveyManagerDaoImpl;
-import com.group8.dalsmartteamwork.student.models.IResponseHandler;
-import com.group8.dalsmartteamwork.student.models.ISurveyHandler;
-import com.group8.dalsmartteamwork.student.models.ResponseHandler;
-import com.group8.dalsmartteamwork.student.models.SurveyHandlerImpl;
+import com.group8.dalsmartteamwork.student.models.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,9 +37,11 @@ public class StudentCoursesController {
         ISurveyManagerDao iSurveyManagerDao = new SurveyManagerDaoImpl();
         ISurveyHandler iSurveyHandler = new SurveyHandlerImpl(iSurveyManagerDao);
         Map<IQuestionDetails, List<IOption>> questions = iSurveyHandler.getQuestions(courseId);
+        Boolean status = iSurveyHandler.getSurveyPublishStatus(courseId);
         Answer answer = Answer.getInstance();
         answer.setQuestions(questions);
         answer.setCourseId(courseId);
+        model.addAttribute("status", status);
         model.addAttribute("answer", answer);
         model.addAttribute("questions", questions);
         model.addAttribute("courseId", courseId);
@@ -52,7 +51,8 @@ public class StudentCoursesController {
 
     @PostMapping(value = "/submit-survey")
     public String saveSurveyResponses(HttpServletRequest request, Model model) {
-        IResponseHandler iResponseHandler = new ResponseHandler();
+        IResponseFactory iResponseFactory = new ResponseFactoryImpl();
+        IResponseHandler iResponseHandler = new ResponseHandler(iResponseFactory);
         Answer answer = Answer.getInstance();
         iResponseHandler.getResponses(request, answer.getQuestions());
         Map<Integer, List<String>> answers = answer.getAnswers();
@@ -60,7 +60,8 @@ public class StudentCoursesController {
         ISurveyHandler iSurveyHandler = new SurveyHandlerImpl(iSurveyManagerDao);
         String bannerId = CurrentUser.getInstance().getBannerId();
         int courseId = answer.getCourseId();
-        iSurveyHandler.saveResponses(answers, bannerId, courseId);
+        Boolean surveyStatus = iSurveyHandler.saveResponses(answers, bannerId, courseId);
+        model.addAttribute("surveyStatus", surveyStatus);
 
         IStudentDao iStudentDao = new StudentDaoImpl();
         ArrayList<Student> courseList = iStudentDao.displayCourses();
