@@ -1,6 +1,6 @@
 package com.group8.dalsmartteamwork.login.model;
 
-import com.group8.dalsmartteamwork.accesscontrol.User;
+import com.group8.dalsmartteamwork.accesscontrol.IUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,9 +11,9 @@ import java.util.List;
 
 public class RoleAuthorization implements UserDetails {
     private static final long serialVersionUID = 1L;
-    private final User user;
+    private final IUser user;
 
-    RoleAuthorization(User user) {
+    RoleAuthorization(IUser user) {
         this.user = user;
     }
 
