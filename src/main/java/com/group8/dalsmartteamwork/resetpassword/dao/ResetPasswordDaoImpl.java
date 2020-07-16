@@ -1,10 +1,7 @@
 package com.group8.dalsmartteamwork.resetpassword.dao;
 
 import com.group8.dalsmartteamwork.database.CallStoredProcedure;
-import com.group8.dalsmartteamwork.resetpassword.models.IPasswordResetToken;
-import com.group8.dalsmartteamwork.resetpassword.models.IResetToken;
-import com.group8.dalsmartteamwork.resetpassword.models.PasswordResetToken;
-import com.group8.dalsmartteamwork.resetpassword.models.ResetToken;
+import com.group8.dalsmartteamwork.resetpassword.models.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +17,7 @@ public class ResetPasswordDaoImpl implements IResetPasswordDao {
 
     @Override
     public Boolean addToken(String bannerID) {
-        IResetToken resetToken = new ResetToken();
+        IResetToken resetToken = ResetPasswordModelsFactory.instance().resetToken();
         CallStoredProcedure storedProcedure = null;
         try {
             storedProcedure = new CallStoredProcedure("spInsertToken(?, ?)");
@@ -34,7 +31,7 @@ public class ResetPasswordDaoImpl implements IResetPasswordDao {
         } catch (SQLException exception) {
             LOGGER.error(String.format("An exception occurred while adding password reset request to database for user with bannerID: %s. ", bannerID), exception);
         } finally {
-            if (storedProcedure != null) {
+            if (null != storedProcedure) {
                 storedProcedure.cleanup();
             }
         }
@@ -54,7 +51,7 @@ public class ResetPasswordDaoImpl implements IResetPasswordDao {
         } catch (SQLException exception) {
             LOGGER.error(String.format("An exception occurred while adding password reset request to database for user with bannerID: %s. ", bannerID), exception);
         } finally {
-            if (storedProcedure != null) {
+            if (null != storedProcedure) {
                 storedProcedure.cleanup();
             }
         }
@@ -73,7 +70,7 @@ public class ResetPasswordDaoImpl implements IResetPasswordDao {
             LOGGER.error("Exception thrown while updating password reset requests status. ", exception);
             return false;
         } finally {
-            if (storedProcedure != null) {
+            if (null != storedProcedure) {
                 storedProcedure.cleanup();
             }
         }
@@ -81,7 +78,7 @@ public class ResetPasswordDaoImpl implements IResetPasswordDao {
 
     @Override
     public IPasswordResetToken getPasswordResetRequest(String bannerID, String token) {
-        IPasswordResetToken passwordResetToken = new PasswordResetToken();
+        IPasswordResetToken passwordResetToken = ResetPasswordModelsFactory.instance().passwordResetToken();
         String status = "notfound";
         CallStoredProcedure storedProcedure = null;
         ResultSet rs;
@@ -105,7 +102,7 @@ public class ResetPasswordDaoImpl implements IResetPasswordDao {
         } catch (SQLException exception) {
             LOGGER.error("Exception occurred while fetching password reset request. ", exception);
         } finally {
-            if (storedProcedure != null) {
+            if (null != storedProcedure) {
                 storedProcedure.cleanup();
             }
         }
@@ -138,7 +135,7 @@ public class ResetPasswordDaoImpl implements IResetPasswordDao {
             LOGGER.error(String.format("Exception occurred while updating password of bannerID: %s. ", bannerID), exception);
             return false;
         } finally {
-            if (storedProcedure != null) {
+            if (null != storedProcedure) {
                 storedProcedure.cleanup();
             }
         }
@@ -160,7 +157,7 @@ public class ResetPasswordDaoImpl implements IResetPasswordDao {
         } catch (SQLException exception) {
             LOGGER.error(String.format("Exception occurred while fetching user details of bannerID: %s. ", bannerID), exception);
         } finally {
-            if (storedProcedure != null) {
+            if (null != storedProcedure) {
                 storedProcedure.cleanup();
             }
         }
@@ -181,7 +178,7 @@ public class ResetPasswordDaoImpl implements IResetPasswordDao {
         } catch (SQLException exception) {
             LOGGER.error(String.format("Exception occurred while fetching user details of bannerID: %s. ", bannerID), exception);
         } finally {
-            if (storedProcedure != null) {
+            if (null != storedProcedure) {
                 storedProcedure.cleanup();
             }
         }

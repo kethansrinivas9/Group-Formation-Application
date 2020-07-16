@@ -3,8 +3,10 @@ package com.group8.dalsmartteamwork.resetpassword.dao;
 import com.group8.dalsmartteamwork.database.CallStoredProcedure;
 import com.group8.dalsmartteamwork.login.model.Encryption;
 import com.group8.dalsmartteamwork.login.model.IEncryption;
+import com.group8.dalsmartteamwork.login.model.LoginModelFactory;
 import com.group8.dalsmartteamwork.resetpassword.models.IPasswordPolicy;
 import com.group8.dalsmartteamwork.resetpassword.models.PasswordPolicy;
+import com.group8.dalsmartteamwork.resetpassword.models.ResetPasswordModelsFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +20,7 @@ public class PasswordHistoryManagerImpl implements IPasswordHistoryManager {
         CallStoredProcedure storedProcedure = null;
         try {
             storedProcedure = new CallStoredProcedure("spMoveCurrentPassword(?, ?)");
-            IPasswordPolicy passwordPolicy = new PasswordPolicy();
+            IPasswordPolicy passwordPolicy = ResetPasswordModelsFactory.instance().passwordPolicy();
             storedProcedure.setParameter(1, bannerID);
             storedProcedure.setParameter(2, passwordPolicy.getHistoricalPasswordLimit());
             storedProcedure.execute();
@@ -27,7 +29,7 @@ public class PasswordHistoryManagerImpl implements IPasswordHistoryManager {
         } catch (Exception exception) {
             LOGGER.error("Exception occurred while moving the current password for BannerID: " + bannerID, exception);
         } finally {
-            if (storedProcedure != null) {
+            if (null != storedProcedure) {
                 storedProcedure.cleanup();
             }
         }
@@ -39,7 +41,7 @@ public class PasswordHistoryManagerImpl implements IPasswordHistoryManager {
         CallStoredProcedure storedProcedure = null;
         ResultSet rs;
         try {
-            IEncryption encryption = new Encryption();
+            IEncryption encryption = LoginModelFactory.instance().encryption();
             String encryptedPassword = encryption.encrypt(password);
             if(null != encryptedPassword){
                 LOGGER.info("Password encrypted");
@@ -67,7 +69,7 @@ public class PasswordHistoryManagerImpl implements IPasswordHistoryManager {
         } catch (Exception exception) {
             LOGGER.error("Exception occurred while fetching password history for BannerID: " + bannerID, exception);
         } finally {
-            if (storedProcedure != null) {
+            if (null != storedProcedure) {
                 storedProcedure.cleanup();
             }
         }

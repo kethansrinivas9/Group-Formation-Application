@@ -2,11 +2,11 @@ package com.group8.dalsmartteamwork.resetpassword.models;
 
 import com.group8.dalsmartteamwork.login.model.Encryption;
 import com.group8.dalsmartteamwork.login.model.IEncryption;
+import com.group8.dalsmartteamwork.login.model.LoginModelFactory;
 import com.group8.dalsmartteamwork.resetpassword.dao.IResetPasswordDao;
 import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDaoFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDaoFactory;
 
 import java.sql.SQLException;
 
@@ -15,9 +15,10 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
 
     private final IResetPasswordDao resetPasswordDao;
 
-    public ResetPasswordManagerImpl(){
+    public ResetPasswordManagerImpl() {
         resetPasswordDao = ResetPasswordDaoFactory.instance().resetPasswordDao();
     }
+
     public ResetPasswordManagerImpl(IResetPasswordDao resetPasswordDao) {
         this.resetPasswordDao = resetPasswordDao;
     }
@@ -26,14 +27,13 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
     public Boolean addResetRequest(String bannerID) {
         try {
             if (resetPasswordDao.userExists(bannerID)) {
-                IResetToken resetToken = new ResetToken();
+                IResetToken resetToken = ResetPasswordModelsFactory.instance().resetToken();
                 String token = resetToken.createToken();
                 if (resetPasswordDao.addToken(bannerID, token)) {
                     sendPasswordResetMail(bannerID, token);
                     return true;
                 }
-            }
-            else{
+            } else {
                 LOGGER.warn(String.format("Password reset mail cannot be sent because user with Banner ID: %s does not exist", bannerID));
             }
         } catch (SQLException exception) {
@@ -50,7 +50,7 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
         String PRODUCTION_DOMAIN = "https://catme-app-production-server.herokuapp.com";
         String LOCALHOST_DOMAIN = "localhost:8080";
 
-        IMail mail = new Mail();
+        IMail mail = ResetPasswordModelsFactory.instance().mail();
 
         String environment = System.getenv("db.environment");
         String domain;
@@ -70,10 +70,9 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
         }
         String mailContent = domain + "/resetpassword?bannerid=" + bannerID + "&token=" + token;
         Boolean mailSent = mail.sendEmail(email, "Password Reset Request", mailContent);
-        if (mailSent){
+        if (mailSent) {
             LOGGER.info("Password Reset email sent to user with BannerID: " + bannerID);
-        }
-        else{
+        } else {
             LOGGER.warn("Failed to send password reset email to user with BannerID: " + bannerID);
         }
         return mailSent;
@@ -95,10 +94,10 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
 
     @Override
     public Boolean updatePassword(String bannerID, String password) {
-        IEncryption encryption = new Encryption();
+        IEncryption encryption = LoginModelFactory.instance().encryption();
 
         String encrypted_password = encryption.encrypt(password);
-        if(null == encrypted_password){
+        if (null == encrypted_password) {
             LOGGER.warn("Password encryption failed for BannerID: " + bannerID);
         }
         try {

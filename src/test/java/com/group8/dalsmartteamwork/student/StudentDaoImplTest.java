@@ -15,7 +15,7 @@ public class StudentDaoImplTest {
     private final IStudentDao studentDaoImpl = mock(StudentDaoImpl.class);
     Student student = new Student("1100", "C++");
     Student student1 = new Student("1120", "C");
-    ArrayList<Student> studentArray = new ArrayList<>();
+    ArrayList<IStudent> studentArray = new ArrayList<>();
     private boolean check = false;
 
     @Test

@@ -1,5 +1,7 @@
 package com.group8.dalsmartteamwork.register.controllers;
 
+import com.group8.dalsmartteamwork.accesscontrol.AccessControlFactory;
+import com.group8.dalsmartteamwork.accesscontrol.IUser;
 import com.group8.dalsmartteamwork.accesscontrol.User;
 import com.group8.dalsmartteamwork.register.models.*;
 import com.group8.dalsmartteamwork.resetpassword.models.IPasswordPolicy;
@@ -18,7 +20,7 @@ public class SignUpController {
 
     @GetMapping(value = "/register")
     public String viewRegistrationForm(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", AccessControlFactory.instance().user());
         return "register";
     }
 

@@ -2,6 +2,7 @@ package com.group8.dalsmartteamwork.student.dao;
 
 import com.group8.dalsmartteamwork.accesscontrol.CurrentUser;
 import com.group8.dalsmartteamwork.database.CallStoredProcedure;
+import com.group8.dalsmartteamwork.student.IStudent;
 import com.group8.dalsmartteamwork.student.Student;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,12 +13,12 @@ import java.util.ArrayList;
 public class StudentDaoImpl implements IStudentDao {
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
-    private final ArrayList<Student> courseList = new ArrayList<Student>();
+    private final ArrayList<IStudent> courseList = new ArrayList<IStudent>();
     private String username;
     private String courseName, courseId;
 
     @Override
-    public ArrayList<Student> displayCourses() {
+    public ArrayList<IStudent> displayCourses() {
 
         CallStoredProcedure procedure = null;
         ResultSet resultSet;

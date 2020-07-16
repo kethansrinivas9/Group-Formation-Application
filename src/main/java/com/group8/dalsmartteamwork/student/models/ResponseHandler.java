@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ResponseHandler implements IResponseHandler {
-    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     private IResponseFactory iResponseFactory;
 

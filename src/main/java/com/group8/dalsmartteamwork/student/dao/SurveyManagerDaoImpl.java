@@ -3,8 +3,10 @@ package com.group8.dalsmartteamwork.student.dao;
 import com.group8.dalsmartteamwork.database.CallStoredProcedure;
 import com.group8.dalsmartteamwork.questions.IOption;
 import com.group8.dalsmartteamwork.questions.Option;
+import com.group8.dalsmartteamwork.questions.QuestionsFactory;
 import com.group8.dalsmartteamwork.student.IQuestionDetails;
 import com.group8.dalsmartteamwork.student.QuestionDetails;
+import com.group8.dalsmartteamwork.student.StudentFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +27,7 @@ public class SurveyManagerDaoImpl implements ISurveyManagerDao {
             procedure.setParameter(1, courseId);
             resultSet = procedure.executeWithResults();
             while (resultSet.next()) {
-                IQuestionDetails iQuestionDetails = new QuestionDetails();
+                IQuestionDetails iQuestionDetails = StudentFactory.instance().questionDetails();
                 iQuestionDetails.setQuestionId(resultSet.getInt("QuestionID"));
                 iQuestionDetails.setText(resultSet.getString("QuestionText"));
                 iQuestionDetails.setType(resultSet.getInt("TypeID"));
@@ -51,7 +53,7 @@ public class SurveyManagerDaoImpl implements ISurveyManagerDao {
             procedure.setParameter(1, questionId);
             resultSet = procedure.executeWithResults();
             while (resultSet.next()) {
-                IOption iOption = new Option();
+                IOption iOption = QuestionsFactory.instance().option();
                 iOption.setDisplayText(resultSet.getString("DisplayText"));
                 iOption.setOptionId(resultSet.getInt("OptionID"));
                 iOption.setStoredAs(resultSet.getInt("StoredAs"));
@@ -77,6 +79,7 @@ public class SurveyManagerDaoImpl implements ISurveyManagerDao {
             procedure.setParameter(3, bannerId);
             procedure.setParameter(4, courseId);
             procedure.execute();
+            LOGGER.info(String.format("Responses saved for QuestionID: %s, BannerID: %s, courseID: %d.", questionId, bannerId, courseId));
             return true;
         } catch (Exception e) {
             LOGGER.error(String.format("Exception occurred while saving responses of questionID: %s, BannerID: %s, courseID: %d.", questionId, bannerId, courseId), e);
@@ -98,12 +101,12 @@ public class SurveyManagerDaoImpl implements ISurveyManagerDao {
             resultSet = procedure.executeWithResults();
             while (resultSet.next()){
                 if(resultSet.getBoolean(1)){
+                    LOGGER.info("Survey successfully published for CourseID: " + courseId);
                     return true;
                 }
             }
         } catch (Exception e) {
-            //TODO: Add to Log
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while getting survey publish status. ", e);
         } finally {
             if (null != procedure) {
                 procedure.cleanup();

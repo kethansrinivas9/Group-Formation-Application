@@ -1,10 +1,8 @@
 package com.group8.dalsmartteamwork.resetpassword.controllers;
 
-import com.group8.dalsmartteamwork.resetpassword.dao.IPasswordHistoryManager;
-import com.group8.dalsmartteamwork.resetpassword.dao.IResetPasswordDao;
-import com.group8.dalsmartteamwork.resetpassword.dao.PasswordHistoryManagerImpl;
-import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDaoImpl;
+import com.group8.dalsmartteamwork.resetpassword.dao.*;
 import com.group8.dalsmartteamwork.resetpassword.models.*;
+import com.group8.dalsmartteamwork.student.models.StudentModelsFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -26,8 +24,8 @@ public class ResetPasswordController {
 
     @PostMapping("/forgotpassword")
     public String requestPasswordReset(@ModelAttribute ResetPasswordRequest resetPasswordRequest, Model model) {
-        IResetPasswordDao resetPasswordDao = new ResetPasswordDaoImpl();
-        IResetPasswordManager resetPasswordManager = new ResetPasswordManagerImpl(resetPasswordDao);
+        IResetPasswordDao resetPasswordDao = ResetPasswordDaoFactory.instance().resetPasswordDao();
+        IResetPasswordManager resetPasswordManager = ResetPasswordModelsFactory.instance().resetPasswordManager();
         model.addAttribute("bannerID", resetPasswordRequest.getBannerID());
 
         if (resetPasswordManager.addResetRequest(resetPasswordRequest.getBannerID())) {
@@ -43,10 +41,10 @@ public class ResetPasswordController {
     public String resetPassword(@RequestParam(name = "bannerid") String bannerID,
                                 @RequestParam(name = "token") String token,
                                 Model model) {
-        IResetPasswordDao resetPasswordDao = new ResetPasswordDaoImpl();
-        IResetPasswordManager resetPasswordManager = new ResetPasswordManagerImpl(resetPasswordDao);
+        IResetPasswordDao resetPasswordDao = ResetPasswordDaoFactory.instance().resetPasswordDao();
+        IResetPasswordManager resetPasswordManager = ResetPasswordModelsFactory.instance().resetPasswordManager();
         if (resetPasswordManager.isRequestValid(bannerID, token)) {
-            INewPassword newPassword = new NewPassword();
+            NewPassword newPassword = new NewPassword();
             newPassword.setBannerID(bannerID);
             model.addAttribute("newPassword", newPassword);
             return "resetPassword/resetPasswordForm";
@@ -58,13 +56,13 @@ public class ResetPasswordController {
 
     @PostMapping("/resetpassword")
     public String requestPasswordReset(@ModelAttribute NewPassword newPassword, Model model) {
-        IResetPasswordDao resetPasswordDao = new ResetPasswordDaoImpl();
-        IResetPasswordManager resetPasswordManager = new ResetPasswordManagerImpl(resetPasswordDao);
-        IPasswordPolicy passwordPolicy = new PasswordPolicy();
+        IResetPasswordDao resetPasswordDao = ResetPasswordDaoFactory.instance().resetPasswordDao();
+        IResetPasswordManager resetPasswordManager = ResetPasswordModelsFactory.instance().resetPasswordManager();
+        IPasswordPolicy passwordPolicy = ResetPasswordModelsFactory.instance().passwordPolicy();
 
         if (passwordPolicy.isValid(newPassword.getPassword())) {
             if (passwordPolicy.getHistoryConstraint().equals("true")) {
-                IPasswordHistoryManager passwordHistoryManager = new PasswordHistoryManagerImpl();
+                IPasswordHistoryManager passwordHistoryManager = ResetPasswordDaoFactory.instance().passwordHistoryManager();
                 if (passwordHistoryManager.passwordExists(newPassword.getBannerID(), newPassword.getPassword())) {
                     model.addAttribute("error",
                             "New password cannot be same as current or last" +
