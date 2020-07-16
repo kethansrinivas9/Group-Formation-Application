@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class StudentDaoImpl implements IStudentDao {
 	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+
 	private final ArrayList<Student> courseList = new ArrayList<Student>();
 	private String username;
 	private String courseName, courseId;
