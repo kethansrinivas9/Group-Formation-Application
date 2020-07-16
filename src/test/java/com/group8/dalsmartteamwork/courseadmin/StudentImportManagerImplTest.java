@@ -1,9 +1,9 @@
 package com.group8.dalsmartteamwork.courseadmin;
 
 import com.group8.dalsmartteamwork.accesscontrol.User;
-import com.group8.dalsmartteamwork.courseadmin.models.IStudentEnrollmentFactory;
+import com.group8.dalsmartteamwork.courseadmin.models.IStudentEnrollmentBuilder;
 import com.group8.dalsmartteamwork.courseadmin.models.StudentImportManagerImpl;
-import com.group8.dalsmartteamwork.register.models.IRegistrationFactory;
+import com.group8.dalsmartteamwork.register.models.IRegistrationBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,9 +28,9 @@ class StudentImportManagerImplTest {
 
     @Test
     void verifyRegistrationTest() {
-        final IRegistrationFactory iRegistrationFactory = new RegistrationFactoryMock();
-        final IStudentEnrollmentFactory iStudentEnrollmentFactory = new StudentEnrollmentFactoryMock();
-        StudentImportManagerImpl service = new StudentImportManagerImpl(COURSE_ID, iRegistrationFactory, iStudentEnrollmentFactory);;
+        final IRegistrationBuilder iRegistrationBuilder = new RegistrationBuilderMock();
+        final IStudentEnrollmentBuilder iStudentEnrollmentBuilder = new StudentEnrollmentBuilderMock();
+        StudentImportManagerImpl service = new StudentImportManagerImpl(COURSE_ID, iRegistrationBuilder, iStudentEnrollmentBuilder);;
         List<Boolean> result = Arrays.asList(false, true);
         assertEquals(service.verifyRegistration(users), result);
     }

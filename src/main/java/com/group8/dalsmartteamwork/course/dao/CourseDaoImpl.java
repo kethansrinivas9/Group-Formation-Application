@@ -20,7 +20,7 @@ public class CourseDaoImpl implements ICourseDao {
             storedProcedure = new CallStoredProcedure("spGetCourse(?)");
             storedProcedure.setParameter(1, courseID);
             rs = storedProcedure.executeWithResults();
-            while (rs.next()) {
+            if (rs.next()) {
                 return true;
             }
         } catch (Exception exception) {

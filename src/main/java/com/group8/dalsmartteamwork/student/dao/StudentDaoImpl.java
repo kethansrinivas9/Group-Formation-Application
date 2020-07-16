@@ -14,7 +14,6 @@ public class StudentDaoImpl implements IStudentDao {
 
     private final ArrayList<Student> courseList = new ArrayList<Student>();
     private String username;
-    private String courseName, courseId;
 
     @Override
     public ArrayList<Student> displayCourses() {
@@ -28,11 +27,10 @@ public class StudentDaoImpl implements IStudentDao {
             resultSet = procedure.executeWithResults();
             LOGGER.info("Fetched courses of student with BannerID: " + username);
             while (resultSet.next()) {
-                courseId = resultSet.getString(1);
-                courseName = resultSet.getString(2);
+                String courseId = resultSet.getString(1);
+                String courseName = resultSet.getString(2);
                 courseList.add(new Student(courseId, courseName));
             }
-
         } catch (Exception e) {
             LOGGER.error("Exception occurred while fetching courses for BannerID: " + username, e);
         } finally {

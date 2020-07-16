@@ -33,7 +33,9 @@ public class UserManagerDaoImpl implements IUserManagerDao {
         } catch (Exception e) {
             LOGGER.error("Exception occurred while fetching list of non-admin users from the Database. ", e);
         } finally {
-            storedProcedure.cleanup();
+            if(null != storedProcedure) {
+                storedProcedure.cleanup();
+            }
         }
         return nonAdminUsersList;
     }
@@ -52,7 +54,9 @@ public class UserManagerDaoImpl implements IUserManagerDao {
         } catch (Exception e) {
             LOGGER.error("Exception occurred while fetching course instructor of course from the Database. ", e);
         } finally {
-            storedProcedure.cleanup();
+            if(null != storedProcedure) {
+                storedProcedure.cleanup();
+            }
         }
         return bannerID;
     }
@@ -85,7 +89,9 @@ public class UserManagerDaoImpl implements IUserManagerDao {
         } catch (Exception e) {
             LOGGER.error("Exception occurred while fetching list of guests and instructors from the Database. ", e);
         } finally {
-            storedProcedure.cleanup();
+            if(null != storedProcedure) {
+                storedProcedure.cleanup();
+            }
         }
         return guestsAndInstructorsList;
     }

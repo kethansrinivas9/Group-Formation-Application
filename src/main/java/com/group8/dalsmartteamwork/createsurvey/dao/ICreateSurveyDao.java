@@ -4,7 +4,7 @@ import com.group8.dalsmartteamwork.course.Course;
 import com.group8.dalsmartteamwork.questions.Question;
 import java.util.List;
 
-public interface CreateSurveyDao {
+public interface ICreateSurveyDao {
 
     List<Course> displayListOfCourses(String BannerID);
 

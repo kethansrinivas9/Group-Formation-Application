@@ -2,7 +2,7 @@ package com.group8.dalsmartteamwork.register;
 
 import com.group8.dalsmartteamwork.accesscontrol.User;
 import com.group8.dalsmartteamwork.register.dao.RegistrationDaoImpl;
-import com.group8.dalsmartteamwork.register.models.IRegistrationFactory;
+import com.group8.dalsmartteamwork.register.models.IRegistrationBuilder;
 import com.group8.dalsmartteamwork.register.models.IRegistrationModel;
 import com.group8.dalsmartteamwork.register.models.RegistrationModelImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,8 +21,8 @@ class RegistrationModelImplTest {
 
     @BeforeEach
     void setup() {
-        IRegistrationFactory iRegistrationFactory = new RegistrationFactoryMock(existingUser, newUserSuccess, newUserFail);
-        service = new RegistrationModelImpl(iRegistrationFactory);
+        IRegistrationBuilder iRegistrationBuilder = new RegistrationBuilderMock(existingUser, newUserSuccess, newUserFail);
+        service = new RegistrationModelImpl(iRegistrationBuilder);
     }
 
     @Test

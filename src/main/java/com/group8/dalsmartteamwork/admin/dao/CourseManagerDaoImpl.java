@@ -64,7 +64,9 @@ public class CourseManagerDaoImpl implements ICourseManagerDao {
         } catch (Exception e) {
             LOGGER.error("Exception occurred while adding new course to the Database. ", e);
         } finally {
-            storedProcedure.cleanup();
+            if(null != storedProcedure){
+                storedProcedure.cleanup();
+            }
         }
         return false;
     }
@@ -101,7 +103,9 @@ public class CourseManagerDaoImpl implements ICourseManagerDao {
         } catch (Exception e) {
             LOGGER.error("Exception occurred while updating course in the Database. ", e);
         } finally {
-            storedProcedure.cleanup();
+            if(null != storedProcedure){
+                storedProcedure.cleanup();
+            }
         }
         return false;
     }
@@ -118,7 +122,9 @@ public class CourseManagerDaoImpl implements ICourseManagerDao {
         } catch (Exception e) {
             LOGGER.error("Exception occurred while deleting course in the Database. ", e);
         } finally {
-            storedProcedure.cleanup();
+            if(null != storedProcedure) {
+                storedProcedure.cleanup();
+            }
         }
         return false;
     }

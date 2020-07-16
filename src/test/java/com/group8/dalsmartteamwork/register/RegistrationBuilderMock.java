@@ -1,35 +1,40 @@
-package com.group8.dalsmartteamwork.courseadmin;
+package com.group8.dalsmartteamwork.register;
 
 import com.group8.dalsmartteamwork.accesscontrol.User;
 import com.group8.dalsmartteamwork.login.model.Encryption;
 import com.group8.dalsmartteamwork.login.model.IEncryption;
 import com.group8.dalsmartteamwork.register.dao.IRegistrationDao;
 import com.group8.dalsmartteamwork.register.dao.RegistrationDaoImpl;
-import com.group8.dalsmartteamwork.register.models.IRegistrationFactory;
+import com.group8.dalsmartteamwork.register.models.IRegistrationBuilder;
 import com.group8.dalsmartteamwork.resetpassword.models.IMail;
-import com.group8.dalsmartteamwork.resetpassword.models.Mail;
 
 import static org.mockito.Mockito.*;
 
-public class RegistrationFactoryMock implements IRegistrationFactory {
-    private final User existingUser = new User("B00000000", "fName", "lName", "email@email.com", "pwd");
-    private final User newUser = new User("B1111111", "fName", "lName", "email@email.com", "pwd");
+public class RegistrationBuilderMock implements IRegistrationBuilder {
+    private User existingUser;
+    private User newUserSuccess;
+    private User newUserFail;
+
+    public RegistrationBuilderMock(User existingUser, User newUserSuccess, User newUserFail){
+        this.existingUser = existingUser;
+        this.newUserSuccess = newUserSuccess;
+        this.newUserFail = newUserFail;
+    }
 
     @Override
     public IRegistrationDao getRegistrationDaoObject() {
         IRegistrationDao iRegistrationDao = mock(RegistrationDaoImpl.class);
-        when(iRegistrationDao.isUserInDb(existingUser.getId())).thenReturn(true);
-        when(iRegistrationDao.isUserInDb(newUser.getId())).thenReturn(false);
+        when(iRegistrationDao.addGuestRoleToUser(newUserSuccess.getId())).thenReturn(true);
         when(iRegistrationDao.addUserToDb(existingUser)).thenReturn(false);
-        when(iRegistrationDao.addUserToDb(newUser)).thenReturn(true);
+        when(iRegistrationDao.addUserToDb(newUserFail)).thenReturn(true);
+        when(iRegistrationDao.addGuestRoleToUser(newUserFail.getId())).thenReturn(false);
+        when(iRegistrationDao.addUserToDb(newUserSuccess)).thenReturn(true);
         return iRegistrationDao;
     }
 
     @Override
     public IMail getMailObject() {
-        IMail iMail = mock(Mail.class);
-        when(iMail.sendEmail(anyString(), anyString(), anyString())).thenReturn(true);
-        return iMail;
+        return null;
     }
 
     @Override
@@ -40,3 +45,4 @@ public class RegistrationFactoryMock implements IRegistrationFactory {
         return iEncryption;
     }
 }
+

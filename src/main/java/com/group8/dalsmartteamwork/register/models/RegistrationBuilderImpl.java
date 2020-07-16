@@ -7,7 +7,7 @@ import com.group8.dalsmartteamwork.register.dao.RegistrationDaoImpl;
 import com.group8.dalsmartteamwork.resetpassword.models.IMail;
 import com.group8.dalsmartteamwork.resetpassword.models.Mail;
 
-public class RegistrationFactoryImpl implements IRegistrationFactory {
+public class RegistrationBuilderImpl implements IRegistrationBuilder {
 
     @Override
     public IRegistrationDao getRegistrationDaoObject() {

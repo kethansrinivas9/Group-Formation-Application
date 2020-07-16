@@ -23,7 +23,7 @@ public class CourseInstructorManagerImpl implements ICourseInstructorManager {
 		List<User> currentTAs = new ArrayList<>();
 		try {
 			currentTAs = courseDao.getCurrentTAs(courseID);
-			LOGGER.info(String.format("Current TAs fetched. CourseID: %s", courseID));
+			LOGGER.info(String.format("Fetched TAs of the course with CourseID: %s", courseID));
 		} catch (SQLException exception) {
 			LOGGER.error("Exception occurred while fetching current TAs in course. ", exception);
 		}
@@ -35,7 +35,7 @@ public class CourseInstructorManagerImpl implements ICourseInstructorManager {
 		List<User> currentStudents = new ArrayList<>();
 		try {
 			currentStudents = courseDao.getCurrentStudents(courseID);
-			LOGGER.info(String.format("Current students fetched. CourseID: %s", courseID));
+			LOGGER.info(String.format("Fetched students enrolled to the course with CourseID: %s", courseID));
 		} catch (SQLException exception) {
 			LOGGER.error("Exception occurred while fetching current students in course. ", exception);
 		}
@@ -46,6 +46,7 @@ public class CourseInstructorManagerImpl implements ICourseInstructorManager {
 	public Boolean courseExists(int courseID) {
 		try {
 			if (courseDao.courseExists(courseID)) {
+				LOGGER.info(String.format("Course with the CourseID: %d exists", courseID));
 				return true;
 			}
 		} catch (SQLException exception) {
@@ -59,7 +60,7 @@ public class CourseInstructorManagerImpl implements ICourseInstructorManager {
 		List<User> eligibleTAs = new ArrayList<>();
 		try {
 			eligibleTAs = courseDao.getUsersForTA(courseID);
-			LOGGER.info(String.format("Eligible TAs fetched. CourseID: %s", courseID));
+			LOGGER.info(String.format("Fetched Eligible TAs. CourseID: %s", courseID));
 		} catch (SQLException exception) {
 			LOGGER.error("Exception occurred while fetching eligible TAs for course.", exception);
 		}

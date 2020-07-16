@@ -5,6 +5,6 @@ import com.group8.dalsmartteamwork.courseadmin.Pair;
 
 import java.util.List;
 
-public interface MakePairService {
+public interface IMakePairService {
     List<Pair<User, Boolean>> getUserDetails(List<User> users, List<Boolean> status);
 }

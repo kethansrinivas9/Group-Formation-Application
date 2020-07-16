@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateSurveyDaoImpl implements CreateSurveyDao {
+public class CreateSurveyDaoImpl implements ICreateSurveyDao {
     public int published;
 
     @Override

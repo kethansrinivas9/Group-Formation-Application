@@ -12,9 +12,9 @@ public class RegistrationModelImpl implements IRegistrationModel {
     private final IRegistrationDao iRegistrationDao;
     private final IEncryption iEncryption;
 
-    public RegistrationModelImpl(IRegistrationFactory iRegistrationFactory) {
-        iRegistrationDao = iRegistrationFactory.getRegistrationDaoObject();
-        iEncryption = iRegistrationFactory.getEncryptionObject();
+    public RegistrationModelImpl(IRegistrationBuilder iRegistrationBuilder) {
+        iRegistrationDao = iRegistrationBuilder.getRegistrationDaoObject();
+        iEncryption = iRegistrationBuilder.getEncryptionObject();
     }
 
     @Override
@@ -25,7 +25,7 @@ public class RegistrationModelImpl implements IRegistrationModel {
             Boolean addGuestRoleStatus = iRegistrationDao.addGuestRoleToUser(user.getId());
             return createUserStatus && addGuestRoleStatus;
         } catch (Exception e) {
-            LOGGER.error("Exception occerred while trying to register user. ", e);
+            LOGGER.error("Exception occurred while trying to register user. ", e);
             return false;
         }
     }

@@ -2,20 +2,20 @@ package com.group8.dalsmartteamwork.createsurvey.model;
 
 import java.util.List;
 
-import com.group8.dalsmartteamwork.createsurvey.dao.CreateSurveyTADao;
+import com.group8.dalsmartteamwork.createsurvey.dao.ICreateSurveyTADao;
 import com.group8.dalsmartteamwork.questions.Question;
 
 public class CreateSurveyTAImpl implements CreateSurveyTA {
-    private final CreateSurveyTADao createSurveyTADao;
+    private final ICreateSurveyTADao iCreateSurveyTADao;
 
-    public CreateSurveyTAImpl(CreateSurveyTADao createSurveyTADao) {
-        this.createSurveyTADao = createSurveyTADao;
+    public CreateSurveyTAImpl(ICreateSurveyTADao iCreateSurveyTADao) {
+        this.iCreateSurveyTADao = iCreateSurveyTADao;
     }
     
 
     @Override
     public List<Question> displayQuestionsTA(String BannerID, int courseID) {
-        return createSurveyTADao.displayQuestionsTA(BannerID, courseID);
+        return iCreateSurveyTADao.displayQuestionsTA(BannerID, courseID);
     }
     
 }

@@ -6,7 +6,7 @@ import com.group8.dalsmartteamwork.courseadmin.Pair;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MakePairServiceImpl implements MakePairService {
+public class MakePairServiceImpl implements IMakePairService {
 
     @Override
     public List<Pair<User, Boolean>> getUserDetails(List<User> users, List<Boolean> status) {

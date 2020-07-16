@@ -5,7 +5,7 @@ import com.group8.dalsmartteamwork.login.model.IEncryption;
 import com.group8.dalsmartteamwork.register.dao.IRegistrationDao;
 import com.group8.dalsmartteamwork.resetpassword.models.IMail;
 
-public interface IRegistrationFactory {
+public interface IRegistrationBuilder {
     IRegistrationDao getRegistrationDaoObject();
     IMail getMailObject();
     IEncryption getEncryptionObject();

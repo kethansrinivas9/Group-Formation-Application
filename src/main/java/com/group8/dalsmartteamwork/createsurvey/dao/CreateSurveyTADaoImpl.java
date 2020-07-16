@@ -6,7 +6,7 @@ import java.util.List;
 import com.group8.dalsmartteamwork.database.CallStoredProcedure;
 import com.group8.dalsmartteamwork.questions.Question;
 
-public class CreateSurveyTADaoImpl implements CreateSurveyTADao {
+public class CreateSurveyTADaoImpl implements ICreateSurveyTADao {
     
     @Override
     public List<Question> displayQuestionsTA(String BannerID,int courseID) {
@@ -15,11 +15,9 @@ public class CreateSurveyTADaoImpl implements CreateSurveyTADao {
         ResultSet resultSet;
         try {
             procedure = new CallStoredProcedure("spDisplayQuestionsToTA(?,?)");
-            
             procedure.setParameter(1, courseID);
             procedure.setParameter(2, BannerID);
             resultSet = procedure.executeWithResults();
-        
             while (resultSet.next()) {
                 int ID = resultSet.getInt(1);
                 String questionText = resultSet.getString(2);

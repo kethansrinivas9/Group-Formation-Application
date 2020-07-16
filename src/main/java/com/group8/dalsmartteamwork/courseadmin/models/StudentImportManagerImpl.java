@@ -4,7 +4,7 @@ import com.group8.dalsmartteamwork.accesscontrol.User;
 import com.group8.dalsmartteamwork.courseadmin.dao.IStudentEnrollmentDao;
 import com.group8.dalsmartteamwork.login.model.IEncryption;
 import com.group8.dalsmartteamwork.register.dao.IRegistrationDao;
-import com.group8.dalsmartteamwork.register.models.IRegistrationFactory;
+import com.group8.dalsmartteamwork.register.models.IRegistrationBuilder;
 import com.group8.dalsmartteamwork.resetpassword.models.IMail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,13 +21,13 @@ public class StudentImportManagerImpl implements IStudentImportManager {
     private final IPasswordGenerator passwordGenerator;
     private final int courseId;
 
-    public StudentImportManagerImpl(int courseId, IRegistrationFactory iRegistrationFactory, IStudentEnrollmentFactory iStudentEnrollmentFactory) {
+    public StudentImportManagerImpl(int courseId, IRegistrationBuilder iRegistrationBuilder, IStudentEnrollmentBuilder iStudentEnrollmentBuilder) {
         this.courseId = courseId;
-        registrationDao = iRegistrationFactory.getRegistrationDaoObject();
-        mail = iRegistrationFactory.getMailObject();
-        encryption = iRegistrationFactory.getEncryptionObject();
-        studentEnrollmentDao = iStudentEnrollmentFactory.getStudentEnrollmentDaoObject();
-        passwordGenerator = iStudentEnrollmentFactory.getPasswordGeneratorObject();
+        registrationDao = iRegistrationBuilder.getRegistrationDaoObject();
+        mail = iRegistrationBuilder.getMailObject();
+        encryption = iRegistrationBuilder.getEncryptionObject();
+        studentEnrollmentDao = iStudentEnrollmentBuilder.getStudentEnrollmentDaoObject();
+        passwordGenerator = iStudentEnrollmentBuilder.getPasswordGeneratorObject();
     }
 
     @Override
