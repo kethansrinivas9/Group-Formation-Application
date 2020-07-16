@@ -34,8 +34,9 @@ public class SignUpController {
 
 		IPasswordPolicy passwordPolicy = new PasswordPolicy();
 		if (passwordPolicy.isValid(user.getPassword())) {
-			LOGGER.warn("The entered password violates the password policy.");
+			LOGGER.info("Entered password for registration is valid for user with BannerID: " + user.getId());
 		} else {
+			LOGGER.warn("The entered password violates the password policy.");
 			model.addAttribute("errorMessages", passwordPolicy.generateErrorMessage());
 			model.addAttribute("user", new User());
 			return "register";

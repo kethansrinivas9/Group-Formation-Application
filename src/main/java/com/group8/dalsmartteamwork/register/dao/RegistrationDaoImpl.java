@@ -22,7 +22,6 @@ public class RegistrationDaoImpl implements IRegistrationDao {
             procedure = new CallStoredProcedure("spCheckIfUserExists(?)");
             procedure.setParameter(1, id);
             resultSet = procedure.executeWithResults();
-            LOGGER.info("Fetched information of user with BannerID: " + id);
             if (resultSet.next()) {
                 return true;
             }
