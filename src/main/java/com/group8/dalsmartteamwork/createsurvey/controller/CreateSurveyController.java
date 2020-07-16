@@ -43,7 +43,7 @@ public class CreateSurveyController {
         Boolean status = createSurvey.checkIfSurveyCreated(course.getCourseID());
         if (status != true) {
             redirectAttributes.addFlashAttribute("message", "Survey already exists");
-            return "redirect:/questionManager";
+            return "redirect:/instructor";
         }
         return "redirect:/surveyPage";
     }
@@ -59,18 +59,32 @@ public class CreateSurveyController {
         return "surveyPage";
     }
 
-    @RequestMapping(value = "/surveyPage", method = RequestMethod.POST)
-    public String publishSurvey(@RequestParam("question") List<Integer> values, Principal principal, Model model,
+    @RequestMapping(value = "/surveyPage", method = RequestMethod.POST, params="action=save")
+    public String saveQuestion(@RequestParam("question") List<Integer> values, Principal principal, Model model,
             RedirectAttributes redirectAttributes) {
         CreateSurveyDao createSurveyDao = new CreateSurveyDaoImpl();
         CreateSurvey createSurvey = new CreateSurveyImpl(createSurveyDao);
-        Boolean status = createSurvey.addQuestionToSurvey(courseID, values);
+        Boolean status = createSurvey.saveQuestions(courseID, values);
         if (status != true) {
-            redirectAttributes.addFlashAttribute("message", "Survey couldn't be added");
-            return "redirect:/questionManager";
+            redirectAttributes.addFlashAttribute("message", "Questions couldn't be added");
+            return "redirect:/instructor";
+        }
+        redirectAttributes.addFlashAttribute("message", "Questions saved");
+        return "redirect:/instructor";
+    }
+
+    @RequestMapping(value = "/surveyPage", method = RequestMethod.POST, params="action=publish")
+    public String publishSurvey(Principal principal, Model model,
+            RedirectAttributes redirectAttributes) {
+        CreateSurveyDao createSurveyDao = new CreateSurveyDaoImpl();
+        CreateSurvey createSurvey = new CreateSurveyImpl(createSurveyDao);
+        Boolean status = createSurvey.publishSurvey(courseID);
+        if (status != true) {
+            redirectAttributes.addFlashAttribute("message", "Add questions to publish");
+            return "redirect:/surveyPage";
         }
         redirectAttributes.addFlashAttribute("message", "Survey published");
-        return "redirect:/questionManager";
+        return "redirect:/instructor";
     }
 
 }
