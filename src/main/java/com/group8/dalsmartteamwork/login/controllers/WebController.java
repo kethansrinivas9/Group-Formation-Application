@@ -15,39 +15,39 @@ import java.io.IOException;
 
 @Controller
 public class WebController {
-	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
-	public String username;
+    public String username;
 
-	@GetMapping("/login")
-	public String getLoginPage(Model model) {
-		model.addAttribute("user", new User());
-		return "login";
-	}
+    @GetMapping("/login")
+    public String getLoginPage(Model model) {
+        model.addAttribute("user", new User());
+        return "login";
+    }
 
-	@PostMapping("/login")
-	public String displayLoginResult(@ModelAttribute("user") User user1) {
-		LOGGER.info("User Logged in. BannerID: " + user1.getId());
-		return "login_success";
-	}
+    @PostMapping("/login")
+    public String displayLoginResult(@ModelAttribute("user") User user1) {
+        LOGGER.info("User Logged in. BannerID: " + user1.getId());
+        return "login_success";
+    }
 
-	@GetMapping("/loginError")
-	public String displayErrorPage() {
-		return "loginError";
-	}
+    @GetMapping("/loginError")
+    public String displayErrorPage() {
+        return "loginError";
+    }
 
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public void displayLogout(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		request.getSession().invalidate();
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public void displayLogout(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getSession().invalidate();
         Answer.getInstance().destroy();
-		response.sendRedirect("/");
-	}
+        response.sendRedirect("/");
+    }
 
-	@GetMapping("guest")
-	public String getGuestPage(HttpServletRequest request, Model model) {
-		username = (String) request.getSession().getAttribute("username");
-		model.addAttribute("user", username);
-		return "guestPage";
-	}
+    @GetMapping("guest")
+    public String getGuestPage(HttpServletRequest request, Model model) {
+        username = (String) request.getSession().getAttribute("username");
+        model.addAttribute("user", username);
+        return "guestPage";
+    }
 }

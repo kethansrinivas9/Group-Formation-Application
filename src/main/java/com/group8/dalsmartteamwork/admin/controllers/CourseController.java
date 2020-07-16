@@ -21,62 +21,62 @@ import java.util.List;
 
 @Controller
 public class CourseController {
-	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
-	@GetMapping(value = "/create-course")
-	public String viewCourseCreationPage(Model model) {
-		IUserManagerDao iUserManagerDao = new UserManagerDaoImpl();
-		IUserManager iUserManager = new UserManagerImpl(iUserManagerDao);
+    @GetMapping(value = "/create-course")
+    public String viewCourseCreationPage(Model model) {
+        IUserManagerDao iUserManagerDao = new UserManagerDaoImpl();
+        IUserManager iUserManager = new UserManagerImpl(iUserManagerDao);
 
-		model.addAttribute(new Course());
-		List<String> listOfGuestsOrInstructors = iUserManager.getUsersWhoAreGuestsOrInstructors("");
-		model.addAttribute("listOfInstructors", listOfGuestsOrInstructors);
-		return "add-course";
-	}
+        model.addAttribute(new Course());
+        List<String> listOfGuestsOrInstructors = iUserManager.getUsersWhoAreGuestsOrInstructors("");
+        model.addAttribute("listOfInstructors", listOfGuestsOrInstructors);
+        return "add-course";
+    }
 
-	@PostMapping(value = "/create-course")
-	public String createCourse(@ModelAttribute Course course, Model model) {
-		ICourseManagerDao iCourseManagerDao = new CourseManagerDaoImpl();
-		ICourseManager iCourseManager = new CourseManagerImpl(iCourseManagerDao);
+    @PostMapping(value = "/create-course")
+    public String createCourse(@ModelAttribute Course course, Model model) {
+        ICourseManagerDao iCourseManagerDao = new CourseManagerDaoImpl();
+        ICourseManager iCourseManager = new CourseManagerImpl(iCourseManagerDao);
 
-		if (iCourseManager.createNewCourse(course)) {
-			model.addAttribute("courses", iCourseManager.getAllCourses());
-			return "redirect:/admin";
-		} else {
-			LOGGER.warn("Failed to add course. Redirected to add course page");
-			return "add-course";
-		}
-	}
+        if (iCourseManager.createNewCourse(course)) {
+            model.addAttribute("courses", iCourseManager.getAllCourses());
+            return "redirect:/admin";
+        } else {
+            LOGGER.warn("Failed to add course. Redirected to add course page");
+            return "add-course";
+        }
+    }
 
-	@PostMapping(value = "/edit-course")
-	public String viewEditCoursePage(String courseName, String originalCourseID, Model model) {
-		IUserManagerDao iUserManagerDao = new UserManagerDaoImpl();
-		IUserManager iUserManager = new UserManagerImpl(iUserManagerDao);
-		String instructorID = iUserManager.getCourseInstructor(originalCourseID);
+    @PostMapping(value = "/edit-course")
+    public String viewEditCoursePage(String courseName, String originalCourseID, Model model) {
+        IUserManagerDao iUserManagerDao = new UserManagerDaoImpl();
+        IUserManager iUserManager = new UserManagerImpl(iUserManagerDao);
+        String instructorID = iUserManager.getCourseInstructor(originalCourseID);
 
-		model.addAttribute("course", new Course(Integer.parseInt(originalCourseID), courseName, instructorID));
-		List<String> listOfGuestsOrInstructors = iUserManager.getUsersWhoAreGuestsOrInstructors(originalCourseID);
-		model.addAttribute("listOfInstructors", listOfGuestsOrInstructors);
-		return "edit-course";
-	}
+        model.addAttribute("course", new Course(Integer.parseInt(originalCourseID), courseName, instructorID));
+        List<String> listOfGuestsOrInstructors = iUserManager.getUsersWhoAreGuestsOrInstructors(originalCourseID);
+        model.addAttribute("listOfInstructors", listOfGuestsOrInstructors);
+        return "edit-course";
+    }
 
-	@PostMapping(value = "/update-course")
-	public String editCourse(String courseName, String courseID, String instructorID, String originalCourseID, Model model) {
-		ICourseManagerDao iCourseManagerDao = new CourseManagerDaoImpl();
-		ICourseManager iCourseManager = new CourseManagerImpl(iCourseManagerDao);
+    @PostMapping(value = "/update-course")
+    public String editCourse(String courseName, String courseID, String instructorID, String originalCourseID, Model model) {
+        ICourseManagerDao iCourseManagerDao = new CourseManagerDaoImpl();
+        ICourseManager iCourseManager = new CourseManagerImpl(iCourseManagerDao);
 
-		iCourseManager.updateCourse(courseName, Integer.parseInt(courseID), instructorID, Integer.parseInt(originalCourseID));
-		model.addAttribute("courses", iCourseManager.getAllCourses());
-		return "redirect:/admin";
-	}
+        iCourseManager.updateCourse(courseName, Integer.parseInt(courseID), instructorID, Integer.parseInt(originalCourseID));
+        model.addAttribute("courses", iCourseManager.getAllCourses());
+        return "redirect:/admin";
+    }
 
-	@PostMapping(value = "/delete-course")
-	public String deleteCourse(String courseID, Model model) {
-		ICourseManagerDao iCourseManagerDao = new CourseManagerDaoImpl();
-		ICourseManager iCourseManager = new CourseManagerImpl(iCourseManagerDao);
+    @PostMapping(value = "/delete-course")
+    public String deleteCourse(String courseID, Model model) {
+        ICourseManagerDao iCourseManagerDao = new CourseManagerDaoImpl();
+        ICourseManager iCourseManager = new CourseManagerImpl(iCourseManagerDao);
 
-		iCourseManager.deleteCourse(courseID);
-		model.addAttribute("courses", iCourseManager.getAllCourses());
-		return "redirect:/admin";
-	}
+        iCourseManager.deleteCourse(courseID);
+        model.addAttribute("courses", iCourseManager.getAllCourses());
+        return "redirect:/admin";
+    }
 }
