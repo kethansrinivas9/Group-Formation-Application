@@ -8,6 +8,7 @@ import com.group8.dalsmartteamwork.student.dao.ISurveyManagerDao;
 import com.group8.dalsmartteamwork.student.dao.StudentDaoImpl;
 import com.group8.dalsmartteamwork.student.dao.SurveyManagerDaoImpl;
 import com.group8.dalsmartteamwork.student.models.*;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.ui.Model;
@@ -25,11 +26,13 @@ import static org.mockito.Mockito.*;
 class StudentCoursesControllerTest {
     private ISurveyManagerDao iSurveyManagerDao;
     private ISurveyHandler iSurveyHandler;
+    private Answer answer;
 
     @BeforeEach
     void setup(){
         iSurveyManagerDao = mock(SurveyManagerDaoImpl.class);
         iSurveyHandler = mock(SurveyHandlerImpl.class);
+        answer = Answer.getInstance();
     }
 
     @Test
@@ -44,17 +47,22 @@ class StudentCoursesControllerTest {
     void getCoursePageTest(){
         iSurveyHandler = new SurveyHandlerImpl(iSurveyManagerDao);
         when(iSurveyHandler.getQuestions(anyInt())).thenReturn(null);
-        Answer answer = Answer.getInstance();
+        answer = Answer.getInstance();
         assertEquals(0, answer.getQuestions().size());
     }
 
     @Test
     void saveSurveyResponsesTest(){
-        HttpServletRequest request = mock(HttpServletRequest.class);
         IResponseHandler iResponseHandler = mock(ResponseHandler.class);
-        Answer answer = Answer.getInstance();
+        answer.destroy();
+        answer = Answer.getInstance();
         doNothing().when(iResponseHandler).getResponses(any(), any());
         Map<Integer, List<String>> answers = answer.getAnswers();
         assertEquals(0, answers.size());
+    }
+
+    @AfterEach
+    void destroy(){
+        answer.destroy();
     }
 }

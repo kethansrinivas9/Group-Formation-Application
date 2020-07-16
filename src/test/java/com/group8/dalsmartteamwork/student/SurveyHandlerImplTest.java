@@ -49,7 +49,7 @@ class SurveyHandlerImplTest {
 
     @Test
     void saveResponsesTest() {
-        doNothing().when(iSurveyManagerDao).saveResponses(1, "TEST", "TEST", 1);
+        when(iSurveyManagerDao.saveResponses(1, "TEST", "TEST", 1)).thenReturn(true);
         iSurveyHandler = new SurveyHandlerImpl(iSurveyManagerDao);
         Map<Integer, List<String>> answers = new HashMap<>();
         iSurveyHandler.saveResponses(answers, "TEST", 1);
