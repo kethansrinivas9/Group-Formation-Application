@@ -4,6 +4,8 @@ import com.group8.dalsmartteamwork.course.dao.CourseDaoImpl;
 import com.group8.dalsmartteamwork.course.dao.ICourseDao;
 import com.group8.dalsmartteamwork.course.models.CourseInstructorManagerImpl;
 import com.group8.dalsmartteamwork.course.models.ICourseInstructorManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class InstructorController {
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+
     @GetMapping("/instructor")
     public String getInstructor() {
         return "instructor";
@@ -32,8 +36,10 @@ public class InstructorController {
             model.addAttribute("currentTAList", courseInstructorManager.getCurrentTAs(courseid));
             model.addAttribute("currentStudentList", courseInstructorManager.getCurrentStudents(courseid));
             return "instructorCourseHome";
+        } else {
+            LOGGER.warn("Trying to access course that does not exist. CourseID: " + courseid);
+            return "badrequest";
         }
-        return "badrequest";
     }
 
     @PostMapping("/add-ta")
@@ -53,7 +59,9 @@ public class InstructorController {
         if (courseInstructorManager.addTAtoCourse(bannerID, courseID)) {
             model.addAttribute("courseid", courseID);
             return "successAddTA";
+        } else {
+            LOGGER.warn(String.format("Trying to add TA failed. CourseID: %s, BannerID: %s", courseID, bannerID));
+            return "badrequest";
         }
-        return "badrequest";
     }
 }

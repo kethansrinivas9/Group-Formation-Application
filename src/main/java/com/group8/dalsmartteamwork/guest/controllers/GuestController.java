@@ -12,7 +12,7 @@ import java.util.List;
 public class GuestController {
 
     @GetMapping("/viewallcourses")
-    public String viewAllCourszes(Model model) {
+    public String viewAllCourses(Model model) {
         List<Course> courses;
         GuestDaoImpl guestDao = new GuestDaoImpl();
         int courseID = 0;

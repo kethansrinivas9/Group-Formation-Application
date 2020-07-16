@@ -2,15 +2,11 @@ package com.group8.dalsmartteamwork.courseadmin.controllers;
 
 import com.group8.dalsmartteamwork.accesscontrol.User;
 import com.group8.dalsmartteamwork.courseadmin.Pair;
-import com.group8.dalsmartteamwork.courseadmin.dao.IStudentEnrollmentDao;
-import com.group8.dalsmartteamwork.courseadmin.dao.StudentEnrollmentDaoImpl;
 import com.group8.dalsmartteamwork.courseadmin.models.*;
-import com.group8.dalsmartteamwork.register.dao.IRegistrationDao;
-import com.group8.dalsmartteamwork.register.dao.RegistrationDaoImpl;
 import com.group8.dalsmartteamwork.register.models.IRegistrationFactory;
 import com.group8.dalsmartteamwork.register.models.RegistrationFactoryImpl;
-import com.group8.dalsmartteamwork.resetpassword.models.IMail;
-import com.group8.dalsmartteamwork.resetpassword.models.Mail;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +18,7 @@ import java.util.List;
 
 @Controller
 public class UploadController {
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     @PostMapping(value = "/import")
     public String getCourseAdminPage(@RequestParam(name = "course-id") int courseId, Model model) {
@@ -34,6 +31,7 @@ public class UploadController {
         if (file.isEmpty()) {
             model.addAttribute("courseId", courseId);
             model.addAttribute("message", "Please select a file to upload.");
+            LOGGER.warn("Empty CSV file imported");
             return "import-students";
         }
         try {
@@ -57,7 +55,7 @@ public class UploadController {
             return "import-students";
 
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while uploading CSV file for student import.", e);
             return "courseadmin";
         }
     }

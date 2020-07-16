@@ -1,5 +1,8 @@
 package com.group8.dalsmartteamwork.database;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -8,6 +11,7 @@ import java.sql.Statement;
 public class DbConnection {
     private static final String IGNORE_TIME_ZONE = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static DbConnection dbConnection;
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
     private String environment;
     private String user;
     private String password;
@@ -52,8 +56,7 @@ public class DbConnection {
                     this.password);
             this.statement = conn.createStatement();
         } catch (Exception e) {
-            // TODO: Add to Log
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while establishing database connection.", e);
             this.statement = null;
         }
     }
@@ -64,7 +67,7 @@ public class DbConnection {
                 conn.close();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while closing the database connection.", e);
         }
     }
 

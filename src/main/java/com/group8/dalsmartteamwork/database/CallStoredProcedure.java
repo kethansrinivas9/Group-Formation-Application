@@ -1,11 +1,16 @@
 package com.group8.dalsmartteamwork.database;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CallStoredProcedure {
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+
     private final String procedureName;
     private DbConnection dbConnection;
     private Connection connection;
@@ -29,8 +34,7 @@ public class CallStoredProcedure {
         try {
             statement = connection.prepareCall("{call " + procedureName + "}");
         } catch (SQLException e) {
-            e.printStackTrace();
-            //TODO: Add to Log
+            LOGGER.error("Exception occurred while creating a statement from the database connection.", e);
         }
 
     }
@@ -47,8 +51,7 @@ public class CallStoredProcedure {
                 dbConnection.closeConnection();
             }
         } catch (SQLException e) {
-            //TODO: Add to Log
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while cleaning up the database resources.", e);
         }
 
     }

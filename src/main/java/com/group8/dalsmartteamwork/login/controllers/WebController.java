@@ -1,6 +1,8 @@
 package com.group8.dalsmartteamwork.login.controllers;
 
 import com.group8.dalsmartteamwork.accesscontrol.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.group8.dalsmartteamwork.student.Answer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import java.io.IOException;
 
 @Controller
 public class WebController {
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     public String username;
 
@@ -24,6 +27,7 @@ public class WebController {
 
     @PostMapping("/login")
     public String displayLoginResult(@ModelAttribute("user") User user1) {
+        LOGGER.info("User Logged in. BannerID: " + user1.getId());
         return "login_success";
     }
 

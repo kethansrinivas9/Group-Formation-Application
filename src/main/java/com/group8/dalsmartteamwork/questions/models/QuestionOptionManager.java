@@ -4,10 +4,14 @@ import com.group8.dalsmartteamwork.accesscontrol.CurrentUser;
 import com.group8.dalsmartteamwork.questions.Option;
 import com.group8.dalsmartteamwork.questions.Question;
 import com.group8.dalsmartteamwork.questions.dao.IQuestionDao;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class QuestionOptionManager implements IQuestionOptionManager {
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+
     private final IQuestionDao questionDao;
 
     public QuestionOptionManager(IQuestionDao questionDao) {
@@ -34,6 +38,7 @@ public class QuestionOptionManager implements IQuestionOptionManager {
                 questionType = 4;
         }
         questionId = questionDao.addQuestionToDb(question, questionType, currentUser.getBannerId());
+        LOGGER.info("Question saved. QuestionID: " + question.getQuestionID());
         return questionId;
     }
 
@@ -43,6 +48,7 @@ public class QuestionOptionManager implements IQuestionOptionManager {
         for (Option option : options) {
             status = status && questionDao.addOptionToDb(option, questionId);
         }
+        LOGGER.info("Options saved for QuestionID: " + questionId);
         return status;
     }
 }

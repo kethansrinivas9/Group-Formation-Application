@@ -12,12 +12,8 @@ public class ResetToken implements IResetToken {
     @Override
     public String createToken() {
         StringBuilder tokenResult = new StringBuilder();
-        try {
-            for (int i = 0; i < 20; i++) {
-                tokenResult.append(getRandomChar());
-            }
-        } catch (Exception exception) {
-            exception.printStackTrace();
+        for (int i = 0; i < 20; i++) {
+            tokenResult.append(getRandomChar());
         }
         return tokenResult.toString();
     }
