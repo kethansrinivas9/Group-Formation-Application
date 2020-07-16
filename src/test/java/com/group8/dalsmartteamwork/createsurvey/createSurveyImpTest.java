@@ -17,7 +17,7 @@ import com.group8.dalsmartteamwork.questions.Question;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class createSurveyImpTest {
+public class CreateSurveyImpTest {
     private final CreateSurveyDao createSurveyDao = mock(CreateSurveyDaoImpl.class);
     private final List<Course> courseList = Arrays.asList(new Course(1,"java"));
     private final List<Question> questionList = Arrays.asList(new Question(1,"what is java"));

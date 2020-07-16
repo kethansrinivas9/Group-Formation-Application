@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class createSurveyTAController {
+public class CreateSurveyTAController {
     public Integer courseID;
     public List<Question> questions = new ArrayList<Question>();
 

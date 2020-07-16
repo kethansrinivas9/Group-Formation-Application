@@ -14,6 +14,7 @@ public class CourseTest {
         Course course = new Course(COURSE_ID);
         assertEquals(course.getCourseID(), COURSE_ID);
     }
+    
     @Test
     public void defaultConstructorWithTwoParametersTest() {
         Course course = new Course(COURSE_ID, COURSE_NAME);
