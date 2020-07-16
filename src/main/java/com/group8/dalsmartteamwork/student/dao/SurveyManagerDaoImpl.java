@@ -66,7 +66,7 @@ public class SurveyManagerDaoImpl implements ISurveyManagerDao {
     }
 
     @Override
-    public void saveResponses(int questionId, String response, String bannerId, int courseId) {
+    public Boolean saveResponses(int questionId, String response, String bannerId, int courseId) {
         CallStoredProcedure procedure = null;
         try {
             procedure = new CallStoredProcedure("spSaveResponse(?, ?, ?, ?)");
@@ -75,6 +75,7 @@ public class SurveyManagerDaoImpl implements ISurveyManagerDao {
             procedure.setParameter(3, bannerId);
             procedure.setParameter(4, courseId);
             procedure.execute();
+            return true;
         } catch (Exception e) {
             //TODO: Add to Log
             e.printStackTrace();
@@ -83,5 +84,6 @@ public class SurveyManagerDaoImpl implements ISurveyManagerDao {
                 procedure.cleanup();
             }
         }
+        return false;
     }
 }

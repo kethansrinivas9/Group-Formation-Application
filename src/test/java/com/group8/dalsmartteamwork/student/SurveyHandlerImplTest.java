@@ -30,16 +30,10 @@ class SurveyHandlerImplTest {
     @Test
     void getQuestionsTest() {
         List<IQuestionDetails> questionDetails = new ArrayList<>();
-        IQuestionDetails question1 = new QuestionDetails();
-        IQuestionDetails question2 = new QuestionDetails();
+        IQuestionDetails question1 = new QuestionDetails(1, "TEXT1", 1);
+        IQuestionDetails question2 = new QuestionDetails(2, "TEXT2", 2);
         List<IOption> options = new ArrayList<>();
         IOption option = new Option();
-        question1.setQuestionId(1);
-        question1.setText("TEXT1");
-        question1.setType(1);
-        question2.setQuestionId(2);
-        question2.setText("TEXT2");
-        question2.setType(2);
         questionDetails.add(question1);
         questionDetails.add(question2);
         option.setOptionId(1);

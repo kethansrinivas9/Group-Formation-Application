@@ -5,6 +5,14 @@ public class QuestionDetails implements IQuestionDetails {
     private String text;
     private int type;
 
+    public QuestionDetails() {}
+
+    public QuestionDetails(int questionId, String text, int type){
+        this.questionId = questionId;
+        this.text = text;
+        this.type = type;
+    }
+
     @Override
     public int getQuestionId() {
         return questionId;
