@@ -11,6 +11,8 @@ public interface CreateSurvey {
     boolean checkIfSurveyCreated(int courseID);
 
     List<Question> displayQuestions(String BannerID,int courseID);
+    
+    boolean saveQuestions(int courseID,List<Integer> questionID);
 
-    boolean addQuestionToSurvey(int courseID,List<Integer> questionID);
+    boolean publishSurvey(int courseID);
 }

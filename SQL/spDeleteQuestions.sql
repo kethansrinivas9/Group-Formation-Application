@@ -1,0 +1,10 @@
+DELIMITER$$
+
+CREATE DEFINER=`CSCI5308_8_DEVINT_USER`@`%` PROCEDURE `spDeleteQuestions`(
+    IN courseID int
+)
+BEGIN
+    DELETE FROM Survey WHERE Survey.CourseID = CourseID;
+END$$
+
+DELIMITER ;

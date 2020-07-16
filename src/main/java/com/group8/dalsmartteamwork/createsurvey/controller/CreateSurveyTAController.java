@@ -46,7 +46,7 @@ public class CreateSurveyTAController {
         Boolean status = createSurvey.checkIfSurveyCreated(course.getCourseID());
         if (status != true) {
             redirectAttributes.addFlashAttribute("message", "Survey already exists");
-            return "redirect:/questionManager";
+            return "redirect:/TApage";
         }
         return "redirect:/surveyPageTA";
     }
@@ -63,15 +63,15 @@ public class CreateSurveyTAController {
     }
 
     @RequestMapping(value = "/surveyPageTA", method = RequestMethod.POST)
-    public String publishSurvey(@RequestParam("question") List<Integer> values, Principal principal, Model model,
+    public String saveQuestions(@RequestParam("question") List<Integer> values, Principal principal, Model model,
             RedirectAttributes redirectAttributes) {
         CreateSurveyDaoImpl createSurveyDaoImpl = new CreateSurveyDaoImpl();
-        Boolean status = createSurveyDaoImpl.addQuestionToSurvey(courseID, values);
+        Boolean status = createSurveyDaoImpl.saveQuestions(courseID,values);
         if (status != true) {
-            redirectAttributes.addFlashAttribute("message", "Survey already exists");
+            redirectAttributes.addFlashAttribute("message", "Questions couldn't be added");
             return "redirect:/TApage";
         }
-        redirectAttributes.addFlashAttribute("message", "Survey published");
+        redirectAttributes.addFlashAttribute("message", "Questions saved");
         return "redirect:/TApage";
     }
 

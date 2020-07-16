@@ -12,6 +12,8 @@ public interface CreateSurveyDao {
 
     List<Question> displayQuestions(String BannerID,int courseID);
 
-    boolean addQuestionToSurvey(int courseID,List<Integer> questionID);
+    boolean saveQuestions(int courseID,List<Integer> questionID);
+
+    boolean publishSurvey(int courseID);
 
 }

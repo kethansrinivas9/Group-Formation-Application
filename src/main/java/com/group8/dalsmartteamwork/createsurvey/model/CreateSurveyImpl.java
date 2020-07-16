@@ -23,12 +23,18 @@ public class CreateSurveyImpl implements CreateSurvey {
     }
 
     @Override
-    public boolean addQuestionToSurvey(int courseID, List<Integer> questionID) {
-        return createSurveyDao.addQuestionToSurvey(courseID, questionID);
+    public boolean publishSurvey(int courseID) {
+        return createSurveyDao.publishSurvey(courseID);
+    }
+
+    @Override
+    public boolean saveQuestions(int courseID, List<Integer> questionID) {
+        return createSurveyDao.saveQuestions(courseID, questionID);
     }
 
     @Override
     public List<Course> displayListOfCourses(String BannerID) {
         return createSurveyDao.displayListOfCourses(BannerID);
     }
+
 }
