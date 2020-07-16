@@ -14,7 +14,8 @@ public class Answer {
     private Map<IQuestionDetails, List<IOption>> questions = new HashMap<>();
     private Map<Integer, List<String>> answers = new HashMap<>();
 
-    private Answer() {
+    Answer() {
+        answer = StudentFactory.instance().answer();
     }
 
     public static Answer getInstance() {
