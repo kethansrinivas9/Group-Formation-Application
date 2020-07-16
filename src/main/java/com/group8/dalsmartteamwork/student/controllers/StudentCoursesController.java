@@ -37,9 +37,11 @@ public class StudentCoursesController {
         ISurveyManagerDao iSurveyManagerDao = new SurveyManagerDaoImpl();
         ISurveyHandler iSurveyHandler = new SurveyHandlerImpl(iSurveyManagerDao);
         Map<IQuestionDetails, List<IOption>> questions = iSurveyHandler.getQuestions(courseId);
+        Boolean status = iSurveyHandler.getSurveyPublishStatus(courseId);
         Answer answer = Answer.getInstance();
         answer.setQuestions(questions);
         answer.setCourseId(courseId);
+        model.addAttribute("status", status);
         model.addAttribute("answer", answer);
         model.addAttribute("questions", questions);
         model.addAttribute("courseId", courseId);

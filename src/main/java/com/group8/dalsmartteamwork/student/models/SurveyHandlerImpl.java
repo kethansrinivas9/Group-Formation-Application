@@ -41,4 +41,9 @@ public class SurveyHandlerImpl implements ISurveyHandler {
         return status;
     }
 
+    @Override
+    public Boolean getSurveyPublishStatus(int courseId) {
+        return iSurveyManagerDao.getSurveyPublishStatus(courseId);
+    }
+
 }

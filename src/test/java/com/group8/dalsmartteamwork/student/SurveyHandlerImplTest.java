@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 class SurveyHandlerImplTest {
@@ -25,6 +26,7 @@ class SurveyHandlerImplTest {
     @BeforeEach
     void setup() {
         iSurveyManagerDao = mock(SurveyManagerDaoImpl.class);
+        iSurveyHandler = new SurveyHandlerImpl(iSurveyManagerDao);
     }
 
     @Test
@@ -42,9 +44,7 @@ class SurveyHandlerImplTest {
         options.add(option);
         when(iSurveyManagerDao.getSurveyQuestions(courseId)).thenReturn(questionDetails);
         when(iSurveyManagerDao.getQuestionOptions(2)).thenReturn(options);
-        iSurveyHandler = new SurveyHandlerImpl(iSurveyManagerDao);
         assertEquals(2, iSurveyHandler.getQuestions(courseId).size());
-
     }
 
     @Test
@@ -53,5 +53,11 @@ class SurveyHandlerImplTest {
         iSurveyHandler = new SurveyHandlerImpl(iSurveyManagerDao);
         Map<Integer, List<String>> answers = new HashMap<>();
         iSurveyHandler.saveResponses(answers, "TEST", 1);
+    }
+
+    @Test
+    void getSurveyPublishStatusTest(){
+        when(iSurveyManagerDao.getSurveyPublishStatus(courseId)).thenReturn(true);
+        assertTrue(iSurveyHandler.getSurveyPublishStatus(courseId));
     }
 }

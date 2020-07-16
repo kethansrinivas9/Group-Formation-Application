@@ -9,4 +9,5 @@ public interface ISurveyManagerDao {
     List<IQuestionDetails> getSurveyQuestions(int courseId);
     List<IOption> getQuestionOptions(int questionId);
     Boolean saveResponses(int questionId, String response, String bannerId, int courseId);
+    Boolean getSurveyPublishStatus(int courseId);
 }

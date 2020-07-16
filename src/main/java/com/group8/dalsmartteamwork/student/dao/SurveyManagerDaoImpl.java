@@ -86,4 +86,28 @@ public class SurveyManagerDaoImpl implements ISurveyManagerDao {
         }
         return false;
     }
+
+    @Override
+    public Boolean getSurveyPublishStatus(int courseId) {
+        CallStoredProcedure procedure = null;
+        ResultSet resultSet;
+        try {
+            procedure = new CallStoredProcedure("spGetSurveyPublishStatus(?)");
+            procedure.setParameter(1, courseId);
+            resultSet = procedure.executeWithResults();
+            while (resultSet.next()){
+                if(resultSet.getBoolean(1)){
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            //TODO: Add to Log
+            e.printStackTrace();
+        } finally {
+            if (null != procedure) {
+                procedure.cleanup();
+            }
+        }
+        return false;
+    }
 }

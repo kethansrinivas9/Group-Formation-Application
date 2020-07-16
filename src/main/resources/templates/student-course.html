@@ -14,7 +14,7 @@
     <h3 th:if="${courseId ne null}" th:text="${'Course ' + courseId}"></h3>
     <h5 th:if="${bannerId ne null}" th:text="${'Student ' + bannerId}"></h5>
 
-    <form th:action="@{/submit-survey}"  method="post">
+    <form th:if="${status == true}" th:action="@{/submit-survey}"  method="post">
         <table class="table table-sm" style="table-layout: fixed; padding: 20px" th:each="question, iQ: ${questions}">
             <tr>
                 <td th:text="${question.key.getText()}"></td>
