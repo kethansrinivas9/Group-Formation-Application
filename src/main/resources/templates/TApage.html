@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>front page</title>
+    <meta charset="UTF-8" content="text/html" http-equiv="Content-type"/>
+</head>
+
+<body>
+<div style="background-color:#337ab7; height:50px; color: black;">
+    <a href="/logout" style="float: right; color: black;">Logout</a>
+</div>
+
+<div>
+    <form method="get" style="text-align:center" th:action="@{/createSurveyPageTA}">
+        <h2>TA page</h2>
+        <button
+                style="background-color: cornflowerblue; box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"
+                type="submit">Create Survey
+        </button>
+    </form>
+    <form method="get" style="text-align:center" th:action="@{/viewallcourses}">
+        <button
+                style="background-color: cornflowerblue; box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"
+                type="submit">Courses
+        </button>
+    </form>
+</div>
+<div th:if="${message}" th:text="${message}"></div>
+</body>
+
+</html>

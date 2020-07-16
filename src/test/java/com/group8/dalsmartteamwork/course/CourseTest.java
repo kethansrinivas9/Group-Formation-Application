@@ -10,6 +10,12 @@ public class CourseTest {
     public static final String INSTRUCTOR_ID = "B00123456";
 
     @Test
+    public void defaultConstructorWithSingleParameterTest(){
+        Course course = new Course(COURSE_ID);
+        assertEquals(course.getCourseID(), COURSE_ID);
+    }
+    
+    @Test
     public void defaultConstructorWithTwoParametersTest() {
         Course course = new Course(COURSE_ID, COURSE_NAME);
         assertEquals(course.getCourseID(), COURSE_ID);

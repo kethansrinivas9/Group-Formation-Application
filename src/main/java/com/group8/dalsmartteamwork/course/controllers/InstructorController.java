@@ -18,6 +18,11 @@ public class InstructorController {
         return "instructor";
     }
 
+    @GetMapping("/TApage")
+    public String getTA() {
+        return "TApage";
+    }
+
     @GetMapping("/viewcourse/{courseid}")
     public String view(@PathVariable int courseid, Model model) {
         ICourseDao courseDao = new CourseDaoImpl();
