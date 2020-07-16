@@ -5,6 +5,8 @@ import com.group8.dalsmartteamwork.questionmanager.dao.SortDaoImpl;
 import com.group8.dalsmartteamwork.questionmanager.model.Sort;
 import com.group8.dalsmartteamwork.questionmanager.model.SortImpl;
 import com.group8.dalsmartteamwork.questions.Question;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,11 +16,12 @@ import java.util.List;
 
 @Controller
 public class SortController {
+	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
-    @GetMapping("/questionManager")
-    public String getInstructor() {
-        return "questionManager";
-    }
+	@GetMapping("/questionManager")
+	public String getInstructor() {
+		return "questionManager";
+	}
 
     @GetMapping("/sortQuestion")
     public String sortQuestions(Principal principal, Model model) {
@@ -26,10 +29,12 @@ public class SortController {
         Sort sort = new SortImpl(sortDao);
         List<Question> sortedQuestionList = sort.getAllQuestion(principal.getName());
         model.addAttribute("list", sortedQuestionList);
-        if (!model.containsAttribute("list")) {
-            return "questionManager";
-        }
-        return "sortQuestion";
+		if (model.containsAttribute("list")) {
+			return "sortQuestion";
+		} else {
+			LOGGER.warn("Failed to sort questions.");
+			return "questionManager";
+		}
     }
 
     @GetMapping("/sortQuestionByTitle")

@@ -3,11 +3,15 @@ package com.group8.dalsmartteamwork.resetpassword.models;
 import com.group8.dalsmartteamwork.login.model.Encryption;
 import com.group8.dalsmartteamwork.login.model.IEncryption;
 import com.group8.dalsmartteamwork.resetpassword.dao.IResetPasswordDao;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDaoFactory;
 
 import java.sql.SQLException;
 
 public class ResetPasswordManagerImpl implements IResetPasswordManager {
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+
     private final IResetPasswordDao resetPasswordDao;
 
     public ResetPasswordManagerImpl(){
@@ -28,10 +32,14 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
                     return true;
                 }
             }
+            else{
+                LOGGER.warn(String.format("Password reset mail cannot be sent because user with Banner ID: %s does not exist", bannerID));
+            }
         } catch (SQLException exception) {
-            exception.printStackTrace();
+            LOGGER.error("Exception occurred while sending password reset email to user with BannerID: " + bannerID, exception);
             return false;
         }
+        LOGGER.warn("Failed to send password reset email to user with BannerID: " + bannerID);
         return false;
     }
 
@@ -49,7 +57,7 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
         try {
             email = resetPasswordDao.getUserEmail(bannerID);
         } catch (SQLException exception) {
-            exception.printStackTrace();
+            LOGGER.error("Exception occurred while trying to get email of user with BannerID: " + bannerID, exception);
         }
 
         if (environment.equals("DEV_INT")) {
@@ -60,7 +68,14 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
             domain = LOCALHOST_DOMAIN;
         }
         String mailContent = domain + "/resetpassword?bannerid=" + bannerID + "&token=" + token;
-        return mail.sendEmail(email, "Password Reset Request", mailContent);
+        Boolean mailSent = mail.sendEmail(email, "Password Reset Request", mailContent);
+        if (mailSent){
+            LOGGER.info("Password Reset email sent to user with BannerID: " + bannerID);
+        }
+        else{
+            LOGGER.warn("Failed to send password reset email to user with BannerID: " + bannerID);
+        }
+        return mailSent;
     }
 
     @Override
@@ -71,7 +86,7 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
                 return true;
             }
         } catch (SQLException exception) {
-            exception.printStackTrace();
+            LOGGER.error("Failed to fetch password reset request of user with BannerID: " + bannerID, exception);
             return false;
         }
         return false;
@@ -82,13 +97,15 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
         IEncryption encryption = new Encryption();
 
         String encrypted_password = encryption.encrypt(password);
-
+        if(null == encrypted_password){
+            LOGGER.warn("Password encryption failed for BannerID: " + bannerID);
+        }
         try {
             if (resetPasswordDao.updatePassword(bannerID, encrypted_password)) {
                 return true;
             }
         } catch (SQLException exception) {
-            exception.printStackTrace();
+            LOGGER.error("Failed to update password of user with BannerID: " + bannerID, exception);
         }
         return false;
     }

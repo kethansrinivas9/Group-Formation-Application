@@ -54,8 +54,15 @@ public class CreateSurveyImpTest {
 
     @Test
     public void addQuestionToSurveyTest() {
-        when(createSurveyDao.addQuestionToSurvey(courseID, questionIDList)).thenReturn(true);
-        assertEquals(createSurvey.addQuestionToSurvey(courseID, questionIDList), true);
-        verify(createSurveyDao).addQuestionToSurvey(courseID, questionIDList);
+        when(createSurveyDao.saveQuestions(courseID, questionIDList)).thenReturn(true);
+        assertEquals(createSurvey.saveQuestions(courseID, questionIDList), true);
+        verify(createSurveyDao).saveQuestions(courseID, questionIDList);
+    }
+
+    @Test
+    public void publishSurveyTest() {
+        when(createSurveyDao.publishSurvey(courseID)).thenReturn(true);
+        assertEquals(createSurvey.publishSurvey(courseID), true);
+        verify(createSurveyDao).publishSurvey(courseID);
     }
 }

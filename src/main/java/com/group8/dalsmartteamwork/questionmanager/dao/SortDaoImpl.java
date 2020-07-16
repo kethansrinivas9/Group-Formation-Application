@@ -2,12 +2,15 @@ package com.group8.dalsmartteamwork.questionmanager.dao;
 
 import com.group8.dalsmartteamwork.database.CallStoredProcedure;
 import com.group8.dalsmartteamwork.questions.Question;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SortDaoImpl implements SortDao {
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public List<Question> getAllQuestion(String BannerID) {
@@ -16,7 +19,6 @@ public class SortDaoImpl implements SortDao {
         ResultSet resultSet;
 
         try {
-
             procedure = new CallStoredProcedure("spGetAllQuestions(?)");
             procedure.setParameter(1, BannerID);
             resultSet = procedure.executeWithResults();
@@ -25,12 +27,13 @@ public class SortDaoImpl implements SortDao {
                 sortedList.add(new Question(title));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while getting all questions from the database. ", e);
         } finally {
             if (null != procedure) {
                 procedure.cleanup();
             }
         }
+        LOGGER.info("List of all questions was retrieved from the database");
         return sortedList;
     }
 
@@ -49,12 +52,13 @@ public class SortDaoImpl implements SortDao {
                 sortedListByTitle.add(new Question(title));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while getting all questions by Title from the database. ", e);
         } finally {
             if (null != procedure) {
                 procedure.cleanup();
             }
         }
+        LOGGER.info("List of questions sorted by title was retrieved from the database");
         return sortedListByTitle;
     }
 
@@ -73,12 +77,13 @@ public class SortDaoImpl implements SortDao {
                 sortedListBydate.add(new Question(title));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while getting all questions by Date from the database. ", e);
         } finally {
             if (null != procedure) {
                 procedure.cleanup();
             }
         }
+        LOGGER.info("List of questions sorted by date was retrieved from the database");
         return sortedListBydate;
     }
 }

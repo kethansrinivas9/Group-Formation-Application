@@ -2,12 +2,15 @@ package com.group8.dalsmartteamwork.login.model;
 
 import com.group8.dalsmartteamwork.accesscontrol.User;
 import com.group8.dalsmartteamwork.login.dao.LoginDaoImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 
 public class LoginAuthentication implements AuthenticationManager {
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     public String role;
     Boolean status;
@@ -34,7 +37,7 @@ public class LoginAuthentication implements AuthenticationManager {
                 return new UsernamePasswordAuthenticationToken(username, password, roleAuthorization.getAuthorities());
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while authenticating user.", e);
         }
         return null;
     }

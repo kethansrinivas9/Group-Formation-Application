@@ -3,12 +3,16 @@ package com.group8.dalsmartteamwork.student.models;
 import com.group8.dalsmartteamwork.questions.IOption;
 import com.group8.dalsmartteamwork.student.IQuestionDetails;
 import com.group8.dalsmartteamwork.student.dao.ISurveyManagerDao;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class SurveyHandlerImpl implements ISurveyHandler {
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+
     private ISurveyManagerDao iSurveyManagerDao;
 
     public SurveyHandlerImpl(ISurveyManagerDao iSurveyManagerDao) {
@@ -27,6 +31,7 @@ public class SurveyHandlerImpl implements ISurveyHandler {
                 questions.put(question, options);
             }
         }
+        LOGGER.info("Questions retrieved for course with courseID: " + courseId);
         return questions;
     }
 
@@ -38,6 +43,7 @@ public class SurveyHandlerImpl implements ISurveyHandler {
                 status = status && iSurveyManagerDao.saveResponses(questionId, response, bannerId, courseId);
             }
         }
+        LOGGER.info(String.format("Responses saved. BannerID: %s, CourseID: %s", bannerId, courseId));
         return status;
     }
 
