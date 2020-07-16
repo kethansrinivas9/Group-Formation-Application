@@ -3,6 +3,7 @@ package com.group8.dalsmartteamwork.resetpassword.models;
 import com.group8.dalsmartteamwork.login.model.Encryption;
 import com.group8.dalsmartteamwork.login.model.IEncryption;
 import com.group8.dalsmartteamwork.resetpassword.dao.IResetPasswordDao;
+import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDaoFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.group8.dalsmartteamwork.resetpassword.dao.ResetPasswordDaoFactory;
