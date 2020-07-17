@@ -20,7 +20,7 @@ public class GroupFormationHandlerDaoImpl implements IGroupFormationHandlerDao {
         CallStoredProcedure proc = null;
         try {
             proc = new CallStoredProcedure("spSaveGroupFormationRules(?, ?, ?, ?, ?, ?, ?)");
-            proc.setParameter(1, "5409");
+            proc.setParameter(1, "5410");
             proc.setParameter(2, iGroupFormationRules.getGroupSize());
             proc.setParameter(3, iGroupFormationRules.getMultipleChoiceSingleOptionRule());
             proc.setParameter(4, iGroupFormationRules.getMultipleChoiceMultipleOptionRule());
@@ -79,7 +79,7 @@ public class GroupFormationHandlerDaoImpl implements IGroupFormationHandlerDao {
         ResultSet resultSet = null;
         try {
             proc = new CallStoredProcedure("spGetAnswers(?)");
-            proc.setParameter(1, "5308");
+            proc.setParameter(1, "5410");
             resultSet = proc.executeWithResults();
 
             StudentResponses studentResponses = new StudentResponses();
