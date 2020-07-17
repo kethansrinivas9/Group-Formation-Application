@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <title>front page</title>
+    <meta ; charset="UTF-8" content="text/html" http-equiv="Content-type"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+
+<body>
+<div style="background-color:#337ab7; height:50px; color: black;">
+    <h2 style="float: left;">Group Formation Tool</h2>
+    <a href="/logout" style="float: right; color: black;">Logout</a>
+</div>
+
+<h2 style="text-align: center;">Select the course to create survey</h2>
+<div>
+    <form method="POST" style="text-align: center;" th:action="@{/createSurveyPage}" th:object="${course}">
+        <select style=" margin-bottom: 500px; width: 200px;" th:field="*{courseID}">
+            <option value=0>Select the course</option>
+            <option th:each="list1 : ${list}" th:text="${list1.courseID}" th:value="${list1.courseID}">
+            </option>
+        </select>
+
+        <button onclick="return confirm('Are you sure you want to create a Survey?');"
+                style="color:black; cursor: pointer; margin-top: 200px;  width: 20%; background-color: cornflowerblue; height: 30px;"
+                type="submit">Create Survey
+        </button>
+        <br/>
+    </form>
+
+</div>
+
+</body>
+
+</html>

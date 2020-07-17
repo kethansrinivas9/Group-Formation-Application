@@ -1,27 +1,33 @@
 package com.group8.dalsmartteamwork.courseadmin.models;
 
+import com.group8.dalsmartteamwork.accesscontrol.User;
 import com.group8.dalsmartteamwork.courseadmin.dao.IStudentEnrollmentDao;
-import com.group8.dalsmartteamwork.register.dao.RegistrationDao;
-import com.group8.dalsmartteamwork.utils.*;
+import com.group8.dalsmartteamwork.login.model.IEncryption;
+import com.group8.dalsmartteamwork.register.dao.IRegistrationDao;
+import com.group8.dalsmartteamwork.register.models.IRegistrationFactory;
+import com.group8.dalsmartteamwork.resetpassword.models.IMail;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StudentImportManagerImpl implements IStudentImportManager {
-    private final RegistrationDao registrationDao;
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+    private final IRegistrationDao registrationDao;
     private final IStudentEnrollmentDao studentEnrollmentDao;
-    private final Mail mail;
-    private final int courseId;
+    private final IMail mail;
     private final IEncryption encryption;
     private final IPasswordGenerator passwordGenerator;
+    private final int courseId;
 
-    public StudentImportManagerImpl(int courseId, RegistrationDao registrationDao, IStudentEnrollmentDao studentEnrollmentDao, Mail mail) {
+    public StudentImportManagerImpl(int courseId, IRegistrationFactory iRegistrationFactory, IStudentEnrollmentFactory iStudentEnrollmentFactory) {
         this.courseId = courseId;
-        this.registrationDao = registrationDao;
-        this.studentEnrollmentDao = studentEnrollmentDao;
-        this.mail = mail;
-        encryption = new Encryption();
-        passwordGenerator = new PasswordGenerator();
+        registrationDao = iRegistrationFactory.getRegistrationDaoObject();
+        mail = iRegistrationFactory.getMailObject();
+        encryption = iRegistrationFactory.getEncryptionObject();
+        studentEnrollmentDao = iStudentEnrollmentFactory.getStudentEnrollmentDaoObject();
+        passwordGenerator = iStudentEnrollmentFactory.getPasswordGeneratorObject();
     }
 
     @Override
@@ -56,8 +62,7 @@ public class StudentImportManagerImpl implements IStudentImportManager {
                 }
             }
         } catch (Exception e) {
-            // TODO: Add to Log
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while verifying user registration.", e);
         }
         return status;
     }

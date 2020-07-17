@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <title>front page</title>
+    <meta ; charset="UTF-8" content="text/html" http-equiv="Content-type"/>
+
+</head>
+
+<body>
+<div style="background-color:#337ab7; height:50px; color: black;">
+    <h2 style="float: left;">Group Formation Tool</h2>
+    <a href="/logout" style="float: right; color: black;">Logout</a>
+</div>
+
+<br/>
+<div>
+    <h2 style="text-align: center;">Create survey</h2>
+    <form method="POST" style="text-align: center;" th:action="@{/surveyPage}" th:object="${question}">
+
+        <div th:each="questions : ${list}">
+            <th>
+            <td><input id="question" name="question" th:text="${questions.text}" th:value="${questions.questionID}"
+                       type="checkbox"/></td>
+            <div></div>
+            </th>
+            <br/>
+    </form>
+    <button
+            name="action"
+            style="color:black; cursor: pointer; width: 20%; background-color: cornflowerblue; height: 30px;" type="submit"
+            value="save">Save Questions
+    </button>
+    <button name="action"
+            onclick="return confirm('Are you sure you want to publish Survey?');"
+            style="color:black; cursor: pointer; margin-top: 200px;  width: 20%; background-color: cornflowerblue; height: 30px;" type="submit"
+            value="publish">Publish
+    </button>
+
+
+</div>
+<div th:if="${message}" th:text="${message}"></div>
+</body>
+
+
+</html>

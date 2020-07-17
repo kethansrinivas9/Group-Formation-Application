@@ -2,18 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
-
     <title>Student Page</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
-
 </head>
 
 <body>
+<div style="background-color:#337ab7; height:50px; color: black;">
+    <h2 style="float: left;">Group Formation Tool</h2>
+    <a href="/logout" style="float: right; color: black;">Logout</a>
+</div>
+
 <div style="text-align:center">
     <h2>Student page </h2>
     <br>
 </div>
+
+<p th:if="${surveyStatus ==false }">Error Submitting Survey. Try again in 5 minutes</p>
 <table>
     <tr>
         <th>Course ID</th>
@@ -22,8 +26,9 @@
 
     <tr th:each="course, itemStat: *{courses}">
 
-        <td><span th:text="${course.courseId}"></span></td>
-        <td><span th:text="${course.courseName}"></span></td>
+        <td><a th:href="@{/student-course(courseId = ${course.getCourseId()})}"><span
+                th:text="${course.getCourseId()}"></span></a></td>
+        <td><a><span th:text="${course.getCourseName()}"></span></a></td>
 
 
     </tr>

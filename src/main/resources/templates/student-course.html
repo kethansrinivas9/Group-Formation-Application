@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Page</title>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" rel="stylesheet">
+</head>
+<body>
+<div style="background-color:#337ab7; height:50px; color: black;">
+    <h2 style="float: left;">Group Formation Tool</h2>
+    <a href="/logout" style="float: right; color: black;">Logout</a>
+</div>
+
+<h3 th:if="${courseId ne null}" th:text="${'Course ' + courseId}"></h3>
+<h5 th:if="${bannerId ne null}" th:text="${'Student ' + bannerId}"></h5>
+
+<form method="post" th:action="@{/submit-survey}" th:if="${status == true}">
+    <table class="table table-sm" style="table-layout: fixed; padding: 20px" th:each="question, iQ: ${questions}">
+        <tr>
+            <td th:text="${question.key.getText()}"></td>
+            <td>
+                <table class="table table-sm" th:each="option, iO: ${question.value}" th:if="${question.value ne null}">
+                    <tr>
+                        <td th:if="${question.key.getType()==3}">
+                            <input id="option3" th:name="${question.key.getQuestionId()+'result'+option.getStoredAs()}"
+                                   th:value="${option.getDisplayText()}" type="checkbox">
+                            <label for="option3" th:text="${option.getDisplayText()}"></label>
+                        </td>
+                    </tr>
+                </table>
+                <div th:if="${question.key.getType()==2}">
+                    <label for="option2"></label>
+                    <select id="option2" th:name="${question.key.getQuestionId()+'result'}">
+                        <option th:each="option, iO: ${question.value}" th:text="${option.getDisplayText()}"
+                                th:value="${option.getDisplayText()}"></option>
+                    </select>
+                </div>
+                <div th:if="${question.key.getType()==1}">
+                    <input id="option1" th:name="${question.key.getQuestionId()+'result'}" type="number">
+                    <label for="option1">Answer</label>
+                </div>
+                <div th:if="${question.key.getType()==4}">
+                    <textarea id="option4" th:name="${question.key.getQuestionId()+'result'}"></textarea>
+                    <label for="option4">Answer</label>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <input id="questions" name="questions" th:value="${questions}" type="hidden">
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Group Formation Page</title>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#numeric-type').on('change', function () {
+                if ($(this).val() === "oneGreaterThanX" || $(this).val() === "oneLessThanX") {
+                    $("#x-value").show()
+                } else {
+                    $("#x-value").hide()
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<div style="background-color:#337ab7; height:50px; color: black;">
+    <a href="/logout" style="float: right; color: black;">Logout</a>
+</div>
+
+<div style="display: flex; justify-content: center; align-items: center">
+    <form method="post" th:action="@{/savegroupformationrules}">
+        <div>
+            <div style="margin-top: 10px">
+                <h4>Enter the size of the group</h4>
+                <input id="groupSize" name="groupSize" type="text">
+            </div>
+        </div>
+        <div style="margin-top: 10px">
+            <h4>Multiple choice – choose one: Select one option from below to group students based on their
+                responses</h4>
+            <select class="form-control col-md-4" id="mc-single-option" name="MultipleChoiceSingle">
+                <option value="similar">Group similar</option>
+                <option value="dissimilar">Group dissimilar</option>
+            </select>
+        </div>
+        <br>
+        <div>
+            <h4>Multiple choice – choose multiple: Select one option from below to group students based on their
+                responses</h4>
+            <select class="form-control col-md-4" id="mc-multi-option" name="MultipleChoiceMultiple">
+                <option value="similar">Group similar</option>
+                <option value="dissimilar">Group dissimilar</option>
+            </select>
+        </div>
+        <br>
+        <div>
+            <h4>Numeric – Select one option from below to group students based on their responses</h4>
+            <select class="form-control col-md-4" id="numeric-type" name="Numeric">
+                <option value="similar">Group similar</option>
+                <option value="dissimilar">Group dissimilar</option>
+                <option value="oneGreaterThanX">Group at least one greater than X</option>
+                <option value="oneLessThanX">Group at least one less than X</option>
+            </select>
+            <div id="x-value" style="display:none;margin-top: 10px">
+                <label for="xValue">Enter X value:</label>
+                <input id="xValue" name="xValue" type="text">
+            </div>
+        </div>
+        <br>
+        <div>
+            <h4>Free text – Select one option from below to group students based on their responses</h4>
+            <select class="form-control col-md-4" id="free-text" name="FreeText">
+                <option value="matching">Group matching</option>
+                <option value="not-matching">Group not matching</option>
+            </select>
+        </div>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>

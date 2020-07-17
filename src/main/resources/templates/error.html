@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/styles/cssandjs/normalize.css}"/>
+    <link rel="stylesheet" th:href="@{/styles/cssandjs/main.css}"/>
+    <link rel="stylesheet" th:href="@{/styles/cssandjs/errorstyles.css}"/>
+</head>
+<body class="bodyGridContainer">
+<header class="bodyGridRow headerGridContainer">
+    <h1>Dal Smart Teamwork</h1>
+</header>
+<main class="bodyGridRow mainGridContainer">
+    <aside class="mainGridRow welcomeInfoBox">
+        <h2 class="errorInfo">Oops, something went wrong!</h2>
+    </aside>
+
+    <table>
+        <tr>
+            <td>Date</td>
+            <td th:text="${timestamp}"/>
+        </tr>
+        <tr>
+            <td>Path</td>
+            <td th:text="${path}"/>
+        </tr>
+        <tr>
+            <td>Error</td>
+            <td th:text="${error}"/>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td th:text="${status}"/>
+        </tr>
+        <tr>
+            <td>Message</td>
+            <td th:text="${message}"/>
+        </tr>
+        <tr>
+            <td>Exception</td>
+            <td th:text="${exception}"/>
+        </tr>
+        <tr>
+            <td>Trace</td>
+            <td>
+                <pre th:text="${trace}"/>
+            </td>
+        </tr>
+    </table>
+</main>
+
+</body>
+</html>

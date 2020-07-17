@@ -1,7 +1,7 @@
 package com.group8.dalsmartteamwork.courseadmin.models;
 
+import com.group8.dalsmartteamwork.accesscontrol.User;
 import com.group8.dalsmartteamwork.courseadmin.Pair;
-import com.group8.dalsmartteamwork.utils.User;
 
 import java.util.ArrayList;
 import java.util.List;

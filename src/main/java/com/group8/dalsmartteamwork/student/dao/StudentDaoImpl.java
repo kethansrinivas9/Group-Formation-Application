@@ -1,32 +1,32 @@
 package com.group8.dalsmartteamwork.student.dao;
 
+import com.group8.dalsmartteamwork.accesscontrol.CurrentUser;
+import com.group8.dalsmartteamwork.database.CallStoredProcedure;
 import com.group8.dalsmartteamwork.student.Student;
-import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
-import com.group8.dalsmartteamwork.utils.DbConnection;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.servlet.http.HttpServletRequest;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class StudentDaoImpl implements IStudentDao {
-    public String username;
-    Student student;
-    String courseName, courseId;
-    ArrayList<Student> courseList = new ArrayList<Student>();
-    DbConnection dbConnection;
-    HttpServletRequest request;
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+
+    private final ArrayList<Student> courseList = new ArrayList<Student>();
+    private String username;
+    private String courseName, courseId;
 
     @Override
     public ArrayList<Student> displayCourses() {
 
         CallStoredProcedure procedure = null;
         ResultSet resultSet;
+        username = CurrentUser.getInstance().getBannerId();
         try {
-            username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            procedure = new CallStoredProcedure("spDisplayCourses(?)");
+            procedure = new CallStoredProcedure("spGetEnrolledCourses(?)");
             procedure.setParameter(1, username);
             resultSet = procedure.executeWithResults();
+            LOGGER.info("Fetched courses of student with BannerID: " + username);
             while (resultSet.next()) {
                 courseId = resultSet.getString(1);
                 courseName = resultSet.getString(2);
@@ -34,7 +34,7 @@ public class StudentDaoImpl implements IStudentDao {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while fetching courses for BannerID: " + username, e);
         } finally {
             if (null != procedure) {
                 procedure.cleanup();

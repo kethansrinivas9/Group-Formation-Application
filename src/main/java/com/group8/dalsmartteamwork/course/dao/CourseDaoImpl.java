@@ -1,13 +1,16 @@
 package com.group8.dalsmartteamwork.course.dao;
 
-import com.group8.dalsmartteamwork.utils.CallStoredProcedure;
-import com.group8.dalsmartteamwork.utils.User;
+import com.group8.dalsmartteamwork.accesscontrol.User;
+import com.group8.dalsmartteamwork.database.CallStoredProcedure;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CourseDaoImpl implements ICourseDao {
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public Boolean courseExists(int courseID) {
@@ -21,7 +24,7 @@ public class CourseDaoImpl implements ICourseDao {
                 return true;
             }
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+            LOGGER.error("Exception occurred while fetching course from the database.", exception);
         } finally {
             if (null != storedProcedure) {
                 storedProcedure.cleanup();
@@ -47,7 +50,7 @@ public class CourseDaoImpl implements ICourseDao {
                         ""));
             }
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+            LOGGER.error("Exception occurred while fetching eligible TAs from the database.", exception);
         } finally {
             if (null != storedProcedure) {
                 storedProcedure.cleanup();
@@ -73,7 +76,7 @@ public class CourseDaoImpl implements ICourseDao {
                         ""));
             }
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+            LOGGER.error("Exception occurred while fetching current TAs of course from the database.", exception);
         } finally {
             if (null != storedProcedure) {
                 storedProcedure.cleanup();
@@ -95,7 +98,7 @@ public class CourseDaoImpl implements ICourseDao {
                 studentList.add(new User(rs.getString("BannerID"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Email"), ""));
             }
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+            LOGGER.error("Exception occurred while fetching current students in course from the database.", exception);
         } finally {
             if (null != storedProcedure) {
                 storedProcedure.cleanup();
@@ -117,7 +120,7 @@ public class CourseDaoImpl implements ICourseDao {
                 result = rs.getString("BannerID");
             }
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+            LOGGER.error("Exception occurred while fetching course name from the database.", exception);
         } finally {
             if (null != storedProcedure) {
                 storedProcedure.cleanup();
@@ -136,7 +139,7 @@ public class CourseDaoImpl implements ICourseDao {
             storedProcedure.execute();
             return true;
         } catch (Exception exception) {
-            System.out.print(exception.getMessage());
+            LOGGER.error("Exception occurred while adding TA to a course in the database.", exception);
             return false;
         } finally {
             if (null != storedProcedure) {
