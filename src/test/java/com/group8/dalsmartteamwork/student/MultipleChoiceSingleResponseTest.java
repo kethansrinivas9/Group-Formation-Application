@@ -8,20 +8,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MultipleChoiceSingleResponseTest {
     private static Answer answer;
+
     @BeforeAll
-    static void setup(){
+    static void setup() {
         answer = Answer.getInstance();
     }
 
+    @AfterAll
+    static void destroy() {
+        answer.destroy();
+    }
+
     @Test
-    void addResponseTest(){
+    void addResponseTest() {
         IResponseObject iResponseObject = new MultipleChoiceSingleResponse();
         iResponseObject.addResponse(1, "TEST");
         assertEquals(1, answer.getAnswers().size());
-    }
-
-    @AfterAll
-    static void destroy(){
-        answer.destroy();
     }
 }

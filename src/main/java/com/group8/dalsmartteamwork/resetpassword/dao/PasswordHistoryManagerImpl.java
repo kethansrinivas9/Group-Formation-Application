@@ -41,7 +41,7 @@ public class PasswordHistoryManagerImpl implements IPasswordHistoryManager {
         try {
             IEncryption encryption = new Encryption();
             String encryptedPassword = encryption.encrypt(password);
-            if(null != encryptedPassword){
+            if (null != encryptedPassword) {
                 LOGGER.info("Password encrypted");
                 storedProcedure = new CallStoredProcedure("spGetPasswordHistory(?, ?)");
                 storedProcedure.setParameter(1, bannerID);
@@ -60,8 +60,7 @@ public class PasswordHistoryManagerImpl implements IPasswordHistoryManager {
                         return true;
                     }
                 }
-            }
-            else{
+            } else {
                 LOGGER.warn("Password encryption failed");
             }
         } catch (Exception exception) {

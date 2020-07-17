@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ResponseFactoryImplTest {
     @Test
-    void getResponseObject(){
+    void getResponseObject() {
         ResponseFactoryImpl responseFactory = new ResponseFactoryImpl();
         IResponseObject numericResponse = new NumericResponse();
         assertEquals(numericResponse.getClass(), responseFactory.getResponseObject(1).getClass());

@@ -30,7 +30,7 @@ class StudentImportManagerImplTest {
     void verifyRegistrationTest() {
         final IRegistrationFactory iRegistrationFactory = new RegistrationFactoryMock();
         final IStudentEnrollmentFactory iStudentEnrollmentFactory = new StudentEnrollmentFactoryMock();
-        StudentImportManagerImpl service = new StudentImportManagerImpl(COURSE_ID, iRegistrationFactory, iStudentEnrollmentFactory);;
+        StudentImportManagerImpl service = new StudentImportManagerImpl(COURSE_ID, iRegistrationFactory, iStudentEnrollmentFactory);
         List<Boolean> result = Arrays.asList(false, true);
         assertEquals(service.verifyRegistration(users), result);
     }

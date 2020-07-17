@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface IGroupDisplayManager {
     List<IGroup> getGroups(int courseId);
+
     List<Integer> getInstructorCourses(String bannerId);
 }

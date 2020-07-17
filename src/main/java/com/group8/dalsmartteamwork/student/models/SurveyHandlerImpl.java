@@ -13,7 +13,7 @@ import java.util.Map;
 public class SurveyHandlerImpl implements ISurveyHandler {
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
-    private ISurveyManagerDao iSurveyManagerDao;
+    private final ISurveyManagerDao iSurveyManagerDao;
 
     public SurveyHandlerImpl(ISurveyManagerDao iSurveyManagerDao) {
         this.iSurveyManagerDao = iSurveyManagerDao;

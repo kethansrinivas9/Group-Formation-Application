@@ -79,7 +79,7 @@ public class SurveyManagerDaoImpl implements ISurveyManagerDao {
             procedure.execute();
             return true;
         } catch (Exception e) {
-            LOGGER.error(String.format("Exception occurred while saving responses of questionID: %s, BannerID: %s, courseID: %d.", questionId, bannerId, courseId), e);
+            LOGGER.info(String.format("Responses saved for QuestionID: %s, BannerID: %s, courseID: %d.", questionId, bannerId, courseId));
         } finally {
             if (null != procedure) {
                 procedure.cleanup();
@@ -96,14 +96,14 @@ public class SurveyManagerDaoImpl implements ISurveyManagerDao {
             procedure = new CallStoredProcedure("spGetSurveyPublishStatus(?)");
             procedure.setParameter(1, courseId);
             resultSet = procedure.executeWithResults();
-            while (resultSet.next()){
-                if(resultSet.getBoolean(1)){
+            while (resultSet.next()) {
+                if (resultSet.getBoolean(1)) {
                     return true;
                 }
             }
+            LOGGER.info("Survey successfully published for CourseID: " + courseId);
         } catch (Exception e) {
-            //TODO: Add to Log
-            e.printStackTrace();
+            LOGGER.error("Exception occurred while getting survey publish status. ", e);
         } finally {
             if (null != procedure) {
                 procedure.cleanup();

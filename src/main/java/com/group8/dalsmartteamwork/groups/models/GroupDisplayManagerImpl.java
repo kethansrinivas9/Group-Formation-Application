@@ -6,9 +6,9 @@ import com.group8.dalsmartteamwork.groups.dao.IGroupRetrieverDao;
 import java.util.List;
 
 public class GroupDisplayManagerImpl implements IGroupDisplayManager {
-    private IGroupRetrieverDao iGroupRetrieverDao;
+    private final IGroupRetrieverDao iGroupRetrieverDao;
 
-    public GroupDisplayManagerImpl(IGroupRetrieverDao iGroupRetrieverDao){
+    public GroupDisplayManagerImpl(IGroupRetrieverDao iGroupRetrieverDao) {
         this.iGroupRetrieverDao = iGroupRetrieverDao;
     }
 

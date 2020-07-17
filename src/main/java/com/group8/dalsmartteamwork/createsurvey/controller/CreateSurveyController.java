@@ -8,11 +8,7 @@ import com.group8.dalsmartteamwork.createsurvey.model.CreateSurveyImpl;
 import com.group8.dalsmartteamwork.questions.Question;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
@@ -36,7 +32,7 @@ public class CreateSurveyController {
 
     @RequestMapping(value = "/createSurveyPage", method = RequestMethod.POST)
     public String deleteQuestion(@ModelAttribute("course") Course course, Principal principal, Model model,
-            RedirectAttributes redirectAttributes) {
+                                 RedirectAttributes redirectAttributes) {
         CreateSurveyDao createSurveyDao = new CreateSurveyDaoImpl();
         CreateSurvey createSurvey = new CreateSurveyImpl(createSurveyDao);
         courseID = course.getCourseID();
@@ -59,9 +55,9 @@ public class CreateSurveyController {
         return "surveyPage";
     }
 
-    @RequestMapping(value = "/surveyPage", method = RequestMethod.POST, params="action=save")
+    @RequestMapping(value = "/surveyPage", method = RequestMethod.POST, params = "action=save")
     public String saveQuestion(@RequestParam("question") List<Integer> values, Principal principal, Model model,
-            RedirectAttributes redirectAttributes) {
+                               RedirectAttributes redirectAttributes) {
         CreateSurveyDao createSurveyDao = new CreateSurveyDaoImpl();
         CreateSurvey createSurvey = new CreateSurveyImpl(createSurveyDao);
         Boolean status = createSurvey.saveQuestions(courseID, values);
@@ -73,9 +69,9 @@ public class CreateSurveyController {
         return "redirect:/instructor";
     }
 
-    @RequestMapping(value = "/surveyPage", method = RequestMethod.POST, params="action=publish")
+    @RequestMapping(value = "/surveyPage", method = RequestMethod.POST, params = "action=publish")
     public String publishSurvey(Principal principal, Model model,
-            RedirectAttributes redirectAttributes) {
+                                RedirectAttributes redirectAttributes) {
         CreateSurveyDao createSurveyDao = new CreateSurveyDaoImpl();
         CreateSurvey createSurvey = new CreateSurveyImpl(createSurveyDao);
         Boolean status = createSurvey.publishSurvey(courseID);

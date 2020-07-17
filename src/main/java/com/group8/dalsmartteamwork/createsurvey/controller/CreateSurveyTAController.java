@@ -12,12 +12,9 @@ import com.group8.dalsmartteamwork.createsurvey.model.CreateSurveyTAImpl;
 import com.group8.dalsmartteamwork.questions.Question;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +36,7 @@ public class CreateSurveyTAController {
 
     @RequestMapping(value = "/createSurveyPageTA", method = RequestMethod.POST)
     public String deleteQuestion(@ModelAttribute("course") Course course, Principal principal, Model model,
-            RedirectAttributes redirectAttributes) {
+                                 RedirectAttributes redirectAttributes) {
         CreateSurveyDao createSurveyDao = new CreateSurveyDaoImpl();
         CreateSurvey createSurvey = new CreateSurveyImpl(createSurveyDao);
         courseID = course.getCourseID();
@@ -64,9 +61,9 @@ public class CreateSurveyTAController {
 
     @RequestMapping(value = "/surveyPageTA", method = RequestMethod.POST)
     public String saveQuestions(@RequestParam("question") List<Integer> values, Principal principal, Model model,
-            RedirectAttributes redirectAttributes) {
+                                RedirectAttributes redirectAttributes) {
         CreateSurveyDaoImpl createSurveyDaoImpl = new CreateSurveyDaoImpl();
-        Boolean status = createSurveyDaoImpl.saveQuestions(courseID,values);
+        Boolean status = createSurveyDaoImpl.saveQuestions(courseID, values);
         if (status != true) {
             redirectAttributes.addFlashAttribute("message", "Questions couldn't be added");
             return "redirect:/TApage";

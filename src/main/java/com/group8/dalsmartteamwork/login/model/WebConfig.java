@@ -30,6 +30,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/loginError").permitAll()
                 .antMatchers("/register").permitAll()
+                .antMatchers("/groupformation**").hasAnyAuthority("Instructor", "Guest")
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()

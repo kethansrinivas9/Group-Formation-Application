@@ -27,8 +27,7 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
                     sendPasswordResetMail(bannerID, token);
                     return true;
                 }
-            }
-            else{
+            } else {
                 LOGGER.warn(String.format("Password reset mail cannot be sent because user with Banner ID: %s does not exist", bannerID));
             }
         } catch (SQLException exception) {
@@ -65,10 +64,9 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
         }
         String mailContent = domain + "/resetpassword?bannerid=" + bannerID + "&token=" + token;
         Boolean mailSent = mail.sendEmail(email, "Password Reset Request", mailContent);
-        if (mailSent){
+        if (mailSent) {
             LOGGER.info("Password Reset email sent to user with BannerID: " + bannerID);
-        }
-        else{
+        } else {
             LOGGER.warn("Failed to send password reset email to user with BannerID: " + bannerID);
         }
         return mailSent;
@@ -93,7 +91,7 @@ public class ResetPasswordManagerImpl implements IResetPasswordManager {
         IEncryption encryption = new Encryption();
 
         String encrypted_password = encryption.encrypt(password);
-        if(null == encrypted_password){
+        if (null == encrypted_password) {
             LOGGER.warn("Password encryption failed for BannerID: " + bannerID);
         }
         try {
