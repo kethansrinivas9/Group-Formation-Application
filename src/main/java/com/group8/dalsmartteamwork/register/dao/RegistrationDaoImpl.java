@@ -55,6 +55,7 @@ public class RegistrationDaoImpl implements IRegistrationDao {
                 procedure.cleanup();
             }
         }
+        LOGGER.warn("User not added to the Database. UserID: " + user.getId());
         return false;
     }
 
