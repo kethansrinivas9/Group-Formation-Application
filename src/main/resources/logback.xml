@@ -10,9 +10,9 @@
         <connectionSource
                 class="ch.qos.logback.core.db.DriverManagerConnectionSource">
             <driverClass>com.mysql.jdbc.Driver</driverClass>
-            <url>jdbc:mysql://db-5308.cs.dal.ca:3306/CSCI5308_8_DEVINT?serverTimezone=UTC</url>
-            <user>CSCI5308_8_DEVINT_USER</user>
-            <password>CSCI5308_8_DEVINT_8189</password>
+            <url>jdbc:mysql://db-5308.cs.dal.ca:3306/CSCI5308_8_PRODUCTION?serverTimezone=UTC</url>
+            <user>CSCI5308_8_PRODUCTION_USER</user>
+            <password>CSCI5308_8_PRODUCTION_8690</password>
         </connectionSource>
     </appender>
 
