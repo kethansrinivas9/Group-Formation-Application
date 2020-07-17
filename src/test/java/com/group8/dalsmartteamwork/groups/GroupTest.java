@@ -7,56 +7,56 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class GroupTest {
 
     @Test
-    void getGroupIdTest(){
+    void getGroupIdTest() {
         IGroup iGroup = new Group();
         iGroup.setGroupId(1);
         assertEquals(1, iGroup.getGroupId());
     }
 
     @Test
-    void setGroupIdTest(){
+    void setGroupIdTest() {
         IGroup iGroup = new Group();
         iGroup.setGroupId(0);
         assertEquals(0, iGroup.getGroupId());
     }
 
     @Test
-    void getBannerIdTest(){
+    void getBannerIdTest() {
         IGroup iGroup = new Group();
         iGroup.setBannerId("TEST");
         assertEquals("TEST", iGroup.getBannerId());
     }
 
     @Test
-    void setBannerIdTest(){
+    void setBannerIdTest() {
         IGroup iGroup = new Group();
         iGroup.setBannerId("TEST");
         assertEquals("TEST", iGroup.getBannerId());
     }
 
     @Test
-    void getFirstNameTest(){
+    void getFirstNameTest() {
         IGroup iGroup = new Group();
         iGroup.setFirstName("TEST");
         assertEquals("TEST", iGroup.getFirstName());
     }
 
     @Test
-    void setFirstNameTest(){
+    void setFirstNameTest() {
         IGroup iGroup = new Group();
         iGroup.setFirstName("TEST");
         assertEquals("TEST", iGroup.getFirstName());
     }
 
     @Test
-    void getLastNameTest(){
+    void getLastNameTest() {
         IGroup iGroup = new Group();
         iGroup.setLastName("TEST");
         assertEquals("TEST", iGroup.getLastName());
     }
 
     @Test
-    void setLastNameTest(){
+    void setLastNameTest() {
         IGroup iGroup = new Group();
         iGroup.setLastName("TEST");
         assertEquals("TEST", iGroup.getLastName());

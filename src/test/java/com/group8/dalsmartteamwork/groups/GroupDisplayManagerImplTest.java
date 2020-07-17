@@ -16,19 +16,19 @@ class GroupDisplayManagerImplTest {
     private IGroupDisplayManager iGroupDisplayManager;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         iGroupRetrieverDao = mock(GroupRetrieverDaoImpl.class);
         iGroupDisplayManager = new GroupDisplayManagerImpl(iGroupRetrieverDao);
     }
 
     @Test
-    void getGroupsTest(){
+    void getGroupsTest() {
         when(iGroupRetrieverDao.getGroups(0)).thenReturn(null);
         assertNull(iGroupDisplayManager.getGroups(0));
     }
 
     @Test
-    void getInstructorCoursesTest(){
+    void getInstructorCoursesTest() {
         when(iGroupRetrieverDao.getCourses("TEST")).thenReturn(null);
         assertNull(iGroupDisplayManager.getInstructorCourses("TEST"));
     }

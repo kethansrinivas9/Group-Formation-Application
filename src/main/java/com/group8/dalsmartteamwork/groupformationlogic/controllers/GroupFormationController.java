@@ -2,14 +2,16 @@ package com.group8.dalsmartteamwork.groupformationlogic.controllers;
 
 import com.group8.dalsmartteamwork.groupformationlogic.dao.GroupFormationHandlerDaoImpl;
 import com.group8.dalsmartteamwork.groupformationlogic.dao.IGroupFormationHandlerDao;
-import com.group8.dalsmartteamwork.groupformationlogic.models.*;
+import com.group8.dalsmartteamwork.groupformationlogic.models.GroupFormationAlgorithm;
+import com.group8.dalsmartteamwork.groupformationlogic.models.GroupFormationHandler;
+import com.group8.dalsmartteamwork.groupformationlogic.models.IGroupFormationAlgorithm;
+import com.group8.dalsmartteamwork.groupformationlogic.models.IGroupFormationHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Controller
 public class GroupFormationController {

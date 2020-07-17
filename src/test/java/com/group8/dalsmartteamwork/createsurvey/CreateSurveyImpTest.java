@@ -1,27 +1,25 @@
 package com.group8.dalsmartteamwork.createsurvey;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import java.util.Arrays;
-import java.util.List;
-
 import com.group8.dalsmartteamwork.course.Course;
 import com.group8.dalsmartteamwork.createsurvey.dao.CreateSurveyDao;
 import com.group8.dalsmartteamwork.createsurvey.dao.CreateSurveyDaoImpl;
 import com.group8.dalsmartteamwork.createsurvey.model.CreateSurvey;
 import com.group8.dalsmartteamwork.createsurvey.model.CreateSurveyImpl;
 import com.group8.dalsmartteamwork.questions.Question;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
+
 public class CreateSurveyImpTest {
     private final CreateSurveyDao createSurveyDao = mock(CreateSurveyDaoImpl.class);
-    private final List<Course> courseList = Arrays.asList(new Course(1,"java"));
-    private final List<Question> questionList = Arrays.asList(new Question(1,"what is java"));
-    private final List<Integer> questionIDList = Arrays.asList(1,2,3);
+    private final List<Course> courseList = Arrays.asList(new Course(1, "java"));
+    private final List<Question> questionList = Arrays.asList(new Question(1, "what is java"));
+    private final List<Integer> questionIDList = Arrays.asList(1, 2, 3);
     private final String BannerID = "B00123456";
     private final int courseID = 5308;
     private CreateSurvey createSurvey = null;
@@ -48,7 +46,7 @@ public class CreateSurveyImpTest {
     @Test
     public void displayQuestionsTest() {
         when(createSurveyDao.displayQuestions(BannerID, courseID)).thenReturn(questionList);
-        assertEquals(createSurvey.displayQuestions(BannerID,courseID), questionList);
+        assertEquals(createSurvey.displayQuestions(BannerID, courseID), questionList);
         verify(createSurveyDao).displayQuestions(BannerID, courseID);
     }
 

@@ -96,8 +96,8 @@ public class SurveyManagerDaoImpl implements ISurveyManagerDao {
             procedure = new CallStoredProcedure("spGetSurveyPublishStatus(?)");
             procedure.setParameter(1, courseId);
             resultSet = procedure.executeWithResults();
-            while (resultSet.next()){
-                if(resultSet.getBoolean(1)){
+            while (resultSet.next()) {
+                if (resultSet.getBoolean(1)) {
                     return true;
                 }
             }

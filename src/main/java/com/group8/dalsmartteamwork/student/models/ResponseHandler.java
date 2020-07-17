@@ -1,11 +1,10 @@
 package com.group8.dalsmartteamwork.student.models;
 
 import com.group8.dalsmartteamwork.questions.IOption;
-import com.group8.dalsmartteamwork.student.Answer;
 import com.group8.dalsmartteamwork.student.IQuestionDetails;
+import com.group8.dalsmartteamwork.student.IResponseObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.group8.dalsmartteamwork.student.IResponseObject;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -14,9 +13,9 @@ import java.util.Map;
 public class ResponseHandler implements IResponseHandler {
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
-    private IResponseFactory iResponseFactory;
+    private final IResponseFactory iResponseFactory;
 
-    public ResponseHandler(IResponseFactory iResponseFactory){
+    public ResponseHandler(IResponseFactory iResponseFactory) {
         this.iResponseFactory = iResponseFactory;
     }
 
@@ -30,7 +29,7 @@ public class ResponseHandler implements IResponseHandler {
             if (response != null) {
                 iResponseObject.addResponse(questionId, response);
             }
-            if (questions.get(question) != null){
+            if (questions.get(question) != null) {
                 for (IOption option : questions.get(question)) {
                     parameter = "" + question.getQuestionId() + "result" + option.getStoredAs();
                     response = request.getParameter(parameter);

@@ -1,6 +1,6 @@
 package com.group8.dalsmartteamwork.groupformationlogic.models;
 
-public class ComparatorFactory implements IComparatorFactory{
+public class ComparatorFactory implements IComparatorFactory {
 
     @Override
     public IComparator getComparator(int typeID) {

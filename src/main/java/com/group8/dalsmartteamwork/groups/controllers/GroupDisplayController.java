@@ -9,9 +9,7 @@ import com.group8.dalsmartteamwork.groups.models.IGroupDisplayManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -20,7 +18,7 @@ import java.util.List;
 public class GroupDisplayController {
 
     @GetMapping(value = "/instructor-courses")
-    public String getInstructorCourses(Model model){
+    public String getInstructorCourses(Model model) {
         IGroupRetrieverDao iGroupRetrieverDao = new GroupRetrieverDaoImpl();
         IGroupDisplayManager iGroupDisplayManager = new GroupDisplayManagerImpl(iGroupRetrieverDao);
         String bannerId = CurrentUser.getInstance().getBannerId();
@@ -30,7 +28,7 @@ public class GroupDisplayController {
     }
 
     @PostMapping(value = "/course-groups")
-    public String getCourseGroups(HttpServletRequest request, Model model){
+    public String getCourseGroups(HttpServletRequest request, Model model) {
         IGroupRetrieverDao iGroupRetrieverDao = new GroupRetrieverDaoImpl();
         IGroupDisplayManager iGroupDisplayManager = new GroupDisplayManagerImpl(iGroupRetrieverDao);
         int courseId = Integer.parseInt(request.getParameter("courseId"));

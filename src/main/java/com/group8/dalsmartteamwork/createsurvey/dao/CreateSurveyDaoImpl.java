@@ -1,8 +1,8 @@
 package com.group8.dalsmartteamwork.createsurvey.dao;
 
+import com.group8.dalsmartteamwork.course.Course;
 import com.group8.dalsmartteamwork.database.CallStoredProcedure;
 import com.group8.dalsmartteamwork.questions.Question;
-import com.group8.dalsmartteamwork.course.Course;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

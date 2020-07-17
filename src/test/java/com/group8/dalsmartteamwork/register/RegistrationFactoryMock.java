@@ -11,11 +11,11 @@ import com.group8.dalsmartteamwork.resetpassword.models.IMail;
 import static org.mockito.Mockito.*;
 
 public class RegistrationFactoryMock implements IRegistrationFactory {
-    private User existingUser;
-    private User newUserSuccess;
-    private User newUserFail;
+    private final User existingUser;
+    private final User newUserSuccess;
+    private final User newUserFail;
 
-    public RegistrationFactoryMock(User existingUser, User newUserSuccess, User newUserFail){
+    public RegistrationFactoryMock(User existingUser, User newUserSuccess, User newUserFail) {
         this.existingUser = existingUser;
         this.newUserSuccess = newUserSuccess;
         this.newUserFail = newUserFail;

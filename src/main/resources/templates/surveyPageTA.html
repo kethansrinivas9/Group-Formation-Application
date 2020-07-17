@@ -4,7 +4,7 @@
 <head>
 
     <title>front page</title>
-     <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 
 </head>
 
@@ -16,21 +16,21 @@
 
 <br/>
 <div>
-           <h2 style="text-align: center;">Create survey</h2>
-           <form method="POST" style="text-align: center;" th:action="@{/surveyPageTA}" th:object="${question}">
+    <h2 style="text-align: center;">Create survey</h2>
+    <form method="POST" style="text-align: center;" th:action="@{/surveyPageTA}" th:object="${question}">
 
-         <div th:each="questions : ${list}">
-    <th >
-        <td><input type="checkbox" id="question" name="question" th:text="${questions.text}"
-            th:value="${questions.questionID}" /></td>
-    <div ></div>
-        </th>
-        <br/>
+        <div th:each="questions : ${list}">
+            <th>
+            <td><input id="question" name="question" th:text="${questions.text}" th:value="${questions.questionID}"
+                       type="checkbox"/></td>
+            <div></div>
+            </th>
+            <br/>
     </form>
     <button
-                style="color:black; cursor: pointer; width: 20%; background-color: cornflowerblue; height: 30px;"
-                type="submit">Save Questions
-        </button>
+            style="color:black; cursor: pointer; width: 20%; background-color: cornflowerblue; height: 30px;"
+            type="submit">Save Questions
+    </button>
 
 </div>
 <div th:if="${message}" th:text="${message}"></div>

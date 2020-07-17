@@ -26,7 +26,8 @@
 
     <tr th:each="course, itemStat: *{courses}">
 
-        <td><a th:href="@{/student-course(courseId = ${course.getCourseId()})}"><span th:text="${course.getCourseId()}"></span></a></td>
+        <td><a th:href="@{/student-course(courseId = ${course.getCourseId()})}"><span
+                th:text="${course.getCourseId()}"></span></a></td>
         <td><a><span th:text="${course.getCourseName()}"></span></a></td>
 
 

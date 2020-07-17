@@ -16,12 +16,12 @@ import java.util.List;
 
 @Controller
 public class SortController {
-	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
-	@GetMapping("/questionManager")
-	public String getInstructor() {
-		return "questionManager";
-	}
+    @GetMapping("/questionManager")
+    public String getInstructor() {
+        return "questionManager";
+    }
 
     @GetMapping("/sortQuestion")
     public String sortQuestions(Principal principal, Model model) {
@@ -29,12 +29,12 @@ public class SortController {
         Sort sort = new SortImpl(sortDao);
         List<Question> sortedQuestionList = sort.getAllQuestion(principal.getName());
         model.addAttribute("list", sortedQuestionList);
-		if (model.containsAttribute("list")) {
-			return "sortQuestion";
-		} else {
-			LOGGER.warn("Failed to sort questions.");
-			return "questionManager";
-		}
+        if (model.containsAttribute("list")) {
+            return "sortQuestion";
+        } else {
+            LOGGER.warn("Failed to sort questions.");
+            return "questionManager";
+        }
     }
 
     @GetMapping("/sortQuestionByTitle")

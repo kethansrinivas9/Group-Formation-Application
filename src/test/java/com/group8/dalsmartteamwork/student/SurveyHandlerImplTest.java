@@ -16,7 +16,8 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class SurveyHandlerImplTest {
     private static final int courseId = 5308;
@@ -56,7 +57,7 @@ class SurveyHandlerImplTest {
     }
 
     @Test
-    void getSurveyPublishStatusTest(){
+    void getSurveyPublishStatusTest() {
         when(iSurveyManagerDao.getSurveyPublishStatus(courseId)).thenReturn(true);
         assertTrue(iSurveyHandler.getSurveyPublishStatus(courseId));
     }

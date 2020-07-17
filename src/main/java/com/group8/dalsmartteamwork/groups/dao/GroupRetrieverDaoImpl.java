@@ -13,7 +13,7 @@ import java.util.List;
 public class GroupRetrieverDaoImpl implements IGroupRetrieverDao {
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
-    public List<IGroup> getGroups(int courseId){
+    public List<IGroup> getGroups(int courseId) {
         CallStoredProcedure procedure = null;
         ResultSet resultSet;
         List<IGroup> groups = new ArrayList<>();

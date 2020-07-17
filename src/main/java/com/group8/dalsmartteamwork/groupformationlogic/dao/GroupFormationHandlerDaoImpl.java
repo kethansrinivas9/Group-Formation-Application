@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroupFormationHandlerDaoImpl implements IGroupFormationHandlerDao{
+public class GroupFormationHandlerDaoImpl implements IGroupFormationHandlerDao {
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     @Override
@@ -46,7 +46,7 @@ public class GroupFormationHandlerDaoImpl implements IGroupFormationHandlerDao{
             proc = new CallStoredProcedure("spGetGroupFormationRules(?)");
             proc.setParameter(1, courseID);
             resultSet = proc.executeWithResults();
-            if (resultSet.next()){
+            if (resultSet.next()) {
                 int groupSize = Integer.parseInt(resultSet.getString("GroupSize"));
                 int numericValue = Integer.parseInt(resultSet.getString("NumericValue"));
                 String multipleChoiceSingleOptionRule = resultSet.getString("MultipleChoiceSingleOptionRule");
@@ -84,7 +84,7 @@ public class GroupFormationHandlerDaoImpl implements IGroupFormationHandlerDao{
 
             StudentResponses studentResponses = new StudentResponses();
             studentResponses.setBannerID(null);
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int questionID = resultSet.getInt(2);
                 String answer = resultSet.getString(3);
                 String bannerID = resultSet.getString(4);
@@ -92,7 +92,7 @@ public class GroupFormationHandlerDaoImpl implements IGroupFormationHandlerDao{
                     studentResponses.setBannerID(bannerID);
                 }
 
-                if ( studentResponses.getBannerID().equals(bannerID) == false) {
+                if (studentResponses.getBannerID().equals(bannerID) == false) {
                     studentResponsesList.add(studentResponses);
                     studentResponses = new StudentResponses();
                     studentResponses.setBannerID(bannerID);
@@ -122,7 +122,7 @@ public class GroupFormationHandlerDaoImpl implements IGroupFormationHandlerDao{
             proc = new CallStoredProcedure("spGetQuestionTypeID(?)");
             proc.setParameter(1, questionID);
             resultSet = proc.executeWithResults();
-            if (resultSet.next()){
+            if (resultSet.next()) {
                 questionType = Integer.parseInt(resultSet.getString("TypeID"));
             }
             LOGGER.error("Retrieved Question Type IDs from the database successfully.");

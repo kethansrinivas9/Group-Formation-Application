@@ -3,7 +3,7 @@ package com.group8.dalsmartteamwork.groupformationlogic.models;
 import com.group8.dalsmartteamwork.groupformationlogic.dao.GroupFormationHandlerDaoImpl;
 import com.group8.dalsmartteamwork.groupformationlogic.dao.IGroupFormationHandlerDao;
 
-public class StudentComparator implements IStudentComparator{
+public class StudentComparator implements IStudentComparator {
     @Override
     public int getDistanceBetweenStudents(IStudentResponses student1, IStudentResponses student2) {
         int distance = 0;
@@ -14,7 +14,7 @@ public class StudentComparator implements IStudentComparator{
         IGroupFormationRules iGroupFormationRules = iGroupFormationHandler.getRules(courseID);
         IComparatorFactory iComparatorFactory = new ComparatorFactory();
 
-        for (Integer questionID: student1.getResponses().keySet()) {
+        for (Integer questionID : student1.getResponses().keySet()) {
             int typeID = iGroupFormationHandlerDao.getQuestionTypeID(questionID);
             IComparator comparator = iComparatorFactory.getComparator(typeID);
 

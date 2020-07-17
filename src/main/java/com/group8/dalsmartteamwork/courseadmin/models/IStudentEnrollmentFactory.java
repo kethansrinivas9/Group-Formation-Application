@@ -4,5 +4,6 @@ import com.group8.dalsmartteamwork.courseadmin.dao.IStudentEnrollmentDao;
 
 public interface IStudentEnrollmentFactory {
     IStudentEnrollmentDao getStudentEnrollmentDaoObject();
+
     IPasswordGenerator getPasswordGeneratorObject();
 }

@@ -5,10 +5,10 @@ import com.group8.dalsmartteamwork.groupformationlogic.dao.IGroupFormationHandle
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class GroupFormationHandler implements IGroupFormationHandler{
-    private IGroupFormationHandlerDao iGroupFormationHandlerDao;
+public class GroupFormationHandler implements IGroupFormationHandler {
+    private final IGroupFormationHandlerDao iGroupFormationHandlerDao;
 
-    public GroupFormationHandler(IGroupFormationHandlerDao iGroupFormationHandlerDao){
+    public GroupFormationHandler(IGroupFormationHandlerDao iGroupFormationHandlerDao) {
         this.iGroupFormationHandlerDao = iGroupFormationHandlerDao;
     }
 

@@ -16,28 +16,28 @@
 
 <br/>
 <div>
-           <h2 style="text-align: center;">Create survey</h2>
-           <form method="POST" style="text-align: center;" th:action="@{/surveyPage}" th:object="${question}">
+    <h2 style="text-align: center;">Create survey</h2>
+    <form method="POST" style="text-align: center;" th:action="@{/surveyPage}" th:object="${question}">
 
-         <div th:each="questions : ${list}">
-    <th>
-        <td><input type="checkbox" id="question" name="question" th:text="${questions.text}"
-            th:value="${questions.questionID}"/></td>
-    <div ></div>
-        </th>
-        <br/>
+        <div th:each="questions : ${list}">
+            <th>
+            <td><input id="question" name="question" th:text="${questions.text}" th:value="${questions.questionID}"
+                       type="checkbox"/></td>
+            <div></div>
+            </th>
+            <br/>
     </form>
-        <button
-                style="color:black; cursor: pointer; width: 20%; background-color: cornflowerblue; height: 30px;"
-                name="action" value="save"
-                type="submit">Save Questions
-        </button>
-    <button onclick="return confirm('Are you sure you want to publish Survey?');"
-                style="color:black; cursor: pointer; margin-top: 200px;  width: 20%; background-color: cornflowerblue; height: 30px;"
-                name="action" value="publish"
-                type="submit">Publish
-        </button>
-       
+    <button
+            name="action"
+            style="color:black; cursor: pointer; width: 20%; background-color: cornflowerblue; height: 30px;" type="submit"
+            value="save">Save Questions
+    </button>
+    <button name="action"
+            onclick="return confirm('Are you sure you want to publish Survey?');"
+            style="color:black; cursor: pointer; margin-top: 200px;  width: 20%; background-color: cornflowerblue; height: 30px;" type="submit"
+            value="publish">Publish
+    </button>
+
 
 </div>
 <div th:if="${message}" th:text="${message}"></div>

@@ -1,11 +1,5 @@
 package com.group8.dalsmartteamwork.createsurvey;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import java.util.Arrays;
-import java.util.List;
 import com.group8.dalsmartteamwork.createsurvey.dao.CreateSurveyTADao;
 import com.group8.dalsmartteamwork.createsurvey.dao.CreateSurveyTADaoImpl;
 import com.group8.dalsmartteamwork.createsurvey.model.CreateSurveyTA;
@@ -13,6 +7,12 @@ import com.group8.dalsmartteamwork.createsurvey.model.CreateSurveyTAImpl;
 import com.group8.dalsmartteamwork.questions.Question;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 public class CreateSurveyTAImplTest {
 

@@ -1,8 +1,9 @@
 package com.group8.dalsmartteamwork.createsurvey.model;
 
-import java.util.List;
 import com.group8.dalsmartteamwork.course.Course;
 import com.group8.dalsmartteamwork.questions.Question;
+
+import java.util.List;
 
 public interface CreateSurvey {
 
@@ -10,9 +11,9 @@ public interface CreateSurvey {
 
     boolean checkIfSurveyCreated(int courseID);
 
-    List<Question> displayQuestions(String BannerID,int courseID);
-    
-    boolean saveQuestions(int courseID,List<Integer> questionID);
+    List<Question> displayQuestions(String BannerID, int courseID);
+
+    boolean saveQuestions(int courseID, List<Integer> questionID);
 
     boolean publishSurvey(int courseID);
 }

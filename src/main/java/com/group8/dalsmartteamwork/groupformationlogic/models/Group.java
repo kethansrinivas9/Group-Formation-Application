@@ -2,7 +2,7 @@ package com.group8.dalsmartteamwork.groupformationlogic.models;
 
 import java.util.List;
 
-public class Group implements IGroup{
+public class Group implements IGroup {
     Integer groupID;
     Integer courseID;
     List<String> bannerID;

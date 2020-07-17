@@ -5,7 +5,7 @@ import com.group8.dalsmartteamwork.groupformationlogic.dao.IGroupFormationHandle
 
 import java.util.*;
 
-public class GroupFormationAlgorithm implements IGroupFormationAlgorithm{
+public class GroupFormationAlgorithm implements IGroupFormationAlgorithm {
 
     @Override
     public void createGroups() {
@@ -30,26 +30,26 @@ public class GroupFormationAlgorithm implements IGroupFormationAlgorithm{
 
 
         int index = 0;
-        while(tempStudentIDs.size() > 0){
+        while (tempStudentIDs.size() > 0) {
             index = studentIDs.indexOf(tempStudentIDs.get(0));
             List<String> group = new ArrayList<>();
             group.add(studentIDs.get(index));
             maxGroupSize = Math.min(maxGroupSize, tempStudentIDs.size());
             tempStudentIDs.remove(0);
-            while(group.size() < maxGroupSize) {
+            while (group.size() < maxGroupSize) {
                 int maxDistance = -1;
                 int maxIndex = -1;
                 for (int j = 0; j < studentIDs.size(); j++) {
-                    if(distanceMatrix[index][j] > maxDistance && tempStudentIDs.contains(studentIDs.get(j))) {
+                    if (distanceMatrix[index][j] > maxDistance && tempStudentIDs.contains(studentIDs.get(j))) {
                         maxDistance = distanceMatrix[index][j];
                         maxIndex = j;
                     }
                 }
-                if(tempStudentIDs.contains(studentIDs.get(maxIndex))){
+                if (tempStudentIDs.contains(studentIDs.get(maxIndex))) {
                     group.add(studentIDs.get(maxIndex));
                 }
-                if(tempStudentIDs.size() > 0) {
-                    tempStudentIDs.remove(tempStudentIDs.indexOf(studentIDs.get(maxIndex)));
+                if (tempStudentIDs.size() > 0) {
+                    tempStudentIDs.remove(studentIDs.get(maxIndex));
                 }
             }
             groups.put(currentGroupID, group);
@@ -67,7 +67,7 @@ public class GroupFormationAlgorithm implements IGroupFormationAlgorithm{
         Arrays.stream(distanceMatrix).forEach(row -> Arrays.fill(row, 0));
 
         for (int i = 0; i < studentResponses.size(); i++) {
-            for (int j = i+1; j < studentResponses.size(); j++) {
+            for (int j = i + 1; j < studentResponses.size(); j++) {
                 distance = studentComparator.getDistanceBetweenStudents(studentResponses.get(i), studentResponses.get(j));
                 distanceMatrix[i][j] = distance;
                 distanceMatrix[j][i] = distance;
@@ -75,7 +75,7 @@ public class GroupFormationAlgorithm implements IGroupFormationAlgorithm{
         }
 
         for (int i = 0; i < studentResponses.size(); i++) {
-            for (int j = i+1; j < studentResponses.size(); j++) {
+            for (int j = i + 1; j < studentResponses.size(); j++) {
                 System.out.print(distanceMatrix[i][j] + " ");
             }
             System.out.println();

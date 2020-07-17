@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class StudentResponses implements IStudentResponses{
+public class StudentResponses implements IStudentResponses {
     private String bannerID;
     private Map<Integer, List<String>> responses = new HashMap<>();
 

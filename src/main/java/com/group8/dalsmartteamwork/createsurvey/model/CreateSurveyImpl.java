@@ -3,6 +3,7 @@ package com.group8.dalsmartteamwork.createsurvey.model;
 import com.group8.dalsmartteamwork.course.Course;
 import com.group8.dalsmartteamwork.createsurvey.dao.CreateSurveyDao;
 import com.group8.dalsmartteamwork.questions.Question;
+
 import java.util.List;
 
 public class CreateSurveyImpl implements CreateSurvey {
@@ -11,7 +12,7 @@ public class CreateSurveyImpl implements CreateSurvey {
     public CreateSurveyImpl(CreateSurveyDao createSurveyDao) {
         this.createSurveyDao = createSurveyDao;
     }
-    
+
     @Override
     public boolean checkIfSurveyCreated(int courseID) {
         return createSurveyDao.checkIfSurveyCreated(courseID);

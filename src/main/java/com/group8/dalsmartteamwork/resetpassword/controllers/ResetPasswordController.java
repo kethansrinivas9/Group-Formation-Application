@@ -32,8 +32,7 @@ public class ResetPasswordController {
 
         if (resetPasswordManager.addResetRequest(resetPasswordRequest.getBannerID())) {
             return "resetPassword/resetPasswordEmailMessage";
-        }
-        else{
+        } else {
             LOGGER.warn(String.format("User not found (may not be registered). BannerID: %s", resetPasswordRequest.getBannerID()));
             return "resetPassword/resetPasswordUserNotFound";
         }
